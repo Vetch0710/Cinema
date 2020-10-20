@@ -30,6 +30,7 @@ const actions = {
       [...asyncRoutes],
       permissions
     );
+    console.log("finallyAsyncRoutes")
     commit("setRoutes", finallyAsyncRoutes);
 
     return finallyAsyncRoutes;

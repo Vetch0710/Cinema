@@ -64,17 +64,15 @@ router.beforeResolve(async (to, from, next) => {
           }
 
           let accessRoutes = []; //获取用户可进入的页面路由
-          if (authentication === "intelligence") {
+
             accessRoutes = await store.dispatch(
               "routes/setRoutes",
               permissions
             );
-          } else if (authentication === "all") {
-            accessRoutes = await store.dispatch("routes/setAllRoutes");
-          }
+
           console.log("以获得permissions+++++" + permissions);
           router.addRoutes(accessRoutes);
-          // console.log(router)
+          console.log(router)
           // if (
           //   permissions.indexOf("manager") !== -1 ||
           //   permissions.indexOf("boss") !== -1

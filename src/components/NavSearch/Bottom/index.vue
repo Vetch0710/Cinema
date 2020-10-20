@@ -25,6 +25,7 @@ export default {
 
 <style>
 .Bottom{
+  /*float: left;*/
   width: 100%;
   text-align: center;
   color: #8C8C8C;

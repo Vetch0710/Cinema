@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="nut-radiogroup">
-      <label class="inline">
+      <label class="inline" for="byhot">
         <span>
           <input
             type="radio"
@@ -35,11 +35,11 @@
             v-model="queryForm.data.selecttype"
             @click="fetchData"
           />
-          <label for="radio" class="radio-beauty"></label>
+<!--          <label for="radio" class="radio-beauty"></label>-->
         </span>
         热门推荐
       </label>
-      <label class="inline">
+      <label class="inline" for="bytime">
         <span>
           <input
             type="radio"
@@ -50,13 +50,14 @@
             v-model="queryForm.data.selecttype"
             @click="fetchData"
           />
-          <label for="radio" class="radio-beauty"></label>
+<!--          <label for="radio" class="radio-beauty"></label>-->
         </span>
         按时间排序
       </label>
-      <label class="inline" v-if="tabhotflag">
+      <label class="inline" v-if="tabhotflag" for="byscore">
         <span>
           <input
+
             type="radio"
             name="checkbytype"
             id="byscore"
@@ -65,11 +66,11 @@
             v-model="queryForm.data.selecttype"
             @click="fetchData"
           />
-          <label for="radio" class="radio-beauty"></label>
+<!--          <label for="byscore" class="radio-beauty"></label>-->
         </span>
         按评分排序
       </label>
-      <label class="inline" v-else-if="tabupflag">
+      <label class="inline" v-else-if="tabupflag" for="bywantnum">
         <span>
           <input
             type="radio"
@@ -80,7 +81,7 @@
             v-model="queryForm.data.selecttype"
             @click="fetchData"
           />
-          <label for="radio" class="radio-beauty"></label>
+<!--          <label for="radio" class="radio-beauty"></label>-->
         </span>
         按想看人数排序
       </label>
@@ -335,7 +336,7 @@
   .listLoading {
     width: 100%;
     height: 100%;
-    background-color: #F6F8F9;
+    /*background-color: #F6F8F9;*/
     text-align: center;
     margin: auto;
     position: relative;

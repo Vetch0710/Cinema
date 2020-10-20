@@ -11,7 +11,7 @@ const setting = {
   // 默认的接口地址 如果是开发环境和生产环境走vab-mock-server，当然你也可以选择自己配置成需要的接口地址
   baseURL:
     process.env.NODE_ENV === "development"
-        //  ? "http://10.96.121.142:8089/CinemaData"
+        //  ? "http://10.5.89.242:8089/CinemaData"
         // : "http://10.96.121.142:8089/CinemaData",
       ? "vab-mock-server"
      : "vab-mock-server",

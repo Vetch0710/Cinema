@@ -1,10 +1,17 @@
 <template>
   <div>
-    <a href="#">
+    <a @click="selectMovie">
       <div class="image" :style="{ background: 'url(' + imgurl + ')' }">
         <div class="curtain"></div>
         <div class="score">
-          {{score}}
+          <el-rate
+          class="filmshow-movie-score"
+            v-model="score"
+            disabled
+            show-score
+            text-color="#ff9900"
+          >
+          </el-rate>
         </div>
       </div>
       <div class="movie-info">
@@ -24,9 +31,7 @@
 export default {
   name: "filmShow",
   data() {
-    return {
-      
-    };
+    return {};
   },
   props: {
     score: { type: Number, required: true },
@@ -34,7 +39,14 @@ export default {
     price: { type: Number, required: true },
     filmname: { type: String, required: true },
   },
-  methods: {},
+  methods: {
+    selectMovie() {
+      this.$router.push({
+        path: "/movies/movieDetail",
+        query: { movieName: this.filmname },
+      });
+    },
+  },
   components: {},
 };
 </script>
@@ -46,6 +58,7 @@ a {
   color: #666;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
 
 .image {
@@ -70,6 +83,10 @@ a {
   font-size: 16px;
   text-align: center;
   z-index: 1;
+}
+
+.filmshow-movie-score{
+  margin-top: 5px;
 }
 
 .movie-info {

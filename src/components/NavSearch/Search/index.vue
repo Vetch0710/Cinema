@@ -30,10 +30,11 @@
               style="
                 position: relative;
                 background-color: #e65252;
-                margin-left: -10px;
+                margin-left: -14px;
                 z-index: 999;
                 height: 38px;
-                 border-radius: 8px 10px 10px 8px;
+                border-radius: 8px 10px 10px 8px;
+                border-color: #E65253;
               "
               type="primary"
               icon="el-icon-search"

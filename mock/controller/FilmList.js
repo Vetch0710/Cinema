@@ -1,6 +1,6 @@
 const films = [
   {
-    filmname: "夺冠",
+    filmname: "夺冠夺冠夺冠夺冠夺冠夺冠夺冠夺冠夺冠夺冠夺冠",
     score: 9.1,
     price: 23,
     imgurl:

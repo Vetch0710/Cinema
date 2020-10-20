@@ -103,6 +103,7 @@
       </ul>
     </div>
     <el-pagination
+      class="film-page"
       background
       :current-page="queryForm.pageNo"
       :page-size="queryForm.pageSize"
@@ -316,12 +317,14 @@
 
   .filmshow ul {
     font-size: 0;
+    text-align: center;
   }
 
   .filmshow ul li {
     display: inline-block;
     width: 18%;
     margin-right: 15px;
+    text-align: center;
   }
 
   .filmshow ul li a {
@@ -368,5 +371,9 @@
       -webkit-transform: rotate(359deg);
       transform: rotate(359deg);
     }
+  }
+
+  .film-page{
+    text-align: center;
   }
 </style>

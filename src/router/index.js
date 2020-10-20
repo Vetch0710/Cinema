@@ -3,8 +3,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import CusLayout from "@/components/NavSearch/index";
-// import Layout from "@/components/managerlayouts";
-import Layout from "@/components/managerlayouts/test/index";
+import Layout from "@/components/managerlayouts";
+// import Layout from "@/components/managerlayouts/test/index";
 import LeftNav from "@/components/customerLeftNav/customerleftNav";
 // import EmptyLayout from "@/layouts/EmptyLayout";
 // import { publicPath, routerMode } from "@/config/settings";

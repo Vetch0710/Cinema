@@ -17,13 +17,14 @@
           <!--          <error-log></error-log>-->
 <!--          <full-screen-bar @refresh="refreshRoute"></full-screen-bar>-->
           <!--          <theme-bar class="hidden-xs-only"></theme-bar>-->
-<!--          <vab-icon-->
+<!--          <i-->
 <!--            title="重载所有路由"-->
 <!--            :pulse="pulse"-->
+<!--            class="el-icon-refresh-right"-->
 <!--            :icon="['fas', 'redo']"-->
 <!--            @click="refreshRoute"-->
-<!--          ></vab-icon>-->
-          <avatar></avatar>
+<!--          ></i>-->
+          <Avatar></Avatar>
           <!--  <vab-icon
             title="退出系统"
             :icon="['fas', 'sign-out-alt']"
@@ -38,6 +39,7 @@
 <script>
   import { mapActions, mapGetters } from "vuex";
 
+  // import {Avatar,Breadcrumb} from "@/components/managerlayouts/components";
   import Avatar from "@/components/managerlayouts/components/Avatar";
   import Breadcrumb from "@/components/managerlayouts/components/Breadcrumb";
 

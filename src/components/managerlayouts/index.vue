@@ -7,6 +7,7 @@
       <div class="vab-main" :class="collapse ? 'is-collapse-main' : ''">
         <div :class="header === 'fixed' ? 'fixed-header' : ''">
           <nav-bar></nav-bar>
+          <tabs-bar />
         </div>
         <!--        <ad></ad>-->
         <app-main></app-main>
@@ -17,7 +18,7 @@
 </template>
 
 <script>
-  import { AppMain, NavBar, SideBar, } from "./components";
+  import { AppMain, NavBar, SideBar, TabsBar} from "./components";
   import { mapActions, mapGetters } from "vuex";
   import { tokenName } from "@/config/settings";
   export default {
@@ -26,6 +27,7 @@
       NavBar,
       SideBar,
       AppMain,
+      TabsBar
     },
     data() {
       return { oldLayout: "" };
@@ -112,13 +114,13 @@
   };
 </script>
 
-<!--<style lang="scss" scoped>
+<style lang="scss" scoped>
   @mixin fix-header {
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
-    z-index: $base-z-index - 2;
+    z-index: 999 - 2;
     width: 100%;
     overflow: hidden;
   }
@@ -132,11 +134,11 @@
       position: relative;
 
       &.fixed {
-        padding-top: calc(#{$base-top-bar-height} + #{$base-tabs-bar-height});
+        padding-top: calc(65px + 55px);
       }
 
       &.fixed.no-tabs-bar {
-        padding-top: $base-top-bar-height;
+        padding-top: 65px;
       }
 
       ::v-deep {
@@ -150,8 +152,8 @@
         }
 
         .tag-view-show {
-          background: $base-color-white;
-          box-shadow: $base-box-shadow;
+          background: #fff;
+          box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);;
         }
 
         .nav-bar-container {
@@ -162,9 +164,9 @@
 
         .main-padding {
           .app-main-container {
-            margin-top: $base-padding;
-            margin-bottom: $base-padding;
-            background: $base-color-white;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            background: #fff;
           }
         }
       }
@@ -179,7 +181,7 @@
         right: 0;
         bottom: 0;
         left: 0;
-        z-index: $base-z-index - 1;
+        z-index: 999 - 1;
         width: 100%;
         height: 100vh;
         overflow: hidden;
@@ -188,28 +190,28 @@
       }
 
       &.fixed {
-        padding-top: calc(#{$base-nav-bar-height} + #{$base-tabs-bar-height});
+          padding-top: calc(60px+ 55px);
       }
 
       &.fixed.no-tabs-bar {
-        padding-top: $base-nav-bar-height;
+        padding-top: 60px;
       }
 
       .vab-main {
         position: relative;
         min-height: 100%;
-        margin-left: $base-left-menu-width;
+        margin-left: 240px;
         background: #f6f8f9;
-        transition: $base-transition;
+        transition: all 0.2s;;
 
         ::v-deep {
           .fixed-header {
             @include fix-header;
 
-            left: $base-left-menu-width;
-            width: $base-right-content-width;
-            box-shadow: $base-box-shadow;
-            transition: $base-transition;
+            left: 240px;
+            width: calc(100% - 240px);;
+            box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);;
+            transition: all 0.2s;;
           }
 
           .nav-bar-container {
@@ -222,19 +224,19 @@
           }
 
           .app-main-container {
-            width: calc(100% - #{$base-padding} - #{$base-padding});
-            margin: $base-padding auto;
-            background: $base-color-white;
-            border-radius: $base-border-radius;
+            width: calc(100% - 20px - 20px);
+            margin: 20px auto;
+            background:  #fff;;
+            border-radius: 8px;;
           }
         }
 
         &.is-collapse-main {
-          margin-left: $base-left-menu-width-min;
+          margin-left: 65px;
 
           ::v-deep {
             .fixed-header {
-              left: $base-left-menu-width-min;
+              left: 65px;;
               width: calc(100% - 65px);
             }
           }
@@ -272,4 +274,4 @@
 
     /* 手机端结束 */
   }
-</style>-->
+</style>

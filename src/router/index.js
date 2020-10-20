@@ -3,8 +3,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import CusLayout from "@/components/NavSearch/index";
-// import Layout from "@/components/managerlayouts";
-import Layout from "@/components/managerlayouts/components/SideBar/index";
+import Layout from "@/components/managerlayouts";
+// import Layout from "@/components/managerlayouts/test/index";
 import LeftNav from "@/components/customerLeftNav/customerleftNav";
 // import EmptyLayout from "@/layouts/EmptyLayout";
 // import { publicPath, routerMode } from "@/config/settings";
@@ -271,7 +271,7 @@ export const asyncRoutes = [
         component: () => import("@/views/manager/index"),
         meta: {
           title: "首页",
-          icon: "marker",
+          icon: "el-icon-location",
           permissions: ["manager", "boss"],
           affix: true,
         },
@@ -285,7 +285,7 @@ export const asyncRoutes = [
     redirect: "noRedirect",
     name: "managerIndex",
     meta: {
-      icon: "marker",
+      icon: "el-icon-location",
       title: "用户管理",
       permissions: ["manager", "boss"],
     },
@@ -323,9 +323,9 @@ export const asyncRoutes = [
   {
     path: "/movieManagement",
     component: Layout,
-    redirect: "noRedirect",
+    redirect: "movieManagement/index",
     meta: {
-      icon: "marker",
+      icon: "el-icon-location",
       title: "影库管理",
       permissions: ["manager", "boss"],
     },
@@ -372,7 +372,7 @@ export const asyncRoutes = [
         name: "EvaluationManagement",
         component: () => import("@/views/manager/EvaluationManagement/index"),
         meta: {
-          icon: "marker",
+          icon: "el-icon-location",
           title: "评价管理",
           permissions: ["manager", "boss"],
         },
@@ -390,7 +390,7 @@ export const asyncRoutes = [
         name: "orderManagement",
         component: () => import("@/views/manager/orderManagement/index"),
         meta: {
-          icon: "marker",
+          icon: "el-icon-location",
           title: "订单管理",
           permissions: ["manager", "boss"],
         },
@@ -408,7 +408,7 @@ export const asyncRoutes = [
         name: "salesStatistics",
         component: () => import("@/views/manager/salesStatistics/index"),
         meta: {
-          icon: "marker",
+          icon: "el-icon-location",
           title: "销售统计",
           permissions: ["manager", "boss"],
         },
@@ -426,7 +426,7 @@ export const asyncRoutes = [
         name: "customerProblems",
         component: () => import("@/views/manager/customerProblems/index"),
         meta: {
-          icon: "marker",
+          icon: "el-icon-location",
           title: "顾客问题",
           permissions: ["manager", "boss"],
         },

@@ -4,7 +4,7 @@
     <el-menu
       style="overflow: hidden; height: 975px"
       :default-active="activeMenu"
-      background-color="#FFFFFF"
+      :background-color="'#FFFFFF'"
       :text-color="'black'"
       :active-text-color="'#e65252'"
       router

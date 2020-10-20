@@ -8,9 +8,7 @@
                         :fit="'contain'"
                         v-cloak
                 >
-                    <div slot="placeholder" class="image-slot">
-
-                    </div>
+                    <div slot="placeholder" class="image-slot"></div>
                 </el-image>
             </router-link>
         </div>

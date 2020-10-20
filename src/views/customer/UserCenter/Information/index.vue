@@ -1,7 +1,7 @@
 <template>
   <div class="Information-container">
     <div class="Information-main">
-      <div class="title">个人信息</div>
+      <div class="Information-title">个人信息</div>
       <ul v-for="(item, index) in list" id="Info-list" :key="item.type">
         <li v-if="index !== 0">
           <span class="Info-type">{{ item.type }}</span>
@@ -78,11 +78,13 @@
     /*border: 1px saddlebrown solid;*/
     font-family: "-apple-system", "BlinkMacSystemFont", "Roboto",
       "Helvetica Neue", "MIcrosoft YaHei", sans-serif !important;
+    border: 1px #e6e6e6 solid;
+    /*box-shadow:inset 1px 1px 2px gray ;*/
   }
   .Information-main {
     margin: 30px 0 0 30px;
   }
-  .title {
+  .Information-title {
     margin-bottom: 20px;
     font-size: 16px;
   }

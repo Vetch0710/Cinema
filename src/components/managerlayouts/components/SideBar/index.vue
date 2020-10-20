@@ -1,62 +1,54 @@
-<!--router	是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转	boolean	—	false-->
 <template>
-    <div class="Side-nav">
+    <el-scrollbar class="side-bar-container" :class="{ 'is-collapse': collapse }">
+        <logo />
         <el-menu
-                style="overflow: hidden; height: 975px"
+                :background-color="'rgb(40, 44, 52)'"
+                :text-color="'hsla(0, 0%, 100%, 0.95)'"
+                :active-text-color="'hsla(0, 0%, 100%, 0.95)'"
                 :default-active="activeMenu"
-                background-color="#ffffff"
-                :text-color="'black'"
-                :active-text-color="'#e65252'"
-                router
-                class="el-menu-vertical-demo"
+                :collapse="collapse"
+                :collapse-transition="false"
+                :default-openeds="defaultOpens"
+                :unique-opened="uniqueOpened"
+                mode="vertical"
         >
-            <el-menu-item index="/customerCenter/index">
-                <i class="el-icon-menu"></i>
-                <span slot="title">我的主页</span>
-            </el-menu-item>
-            <el-menu-item index="/customerInfo/index">
-                <i class="el-icon-menu"></i>
-                <span slot="title">个人信息</span>
-            </el-menu-item>
-            <el-submenu index="2">
-                <template slot="title">
-                    <i class="el-icon-location"></i>
-                    <span>我的订单</span>
-                </template>
-                <el-menu-item-group>
-                    <el-menu-item index="/customerOrder/totalOrder">
-                        全部订单
-                    </el-menu-item>
-                    <el-menu-item index="/customerOrder/finish">已完成</el-menu-item>
-                    <el-menu-item index="/customerOrder/waitingPay">待支付</el-menu-item>
-                    <el-menu-item index="/customerOrder/waitingEvaluation">
-                        待评价
-                    </el-menu-item>
-                </el-menu-item-group>
-            </el-submenu>
-
-            <el-menu-item index="/customerEvaluation/index">
-                <i class="el-icon-document"></i>
-                <span slot="title">我的评价</span>
-            </el-menu-item>
+            <template v-for="route in routes">
+                <side-bar-item
+                        :key="route.path"
+                        :full-path="route.path"
+                        :item="route"
+                ></side-bar-item>
+            </template>
         </el-menu>
-    </div>
+    </el-scrollbar>
 </template>
-
 <script>
-    module.exports = {
-        name: "Side-nav",
+    import SideBarItem from "./components/SideBarItem";
+    import  Logo  from "./Logo";
+    import { mapGetters } from "vuex";
+    import { defaultOopeneds, uniqueOpened } from "@/config/settings";
+
+    export default {
+        name: "SideBar",
+        components: { SideBarItem ,Logo},
         data() {
             return {
-                NowPath: this.$route.path,
-                i: 0,
+                uniqueOpened,
             };
         },
-        methods: {},
         computed: {
+            ...mapGetters({
+                collapse: "settings/collapse",
+                routes: "routes/routes",
+            }),
+            defaultOpens() {
+                if (this.collapse) {
+                }
+                return defaultOopeneds;
+            },
             activeMenu() {
                 const route = this.$route;
-                const {meta, path} = route;
+                const { meta, path } = route;
                 if (meta.activeMenu) {
                     return meta.activeMenu;
                 }
@@ -65,22 +57,84 @@
         },
     };
 </script>
+<style lang="scss" scoped>
+    @mixin active {
+        &:hover {
+            color: #fff;
+            background-color: #1890ff !important;
+        }
 
-<style>
-    .Side-nav {
-        width: 250px;
-        height: 800px;
-        /*background-color: #ffffff;*/
-        /*position: absolute;*/
-        float: left;
-        margin: 20px;
-        /*color: red;*/
-        /*left: 50px;*/
-        /*top: 200px;*/
-        overflow: hidden;
+        &.is-active {
+            color: #fff;
+            background-color: #1890ff !important;
+        }
     }
 
-    .is-active {
-        font-weight: bolder;
+    .side-bar-container {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 999;
+        width: 240px;
+        height: 100vh;
+        overflow: hidden;
+        background: rgb(40, 44, 52) ;
+        box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+        transition: width 0.2s;
+
+        &.is-collapse {
+            width: 65px;
+            border-right: 0;
+
+            ::v-deep {
+                .el-menu {
+                    transition: width 0.2s;
+                }
+
+                .el-menu--collapse {
+                    border-right: 0;
+
+                    .el-submenu__icon-arrow {
+                        right: 10px;
+                        margin-top: -3px;
+                    }
+                }
+            }
+        }
+
+        ::v-deep {
+            .el-scrollbar__wrap {
+                overflow-x: hidden;
+            }
+
+            .el-menu {
+                border: 0;
+
+                .vab-fas-icon {
+                    padding-right: 3px;
+                    font-size: 14px;
+                }
+
+                .vab-remix-icon {
+                    padding-right: 3px;
+                    font-size: 14px + 2;
+                }
+            }
+
+            .el-menu-item,
+            .el-submenu__title {
+                height: 50px;
+                overflow: hidden;
+                line-height: 50px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                vertical-align: middle;
+            }
+
+            .el-menu-item {
+                @include active;
+            }
+        }
     }
 </style>

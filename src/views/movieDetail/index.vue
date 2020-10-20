@@ -351,7 +351,7 @@ export default {
 }
 
 /* 星星大小 */
-.el-icon-star-on:before {
+.movie-score-all-part .el-icon-star-on:before {
   font-size: 35px;
 }
 

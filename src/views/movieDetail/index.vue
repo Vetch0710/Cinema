@@ -3,24 +3,32 @@
     <div class="movieDetail-top">
       <span style="display: none">{{ movieName }}</span>
       <div class="movie-info-movieshow">
-        <a class="movie-yugao-play" :href="movieInfo.movie.yugao">
-          <img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAACQRJREFUeAHlm21MFVcexnm7yousCOiSXYQaharUhtrYpVFjjalJJRB8qTGaTdH49mXThE/1ixq/1C+amP1i1EQ2GxOtq+KS3SYaN77Rspq6BkGCYCxIN6wWxEVeFIQ+v9uZyQBz5QIzcJFJTmbumXPOPM9z/2fOOf/zn7CwSX6Ee82/r69vmp6xWClDKd1IiTrHKsUpcbQrdSi1KNUbqVbnO+Hh4S909uzwRACRThXiXKWlul7Q2dkZ8+rVqylKvu7ubl9vb2+EmWAWERHRayafz9c9ZcoU0quYmJhOCVCtImVK/9B1I+XdPFwTQEQjBexTpY0il93W1hbX3t4eK/K+hw8fPquqqmp59OhR24MHD140NDR0Pn/+vKelpaUHMomJiVHTp0+PSktLi8nMzJw2Z86c+KysrMS5c+fOkAjdcXFxHfHx8e0S6a6Kf6N0WWK8pu5oj1ELYBDPE5DCrq6uua2trb8ROV95efl/S0tLH1+6dKlZYowIrEhHrl69OikvL292Tk7O7yRSd0JCwv+jo6Mf6nnFSqWjFWJUAoj8ewKxR8Tf17+Z8Pjx455Tp07VFBcXN46UtNpzPBCjsLAwdcuWLe/Onj07SlbTKiEqVPhriVDpWCmIzBEJYPzrX/b09Pyxubl5RmNjY9jRo0erTp482fj69Yj+7CCg/lokMjIybOvWram7d+/OSk1NDUtKSnoWFRX1V909MhJrGLYAIh+vhx3s6OhY0dTUlHT+/Pm6AwcO1Lj9jw+lCBaxd+/ed9etWzcvJSWlOTY29prqfCUR2oaqa78/LAFE/h1VPqw+nlVfXx9TVFT07ytXrjB0jduxatWqxMOHD/8hPT29U++IKgEpkgg/BgsoaAFE/mOlg0+fPk2rrq7u3r59e3ldXV1nsA/ysty8efNiTpw4kbNgwQLfzJkzGyQAlvB9MM8MSgDIa2j7s0z+tzdu3Ph5x44dP4y1yQ9Fhi5x/PjxD5cvX56sLvE/DZl/CkaEiKEaxuz55yF/5syZ+k2bNt0KNfJwABPYwAhWMIN9KH5vtAA1wAvvL0+ePPlAfb118+bNt4ZqMBTunz59+qOVK1cmzJo16z/C84UsIeCLMaAFiDwzu4O88Ojzu3bt+iEUyAWDgS4KZrDDweDiWDWgACr9JUMdb3teeKFo9o6MlAlWMIMdDnAJVNZRACn2HpMc9aUkhrpQedsHIuGUD2awwwEucHIqN0gAw1z2MMNjkjPe47wT6GDzwA4HuKjOHqeuMEgAFcxjbs/0lhlesA8L1XJwgAuc4DYQZz8BDIUKWdgwt59I/X4gMfM3HOACJ+UVDrSCfgKowKcsaVnVsbAxG5noZ7jACW5wtPMZKMBG1vMsab1e1dlBeH0NFzjBTc/aaH+eJYBMIxVPDs4M1vP2Qm/DNZzgBke4mpwsAZSRq/4ShyfHi75fUVGxRpOT/Nzc3GTz4WN5hpPBDUcs/kr/YRdgKT483FjmTTfPixYt+v38+fNT1H7B2bNnc+TainKz/WDaghscVXapWd4vgEximhLeWx8+PPOmy2f/ukPz8ogNGza8X1tb+7lma5Ypuvwsx+bgBke4wplCpgUsxnWt2dMzL8zfCU1ycnK8lq9rrl69ulJe4GinMm7nwQ0PNVzVNnsVlgCZ+O3v378/5t6dFStWZNy7d2/jvn37Mt0m7NQe7nm46l4G900LSGfTAr+9UyWv8+T3j96/f/8nelHmLlmyhKHKswOOcNUD3uEhpgBp7NiwaUHmeB28KMvKyjZo5pY9derUN/oqRooRjnBV/TTaMAVI1PgYwY7NSBt2q562xqLke/hIQNfl5+fPdKtdsx04wlW/2Z+0BIglUxMF/1aVWXg8z9omSyopKSm4cOHCx2yduYUFjoYADIeWAHFkasEQMgIATkNmeEFBwaKbN29+xm83DjgaAjAhsgRwo23P2pAOnrVtvgPYee1109TcQKzJSt/Fixcrly1b9q0b7dEGHOGqS2ISLAvoIJMtajJD4dDytXnt2rUl6gLfyaPjWteEoyEAARmWAC1ksj8/3uTlv+vRDPFWRkbGef37T93GA0dDAP+kz+wCDURmEJzg9gOH015lZeVPMve/7dy58+7Lly/7hlM32LJwhKvK11PHNPkfCUshMiPYhtwsJ9d116FDh8q12/vAzXad2oIjXHWvnwC1xOQsXLjQPzlwquhV3vXr1+u2bdv2nRYpXV49w94uoTdwVR5BWNY74A4BSdplncEmo72CV9d6sbVpxvetFkP/GivycDPijpjx3oGb/x2gcfaFUjUBScTkeETa36c1svXKV1+hvnj22LFjnjhfAuGHGxzhCmdLAKNCGdFYBCQFamA0+Vry/lRTU9Ok9kvWr19fPh6zTrjBUTzKTC7WFEv/DE7Rv8tTk6Il6T/HyjFiAvH6jPnfvn17jYbXJg2D+bKARp5pDoPMuxt14y6haERjeQ1orNuHE9zgaJLvJ4AB6Bvi8AhFIxrrbTngAie4iROBltZhWYCRc5kgROLwCEWzSk3wC7jAyQiwvGyn008AmQZBfsUEIRKHN1ZDoh2Q29dwgAuc4GZwtB7TTwAjt5QITIIQicOzSk7QCzjAxYgqLR1IY5AAhkJfE4FJECJxeAMrTZTfYIcDXISZkNpBYayDBICcClYSfkoEJkGIxOFNFNImTjCDHQ5wgZN5z352FMAocITwUyIwCUKcSO8DsIIZ7EYI7RE7aft1QAEMc/lKY2cVEZgEIdorhvI1WMEMduEkanSQ6Zv4AwpAAVVko6SI8FMiMGVSWWbFUD2DEaxgBrvBISBcayocsIRuaJpshcpeu3btZ2IGQ22qjNnzzw83VDYoARAHEZTeumDpN3YBu1XIlL5X+oLw0+zs7L5z5859EgpDJBjAAiawgRGsduxvug7aAsxGZAW4zSbnBxM2EVgpTc5PZkwROMsaJudHUwNEwBqIwJx8n805CLFaeZ/Ls9Tvw0lCb4g+Gc6Hk3iocdKG/IeTdhHMa3UNfAmEok2eT2dN8gPPEoPdpsVKxADx8TSRGaww2Z/3b1HrzEal+fE0M7h6JTZJPP94Ws+Y3McvZXX8u5wD9joAAAAASUVORK5CYII="
-          />
-        </a>
-        <el-image
-          style="
-            width: 232px;
-            height: 322px;
-            margin-left: 60px;
-            margin-top: 20px;
-            border: solid 1px #c9bac0;
-            box-shadow: 3px 3px 10px white;
-            float: left;
-          "
-          :src="movieInfo.movie.imgurl"
-        >
-        </el-image>
+        <div class="movie-info-moviepicture">
+          <div class="movie-yugao-play">
+            <a :href="movieInfo.movie.yugao">
+              <img
+                src="data:image/png;base64,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"
+              />
+            </a>
+          </div>
+
+          <el-image
+            style="
+              width: 232px;
+              height: 322px;
+              border: solid 1px #c9bac0;
+              box-shadow: 3px 3px 10px white;
+            "
+            :src="movieInfo.movie.imgurl"
+          >
+            <div slot="placeholder" class="image-slot">
+              加载中<span class="dot">...</span>
+            </div>
+            <div slot="error" class="image-slot">
+              <i class="el-icon-picture-outline"></i>
+            </div>
+          </el-image>
+        </div>
         <div class="movie-info-movieshow-right">
           <p style="font-size: 26px; font-weight: 800; color: #ffffff">
             {{ movieInfo.movie.filmname }}
@@ -111,24 +119,40 @@
         ><a
           :href="'https://baike.baidu.com/item/' + item"
           v-for="(item, index) in directors"
-          :key="'d'+index"
+          :key="'d' + index"
           >{{ item }}</a
         ></span
       ><br /><br />
       <h3>演员</h3>
       <br />
-      <span style="margin-left: 20px"><a
+      <span style="margin-left: 20px"
+        ><a
           :href="'https://baike.baidu.com/item/' + item"
           v-for="(item, index) in actors"
-          :key="'a'+index"
+          :key="'a' + index"
           >{{ item }}</a
-        ></span>
+        ></span
+      ><br /><br /><br />
+      <h2>影片评价</h2>
+      <div class="evaluation-list">
+        <ul>
+          <li v-for="(item, index) in movieInfo.evaluations" :key="index">
+            <evaluation
+              :customer="item.customer"
+              :evaluationScore="item.evaluationScore"
+              :evaluationContent="item.evaluationContent"
+              :evaluationTime="item.evaluationTime"
+            ></evaluation>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import { getInfo } from "@/api/FilmInfo";
 import { methods } from "../../components/customerLeftNav/customerleftNav.vue";
+import Evaluation from "@/views/movieDetail/Evaluation";
 export default {
   name: "MovieDetail",
   data() {
@@ -159,12 +183,18 @@ export default {
       this.movieInfo = null;
       const result = await getInfo(this.queryData);
       this.movieInfo = result.data;
-      if (this.movieInfo.myScore == null) {
+      if (this.movieInfo.myScore != null) {
         this.scoreflag = true;
       }
       this.actors = this.movieInfo.movie.actor.split(",");
       this.directors = this.movieInfo.movie.director.split(",");
+      console.log("====================================");
+      console.log(this.movieInfo.evaluations);
+      console.log("====================================");
     },
+  },
+  components: {
+    Evaluation,
   },
 };
 </script>
@@ -188,8 +218,8 @@ export default {
   background-color: black;
   opacity: 0;
   position: absolute;
-  top: 147px;
-  left: 249px;
+  /* top: 147px;
+  left: 249px; */
   z-index: 2;
   cursor: pointer;
   text-align: center;
@@ -197,6 +227,13 @@ export default {
 .movie-yugao-play:hover {
   opacity: 1;
   background: rgb(0, 0, 0, 0.4);
+}
+
+.movie-info-moviepicture {
+  position: relative;
+  margin-left: 60px;
+  margin-top: 20px;
+  float: left;
 }
 
 .movie-info-movieshow-right {
@@ -360,7 +397,7 @@ export default {
   width: 720px;
 }
 
-.movieDetail-middle a{
+.movieDetail-middle a {
   color: black;
   margin-right: 20px;
 }
@@ -398,5 +435,15 @@ export default {
   color: #333;
   font-size: 14px;
   line-height: 26px;
+}
+
+.evaluation-list {
+  width: 730px;
+}
+.evaluation-list ul {
+  list-style: none;
+}
+.evaluation-list ul li{
+  margin-top: 30px;
 }
 </style>

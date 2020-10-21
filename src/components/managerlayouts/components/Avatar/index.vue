@@ -55,7 +55,7 @@
             await this.$store.dispatch("user/logout");
             if (recordRoute) {
               const fullPath = this.$route.fullPath;
-              this.$router.push(`/login?redirect=${fullPath}`);
+              this.$router.push(`/login?redirect=${fullPath}&&type=manager`);
             } else {
               this.$router.push("/login");
             }

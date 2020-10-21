@@ -68,6 +68,7 @@
         layout: "total, sizes, prev, pager, next, jumper",
         elementLoadingText: "正在加载...",
         url: "",
+        baseU: 'http://39.97.217.243:8089/images/',
         action: baseURL + "/upload",
       };
     },
@@ -82,8 +83,8 @@
           console.log(res)
           console.log(file)
         // this.url = URL.createObjectURL(file.raw);
-        this.url = res;
-        console.log(this.imageUrl)
+        this.url = this.baseU+res;
+        console.log(this.url)
       },
       beforeAvatarUpload(file) {
         const isJPG = file.type === "image/jpeg" || file.type === "image/png";

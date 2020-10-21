@@ -22,9 +22,25 @@
               :fit="'contain'"
             ></el-image>
           </span>
-          <el-button class="Info-edit" round @click="handleEdit(index)">
+          <el-button class="Info-edit"  @click="handleEdit(index)" v-if="item.type !== '头像'">
             修改
           </el-button>
+          <el-upload
+                    v-else
+                  style="display: inline-block;width: 70px;"
+                  name="file"
+                  :action="action"
+                  :show-file-list="false"
+                  :on-success="handleAvatarSuccess"
+                  :before-upload="beforeAvatarUpload"
+          >
+             <el-button class="Info-edit"   >
+            上传图片
+          </el-button>
+<!--              <img :src="url" alt="">-->
+
+          </el-upload>
+
         </li>
       </ul>
       <edit ref="edit" :list="list" @fetch-data="fetchData"></edit>
@@ -34,10 +50,17 @@
 <script>
   import { getPersonalInfo } from "@/api/user";
   import Edit from "./components/InformationEdit";
+  import { baseURL, tokenName } from "@/config/settings";
+  import { mapGetters } from "vuex";
 
   export default {
     name: "Information",
     components: { Edit },
+    computed: {
+      ...mapGetters({
+        accessToken: "user/accessToken",
+      }),
+    },
     data() {
       return {
         list: null,
@@ -45,6 +68,8 @@
         layout: "total, sizes, prev, pager, next, jumper",
         elementLoadingText: "正在加载...",
         url: "",
+        baseU: 'http://39.97.217.243:8089/images/',
+        action: baseURL + "/upload",
       };
     },
     created() {
@@ -54,10 +79,31 @@
       handleEdit(row) {
         this.$refs["edit"].showEdit(row);
       },
+      handleAvatarSuccess(res, file) {
+          console.log(res)
+          console.log(file)
+        // this.url = URL.createObjectURL(file.raw);
+        this.url = this.baseU+res;
+        console.log(this.url)
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === "image/jpeg" || file.type === "image/png";
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error("上传头像图片只能是 JPG或PNG 格式!");
+        }
+        if (!isLt2M) {
+          this.$message.error("上传头像图片大小不能超过 2MB!");
+        }
+
+        return isJPG && isLt2M;
+      },
       async fetchData() {
         this.listLoading = true;
-        const { data } = await getPersonalInfo();
-        console.log(data[0].value);
+        const { data } = await getPersonalInfo({'this.accessToken':this.accessToken});
+        console.log("data===="+data)
+        console.log(data[0].type);
         this.list = data;
         this.url = data[1].value;
         setTimeout(() => {
@@ -114,7 +160,9 @@
   }
   .Info-edit {
     position: relative;
-    width: 70px;
+    width: 100px;
     right: 0;
+      text-align: center;
+border-radius: 20px 20px;
   }
 </style>

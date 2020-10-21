@@ -26,10 +26,11 @@ export function logout() {
     method: "post",
   });
 }
-export function getPersonalInfo() {
+export function getPersonalInfo(data) {
   return request({
     url: "/getPersonalInfo",
     method: "post",
+    data
   });
 }
 

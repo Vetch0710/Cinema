@@ -79,5 +79,6 @@ export default {
     line-height: 26px;
     font-size: 14px;
     width: 660px;
+    float: right;
 }
 </style>

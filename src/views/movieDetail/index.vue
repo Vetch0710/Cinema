@@ -77,7 +77,7 @@
             >
           </div>
         </div>
-        <div class="movie-score-all">
+        <div class="movie-score-all" v-if="movieInfo.movie.score > 0">
           <p style="font-size: 26px; font-weight: 500; color: white">
             影片评分
           </p>
@@ -103,9 +103,48 @@
             }}</span>
           </div>
         </div>
+        <div class="movie-score-all" v-else>
+          <p style="font-size: 20px; font-weight: 500; color: white">
+            暂无评分
+          </p>
+        </div>
       </div>
     </div>
     <hr style="color: #eeeeee; margin-top: 70px" />
+    <div class="movieDetail-middle-right">
+      <h2>相关电影</h2>
+      <div class="relativeMovies">
+        <dl>
+          <dd
+            v-for="(item, index) in movieInfo.relativeMovies"
+            :key="index"
+            style="
+              width: 106px;
+              float: left;
+              margin-left: 20px;
+              margin-bottom: 22px;
+            "
+          >
+            <a @click="showMovie(item.movieName)">
+              <el-image
+                style="width: 106px; height: 145px; cursor: pointer"
+                :src="item.moviePicture"
+                fit="cover"
+              >
+                <div slot="error" class="image-slot">
+                  <i class="el-icon-picture-outline"></i>
+                </div>
+              </el-image>
+              <p style="cursor: pointer">{{ item.movieName }}</p>
+            </a>
+            <p style="color: #ffc861" v-if="item.score > 0">
+              {{ item.score }}
+            </p>
+            <p style="color: #ffc861" v-else>暂无评分</p>
+          </dd>
+        </dl>
+      </div>
+    </div>
     <div class="movieDetail-middle">
       <h2>剧情简介</h2>
       <br />
@@ -134,9 +173,9 @@
         ></span
       ><br /><br /><br />
       <h2>影片评价</h2>
-      <div class="evaluation-list">
+      <div class="evaluation-list" v-loading="listLoading">
         <ul>
-          <li v-for="(item, index) in movieInfo.evaluations" :key="index">
+          <li v-for="(item, index) in evaluationList" :key="index">
             <evaluation
               :customer="item.customer"
               :evaluationScore="item.evaluationScore"
@@ -146,6 +185,16 @@
           </li>
         </ul>
       </div>
+      <el-pagination
+        class="evaluation-reloadmore"
+        background
+        :current-page="queryForm.pageNo"
+        :page-size="queryForm.pageSize"
+        :layout="layout"
+        :total="total"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      ></el-pagination>
     </div>
   </div>
 </template>
@@ -153,18 +202,25 @@
 import { getInfo } from "@/api/FilmInfo";
 import { methods } from "../../components/customerLeftNav/customerleftNav.vue";
 import Evaluation from "@/views/movieDetail/Evaluation";
+import { getList } from "@/api/EvaluationList";
 export default {
   name: "MovieDetail",
   data() {
     return {
       movieInfo: Object,
-      queryData: {
-        name: "",
-      },
       wantflag: true,
       scoreflag: false,
       actors: [],
       directors: [],
+      evaluationList: null,
+      listLoading: true,
+      layout: "total,  prev, pager, next, jumper",
+      total: 0,
+      queryForm: {
+        pageNo: 1,
+        pageSize: 5,
+        pageMovieName: "",
+      },
     };
   },
   computed: {
@@ -174,23 +230,53 @@ export default {
     },
   },
   mounted() {},
+  created() {
+    this.fetchEvaluation();
+  },
   methods: {
-    addwant() {
-      this.wantflag = !this.wantflag;
-    },
     async fetchData() {
-      this.queryData.name = this.$route.query.movieName;
+      this.queryForm.pageMovieName = this.$route.query.movieName;
       this.movieInfo = null;
-      const result = await getInfo(this.queryData);
+      const result = await getInfo(this.queryForm);
       this.movieInfo = result.data;
       if (this.movieInfo.myScore != null) {
         this.scoreflag = true;
       }
       this.actors = this.movieInfo.movie.actor.split(",");
       this.directors = this.movieInfo.movie.director.split(",");
-      console.log("====================================");
-      console.log(this.movieInfo.evaluations);
-      console.log("====================================");
+    },
+    addwant() {
+      this.wantflag = !this.wantflag;
+    },
+    handleSizeChange(val) {
+      this.queryForm.pageSize = val;
+      this.fetchEvaluation();
+    },
+    handleCurrentChange(val) {
+      this.queryForm.pageNo = val;
+      this.fetchEvaluation();
+    },
+    queryData() {
+      this.queryForm.pageNo = 1;
+      this.fetchEvaluation();
+    },
+    async fetchEvaluation() {
+      this.listLoading = true;
+      this.queryForm.pageMovieName = this.movieName;
+      const { data, totalCount } = await getList(this.queryForm);
+      setTimeout(() => {
+        this.evaluationList = data;
+        this.total = totalCount;
+        this.listLoading = false;
+      }, 3000);
+    },
+    showMovie(movieName) {
+      this.$router.push({
+        path: "/movies/movieDetail",
+        query: {
+          movieName: movieName,
+        },
+      });
     },
   },
   components: {
@@ -395,6 +481,8 @@ export default {
 .movieDetail-middle {
   margin-top: 30px;
   width: 720px;
+  margin-left: 50px;
+  float: left;
 }
 
 .movieDetail-middle a {
@@ -402,12 +490,12 @@ export default {
   margin-right: 20px;
 }
 
-.movieDetail-middle h3 {
+.movieDetail h3 {
   font-weight: normal;
   font-size: 18px;
 }
 
-.movieDetail-middle h2 {
+.movieDetail h2 {
   font-family: Microsoft YaHei, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: subpixel-antialiased;
   display: inline-block;
@@ -419,7 +507,7 @@ export default {
   line-height: 65px;
 }
 
-.movieDetail-middle h2:before {
+.movieDetail h2:before {
   content: "";
   display: inline-block;
   width: 4px;
@@ -443,7 +531,37 @@ export default {
 .evaluation-list ul {
   list-style: none;
 }
-.evaluation-list ul li{
+.evaluation-list ul li {
   margin-top: 30px;
+}
+
+.evaluation-reloadmore {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.evaluation-reloadmore .el-pager li:not(.disabled).active {
+  background-color: #f80f01 !important;
+}
+
+.evaluation-list .el-loading-mask .el-loading-spinner .path {
+  stroke: red;
+}
+
+.movieDetail-middle-right {
+  width: 400px;
+  float: right;
+  margin-top: 30px;
+  margin-right: 50px;
+}
+
+.relativeMovies dd {
+  text-align: center;
+  color: black;
+  line-height: 28px;
+}
+.relativeMovies dd a {
+  color: black;
+  line-height: 26px;
 }
 </style>

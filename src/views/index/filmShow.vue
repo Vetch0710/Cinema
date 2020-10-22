@@ -5,13 +5,15 @@
         <div class="curtain"></div>
         <div class="score">
           <el-rate
-          class="filmshow-movie-score"
+            v-if="score > 0"
+            class="filmshow-movie-score"
             v-model="score"
             disabled
             show-score
             text-color="#ff9900"
           >
           </el-rate>
+          <span style="font-weight:500;" v-else>暂无评分</span>
         </div>
       </div>
       <div class="movie-info">
@@ -85,7 +87,7 @@ a {
   z-index: 1;
 }
 
-.filmshow-movie-score{
+.filmshow-movie-score {
   margin-top: 5px;
 }
 

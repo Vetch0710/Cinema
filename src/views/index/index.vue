@@ -376,4 +376,9 @@
   .film-page{
     text-align: center;
   }
+
+  .film-page .el-pager li:not(.disabled).active {
+    background-color: #F80F01 !important;
+  }
+
 </style>

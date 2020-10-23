@@ -39,6 +39,7 @@ const setting = {
     "/index",
     "/resetPassword",
     "/movies/selectSession",
+    "/movies/seatSelection",
     "/movies/movieDetail",
   ],
   //加载时显示文字

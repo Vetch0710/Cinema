@@ -1,5 +1,3 @@
-
-
 import Vue from "vue";
 import VueRouter from "vue-router";
 import CusLayout from "@/components/NavSearch/index";
@@ -17,13 +15,11 @@ export const constantRoutes = [
     redirect: "index",
     hidden: true,
     component: CusLayout,
-    children: [
-      {
-        path: "index",
-        name: "Index",
-        component: () => import("@/views/index/index"),
-      },
-    ],
+    children: [{
+      path: "index",
+      name: "Index",
+      component: () => import("@/views/index/index"),
+    }, ],
   },
   //登陆界面
   {
@@ -49,17 +45,33 @@ export const constantRoutes = [
     hidden: true,
     component: CusLayout,
     children: [
-      //选择场次界面
-      {
-        path: "selectSession",
-        name: "SelectSession",
-        component: () => import("@/views/selectSession/index"),
-      },
       //电影详情界面
       {
         path: "movieDetail",
         name: "movieDetail",
         component: () => import("@/views/movieDetail/index"),
+      },
+      {
+        path: "selectSession",
+        name: "SelectSession",
+        components: {
+          default: () => import("@/views/customer/ticket/selectSession/index"),
+          steps: () => import("@/views/customer/ticket/index")
+        },
+        meta: {
+          title: "选择场次",
+        },
+      },
+      {
+        path: "seatSelection",
+        name: "SeatSelection",
+        components: {
+          default: () => import("@/views/customer/ticket/seatSelection/index"),
+          steps: () => import("@/views/customer/ticket/index"),
+        },
+        meta: {
+          title: "座位选择",
+        },
       },
     ],
   },
@@ -81,7 +93,7 @@ export const constantRoutes = [
 export const asyncRoutes = [
   //顾客订单生成界面
   {
-    path: "/movieDO",
+    path: "/ticket",
     redirect: "noRedirect",
     component: CusLayout,
     meta: {
@@ -90,23 +102,37 @@ export const asyncRoutes = [
     children: [
       //选择场次界面
       {
-        path: "orderGenerated",
-        name: "OrderGenerated",
-        component: () => import("@/views/customer/orderGenerated/index"),
-        meta: {
-          title: "订单生成",
-          permissions: ["customer"],
-        },
-      },
-      {
-        path: "seatSelection",
-        name: "SeatSelection",
-        component: () => import("@/views/customer/seatSelection/index"),
-        meta: {
-          title: "座位选择",
-          permissions: ["customer"],
-        },
-      },
+        path: "/order",
+        component: () => import('@/views/customer/ticket/index'),
+        children: [
+          //选择场次界面
+          {
+            path: "orderGenerated",
+            name: "OrderGenerated",
+            components: {
+              default: () => import("@/views/customer/ticket/orderGenerated/index"),
+              steps: () => import("@/views/customer/ticket/index")
+            },
+            meta: {
+              title: "订单生成",
+              permissions: ["customer"],
+            },
+          },
+
+          {
+            path: "orderFinished",
+            name: "orderFinished",
+            components: {
+              default: () => import("@/views/customer/ticket/orderFinished/index"),
+              steps: () => import("@/views/customer/ticket/index")
+            },
+            meta: {
+              title: "购票成功",
+              permissions: ["customer"],
+            },
+          },
+        ]
+      }
     ],
   },
 
@@ -118,21 +144,19 @@ export const asyncRoutes = [
     meta: {
       permissions: ["customer"],
     },
-    children: [
-      {
-        path: "index",
-        name: "UserCenterIndex",
-        components: {
-          left: LeftNav,
-          default: () => import("@/views/customer/UserCenter/index"),
-        },
-        meta: {
-          title: "个人中心",
-          permissions: ["customer"],
-          affix: true,
-        },
+    children: [{
+      path: "index",
+      name: "UserCenterIndex",
+      components: {
+        left: LeftNav,
+        default: () => import("@/views/customer/UserCenter/index"),
       },
-    ],
+      meta: {
+        title: "个人中心",
+        permissions: ["customer"],
+        affix: true,
+      },
+    }, ],
   },
   //用户评价详情
   {
@@ -142,21 +166,19 @@ export const asyncRoutes = [
     meta: {
       permissions: ["customer"],
     },
-    children: [
-      {
-        path: "index",
-        name: "customerEvaluation",
-        components: {
-          left: LeftNav,
-          default: () =>
-            import("@/views/customer/UserCenter/customerEvaluation/index"),
-        },
-        meta: {
-          title: "我的评价",
-          permissions: ["customer"],
-        },
+    children: [{
+      path: "index",
+      name: "customerEvaluation",
+      components: {
+        left: LeftNav,
+        default: () =>
+          import("@/views/customer/UserCenter/customerEvaluation/index"),
       },
-    ],
+      meta: {
+        title: "我的评价",
+        permissions: ["customer"],
+      },
+    }, ],
   },
   //用户个人信息
   {
@@ -166,21 +188,19 @@ export const asyncRoutes = [
     meta: {
       permissions: ["customer"],
     },
-    children: [
-      {
-        path: "index",
-        name: "Information",
-        components: {
-          left: LeftNav,
-          default: () =>
-            import("@/views/customer/UserCenter/Information/index"),
-        },
-        meta: {
-          title: "个人信息",
-          permissions: ["customer"],
-        },
+    children: [{
+      path: "index",
+      name: "Information",
+      components: {
+        left: LeftNav,
+        default: () =>
+          import("@/views/customer/UserCenter/Information/index"),
       },
-    ],
+      meta: {
+        title: "个人信息",
+        permissions: ["customer"],
+      },
+    }, ],
   },
   //用户订单详情
   {
@@ -191,8 +211,7 @@ export const asyncRoutes = [
       title: "我的订单",
       permissions: ["customer"],
     },
-    children: [
-      {
+    children: [{
         path: "totalOrder",
         name: "Order",
         components: {
@@ -264,19 +283,17 @@ export const asyncRoutes = [
     path: "/manager",
     component: Layout,
     redirect: "manager/index",
-    children: [
-      {
-        path: "index",
-        name: "managerIndex",
-        component: () => import("@/views/manager/index"),
-        meta: {
-          title: "首页",
-          icon: "el-icon-location",
-          permissions: ["manager", "boss"],
-          affix: true,
-        },
+    children: [{
+      path: "index",
+      name: "managerIndex",
+      component: () => import("@/views/manager/index"),
+      meta: {
+        title: "首页",
+        icon: "el-icon-location",
+        permissions: ["manager", "boss"],
+        affix: true,
       },
-    ],
+    }, ],
   },
   //后台  用户管理
   {
@@ -289,8 +306,7 @@ export const asyncRoutes = [
       title: "用户管理",
       permissions: ["manager", "boss"],
     },
-    children: [
-      {
+    children: [{
         path: "customerInfo",
         name: "customerInfo",
         component: () => import("@/views/manager/userManagement/customerInfo"),
@@ -329,8 +345,7 @@ export const asyncRoutes = [
       title: "影库管理",
       permissions: ["manager", "boss"],
     },
-    children: [
-      {
+    children: [{
         path: "index",
         name: "MovieManagement",
         component: () => import("@/views/manager/MovieManagement/index"),
@@ -366,72 +381,64 @@ export const asyncRoutes = [
     path: "/evaluationManagement",
     component: Layout,
     redirect: "evaluationManagement/index",
-    children: [
-      {
-        path: "index",
-        name: "EvaluationManagement",
-        component: () => import("@/views/manager/EvaluationManagement/index"),
-        meta: {
-          icon: "el-icon-location",
-          title: "评价管理",
-          permissions: ["manager", "boss"],
-        },
+    children: [{
+      path: "index",
+      name: "EvaluationManagement",
+      component: () => import("@/views/manager/EvaluationManagement/index"),
+      meta: {
+        icon: "el-icon-location",
+        title: "评价管理",
+        permissions: ["manager", "boss"],
       },
-    ],
+    }, ],
   },
   //后台  订单管理
   {
     path: "/orderManagement",
     component: Layout,
     redirect: "orderManagement/index",
-    children: [
-      {
-        path: "index",
-        name: "orderManagement",
-        component: () => import("@/views/manager/orderManagement/index"),
-        meta: {
-          icon: "el-icon-location",
-          title: "订单管理",
-          permissions: ["manager", "boss"],
-        },
+    children: [{
+      path: "index",
+      name: "orderManagement",
+      component: () => import("@/views/manager/orderManagement/index"),
+      meta: {
+        icon: "el-icon-location",
+        title: "订单管理",
+        permissions: ["manager", "boss"],
       },
-    ],
+    }, ],
   },
   //后台  销售统计
   {
     path: "/salesStatistics",
     component: Layout,
     redirect: "salesStatistics/index",
-    children: [
-      {
-        path: "index",
-        name: "salesStatistics",
-        component: () => import("@/views/manager/salesStatistics/index"),
-        meta: {
-          icon: "el-icon-location",
-          title: "销售统计",
-          permissions: ["manager", "boss"],
-        },
+    children: [{
+      path: "index",
+      name: "salesStatistics",
+      component: () => import("@/views/manager/salesStatistics/index"),
+      meta: {
+        icon: "el-icon-location",
+        title: "销售统计",
+        permissions: ["manager", "boss"],
       },
-    ],
+    }, ],
   },
   //后台  用户提问
   {
     path: "/customerProblems",
     component: Layout,
     redirect: "customerProblems/index",
-    children: [
-      {
-        path: "index",
-        name: "customerProblems",
-        component: () => import("@/views/manager/customerProblems/index"),
-        meta: {
-          icon: "el-icon-location",
-          title: "顾客问题",
-          permissions: ["manager", "boss"],
-        },
+    children: [{
+      path: "index",
+      name: "customerProblems",
+      component: () => import("@/views/manager/customerProblems/index"),
+      meta: {
+        icon: "el-icon-location",
+        title: "顾客问题",
+        permissions: ["manager", "boss"],
       },
-    ],
+    }, ],
   },
   /* {
     path: "/test",

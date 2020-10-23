@@ -1,9 +1,9 @@
 import request from "@/utils/request";
 
-export function getInfo(data) {
+export function selectSession(data) {
   console.log(data)
   return request({
-    url: "/film/getInfo",
+    url: "/arrangement/selectSession",
     method: "get",
     data,
   });

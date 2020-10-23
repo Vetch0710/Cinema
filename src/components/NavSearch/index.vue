@@ -5,6 +5,11 @@
         <div class="app-main">
             <transition mode="out-in" name="fade-transform">
                 <keep-alive>
+                    <router-view name="steps"/>
+                </keep-alive>
+            </transition>
+            <transition mode="out-in" name="fade-transform">
+                <keep-alive>
                     <router-view name="left"/>
                 </keep-alive>
             </transition>

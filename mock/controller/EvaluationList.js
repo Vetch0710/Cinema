@@ -185,7 +185,7 @@ module.exports = [{
   type: "post",
   response(config) {
     const {
-      title = "", pageNo = 1, pageSize = 20, pageMovieName = ""
+      title = "", pageNo = 1, pageSize = 20, pageMovieId = 0
     } = config.body;
     let mockList = evaluations.filter((item) => {
       if (title && item.title.indexOf(title) < 0) return false;

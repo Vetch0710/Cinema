@@ -1,25 +1,29 @@
 <template>
-  <div>
+  <div class="filmShow">
     <a @click="selectMovie">
-      <div class="image" :style="{ background: 'url(' + imgurl + ')' }">
+      <div class="image" :style="{ background: 'url(' + moviePicture + ')' }">
         <div class="curtain"></div>
-        <div class="score">
+        <div class="movieScore">
           <el-rate
-            v-if="score > 0"
-            class="filmshow-movie-score"
-            v-model="score"
+            v-if="movieScore > 0"
+            class="filmshow-movie-movieScore"
+            v-model="movieScore"
             disabled
-            show-score
+            show-movieScore
             text-color="#ff9900"
           >
           </el-rate>
-          <span style="font-weight:500;" v-else>暂无评分</span>
+          <span style="font-weight: 500" v-else>暂无评分</span>
         </div>
       </div>
       <div class="movie-info">
-        <h4 class="movie-title font-bold" :title="filmname">{{ filmname }}</h4>
-        <p class="movie-price">
-          <span class="movie-iniprice font-reaular"> ￥{{ price }} </span>
+        <h4 class="movie-title font-bold" :title="movieName">
+          {{ movieName }}
+        </h4>
+        <p class="movie-arrangementPrice">
+          <span class="movie-iniprice font-reaular">
+            ￥{{ arrangementPrice }}
+          </span>
           <span class="movie-tag font-bold">
             <label></label>
           </span>
@@ -36,16 +40,17 @@ export default {
     return {};
   },
   props: {
-    score: { type: Number, required: true },
-    imgurl: { type: String, required: true },
-    price: { type: Number, required: true },
-    filmname: { type: String, required: true },
+    movieId: { type: Number, required: true },
+    movieScore: { type: Number, required: true },
+    moviePicture: { type: String, required: true },
+    arrangementPrice: { type: Number, required: true },
+    movieName: { type: String, required: true },
   },
   methods: {
     selectMovie() {
       this.$router.push({
         path: "/movies/movieDetail",
-        query: { movieName: this.filmname },
+        query: { movieId: this.movieId },
       });
     },
   },
@@ -71,7 +76,7 @@ a {
   background-repeat: no-repeat;
 }
 
-.score {
+.movieScore {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -87,11 +92,11 @@ a {
   z-index: 1;
 }
 
-.filmshow-movie-score {
+.filmshow-movie-movieScore {
   margin-top: 5px;
 }
 
-.movie-info {
+.filmShow .movie-info {
   margin-top: 15px;
   margin-bottom: 40px;
   text-align: center;
@@ -116,7 +121,7 @@ a {
   font-family: JDZHENGHEI-01-BOLD;
 }
 
-.movie-price {
+.movie-arrangementPrice {
   margin-top: -18px;
   font-family: JDZhengHei-01-Regular;
 }

@@ -12,7 +12,7 @@
             <el-menu-item index="/customerOrder/waitingPay">待支付</el-menu-item>
             <el-menu-item index="/customerOrder/waitingEvaluation">待评价</el-menu-item>
         </el-menu>
-        <div class="customerOrder-main">
+        <div class="customerOrder-main" v-loading="listLoading" element-loading-text="正在加载中">
             <div v-if="flag">
                 <div v-if="total===0" class="text">
                     对不起，您没有该类型的订单
@@ -54,19 +54,20 @@
                         </div>
                     </div>
                 </div>
+
+                <el-pagination
+                        v-if="total>5"
+                        class="order-page"
+                        background
+                        :current-page="queryForm.pageNo"
+                        :page-size="queryForm.pageSize"
+                        :layout="layout"
+                        :total="total"
+                        @current-change="handleCurrentChange"
+                ></el-pagination>
             </div>
-            <el-pagination
-                    v-if="total>5"
-                    class="order-page"
-                    background
-                    :current-page="queryForm.pageNo"
-                    :page-size="queryForm.pageSize"
-                    :layout="layout"
-                    :total="total"
-                    @current-change="handleCurrentChange"
-            ></el-pagination>
         </div>
-        <edit ref="edit" @fetch-data="fetchData"></edit>
+        <edit ref="edit"></edit>
     </div>
 </template>
 
@@ -91,7 +92,7 @@
                 total: 1,
                 handleSizeChange: '',
                 flag: false,
-                layout: "prev, pager, next, jumper",
+                layout: "total,prev, pager, next, jumper",
             };
         },
         created() {
@@ -103,11 +104,7 @@
         computed: {
             activeIndex() {
                 const route = this.$route;
-                // console.log(route)
                 const {path} = route;
-                // if (meta.activeIndex) {
-                //     return meta.activeIndex;
-                // }
                 return path;
             },
         },
@@ -115,27 +112,39 @@
             $route(to, from) {
                 this.type = to.params.type;
                 console.log("当前类型：" + this.type)
-                this.filterData();
-                console.log(typeof this.orderInfo)
+                this.fetchData();
+                console.log(this.orderInfo)
             }
         },
         mounted() {
 
         },
         methods: {
-            goEvaluation(item){
+            goEvaluation(item) {
                 this.$router.push({
-                    path:"/customerEvaluation",
-                    query:{
-                        data:item
+                    path: "/customerEvaluation/index",
+                    query: {
+                        data:
+                            {
+                                orderInfo: {
+                                    orderId: item.orderId,
+                                    orderImg: item.orderImg,
+                                    movieName:  item.movieName,
+                                    orderTime:  item.orderTime,
+                                },
+                                evaluationScore: null,
+                                evaluationContent: null,
+                                evaluationTime: null,
+                            }
+
                     }
                 })
             },
-            goPay(item){
+            goPay(item) {
                 this.$router.push({
-                    path:"/Pay",
-                    query:{
-                        data:item
+                    path: "/Pay",
+                    query: {
+                        data: item
                     }
                 })
             },
@@ -154,33 +163,29 @@
                 );
             },
             filterData() {
-                if (this.type) {
-                    this.middleInfo = this.orderAllInfo.filter(
-                        (item, index) => {
-                            if (this.type === '全部订单') {
-                                return item;
-                            } else {
-                                return item.orderStatus === this.type
-                            }
-                        }
-                    );
-                    this.total = this.middleInfo.length;
-                    this.queryForm.pageNo = 1;
-                    console.log(this.total)
-                    // this.total = 100;
-                    this.pagingInfo();
-                }
+
+                this.middleInfo = this.orderAllInfo;
+                this.total = this.middleInfo.length;
+                this.queryForm.pageNo = 1;
+                console.log(this.total)
+                // this.total = 100;
+                this.pagingInfo();
+
             },
             async fetchData() {
-                this.listLoading = true;
-                const {data} = await getOrderList();
-                setTimeout(() => {
+                if (this.type) {
+                    this.flag = false;
+                    this.total = 0;
+                    this.listLoading = true;
+                    const {data} = await getOrderList({type: this.type});
+                    setTimeout(() => {
+                        this.orderAllInfo = data.orderInfo;
+                        this.filterData();
+                        this.flag = true;
+                        this.listLoading = false;
+                    }, 1000);
 
-                }, 2000);
-                this.orderAllInfo = data.orderInfo;
-                this.filterData();
-                this.flag = true;
-                this.listLoading = false;
+                }
             },
 
         },
@@ -189,12 +194,16 @@
 <style>
     .customerOrder-contain {
         margin-top: 20px;
-        width: 900px;
+        width: 1000px;
         height: 800px;
         border: 1px #e6e6e6 solid;
         float: left;
         background-color: #fff;
         font-family: "-apple-system", "BlinkMacSystemFont", "Roboto", "Helvetica Neue", "MIcrosoft YaHei", sans-serif !important;
+    }
+
+    .customerOrder-main {
+        height: 720px;
     }
 
     .customerOrder-contain .el-menu-item {

@@ -26,20 +26,6 @@
         </div>
             </div>
         </div>
-        <!-- <el-table
-                 style="width: 95%;text-align: center;margin: 0 auto;font-size: 14px !important;"
-                 :data="orderDetail"
-                 :header-cell-style="{background:'#f5f7fa',color:'#606266','font-size': '14px','font-weight': '400','padding': '7.5px 0',
-         'height': '30px'}"
-         >
-           <el-table-column show-overflow-tooltip prop="orderId"  label="订单编号"></el-table-column>
-           <el-table-column show-overflow-tooltip prop="movieName"  label="影片"></el-table-column>
-           <el-table-column show-overflow-tooltip prop="orderTime"  label="时间"></el-table-column>
-           <el-table-column show-overflow-tooltip label="座位">
-     &lt;!&ndash;        <div>{{orderDetail.arrangementPlace}}</div>&ndash;&gt;
-     &lt;!&ndash;        <div>{{orderDetail.orderSeat}}</div>&ndash;&gt;
-           </el-table-column>
-         </el-table>-->
     </el-dialog>
 
 </template>
@@ -65,7 +51,6 @@
                 this.dialogFormVisible = true;
             },
             close() {
-
                 this.dialogFormVisible = false;
             },
 

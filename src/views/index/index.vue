@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="rotation">
-      <el-carousel trigger="click" height="400px">
+      <el-carousel trigger="hover" height="400px">
         <el-carousel-item v-for="item in rotationImgs" :key="item">
-          <img class="small" :src="item" />
+          <img class="small" :src="item"  alt=""/>
         </el-carousel-item>
       </el-carousel>
     </div>

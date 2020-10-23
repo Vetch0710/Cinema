@@ -44,10 +44,10 @@ const orderInfo =
             orderId: '5',
             orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
             orderSeat: ["32", "22", "11"],
-            orderTime: "2020-6-6 17:00",
+            orderTime: "456",
             orderPrice:"100",
             orderStatus: "待评价",
-            movieName: "我和我的祖国",
+            movieName: "123",
             arrangementPlace:"1"
         },
         {
@@ -97,11 +97,20 @@ module.exports = [{
     url: "/Order/getOrderList",
     type: "post",
     response(config) {
+        let type=config.body.type;
+       let list=orderInfo.filter((item)=>{
+           if (type === '全部订单'){
+               return item;
+           }else {
+               return item.orderStatus === type
+
+           }
+        })
         return {
             code: 200,
             msg: "success",
             data: {
-                orderInfo
+                orderInfo:list
             },
         };
     },

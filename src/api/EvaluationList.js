@@ -8,3 +8,16 @@ export function getList(data) {
     data,
   });
 }
+export function getCusEva() {
+  return request({
+    url: "/evaluationList/getCusEva",
+    method: "post",
+  });
+}
+export function saveEvaluation(data) {
+  return request({
+    url: "/evaluationList/saveEvaluation",
+    method: "post",
+    data
+  });
+}

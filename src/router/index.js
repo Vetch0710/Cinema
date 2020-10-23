@@ -151,6 +151,16 @@ export const asyncRoutes = [
           default: () =>
             import("@/views/customer/UserCenter/customerEvaluation/index"),
         },
+        // beforeEnter: (to, from, next) => {
+        //   // if ()
+        //   // to.params.type = "全部订单";
+        //   console.log(to.query)
+        //   if (!to.query){
+        //     to.query.data=""
+        //   }
+        //   console.log(to.query.data+"sdsdsd")
+        //   next();
+        // },
         meta: {
           title: "我的评价",
           permissions: ["customer"],

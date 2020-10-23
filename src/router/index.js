@@ -219,7 +219,7 @@ export const asyncRoutes = [
           default: () => import("@/views/customer/UserCenter/Order/index"),
         },
         beforeEnter: (to, from, next) => {
-          to.params.type = "all";
+          to.params.type = "全部订单";
           next();
         },
         meta: {
@@ -235,7 +235,7 @@ export const asyncRoutes = [
           default: () => import("@/views/customer/UserCenter/Order/index"),
         },
         beforeEnter: (to, from, next) => {
-          to.params.type = "finish";
+          to.params.type = "已完成";
           next();
         },
         meta: {
@@ -251,7 +251,7 @@ export const asyncRoutes = [
           default: () => import("@/views/customer/UserCenter/Order/index"),
         },
         beforeEnter: (to, from, next) => {
-          to.params.type = "waitingPay";
+          to.params.type = "待支付";
           next();
         },
         meta: {
@@ -267,7 +267,7 @@ export const asyncRoutes = [
           default: () => import("@/views/customer/UserCenter/Order/index"),
         },
         beforeEnter: (to, from, next) => {
-          to.params.type = "waitingEvaluation";
+          to.params.type = "待评价";
           next();
         },
         meta: {

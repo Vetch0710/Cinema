@@ -1,4 +1,5 @@
-const evaluations = [{
+const evaluations = [
+    {
     customer: {
       customerName: "张博",
       customerPicture: "https://img.meituan.net/maoyanuser/82cc5ef259348d9bf9acc182e72223a43813.jpg@100w_100h_1e_1c"
@@ -179,8 +180,154 @@ const evaluations = [{
         evaluationTime: "2020-10-08 12:05:27",
       },
 ]
-
-module.exports = [{
+const customerEvaluations = [
+  {
+    orderInfo: {
+      orderId: "1111",
+      orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+      movieName:'阿凡达啊啊啊啊啊啊啊啊啊啊啊啊',
+      orderTime: "2020-6-6 17:00",
+    },
+    evaluationId:"1",
+    evaluationScore: null,
+    evaluationContent: null,
+    evaluationTime: null,
+  },
+  {
+    orderInfo: {
+      orderId: "1111",
+      orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+      movieName:'2',
+      orderTime: "2020-6-6 17:00",
+    },
+    evaluationId:"1",
+    evaluationScore: null ,
+    evaluationContent: null,
+    evaluationTime: null,
+  },
+  {
+    orderInfo: {
+      orderId: "1111",
+      orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+      movieName:'3',
+      orderTime: "2020-6-6 17:00",
+    },
+    evaluationId:"1",
+    evaluationScore:null ,
+    evaluationContent: null,
+    evaluationTime: null,
+  },
+  {
+    orderInfo: {
+      orderId: "1111",
+      orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+      movieName:'4',
+      orderTime: "2020-6-6 17:00",
+    },
+    evaluationId:"1",
+    evaluationScore: 4.8,
+    evaluationContent: "这真是太好了1",
+    evaluationTime: "2020-10-08 12:05:27",
+  },
+  {
+    orderInfo: {
+      orderId: "1111",
+      orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+      movieName:'5',
+      orderTime: "2020-6-6 17:00",
+    },
+    evaluationId:"1",
+    evaluationScore: 4.8,
+    evaluationContent: "这真是太好了1",
+    evaluationTime: "2020-10-08 12:05:27",
+  },
+  {
+    orderInfo: {
+      orderId: "1111",
+      orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+      movieName:'6',
+      orderTime: "2020-6-6 17:00",
+    },
+    evaluationId:"1",
+    evaluationScore: 4.8,
+    evaluationContent: "这真是太好了1",
+    evaluationTime: "2020-10-08 12:05:27",
+  },
+  {
+    orderInfo: {
+      orderId: "1111",
+      orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+      movieName:'7',
+      orderTime: "2020-6-6 17:00",
+    },
+    evaluationId:"1",
+    evaluationScore: 4.8,
+    evaluationContent: "这真是太好了1",
+    evaluationTime: "2020-10-08 12:05:27",
+  },
+  {
+    orderInfo: {
+      orderId: "1111",
+      orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+      movieName:'8',
+      orderTime: "2020-6-6 17:00",
+    },
+    evaluationId:"1",
+    evaluationScore: 4.8,
+    evaluationContent: "这真是太好了1",
+    evaluationTime: "2020-10-08 12:05:27",
+  },
+  {
+    orderInfo: {
+      orderId: "1111",
+      orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+      movieName:'9',
+      orderTime: "2020-6-6 17:00",
+    },
+    evaluationId:"1",
+    evaluationScore: 4.8,
+    evaluationContent: "这真是太好了1",
+    evaluationTime: "2020-10-08 12:05:27",
+  },
+  {
+    orderInfo: {
+      orderId: "1111",
+      orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+      movieName:'10',
+      orderTime: "2020-6-6 17:00",
+    },
+    evaluationId:"1",
+    evaluationScore: 4.8,
+    evaluationContent: "这真是太好了1",
+    evaluationTime: "2020-10-08 12:05:27",
+  },
+  {
+    orderInfo: {
+      orderId: "1111",
+      orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+      movieName:'11',
+      orderTime: "2020-6-6 17:00",
+    },
+    evaluationId:"1",
+    evaluationScore: 4.8,
+    evaluationContent: "这真是太好了1",
+    evaluationTime: "2020-10-08 12:05:27",
+  },
+  {
+    orderInfo: {
+      orderId: "1111",
+      orderImg:'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+      movieName:'12',
+      orderTime: "2020-6-6 17:00",
+    },
+    evaluationId:"1",
+    evaluationScore: 4.8,
+    evaluationContent: "这真是太好了1",
+    evaluationTime: "2020-10-08 12:05:27",
+  },
+]
+module.exports = [
+    {
   url: "/evaluationList/getList",
   type: "post",
   response(config) {
@@ -203,4 +350,30 @@ module.exports = [{
       data: pageList,
     };
   },
-}, ];
+},
+  {
+  url: "/evaluationList/getCusEva",
+  type: "post",
+  response() {
+    return {
+      code: 200,
+      msg: "success",
+      totalCount: customerEvaluations.length,
+      data: {
+        customerEvaluations
+      },
+    };
+  },
+},
+  {
+  url: "/evaluationList/saveEvaluation",
+  type: "post",
+  response(config) {
+    console.log(config.body)
+    return {
+      code: 200,
+      msg: "评价成功",
+    };
+  },
+},
+];

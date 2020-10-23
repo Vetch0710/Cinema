@@ -21,7 +21,9 @@ export default {
   watch: {
     $route: "getStep",
   },
-  created() {},
+  created() {
+    this.getStep()
+  },
   mounted() {},
   methods: {
     getStep() {

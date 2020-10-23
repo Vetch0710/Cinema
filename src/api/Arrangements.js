@@ -8,3 +8,11 @@ export function selectSession(data) {
     data,
   });
 }
+export function arrangementInfo(data) {
+  console.log(data)
+  return request({
+    url: "/arrangement/arrangementInfo",
+    method: "get",
+    data,
+  });
+}

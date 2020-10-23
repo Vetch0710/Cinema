@@ -58,9 +58,10 @@ const arrangement = {
       ]
     },
     {
-      arrangementId: 7,
+
       arrangementData: '10月25',
       theDayArrangement: [{
+          arrangementId: 7,
           startTime: '12:12',
           endTime: '14:25',
           arrangementPrice: 23,
@@ -85,6 +86,19 @@ const arrangement = {
   ]
 };
 
+const arrangementInfo = {
+  arrangementId: 9,
+  startTime: '10:14',
+  arrangementPrice: 25,
+  arrangementPlace: 9,
+  movieInfo: {
+    movieId: 1,
+    movieName: "夺冠",
+    moviePicture: "https://p0.meituan.net/movie/e7185e149d79e72c4ef0d70f27fc76da1642784.jpg@464w_644h_1e_1c",
+    movieType: "剧情",
+    movieTime: "中国大陆/135分钟",
+  }
+}
 
 module.exports = [{
   url: "/arrangement/selectSession",
@@ -96,4 +110,14 @@ module.exports = [{
       data: arrangement,
     };
   },
-}, ];
+}, {
+  url: "/arrangement/arrangementInfo",
+  movieType: "get",
+  response(config) {
+    return {
+      code: 200,
+      msg: "success",
+      data: arrangementInfo,
+    };
+  },
+}];

@@ -36,31 +36,149 @@
               <span
                 class="seat"
                 v-for="item1 in column"
-                :class="{ sold: soldSeats.indexOf(item + '-' + item1) != -1 }"
+                :class="{
+                  sold: soldSeats.indexOf(item + '排' + item1 + '座') != -1,
+                  selected:
+                    selectedSeats.indexOf(item + '排' + item1 + '座') != -1,
+                }"
+                @click="
+                  soldSeats.indexOf(item + '排' + item1 + '座') == -1 &&
+                    seatSelection(item + '排' + item1 + '座')
+                "
                 :key="item1"
               ></span>
             </div>
           </div>
         </div>
       </div>
-      <div class="movie-show"></div>
+      <div class="movie-show">
+        <div class="movie-info clearfix">
+          <div class="poster">
+            <el-image
+              style="width: 100%; height: 100%"
+              :src="movieInfo.moviePicture"
+              fit="cover"
+            ></el-image>
+          </div>
+          <div class="content">
+            <p class="name text-ellipsis">{{ movieInfo.movieName }}</p>
+            <div class="info-item">
+              <span>类型 :</span>
+              <span class="value">{{ movieInfo.movieType }}</span>
+            </div>
+            <div class="info-item">
+              <span>时长 :</span>
+              <span class="value">{{ movieInfo.movieTime }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="show-info">
+          <div class="info-item">
+            <span>影厅 :</span>
+            <span class="value text-ellipsis"
+              >{{ arrangementInfo.arrangementPlace }}号厅</span
+            >
+          </div>
+          <div class="info-item">
+            <span>场次 :</span>
+            <span class="value text-ellipsis screen"
+              >今天 {{ arrangementInfo.arrangementData }}
+              {{ arrangementInfo.startTime }}</span
+            >
+          </div>
+          <div class="info-item">
+            <span>票价 :</span>
+            <span class="value text-ellipsis"
+              >￥{{ arrangementInfo.arrangementPrice }}/张</span
+            >
+          </div>
+        </div>
+
+        <div class="ticket-info">
+          <div class="no-ticket" v-if="isEmpty">
+            <p class="buy-limit">座位：一次最多选6个座位</p>
+            <p class="no-selected">请<span>点击左侧</span>座位图选择座位</p>
+          </div>
+          <div class="has-ticket" style="" v-else>
+            <span class="text">座位：</span>
+            <div class="ticket-container">
+              <span
+                class="ticket"
+                v-for="(item, index) in selectedSeats"
+                @click="seatSelection(item)"
+                :key="index"
+                >{{ item }}</span
+              >
+            </div>
+          </div>
+
+          <div class="total-price">
+            <span>总价 :</span>
+            <span class="price">{{
+              selectedSeats.length * arrangementInfo.arrangementPrice
+            }}</span>
+          </div>
+        </div>
+
+        <div class="confirm-order">
+          <button
+            class="iLoginComp-login-btn-wrapper"
+            id="iloginBtn"
+            data-act="confirm-click"
+            data-bid="b_0a0ep6pp"
+          >
+            确认选座
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import { arrangementInfo } from "@/api/Arrangements";
 export default {
   name: "SeatSelection",
   data() {
     return {
       row: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       column: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      soldSeats:['1-2','3-3','4-4','5-5']
+      soldSeats: ["1排2座", "3排3座", "4排4", "5座5", "6排1座"],
+      selectedSeats: ["2排2座", "3排5座", "5排6座"],
+      movieInfo: {},
+      arrangementInfo: {},
     };
   },
-  created() {},
+  created() {
+    this.fetchArrangementInfo();
+  },
   mounted() {},
+  computed: {
+    isEmpty: function () {
+      return this.selectedSeats.length == 0;
+    },
+  },
   methods: {
-    
+    seatSelection(data) {
+      if (this.selectedSeats.indexOf(data) == -1) {
+        if (this.selectedSeats.length < 6) {
+          this.selectedSeats.push(data);
+        } else {
+          this.$message({
+            message: "一次最多购买6张票",
+            type: "warning",
+          });
+        }
+      } else {
+        const index = this.selectedSeats.indexOf(data);
+        this.selectedSeats.splice(index, 1);
+      }
+    },
+    async fetchArrangementInfo() {
+      const { data } = await arrangementInfo("1");
+      this.arrangementInfo = data;
+      this.movieInfo = data.movieInfo;
+    },
   },
 };
 </script>
@@ -70,11 +188,23 @@ export default {
   margin: auto;
   margin-top: 40px;
 }
+
+.seat-selection .alert {
+  position: fixed;
+  width: 600px;
+  height: 30px;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: auto;
+}
+
 .seat-selection .main {
   width: 100%;
   border: 1px solid #e5e5e5;
   font-size: 0;
-  padding-bottom: 30px;
+  padding-bottom: 100px;
 }
 .seat-selection .main .seat-show {
   width: 820px;
@@ -202,5 +332,146 @@ export default {
   background-color: #f9f9f9;
   padding: 20px;
   display: inline-block;
+}
+
+.movie-show .movie-info .poster {
+  width: 115px;
+  height: 158px;
+  border: 2px solid #fff;
+  -webkit-box-shadow: 0 2px 7px 0 hsla(0, 0%, 53%, 0.5);
+  box-shadow: 0 2px 7px 0 hsla(0, 0%, 53%, 0.5);
+  float: left;
+}
+
+.movie-show .movie-info .content {
+  margin-left: 140px;
+}
+.movie-show .movie-info .content .name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 14px;
+}
+.movie-show .info-item {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 4px;
+}
+.movie-show .info-item .value {
+  color: #151515;
+  margin-left: 2px;
+}
+
+.movie-show .show-info {
+  margin-top: 110px;
+}
+
+.movie-show .show-info .info-item {
+  margin-bottom: 9px;
+  clear: both;
+}
+
+.movie-show .show-info .info-item > span {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 14px;
+}
+
+.movie-show .show-info .info-item .value {
+  width: 85%;
+}
+
+.movie-show .ticket-info {
+  padding: 20px 0 10px;
+  border-top: 1px dashed #e5e5e5;
+  border-bottom: 1px dashed #e5e5e5;
+}
+
+.movie-show .ticket-info .buy-limit {
+  font-size: 14px;
+  color: #999;
+  margin: 0;
+}
+
+.movie-show .ticket-info .no-selected {
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  margin: 28px 0 39px;
+}
+
+.movie-show .ticket-info .no-selected span {
+  color: #f03d37;
+}
+
+.movie-show .ticket-info .text {
+  font-size: 14px;
+  color: #999;
+  float: left;
+}
+.movie-show .ticket-info .ticket-container {
+  margin-left: 42px;
+  margin-bottom: 20px;
+  position: relative;
+  top: -5px;
+}
+
+.movie-show .ticket-info .ticket {
+  cursor: default;
+  position: relative;
+  font-size: 12px;
+  color: #f03d37;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0 12px 10px 0;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAeCAYAAABwmH1PAAAAAXNSR0IArs4c6QAAAXlJREFUWAlj/Oho7cXAzLTg/89fogzDGDCys71m+PsvgeGji+2r38eP/h/u4Pexo/9BfmUCxSyLhdUwjluI11gsrRhAfmUa9j5F8+Coh9ECZNhxR2N42EUpmodGZgx/TYz9+nvzhn9ogTEsuUysDGxS/548jP4+qe/0l6zUL//fvh2WHoV5ihHGALa0GD872rQxamrm8EybzQMTH070RzsLBngeZmRk/M+7/0jVv9s3rw7n5A33MCgmQZ4GRnn7r3Vrvw+nmEX2C4qHQRLMPxlO/X38kA1Z0XBiY3h4OHkOm18wPPyXncGMWVb+FzbFw0EMxcOgkvo/A0MlW1Aw53DwHDY/wD0Mq5aYVNW1WX0D4OLYNA1lMZavtraSoGT8ydWukklTU5u7uWNY1sGwSGL5zfDrGYuM6ldQMh7OMQv3MIjBPX8xN0xguNPDNq/iirhRD+MKmeEiPhrDwyUmcflj5MUwaM7lz/FjuAJk2IiD/AjyK+NIm0wDAACxUs8MaULTAAAAAElFTkSuQmCC)
+    no-repeat;
+}
+
+.movie-show .ticket-info .total-price {
+  font-size: 14px;
+  color: #333;
+}
+
+.movie-show .ticket-info .total-price .price {
+  color: #f03d37;
+  font-size: 24px;
+}
+
+.movie-show .ticket-info .total-price .price:before {
+  content: "\FFE5";
+  font-size: 14px;
+}
+
+.confirm-order {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.confirm-order .iLoginComp-login-btn-wrapper {
+  -webkit-font-smoothing: subpixel-antialiased;
+  visibility: visible;
+  font: inherit;
+  margin: 0;
+  overflow: visible;
+  text-transform: none;
+  text-align: center;
+  background: #e5e5e5;
+  height: 2.8em;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  width: 260px;
+  line-height: 42px;
+  border-radius: 21px;
+  font-size: 16px;
+  color: #fff;
+  box-shadow: 0 2px 10px -2px #f03d37;
+  background-color: #f03d37;
 }
 </style>

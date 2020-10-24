@@ -73,13 +73,15 @@ const orderInfo = [{
   },
   {
     orderId: '8',
-    orderImg: 'https://p1.meituan.net/movie/a596474c1c29118d908d1eff0fd4293f1017066.jpg@90w_90h_1e_1c',
-    orderSeat: ["4", "5", "6"],
-    orderTime: "2020-6-6 17:00",
+    orderImg: 'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
+    orderSeat: ["3排2座", "1排1座"],
+    orderTime: "2020-10-24 20:55:23",
     orderPrice: "100",
     orderStatus: "待支付",
+    movieId: 1,
     movieName: "我和我的祖国",
-    arrangementPlace: "1"
+    arrangementPlace: "1",
+    arrangementTime: "2020-10-24 15:38"
   },
   {
     orderId: '9',

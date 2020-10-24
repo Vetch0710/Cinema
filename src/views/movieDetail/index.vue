@@ -129,6 +129,7 @@
               margin-left: 20px;
               margin-bottom: 22px;
             "
+            :title="item.movieName"
           >
             <a @click="showMovie(item.movieId)">
               <el-image
@@ -140,7 +141,16 @@
                   <i class="el-icon-picture-outline"></i>
                 </div>
               </el-image>
-              <p style="cursor: pointer">{{ item.movieName }}</p>
+              <p
+                style="
+                  cursor: pointer;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                  white-space: nowrap;
+                "
+              >
+                {{ item.movieName }}
+              </p>
             </a>
             <p style="color: #ffc861" v-if="item.movieScore > 0">
               {{ item.movieScore }}
@@ -212,7 +222,7 @@ export default {
   name: "MovieDetail",
   data() {
     return {
-      movieInfo: Object,
+      movieInfo: {},
       wantflag: true,
       scoreflag: false,
       actors: [],
@@ -226,6 +236,7 @@ export default {
         pageSize: 5,
         pageMovieId: this.$route.query.movieId,
       },
+      fff: false,
     };
   },
   computed: {
@@ -236,6 +247,7 @@ export default {
   },
   mounted() {},
   created() {
+    this.fetchData();
     this.fetchEvaluation();
   },
   methods: {

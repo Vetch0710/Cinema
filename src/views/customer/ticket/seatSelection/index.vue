@@ -1,5 +1,5 @@
 <template>
-  <div class="seat-selection">
+  <div class="seat-selection" v-if="loaded">
     <div class="main">
       <div class="seat-show">
         <div class="seat-example">
@@ -82,9 +82,8 @@
           </div>
           <div class="info-item">
             <span>场次 :</span>
-            <span class="value text-ellipsis screen"
-              >今天 {{ arrangementInfo.arrangementData }}
-              {{ arrangementInfo.startTime }}</span
+            <span class="value text-ellipsis screen">
+              {{ getArrangementTime(arrangementInfo.arrangementTime) }}</span
             >
           </div>
           <div class="info-item">
@@ -123,12 +122,25 @@
 
         <div class="confirm-order">
           <button
+            v-if="this.accessToken"
+            class="iLoginComp-login-btn-wrapper"
+            :class="{ disable: selectedSeats.length == 0 }"
+            id="iloginBtn"
+            data-act="confirm-click"
+            data-bid="b_0a0ep6pp"
+            @click="selectedSeats.length > 0 && placeOrder()"
+          >
+            确认选座
+          </button>
+          <button
+            v-else
             class="iLoginComp-login-btn-wrapper"
             id="iloginBtn"
             data-act="confirm-click"
             data-bid="b_0a0ep6pp"
+            @click="login"
           >
-            确认选座
+            登陆
           </button>
         </div>
       </div>
@@ -137,10 +149,13 @@
 </template>
 <script>
 import { arrangementInfo } from "@/api/Arrangements";
+import { mapGetters } from "vuex";
+
 export default {
   name: "SeatSelection",
   data() {
     return {
+      loaded: false,
       row: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       column: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       soldSeats: ["1排2座", "3排3座", "4排4", "5座5", "6排1座"],
@@ -152,8 +167,16 @@ export default {
   created() {
     this.fetchArrangementInfo();
   },
+  watch: {
+    $route: "fetchArrangementInfo",
+  },
   mounted() {},
   computed: {
+    ...mapGetters({
+      username: "user/username",
+      accessToken: "user/accessToken",
+      permissions: "user/permissions",
+    }),
     isEmpty: function () {
       return this.selectedSeats.length == 0;
     },
@@ -178,6 +201,49 @@ export default {
       const { data } = await arrangementInfo("1");
       this.arrangementInfo = data;
       this.movieInfo = data.movieInfo;
+
+      this.loaded = true;
+    },
+    getArrangementTime(data) {
+      const date = new Date(data);
+      return (
+        date.getMonth() +
+        1 +
+        "月" +
+        date.getDate() +
+        "日 " +
+        date.getHours() +
+        ":" +
+        date.getMinutes()
+      );
+    },
+    placeOrder() {
+      const nowDate = new Date();
+      const arrDate = new Date(this.arrangementInfo.arrangementTime);
+      nowDate.setMinutes(nowDate.getMinutes() + 15);
+      if (nowDate - arrDate < 0) {
+        this.$router.push({
+          path: "/ticket/orderGenerated",
+          query: {
+            orderId: 2,
+          },
+        });
+      } else {
+        this.loaded = false;
+        this.$message({
+          message: "本场次暂未开放售票",
+          type: "warning",
+        });
+        setTimeout(() => {
+          this.$router.go(-1);
+        }, 2000);
+      }
+    },
+    login() {
+      this.$router.push({
+        path:
+          "/login?redirect=movies/seatSelection?arrangementId=1&&type=customer",
+      });
     },
   },
 };
@@ -473,5 +539,12 @@ export default {
   color: #fff;
   box-shadow: 0 2px 10px -2px #f03d37;
   background-color: #f03d37;
+}
+
+.movie-show .confirm-order .iLoginComp-login-btn-wrapper.disable {
+  cursor: default;
+  background-color: #dedede;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 </style>

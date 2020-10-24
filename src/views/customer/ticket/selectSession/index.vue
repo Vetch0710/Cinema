@@ -1,5 +1,5 @@
 <template>
-  <div class="select-session">
+  <div class="select-session" v-if="loaded">
     <div class="movie-info">
       <div>
         <h2 class="movie-name">{{ movieInfo.movieName }}</h2>
@@ -41,7 +41,7 @@
         v-for="(item, index) in arrangementList"
         @click="showArrangement(item.arrangementData)"
         :key="index"
-        >{{ item.arrangementData }}</span
+        >{{ getTagTime(item.arrangementData) }}</span
       >
     </div>
     <div
@@ -67,9 +67,15 @@
             :key="'b' + index2"
           >
             <td>
-              <span class="begin-time">{{ item2.startTime }}</span>
+              <span class="begin-time">{{
+                getBeginTime(item2.arrangementTime)
+              }}</span>
               <br />
-              <span class="end-time">{{ item2.endTime }}散场</span>
+              <span class="end-time"
+                >{{
+                  getEndTime(item2.arrangementTime, item2.movieTime)
+                }}散场</span
+              >
             </td>
             <td>
               <span class="hall">{{ item2.arrangementPlace }}号厅</span>
@@ -83,15 +89,11 @@
             </td>
             <td>
               <a
-                :href="
-                  '#/movies/seatSelection?arrangementId=' + item2.arrangementId
-                "
                 class="buy-btn normal"
-                data-tip=""
-                data-act="show-click"
-                data-bid="b_gvh3l8gg"
-                data-val="{movie_id: 1217123, cinema_id:6818}"
                 one-link-mark="yes"
+                @click="
+                  jumpSelectSeat(item2.arrangementId, item2.arrangementTime)
+                "
                 >选座购票</a
               >
             </td>
@@ -103,10 +105,13 @@
 </template>
 <script>
 import { selectSession } from "@/api/Arrangements";
+import path from "path";
+import { log } from "util";
 export default {
   name: "SelectSession",
   data() {
     return {
+      loaded: false,
       arrangementList: [],
       movieInfo: [],
       actors: [],
@@ -121,21 +126,66 @@ export default {
     movieId: function () {
       return this.$route.query.movieId;
     },
+    endTime: function (arrangementTime, movieTime) {},
   },
   created() {
     this.fetchData();
   },
   mounted() {},
   methods: {
+    getBeginTime(data) {
+      const arrdate = new Date(data);
+      return arrdate.getHours() + ":" + arrdate.getMinutes();
+    },
+
+    getEndTime(data, movieTime) {
+      const startTime = new Date(data);
+      startTime.setMinutes(
+        startTime.getMinutes() + parseInt(movieTime.replace("分钟", ""))
+      );
+      return startTime.getHours() + ":" + startTime.getMinutes();
+    },
+
+    getTagTime(data) {
+      const tagTime = new Date(data);
+      return tagTime.getMonth() + 1 + "月" + tagTime.getDate() + "日";
+    },
+
     async fetchData() {
       const result = await selectSession(this.queryForm);
       this.arrangementList = result.data.arrangementList;
       this.movieInfo = result.data.movie;
       this.actors = this.movieInfo.movieActor.split(",");
       this.selectedDate = this.arrangementList[0].arrangementData;
+      this.loaded = true;
     },
+
     showArrangement(data) {
       this.selectedDate = data;
+    },
+
+    jumpSelectSeat(arrangementId, arrangementTime) {
+      const stopTime = new Date(arrangementTime);
+      const nowTime = new Date();
+      stopTime.setMinutes(stopTime.getMinutes() + 15);
+      log(stopTime + "" + nowTime);
+      if (stopTime - nowTime <= 0) {
+        this.loaded = false;
+        this.$message({
+          message: "本场次暂未开放售票",
+          type: "warning",
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      } else {
+        this.$router.push({
+          path: "/movies/seatSelection",
+          query: {
+            arrangementId: arrangementId,
+          },
+        });
+      }
     },
   },
 };

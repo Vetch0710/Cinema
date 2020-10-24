@@ -6,7 +6,7 @@ const films = [{
     moviePicture: "https://img14.360buyimg.com/movie/s450x660_jfs/t1/136154/20/10866/1101355/5f6e4547Eed28cb8b/a3e894eb39323072.jpg",
   },
   {
-    movieId: 1,
+    movieId: 2,
     movieName: "夺冠",
     movieScore: 4.1,
     arrangementPrice: 23,

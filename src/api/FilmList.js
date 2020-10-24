@@ -7,3 +7,9 @@ export function getList(data) {
     data,
   });
 }
+export function getRecommendList() {
+  return request({
+    url: "/filmList/getRecommendList",
+    method: "post",
+  });
+}

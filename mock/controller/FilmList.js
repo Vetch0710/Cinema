@@ -13,35 +13,35 @@ const films = [{
     moviePicture: "https://img14.360buyimg.com/movie/s450x660_jfs/t1/88109/31/10835/375283/5e220b47E6fc1fc13/057690afdd34db91.jpg",
   },
   {
-    movieId: 1,
+    movieId: 3,
     movieName: "夺冠",
     movieScore: 4.1,
     arrangementPrice: 23,
     moviePicture: "https://img14.360buyimg.com/movie/s450x660_jfs/t1/88109/31/10835/375283/5e220b47E6fc1fc13/057690afdd34db91.jpg",
   },
   {
-    movieId: 1,
+    movieId: 4,
     movieName: "夺冠",
     movieScore: 4.1,
     arrangementPrice: 23,
     moviePicture: "https://img14.360buyimg.com/movie/s450x660_jfs/t1/88109/31/10835/375283/5e220b47E6fc1fc13/057690afdd34db91.jpg",
   },
   {
-    movieId: 1,
+    movieId: 5,
     movieName: "夺冠",
     movieScore: 4.1,
     arrangementPrice: 23,
     moviePicture: "https://img14.360buyimg.com/movie/s450x660_jfs/t1/88109/31/10835/375283/5e220b47E6fc1fc13/057690afdd34db91.jpg",
   },
   {
-    movieId: 1,
+    movieId: 6,
     movieName: "夺冠",
     movieScore: 4.1,
     arrangementPrice: 23,
     moviePicture: "https://img14.360buyimg.com/movie/s450x660_jfs/t1/88109/31/10835/375283/5e220b47E6fc1fc13/057690afdd34db91.jpg",
   },
   {
-    movieId: 1,
+    movieId: 7,
     movieName: "夺冠",
     movieScore: 4.1,
     arrangementPrice: 23,
@@ -275,7 +275,8 @@ const films = [{
   },
 ]
 
-module.exports = [{
+module.exports = [
+{
   url: "/filmList/getList",
   type: "post",
   response(config) {
@@ -298,4 +299,22 @@ module.exports = [{
       data: pageList,
     };
   },
-}, ];
+},
+  {
+  url: "/filmList/getRecommendList",
+  type: "post",
+  response() {
+    const pageList = films.filter(
+        (item, index) =>
+            index < 10 && index >= 0
+    );
+    return {
+      code: 200,
+      msg: "success",
+      data: {
+        RecommendList:pageList
+      },
+    };
+  },
+},
+];

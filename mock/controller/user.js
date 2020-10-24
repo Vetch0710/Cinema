@@ -121,7 +121,7 @@ module.exports = [
           username,
           "avatar|1": [
             "https://i.gtimg.cn/club/item/face/img/2/15922_100.gif",
-            "https://i.gtimg.cn/club/item/face/img/8/15918_100.gif",
+            "http://39.97.217.243:8089/images/20201021101424%E5%9B%BE%E7%89%87.jpeg",
           ],
         },
       };

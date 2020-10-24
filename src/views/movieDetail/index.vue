@@ -1,5 +1,5 @@
 <template>
-  <div class="movieDetail">
+  <div class="movieDetail" v-if="flag">
     <div class="movieDetail-top">
       <span style="display: none">{{ movieName }}</span>
       <div class="movie-info-movieshow">
@@ -212,7 +212,7 @@ export default {
   name: "MovieDetail",
   data() {
     return {
-      movieInfo: Object,
+      movieInfo: '',
       wantflag: true,
       scoreflag: false,
       actors: [],
@@ -226,29 +226,40 @@ export default {
         pageSize: 5,
         pageMovieId: this.$route.query.movieId,
       },
+      flag:false,
     };
   },
   computed: {
     movieName: function () {
-      this.fetchData();
+      // this.fetchData();
       return this.$route.query.movieName;
     },
   },
   mounted() {},
   created() {
+    this.fetchData();
     this.fetchEvaluation();
+    // this.flag=true;
   },
   methods: {
     async fetchData() {
       this.queryForm.pageMovieId = this.$route.query.movieId;
       this.movieInfo = null;
       const result = await getInfo(this.queryForm);
-      this.movieInfo = result.data;
+      this.movieInfo = result.data
+      // console.log(this.movieInfo);
+      // console.log(this.flag)
       if (this.movieInfo.myScore != null) {
         this.scoreflag = true;
       }
       this.actors = this.movieInfo.movie.movieActor.split(",");
       this.directors = this.movieInfo.movie.movieDirector.split(",");
+      this.flag=true;
+
+      // setTimeout(()=>{
+      //   // this.flag=true;
+      //
+      // },2000)
     },
     addwant() {
       this.wantflag = !this.wantflag;
@@ -328,7 +339,7 @@ export default {
 }
 .movie-yugao-play:hover {
   opacity: 1;
-  background: rgb(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0,0.4);
 }
 
 .movie-info-moviepicture {

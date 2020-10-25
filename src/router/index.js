@@ -102,38 +102,31 @@ export const asyncRoutes = [
     children: [
       //选择场次界面
       {
-        path: "/order",
-        component: () => import('@/views/customer/ticket/index'),
-        children: [
-          //选择场次界面
-          {
-            path: "orderGenerated",
-            name: "OrderGenerated",
-            components: {
-              default: () => import("@/views/customer/ticket/orderGenerated/index"),
-              steps: () => import("@/views/customer/ticket/index")
-            },
-            meta: {
-              title: "订单生成",
-              permissions: ["customer"],
-            },
-          },
+        path: "orderGenerated",
+        name: "OrderGenerated",
+        components: {
+          default: () => import("@/views/customer/ticket/orderGenerated/index"),
+          steps: () => import("@/views/customer/ticket/index")
+        },
+        meta: {
+          title: "订单生成",
+          permissions: ["customer"],
+        },
+      },
 
-          {
-            path: "orderFinished",
-            name: "orderFinished",
-            components: {
-              default: () => import("@/views/customer/ticket/orderFinished/index"),
-              steps: () => import("@/views/customer/ticket/index")
-            },
-            meta: {
-              title: "购票成功",
-              permissions: ["customer"],
-            },
-          },
-        ]
-      }
-    ],
+      {
+        path: "orderFinished",
+        name: "orderFinished",
+        components: {
+          default: () => import("@/views/customer/ticket/orderFinished/index"),
+          steps: () => import("@/views/customer/ticket/index")
+        },
+        meta: {
+          title: "购票成功",
+          permissions: ["customer"],
+        },
+      },
+    ]
   },
 
   //用户个人中心首页

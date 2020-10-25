@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div v-if="loaded">
     <div class="rotation">
       <el-carousel trigger="hover" height="400px">
         <el-carousel-item v-for="item in rotationImgs" :key="item">
-          <img class="small" :src="item"  alt=""/>
+          <img class="small" :src="item" alt="" />
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -101,6 +101,7 @@
             :movieScore="item.movieScore"
             :arrangementPrice="item.arrangementPrice"
             :moviePicture="item.moviePicture"
+            :movieLoaded="loaded"
           ></film-show>
         </li>
       </ul>
@@ -125,6 +126,7 @@ export default {
   name: "Index",
   data() {
     return {
+      loaded: false,
       rotationImgs: [
         "https://img14.360buyimg.com/itcomm/jfs/t1/146985/21/9644/178592/5f745e8fece315ab1/c5cf861c0d367493.jpg",
         "https://img14.360buyimg.com/itcomm/jfs/t1/140494/15/9683/197269/5f744b82e8e0d8275/e3f36a76fe496d04.jpg",
@@ -184,6 +186,7 @@ export default {
       this.list = null;
       this.listLoading = true;
       const { data, totalCount } = await getList(this.queryForm);
+      this.loaded = true;
       setTimeout(() => {
         this.list = data;
         this.total = totalCount;

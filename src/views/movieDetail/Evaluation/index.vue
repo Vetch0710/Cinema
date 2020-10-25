@@ -10,17 +10,20 @@
       </div>
       <div class="evaluation-username" :title="evaluationTime">
         {{ customer.customerName }}<br />
-        <div >
-          <span style="float:left;font-size:16px;color:#999999">{{ date }}</span>
-          <el-rate style="float:left" v-model="evaluationScore" disabled> </el-rate>
+        <div>
+          <span style="float: left; font-size: 16px; color: #999999">{{
+            date
+          }}</span>
+          <el-rate style="float: left" v-model="evaluationScore" disabled>
+          </el-rate>
         </div>
       </div>
     </div>
-    <br style="clear:both">
+    <br style="clear: both" />
     <div class="evaluation-content">
-        <span>{{ evaluationContent }}</span>
+      <span>{{ evaluationContent }}</span>
     </div>
-    <br style="clear:both">
+    <br style="clear: both" />
   </div>
 </template>
 
@@ -35,6 +38,7 @@ export default {
     evaluationScore: { type: Number, required: true },
     evaluationContent: { type: String, required: true },
     evaluationTime: { type: String, required: true },
+    // evaLoaded: { type: Boolean, required: true },
   },
   methods: {},
   computed: {
@@ -52,8 +56,8 @@ export default {
   display: inline;
 }
 
-.evaluation-username{
-    line-height: 25px;
+.evaluation-username {
+  line-height: 25px;
 }
 
 .evaluation-username,
@@ -71,14 +75,14 @@ export default {
   font-size: 24px;
 }
 
-.evaluation-content{
-    margin-top:15px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid #e5e5e5;
-    color: #666;
-    line-height: 26px;
-    font-size: 14px;
-    width: 660px;
-    float: right;
+.evaluation-content {
+  margin-top: 15px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e5e5e5;
+  color: #666;
+  line-height: 26px;
+  font-size: 14px;
+  width: 660px;
+  float: right;
 }
 </style>

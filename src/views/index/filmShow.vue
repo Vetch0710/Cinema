@@ -1,5 +1,5 @@
 <template>
-  <div class="filmShow">
+  <div class="filmShow" v-if="movieLoaded">
     <a @click="selectMovie">
       <div class="image" :style="{ background: 'url(' + moviePicture + ')' }">
         <div class="curtain"></div>
@@ -9,7 +9,7 @@
             class="filmshow-movie-movieScore"
             v-model="movieScore"
             disabled
-            show-movieScore
+            show-score
             text-color="#ff9900"
           >
           </el-rate>
@@ -40,7 +40,8 @@ export default {
     return {};
   },
   props: {
-    movieId: { type: Number, required: true },
+    movieLoaded: { type: Boolean, required: true, default: false },
+    movieId: { type: Number, required: true, default: 1 },
     movieScore: { type: Number, required: true },
     moviePicture: { type: String, required: true },
     arrangementPrice: { type: Number, required: true },

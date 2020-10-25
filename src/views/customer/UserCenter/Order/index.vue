@@ -142,9 +142,9 @@
             },
             goPay(item) {
                 this.$router.push({
-                    path: "/Pay",
+                    path: "/ticket/orderGenerated",
                     query: {
-                        data: item
+                        orderId: item.orderId
                     }
                 })
             },

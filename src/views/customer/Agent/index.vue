@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import {sendSock, initWebSocket} from "@/api/agent.js";
+    import {sendSock, initWebSocket} from "@/api/websocket.js";
     import {mapGetters} from "vuex";
 
 
@@ -32,7 +32,7 @@
         },
         methods: {
             async fetchData() {
-                console.log(this.accessToken)
+                console.log(this.accessToken,this.result)
                 // await sendSock({type: "Hello"},this.result);
                 await initWebSocket(this.accessToken,this.result)
             },
@@ -50,7 +50,7 @@
                 // 接收者ID - userSocketSessionMap - key
                 // 注意 - NZ1 代表是第一个连接人的key - 测试
                 // 消息发送的也是给第一个连接者
-                data['toId'] = '754406394';
+                data['toId'] = '12345';
                 // 发送的消息
                 data['messageText'] =this.inaaa ;
                 sendSock(data, this.result);

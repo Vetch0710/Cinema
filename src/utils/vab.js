@@ -1,8 +1,19 @@
-import { loadingText, messageDuration, title } from "@/config/settings";
+import {
+  loadingText,
+  messageDuration,
+  title
+} from "@/config/settings";
 import * as lodash from "lodash";
-import { Loading, Message, MessageBox, Notification } from "element-ui";
+import {
+  Loading,
+  Message,
+  MessageBox,
+  Notification
+} from "element-ui";
 import store from "@/store";
-import { getAccessToken } from "@/utils/accessToken";
+import {
+  getAccessToken
+} from "@/utils/accessToken";
 
 const accessToken = store.getters["user/accessToken"];
 const layout = store.getters["settings/layout"];
@@ -97,11 +108,11 @@ const install = (Vue, opts = {}) => {
   /* 全局Confirm */
   Vue.prototype.$baseConfirm = (content, title, callback1, callback2) => {
     MessageBox.confirm(content, title || "温馨提示", {
-      confirmButtonText: "确定",
-      cancelButtonText: "取消",
-      closeOnClickModal: false,
-      type: "warning",
-    })
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        closeOnClickModal: false,
+        type: "warning",
+      })
       .then(() => {
         if (callback1) {
           callback1();
@@ -158,17 +169,17 @@ const install = (Vue, opts = {}) => {
       },
       baseLayer: new maptalks.TileLayer("base", {
         cssFilter: "sepia(100%) invert(90%)",
-        urlTemplate:
-          "http://online{s}.map.bdimg.com/onlinelabel/?qt=tile&x={x}&y={y}&z={z}&styles=pl&scaler=1&p=1",
+        urlTemplate: "http://online{s}.map.bdimg.com/onlinelabel/?qt=tile&x={x}&y={y}&z={z}&styles=pl&scaler=1&p=1",
         subdomains: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-        attribution:
-          '&copy; <a target="_blank" href="http://map.baidu.com">Baidu</a>',
+        attribution: '&copy; <a target="_blank" href="http://map.baidu.com">Baidu</a>',
       }),
     });
   };
 
   /* 全局lodash */
   Vue.prototype.$baseLodash = lodash;
+
+  Vue.prototype.$isUpdate = false;
   /* 全局事件总线 */
   Vue.prototype.$baseEventBus = new Vue();
 };

@@ -74,7 +74,7 @@ const film = {
 
 module.exports = [{
   url: "/film/getInfo",
-  movieType: "get",
+  type: "post",
   response(config) {
     return {
       code: 200,

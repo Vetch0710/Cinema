@@ -63,6 +63,7 @@ instance.interceptors.request.use(
       config.data = qs.stringify(config.data);
     if (debounce.some((item) => config.url.includes(item)))
       loadingInstance = Vue.prototype.$baseLoading();
+    console.log(config);
     return config;
   },
   (error) => {
@@ -83,15 +84,15 @@ instance.interceptors.response.use(
       : [...[successCode]];
     // 是否操作正常
     // console.log("codeVerificationArray========"+codeVerificationArray)
-    if (codeVerificationArray.includes(code)) {
+    // if (codeVerificationArray.includes(code)) {
       return data;
-    } else {
-      handleCode(code, msg);
-      return Promise.reject(
-        "vue-admin-beautiful请求异常拦截:" +
-          JSON.stringify({ url: config.url, code, msg }) || "Error"
-      );
-    }
+    // } else {
+    //   handleCode(code, msg);
+    //   return Promise.reject(
+    //     "vue-admin-beautiful请求异常拦截:" +
+    //       JSON.stringify({ url: config.url, code, msg }) || "Error"
+    //   );
+    // }
   },
   (error) => {
     if (loadingInstance) loadingInstance.close();

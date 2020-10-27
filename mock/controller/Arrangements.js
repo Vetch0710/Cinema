@@ -25,7 +25,7 @@ const arrangement = {
         },
         {
           arrangementId: 3,
-          arrangementTime: '2020-10-23 12:14',
+          arrangementTime: '2020-10-29 12:14',
           movieTime: '138分钟',
           arrangementPrice: 25,
           arrangementPlace: 3,

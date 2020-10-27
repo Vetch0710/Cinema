@@ -11,8 +11,7 @@ const setting = {
   // 默认的接口地址 如果是开发环境和生产环境走vab-mock-server，当然你也可以选择自己配置成需要的接口地址
   baseURL:
          // "http://39.97.217.243:8089/CinemaData",
-        "http://10.5.75.21:8089/CinemaData",
-
+        "http://10.5.109.35:8089/CinemaData",
    // "vab-mock-server",
   //标题 （包括初次加载雪花屏的标题 页面的标题 浏览器的标题）
   title: "毅购",

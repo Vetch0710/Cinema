@@ -1,6 +1,8 @@
 let websock = null;
-let global_callback = null;
+let global_history = null;
+let global_result = null;
 const serverPort = '8089';	//webSocket连接端口
+let count = 0;	//webSocket连接端口
 
 
 function getWebIP(){
@@ -8,11 +10,13 @@ function getWebIP(){
     return curIP;
 }
 
-function initWebSocket(token,callback){ //初始化weosocket
+function initWebSocket(token,callback,callback2){ //初始化weosocket
     //ws地址
     // var wsuri = "ws://10.5.75.21:8089/CinemaData/ws?accessToken="+token ;
-    global_callback = callback;
-    var wsuri = "ws://10.5.75.21:8089/CinemaData/ws";
+    count=0;
+    global_history = callback;
+    global_result = callback2;
+    var wsuri = "ws://10.5.109.35:8089/CinemaData/ws";
     websock = new WebSocket(wsuri,[token]);
     websock.onmessage = function(e){
         websocketonmessage(e);
@@ -31,8 +35,8 @@ function initWebSocket(token,callback){ //初始化weosocket
 }
 
 // 实际调用的方法
-function sendSock(agentData,callback){
-    global_callback = callback;
+function sendSock(agentData){
+
     if (websock.readyState === websock.OPEN) {
         //若是ws开启状态
         websocketsend(agentData)
@@ -51,7 +55,14 @@ function sendSock(agentData,callback){
 
 //数据接收
 function websocketonmessage(e){
-    global_callback(JSON.parse(e.data));
+    console.log(count)
+    if (count===1){
+        global_history(JSON.parse(e.data));
+        count++;
+    }else {
+        global_result(JSON.parse(e.data));
+    }
+
 }
 
 //数据发送
@@ -66,6 +77,7 @@ function websocketclose(e){
 
 function websocketOpen(e){
     console.log("连接成功");
+    count++;
 }
 
 // initWebSocket();

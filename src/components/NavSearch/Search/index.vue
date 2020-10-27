@@ -46,8 +46,8 @@
         <div class="connect">
           <div class="connectmain">
             <span class="el-icon-phone-outline"></span>
-            18103549919
-            <router-link to="">
+              18103549919
+            <router-link to="/agent/index">
               <span class="el-icon-help"></span>
               在线客服
             </router-link>

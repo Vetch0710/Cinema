@@ -271,6 +271,29 @@ export const asyncRoutes = [
     ],
   },
 
+  //用户客服中心
+  {
+    path: "/agent",
+    component: CusLayout,
+    redirect: "agent/index",
+    meta: {
+      permissions: ["customer"],
+    },
+    children: [{
+      path: "index",
+      name: "index",
+      components: {
+        default: () => import("@/views/customer/Agent/index"),
+      },
+      meta: {
+        title: "客服",
+        permissions: ["customer"],
+        affix: true,
+      },
+    }, ],
+  },
+
+
   //后台  个人中心
   {
     path: "/manager",

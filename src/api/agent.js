@@ -12,12 +12,13 @@ function getWebIP(){
     return curIP;
 }
 
-function initWebSocket(token,callback){ //初始化weosocket
+function initWebSocket(token,callback,callback2){ //初始化weosocket
     //ws地址
     // var wsuri = "ws://10.5.75.21:8089/CinemaData/ws?accessToken="+token ;
     count=0;
     global_problemList = callback;
-    var wsuri = "ws://10.5.109.35:8089/CinemaData/ws";
+    global_result = callback2;
+    var wsuri = "ws://10.96.116.108:8089/CinemaData/ws";
     websock = new WebSocket(wsuri,[token]);
     websock.onmessage = function(e){
         websocketonmessage(e);
@@ -90,6 +91,14 @@ export function gethistoryList(data) {
     console.log(data)
     return request({
         url: "/gethistoryList",
+        method: "get",
+        params:data
+    });
+}
+export function changeStatus(data) {
+    console.log(data)
+    return request({
+        url: "/changeStatus",
         method: "get",
         params:data
     });

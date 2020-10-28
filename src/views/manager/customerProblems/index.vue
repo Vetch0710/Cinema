@@ -1,22 +1,28 @@
 <template>
     <div class="problems-contain">
         <div class="problems-list">
-            <div style="margin: 20px 0 0 30px;font-weight: bold;font-size: 16px">客服服务</div>
+            <div style="height: 40px;font-weight: bold;font-size: 16px;line-height: 40px;padding-left: 20px;border-bottom:1px solid #E5E5E5 ">客服服务</div>
             <ul>
                 <li v-for="(item , index ) in problemList" :key="item.infoId" @click="activeSession(item,index)">
-                    <div style="width: 100%;height: 25px;">
-                        <span style="display: inline-block;float:left;"> {{item.customerName}}</span>
-                        <span style="display: inline-block;float:right;"> {{item.infoTime}}</span>
-                    </div>
-                    <div style="width: 100%;height: 25px;">
-                        <span> {{item.infoContent}}</span>
-                        <span class="problems-count" v-if="item.messageCount!==0"> {{item.messageCount}}</span>
-                    </div>
+                    <el-card shadow="hover"
+                     style="width: 330px;height: 90px;text-align: center;float: left;padding: 0;background: #fcfcfc;"
+
+                      slot="reference">
+                        <div style="width: 100%;height: 25px;">
+                            <span style="display: inline-block;float:left;font-size: 18px">{{item.customerName}}</span>
+                            <span style="display: inline-block;float:right;font-size: 14px"> {{item.infoTime}}</span>
+                        </div>
+                        <div style="width: 100%;height: 25px;">
+                            <span style="display: inline-block;float:left;font-size: 14px;margin-top: 10px;margin-left: 20px;">{{item.infoContent}}</span>
+                            <span class="problems-count" v-if="item.messageCount!==0"> {{item.messageCount}}</span>
+                        </div>
+                    </el-card>
+
                 </li>
             </ul>
         </div>
         <div class="problems-main">
-            <div v-if="!flag">
+            <div v-if="!flag" class="problems-first">
                 请选择一个会话
             </div>
             <div v-else style=" overflow: hidden;">
@@ -91,7 +97,7 @@
                                     :key="item.infoId"
                                     style=" padding:0 20px;"
                             >
-                                <el-row v-if="item.infoType==='customer'">
+                                <el-row v-if="item.infoType!=='customer'">
                                     <el-col :span="20" :offset="2">
                           <span class="aa">
                             {{ item.infoContent }}
@@ -107,7 +113,7 @@
                 display: inline-block;
                 margin-right: 10px;
               "
-                                                :src="'http://39.97.217.243:8089/images/'+avatar"
+                                                :src="'http://39.97.217.243:8089/images/20201021101424%E5%9B%BE%E7%89%87.jpeg'"
                                                 :fit="'contain'"
                                         ></el-image>
 
@@ -124,7 +130,7 @@
                 vertical-align: middle;
                 display: inline-block;
               "
-                                      :src="'http://39.97.217.243:8089/images/20201021101424%E5%9B%BE%E7%89%87.jpeg'"
+                                      :src="'http://39.97.217.243:8089/images/'+avatar"
                                       :fit="'contain'"
                               ></el-image>
                           </span>
@@ -152,7 +158,7 @@
                                     @keyup.enter.native="sendMessage"
                             />
                             <el-button
-                                    style="bottom: 30px;right: 10px;position: absolute"
+                                    style="bottom: 10px;right: 10px;position: absolute"
                                     onmouseover="this.style.backgroundColor='#129611';this.style.color='#f5f5f5'"
                                     onmouseout="this.style.backgroundColor='#f5f5f5';this.style.color='#606060'"
                                     @click="sendMessage"
@@ -171,7 +177,7 @@
 </template>
 
 <script>
-    import {sendSock, initWebSocket, gethistoryList} from "@/api/agent.js";
+    import {sendSock, initWebSocket, gethistoryList, changeStatus} from "@/api/agent.js";
     import {mapGetters} from "vuex";
 
 
@@ -193,7 +199,8 @@
                 ],
                 historyList: [],
                 nowList: [],
-                flag: true,
+                flag: false,
+                condition: '',
             }
         },
         created() {
@@ -201,20 +208,24 @@
         },
         computed: {
             ...mapGetters({
+                username: "user/username",
+                avatar: "user/avatar",
                 accessToken: "user/accessToken",
             }),
         },
         methods: {
             async fetchData() {
                 console.log(this.history)
-                await initWebSocket(this.accessToken, this.problemLists)
+                await initWebSocket(this.accessToken, this.problemLists,this.results)
             },
-            async activeSession(item,index) {
+            async activeSession(item, index) {
                 this.flag = item;
                 let data = await gethistoryList({customerId: item.customerId});
                 console.log(data.success)
                 this.historyList = data.success;
-                this.problemList[index].messageCount=0;
+                this.problemList[index].messageCount = 0;
+                this.nowList = [];
+                console.log(this.flag)
             },
             problemLists(data) {
                 console.log("消息列表")
@@ -224,7 +235,7 @@
                 console.log("消息列表")
                 this.historyList = data;
             },
-            results(data) {
+         async   results(data) {
                 console.log("返回的消息")
                 if (data) {
                     let mid2 = {
@@ -234,12 +245,42 @@
                         infoStatus: data.infoStatus,
                         infoType: data.infoType,
                         customerId: data.customerId,
+                        messageCount:0,
+                        customerName:data.customerName
                     }
-                    this.nowList.push(mid2)
+                    if (this.flag.customerId === mid2.customerId) {
+                        this.nowList.push(mid2)
+                        await changeStatus({infoId: mid2.infoId});
+
+                    }
+                    let isExist = false;
+                    for (let item of this.problemList) {
+                        if (item.customerId === mid2.customerId) {
+                            item.infoContent = mid2.infoContent;
+                            item.infoTime = mid2.infoTime;
+                            if (this.flag.customerId !== mid2.customerId) {
+                                item.messageCount++;
+                            }
+                            isExist = true;
+                            break;
+                        }
+                    }
+                    console.log(this.problemList)
+                    if (!isExist) {
+                        mid2.messageCount=1;
+                        this.problemList.push(mid2);
+                    }
+
                 } else {
                     this.$message.error('发送失败')
                 }
 
+            },
+            // 去掉回车换行符
+            clearBr(key) {
+                key = key.replace(/<\/?.+?>/g, '')
+                key = key.replace(/[\r\n]/g, '')
+                return key
             },
             sendMessage() {
 
@@ -252,7 +293,7 @@
                     var data = {};
                     data['infoType'] = "manager";
                     data['infoContent'] = this.condition;
-                    data['infoContent'] = this.condition;
+                    data['customerId'] = this.flag.customerId;
                     sendSock(data, this.results);
                     this.condition = ''
                 }
@@ -260,7 +301,11 @@
 
             },
         },
-
+        beforeRouteLeave(to, from, next) {
+            this.flag = false;
+            this.problemList=[];
+            next();
+        }
 
     }
 </script>
@@ -279,18 +324,19 @@
         height: 100%;
         /*margin:0 20px;*/
         border-right: 1px solid #E5E5E5;
+        background: #fafafa;
 
     }
 
     .problems-list li {
         list-style: none;
-        height: 50px;
-        padding: 10px 20px;
-        border-top: 1px solid #E5E5E5;
+        /*height: 70px;*/
+        /*padding: 10px 20px;*/
+        /*border-top: 1px solid #E5E5E5;*/
     }
 
     .problems-list li:last-of-type {
-        border-bottom: 1px solid #E5E5E5;
+        /*border-bottom: 1px solid #E5E5E5;*/
 
     }
 
@@ -346,7 +392,14 @@
         right: 20px;
         top: 10px;
     }
-
+    .problems-first{
+        width: 150px;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 auto;
+        line-height: 500px;
+        text-align: center;
+    }
     .aa:after {
         content: "";
         border-top: solid 5px #00800000;

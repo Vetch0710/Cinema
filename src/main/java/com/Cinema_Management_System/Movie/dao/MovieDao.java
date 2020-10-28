@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface MovieDao {
     //查询全部影片信息
-    List<Movie> selectMovieAll(@Param("pageStart") Integer pageStart, @Param("pageNum") Integer pageNum);
+    List<Movie> selectMovieAll(@Param("selType") String selType, @Param("selContent") String selContent, @Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
 
     //通过电影名称查询指定影片信息
     Movie selectMovieByName(@Param("movieName") String movieName);
@@ -17,18 +17,20 @@ public interface MovieDao {
     List<Movie> selectMovieByType(@Param("timeType") String timeType,
                                   @Param("selectType") String selectType,
                                   @Param("pageStart") Integer pageStart,
-                                  @Param("pageNum") Integer pageNum,
+                                  @Param("pageSize") Integer pageSize,
                                   @Param("nowDate") Date nowDate);
 
     //按影片id删除指定电影
-    String deleteMovie(@Param("movieId") Integer movieId);
+    int deleteMovie(@Param("movieId") Integer movieId);
 
     //批量删除影片
-    String deleteMovies(List<Integer> movieIds);
+    int deleteMovies(List<Integer> movieIds);
 
     //更新影片信息
-    String updateMovie(Movie movie);
+    void updateMovie(Movie movie);
 
     //新增影片信息
-    String insertMovie(Movie movie);
+    void insertMovie(Movie movie);
+
+    int getCount(@Param("selType") String selType, @Param("selContent") String selContent);
 }

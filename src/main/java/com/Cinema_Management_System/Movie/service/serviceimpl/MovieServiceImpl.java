@@ -3,16 +3,18 @@ package com.Cinema_Management_System.Movie.service.serviceimpl;
 import com.Cinema_Management_System.Movie.dao.MovieDao;
 import com.Cinema_Management_System.Movie.entity.Movie;
 import com.Cinema_Management_System.Movie.service.MovieService;
+import com.Cinema_Management_System.utils.Exception.DeleteException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Transactional(rollbackFor = Exception.class)
+
 @Service(value = "MovieService")
 public class MovieServiceImpl implements MovieService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -20,31 +22,49 @@ public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
 
-    public List<Movie> selectMovieAll(Integer pageStart, Integer pageNum) {
-        return movieDao.selectMovieAll(pageStart, pageNum);
+    public List<Movie> selectMovieAll(String selType, String selContent, Integer pageStart, Integer pageSize) {
+        return movieDao.selectMovieAll(selType, selContent, pageStart, pageSize);
+    }
+
+    public int getCount(String selType, String selContent) {
+        return movieDao.getCount(selType, selContent);
     }
 
     public Movie selectMovieByName(String movieName) {
         return movieDao.selectMovieByName(movieName);
     }
 
-    public List<Movie> selectMovieByType(String timeType, String selectType, Integer pageStart, Integer pageNum, Date nowDate) {
-        return movieDao.selectMovieByType(timeType, selectType, pageStart, pageNum, nowDate);
+    public List<Movie> selectMovieByType(String timeType, String selectType, Integer pageStart, Integer pageSize, Date nowDate) {
+        return movieDao.selectMovieByType(timeType, selectType, pageStart, pageSize, nowDate);
     }
 
-    public String deleteMovie(Integer movieId) {
-        return movieDao.deleteMovie(movieId);
+    public void deleteMovie(Integer movieId) throws DeleteException {
+        int affectRows = movieDao.deleteMovie(movieId);
+        if (affectRows == 0) {
+            throw new DeleteException();
+        }
     }
 
-    public String deleteMovies(List<Integer> movieIds) {
-        return movieDao.deleteMovies(movieIds);
+    @Transactional(rollbackFor = DeleteException.class)
+    public void deleteMovies(String movieIds) throws DeleteException {
+        String[] idArray = movieIds.split("&");
+        List<Integer> idList = new ArrayList<>();
+        for (String str : idArray) {
+            idList.add(Integer.parseInt(str));
+        }
+        int affectRows = movieDao.deleteMovies(idList);
+        if (affectRows != idList.size()) {
+            throw new DeleteException();
+        }
     }
 
-    public String updateMovie(Movie movie) {
-        return movieDao.updateMovie(movie);
+    public void updateMovie(Movie movie) {
+        movieDao.updateMovie(movie);
     }
 
-    public String insertMovie(Movie movie) {
-        return movieDao.insertMovie(movie);
+    public void insertMovie(Movie movie) {
+        movieDao.insertMovie(movie);
     }
+
+
 }

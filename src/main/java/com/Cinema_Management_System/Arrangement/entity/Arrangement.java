@@ -12,6 +12,7 @@ import java.util.Date;
  * * @param arrangementPlace 影厅
  * * @param arrangementPrice 票价
  * * @param movieId          影片id
+ * * @param movieName        片名
  * * @param arrangementTime  场次时间
  */
 
@@ -19,16 +20,18 @@ import java.util.Date;
 public class Arrangement {
     private int arrangementId, arrangementPlace, arrangementPrice, movieId;
     private Date arrangementTime;
+    private String movieName;
 
     public Arrangement() {
     }
 
-    public Arrangement(int arrangementId, int arrangementPlace, int arrangementPrice, int movieId, Date arrangementTime) {
+    public Arrangement(int arrangementId, int arrangementPlace, int arrangementPrice, int movieId, Date arrangementTime, String movieName) {
         this.arrangementId = arrangementId;
         this.arrangementPlace = arrangementPlace;
         this.arrangementPrice = arrangementPrice;
         this.movieId = movieId;
         this.arrangementTime = arrangementTime;
+        this.movieName = movieName;
     }
 
     public int getArrangementId() {
@@ -71,6 +74,14 @@ public class Arrangement {
         this.arrangementTime = arrangementTime;
     }
 
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
     @Override
     public String toString() {
         return "Arrangement{" +
@@ -79,6 +90,7 @@ public class Arrangement {
                 ", arrangementPrice=" + arrangementPrice +
                 ", movieId=" + movieId +
                 ", arrangementTime=" + arrangementTime +
+                ", movieName='" + movieName + '\'' +
                 '}';
     }
 }

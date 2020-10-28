@@ -10,6 +10,7 @@ import java.util.Date;
  * * @param wantsNum            想看人数
  * * @param movieName           影片名称
  * * @param moviePicture        海报
+ * * @param movieTrailer        预告
  * * @param movieDes            影片简述
  * * @param movieDirector       导演
  * * @param movieActor          演员
@@ -20,18 +21,19 @@ import java.util.Date;
  */
 public class Movie {
     private int movieId, wantsNum;
-    private String movieName, moviePicture, movieDes, movieDirector, movieActor, movieTime, movieType;
+    private String movieName, moviePicture, movieTrailer, movieDes, movieDirector, movieActor, movieTime, movieType;
     private Date movieReleaseTime;
     private float movieScore;
 
     public Movie() {
     }
 
-    public Movie(int movieId, int wantsNum, String movieName, String moviePicture, String movieDes, String movieDirector, String movieActor, String movieTime, String movieType, Date movieReleaseTime, float movieScore) {
+    public Movie(int movieId, int wantsNum, String movieName, String moviePicture, String movieTrailer, String movieDes, String movieDirector, String movieActor, String movieTime, String movieType, Date movieReleaseTime, float movieScore) {
         this.movieId = movieId;
         this.wantsNum = wantsNum;
         this.movieName = movieName;
         this.moviePicture = moviePicture;
+        this.movieTrailer = movieTrailer;
         this.movieDes = movieDes;
         this.movieDirector = movieDirector;
         this.movieActor = movieActor;
@@ -71,6 +73,14 @@ public class Movie {
 
     public void setMoviePicture(String moviePicture) {
         this.moviePicture = moviePicture;
+    }
+
+    public String getMovieTrailer() {
+        return movieTrailer;
+    }
+
+    public void setMovieTrailer(String movieTrailer) {
+        this.movieTrailer = movieTrailer;
     }
 
     public String getMovieDes() {
@@ -136,6 +146,7 @@ public class Movie {
                 ", wantsNum=" + wantsNum +
                 ", movieName='" + movieName + '\'' +
                 ", moviePicture='" + moviePicture + '\'' +
+                ", movieTrailer='" + movieTrailer + '\'' +
                 ", movieDes='" + movieDes + '\'' +
                 ", movieDirector='" + movieDirector + '\'' +
                 ", movieActor='" + movieActor + '\'' +

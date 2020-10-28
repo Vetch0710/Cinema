@@ -1,13 +1,46 @@
 <template>
   <div class="vue-admin-beautiful-wrapper" :class="classObj">
     <div
-      class="layout-container-vertical"
+            v-if="'horizontal' === layout"
+            class="layout-container-horizontal"
+            :class="{
+        fixed: header === 'fixed',
+        'no-tabs-bar': tabsBar === 'false' || tabsBar === false,
+      }"
     >
+      <div :class="header === 'fixed' ? 'fixed-header' : ''">
+<!--        <top-bar></top-bar>-->
+        <div
+                v-if="tabsBar === 'true' || tabsBar === true"
+                :class="{ 'tag-view-show': tabsBar }"
+        >
+          <div class="vab-main">
+            <tabs-bar></tabs-bar>
+          </div>
+        </div>
+      </div>
+      <div class="vab-main main-padding">
+        <app-main></app-main>
+      </div>
+    </div>
+    <div
+            v-else
+            class="layout-container-vertical"
+            :class="{
+        fixed: header === 'fixed',
+        'no-tabs-bar': tabsBar === 'false' || tabsBar === false,
+      }"
+    >
+      <div
+              v-if="device === 'mobile' && collapse === false"
+              class="mask"
+              @click="handleFoldSideBar"
+      />
       <side-bar></side-bar>
       <div class="vab-main" :class="collapse ? 'is-collapse-main' : ''">
         <div :class="header === 'fixed' ? 'fixed-header' : ''">
           <nav-bar></nav-bar>
-          <tabs-bar />
+          <tabs-bar v-if="tabsBar === 'true' || tabsBar === true" />
         </div>
         <!--        <ad></ad>-->
         <app-main></app-main>
@@ -18,16 +51,17 @@
 </template>
 
 <script>
-  import { AppMain, NavBar, SideBar, TabsBar} from "./components";
+  import { AppMain, NavBar, SideBar, TabsBar, } from "./components";
   import { mapActions, mapGetters } from "vuex";
   import { tokenName } from "@/config/settings";
   export default {
     name: "Layout",
     components: {
+      // TopBar,
       NavBar,
       SideBar,
       AppMain,
-      TabsBar
+      TabsBar,
     },
     data() {
       return { oldLayout: "" };
@@ -57,7 +91,7 @@
       const userAgent = navigator.userAgent;
       if (userAgent.includes("Juejin")) {
         this.$baseAlert(
-          "vue-admin-beautiful不支持在掘金内置浏览器演示，请手动复制以下地址到浏览器中查看http://mpfhrd48.sanxing.uz7.cn/vue-admin-beautiful"
+                "vue-admin-beautiful不支持在掘金内置浏览器演示，请手动复制以下地址到浏览器中查看http://mpfhrd48.sanxing.uz7.cn/vue-admin-beautiful"
         );
       }
       const isMobile = this.handleIsMobile();
@@ -77,13 +111,13 @@
       }
       this.$nextTick(() => {
         window.addEventListener(
-          "storage",
-          (e) => {
-            if (e.key === tokenName || e.key === null) window.location.reload();
-            if (e.key === tokenName && e.value === null)
-              window.location.reload();
-          },
-          false
+                "storage",
+                (e) => {
+                  if (e.key === tokenName || e.key === null) window.location.reload();
+                  if (e.key === tokenName && e.value === null)
+                    window.location.reload();
+                },
+                false
         );
       });
     },
@@ -105,8 +139,8 @@
           }
 
           this.$store.dispatch(
-            "settings/toggleDevice",
-            isMobile ? "mobile" : "desktop"
+                  "settings/toggleDevice",
+                  isMobile ? "mobile" : "desktop"
           );
         }
       },
@@ -120,7 +154,7 @@
     top: 0;
     right: 0;
     left: 0;
-    z-index: 999 - 2;
+    z-index:999 - 2;
     width: 100%;
     overflow: hidden;
   }
@@ -138,7 +172,7 @@
       }
 
       &.fixed.no-tabs-bar {
-        padding-top: 65px;
+          padding-top: 65px;
       }
 
       ::v-deep {
@@ -153,7 +187,7 @@
 
         .tag-view-show {
           background: #fff;
-          box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);;
+          box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
         }
 
         .nav-bar-container {
@@ -164,7 +198,7 @@
 
         .main-padding {
           .app-main-container {
-            margin-top: 20px;
+            margin-top:  20px;
             margin-bottom: 20px;
             background: #fff;
           }
@@ -190,7 +224,7 @@
       }
 
       &.fixed {
-          padding-top: calc(60px+ 55px);
+        padding-top: calc(calc(65px + 55px));
       }
 
       &.fixed.no-tabs-bar {
@@ -200,7 +234,7 @@
       .vab-main {
         position: relative;
         min-height: 100%;
-        margin-left: 240px;
+        margin-left: 240px;;
         background: #f6f8f9;
         transition: all 0.2s;;
 
@@ -208,8 +242,8 @@
           .fixed-header {
             @include fix-header;
 
-            left: 240px;
-            width: calc(100% - 240px);;
+            left: 240px;;
+            width: calc(100% - 240px);
             box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);;
             transition: all 0.2s;;
           }
@@ -226,17 +260,17 @@
           .app-main-container {
             width: calc(100% - 20px - 20px);
             margin: 20px auto;
-            background:  #fff;;
+            background: #fff;
             border-radius: 8px;;
           }
         }
 
         &.is-collapse-main {
-          margin-left: 65px;
+          margin-left: 65px;;
 
           ::v-deep {
             .fixed-header {
-              left: 65px;;
+              left: 65px;
               width: calc(100% - 65px);
             }
           }

@@ -14,6 +14,8 @@ import store from "@/store";
 import {
   getAccessToken
 } from "@/utils/accessToken";
+import echarts from 'echarts'
+
 
 const accessToken = store.getters["user/accessToken"];
 const layout = store.getters["settings/layout"];
@@ -182,8 +184,10 @@ const install = (Vue, opts = {}) => {
   Vue.prototype.$isUpdate = false;
   /* 全局事件总线 */
   Vue.prototype.$baseEventBus = new Vue();
-};
 
+  Vue.prototype.$echarts = echarts
+
+};
 if (typeof window !== "undefined" && window.Vue) {
   install(window.Vue);
 }

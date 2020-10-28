@@ -1,11 +1,8 @@
-import 'echarts'
-import 'echarts/map/js/china'
-import 'echarts/map/js/world'
+import "echarts";
+import "echarts-wordcloud";
 
-import 'echarts-wordcloud'
+import byuiChart from "vue-echarts";
+import theme from "./byui-echarts-theme.json";
 
-import VabChart from 'vue-echarts'
-import theme from './vab-echarts-theme.json'
-
-VabChart.registerTheme('vab-echarts-theme', theme)
-export default VabChart
+byuiChart.registerTheme("byui-echarts-theme", theme);
+export default byuiChart;

@@ -1,0 +1,76 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+    <!--  配置DispatcherServlet  -->
+    <servlet>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--
+         配置springMVC需要加载的配置文件
+                    spring-dao.xml,spring-service.xml,spring-web.xml
+                    Mybatis - > spring -> springmvc
+
+        -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath*:spring/spring-*.xml</param-value>
+        </init-param>
+        <!--
+             当值为0或者大于0时，表示容器在应用启动时就加载并初始化这个servlet;当值小于0或者没有指定时，则表示容器在该servlet被选择时才会去加载。
+        -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <!--  默认匹配所有的请求  -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <!-- 跨域设置 -->
+    <filter>
+        <filter-name>corsFilter</filter-name>
+        <filter-class>com.Cinema_Management_System.utils.Filter.CorsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>corsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>
+            org.springframework.web.filter.CharacterEncodingFilter
+        </filter-class>
+        <!--  encoding:指定解决POST请求乱码 -->
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <!--  force Encoding:顺手解决响应乱码; -->
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <!-- 支持rest风格的过滤器 -->
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>
+            org.springframework.web.filter.HiddenHttpMethodFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:properties/log4j.properties</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+</web-app>

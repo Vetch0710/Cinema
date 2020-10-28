@@ -21,6 +21,7 @@
           v-model.number="form.arrangementPlace"
           placeholder="请输入影厅号"
           autocomplete="off"
+          @input="chageInput"
           style="width: 180px"
           ><template slot="append">号厅</template></el-input
         >
@@ -31,6 +32,7 @@
           type="date"
           placeholder="选择日期"
           format="yyyy-MM-dd"
+          value-format="yyyy-MM-dd"
           :picker-options="pickerOptions"
           v-model="form.arrangementDate"
           @change="chageDate"
@@ -44,7 +46,7 @@
           format="HH:mm"
           value-format="HH:mm"
           v-model="form.arrangementTime"
-          :disabled="!isSelected && title != '修改'"
+          :disabled="(isInput || !isSelected) && title != '修改'"
         >
         </el-time-picker>
       </el-form-item>
@@ -56,7 +58,7 @@
           v-model.number="form.arrangementPrice"
           :inputNumber="form.arrangementPrice"
         ></MyNumberInput
-        >&nbsp;&nbsp;&nbsp;<span style="color:red;">0&lt;price&lt;200</span>
+        >&nbsp;&nbsp;&nbsp;<span style="color: red">0&lt;price&lt;200</span>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -66,7 +68,7 @@
   </el-dialog>
 </template>
 <script>
-import { doEdit } from "@/api/roleManagement";
+import { doEdit, addArrangement, getDisableTime } from "@/api/Arrangements";
 import MyNumberInput from "@/components/Plugin/MyNumberInput";
 export default {
   name: "AddArrange",
@@ -99,9 +101,16 @@ export default {
       },
     };
   },
+  computed: {
+    isInput: function () {
+      return (
+        this.form.arrangementPlace == null || this.form.arrangementPlace == ""
+      );
+    },
+  },
   created() {},
   watch: {
-    "form.arrangementDate": "getDisableTime",
+    // "form.arrangementDate": "setDisableTime",
   },
   mounted() {},
   components: {
@@ -119,15 +128,47 @@ export default {
     addArrange(row) {
       this.title = "修改";
       this.form = Object.assign({}, row);
+      const date = new Date(row.arrangementTime);
+      // this.form.arrangementDate =
+      //   date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+      this.$set(
+        this.form,
+        "arrangementDate",
+        date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+      );
+      this.form.arrangementTime = date.getHours() + ":" + date.getMinutes();
       console.log(this.form);
       this.dialogFormVisible = true;
     },
+
     save() {
       this.$refs["form"].validate(async (valid) => {
         if (valid) {
           console.log(this.form);
-          const { msg } = await doEdit(this.form);
-          this.$baseMessage(msg, "success");
+          this.form.arrangementTime = new Date(
+            this.form.arrangementDate + " " + this.form.arrangementTime
+          );
+          let msgContent = "";
+          console.log(this.title);
+          if (this.title == "排场") {
+            const msg = await addArrangement(this.form);
+            if (msg == "success") {
+              msgContent = "排场成功";
+              this.$baseMessage(msgContent, msg);
+            } else if (msg == "error") {
+              msgContent = "排场失败,请重新尝试";
+              this.$message.error(msgContent);
+            }
+          } else if (this.title == "修改") {
+            const msg = await doEdit(this.form);
+            if (msg == "success") {
+              msgContent = "修改成功";
+              this.$baseMessage(msgContent, msg);
+            } else if (msg == "error") {
+              msgContent = "修改失败,请重新尝试";
+              this.$message.error(msgContent);
+            }
+          }
           this.$emit("fetch-data");
           this.close();
         } else {
@@ -135,6 +176,7 @@ export default {
         }
       });
     },
+
     close() {
       this.$refs["form"].resetFields();
       this.form = this.$options.data().form;
@@ -142,17 +184,34 @@ export default {
     },
     chageDate() {
       this.isSelected = true;
-      this.selectTimeFormat.selectableRange = [
-        "09:30:00 - 12:00:00",
-        "14:30:00 - 18:30:00",
-      ];
+      // this.selectTimeFormat.selectableRange = [
+      //   "09:30:00 - 12:00:00",
+      //   "14:30:00 - 18:30:00",
+      // ];
+      this.setDisableTime();
       this.$delete(this.form, "arrangementTime");
     },
-    getDisableTime() {
-      this.selectTimeFormat.selectableRange = [
-        "09:30:00 - 12:00:00",
-        "14:30:00 - 18:30:00",
-      ];
+    chageInput() {
+      this.$delete(this.form, "arrangementTime");
+      this.setDisableTime();
+    },
+    async setDisableTime() {
+      console.log("this.form.arrangementPlace=" + this.form.arrangementPlace);
+      console.log("this.form.arrangementDate=" + this.form.arrangementPlace);
+      if (
+        this.form.arrangementPlace != null &&
+        this.form.arrangementDate != null &&
+        this.form.arrangementPlace != "" &&
+        this.form.arrangementDate != ""
+      ) {
+        const msg = await getDisableTime(this.form);
+        console.log(msg);
+        this.selectTimeFormat.selectableRange = msg;
+      }
+      // this.selectTimeFormat.selectableRange = [
+      //   "09:30:00 - 12:00:00",
+      //   "14:30:00 - 18:30:00",
+      // ];
     },
   },
 };

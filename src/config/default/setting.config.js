@@ -13,6 +13,7 @@ const setting = {
     // "http://39.97.217.243:8089/CinemaData",
     // "http://10.96.119.196:8089/CinemaData",
     "http://localhost:8080/Cinema_Management_System",
+    
   //  "vab-mock-server",
   //标题 （包括初次加载雪花屏的标题 页面的标题 浏览器的标题）
   title: "毅购",

@@ -286,6 +286,7 @@ export default {
       this.$refs["form"].validate(async (valid) => {
         if (valid) {
           this.form.movieType = this.form.movieType.join("/");
+          this.form.movieTime = this.form.movieTime + "分钟";
           if (this.title == "添加") {
             await addMovie(this.form);
           } else if (this.title == "编辑") {

@@ -219,15 +219,31 @@ export default {
       if (row.movieId >= 0) {
         this.$baseConfirm("你确定要删除当前项吗", null, async () => {
           const { msg } = await doDelete({ movieId: row.movieId });
-          this.$baseMessage(msg, "success");
+          let msgContent = "";
+          if (msg == "success") {
+            msgContent = "删除成功";
+            this.$baseMessage(msgContent, msg);
+          } else if (msg == "error") {
+            msgContent = "删除失败,请重新尝试";
+            this.$message.error(msgContent);
+          }
+
           this.fetchData();
         });
       } else {
         if (this.selectRows.length > 0) {
           const movieIds = this.selectRows.map((item) => item.movieId);
           this.$baseConfirm("你确定要删除选中项吗", null, async () => {
-            const { msg } = await doDeletes({ movieIds });
-            this.$baseMessage(msg, "success");
+            const  msg  = await doDeletes({ movieIds });
+            console.log(msg);
+            let msgContent = "";
+            if (msg == "success") {
+              msgContent = "删除成功";
+              this.$baseMessage(msgContent, msg);
+            } else if (msg == "error") {
+              msgContent = "删除失败,请重新尝试";
+              this.$message.error(msgContent);
+            }
             this.fetchData();
           });
         } else {

@@ -59,7 +59,7 @@
         ></el-table-column>
         <el-table-column
           show-overflow-tooltip
-          prop="customer.customerName"
+          prop="customerName"
           label="用户名"
         ></el-table-column>
         <el-table-column
@@ -143,11 +143,11 @@ export default {
 
     async fetchData() {
       this.listLoading = true;
-      const { data, totalCount } = await getList(this.queryForm);
+      const { data, total } = await getList(this.queryForm);
       this.list = data;
       // console.log(typeof this.list);
       // console.log(parseInt(this.list[this.list.length - 1].id) + 1);
-      this.total = totalCount;
+      this.total = total;
       setTimeout(() => {
         this.listLoading = false;
       }, 300);

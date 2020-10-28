@@ -370,23 +370,23 @@ export const asyncRoutes = [
           permissions: ["manager", "boss"],
         },
       },
+      // {
+      //   path: "addArrangement",
+      //   name: "addArrangement",
+      //   component: () =>
+      //     import("@/views/manager/MovieManagement/addArrangement/index"),
+      //   meta: {
+      //     title: "添加场次",
+      //     permissions: ["manager", "boss"],
+      //   },
+      // },
       {
-        path: "addMovie",
-        name: "addMovie",
+        path: "showArrange",
+        name: "showArrange",
         component: () =>
-          import("@/views/manager/MovieManagement/addMovie/index"),
+          import("@/views/manager/MovieManagement/showArrange/index"),
         meta: {
-          title: "添加电影",
-          permissions: ["manager", "boss"],
-        },
-      },
-      {
-        path: "shelvesMovie",
-        name: "shelvesMovie",
-        component: () =>
-          import("@/views/manager/MovieManagement/shelvesMovie/index"),
-        meta: {
-          title: "已下架电影",
+          title: "已排场电影",
           permissions: ["manager", "boss"],
         },
       },

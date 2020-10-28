@@ -1,7 +1,7 @@
 <template>
-  <div class="MovieManagement-container">
-    <div class="MovieManagement-do">
-      <div class="MovieManagement-do-left">
+  <div class="showArrange-container">
+    <div class="showArrange-do">
+      <div class="showArrange-do-left">
         <el-button icon="el-icon-plus" type="primary" @click="handleEdit">
           添加
         </el-button>
@@ -9,7 +9,7 @@
           批量删除
         </el-button>
       </div>
-      <div class="MovieManagement-do-right">
+      <div class="showArrange-do-right">
         <el-form :inline="true" :model="queryForm" @submit.native.prevent>
           <el-form-item>
             <el-input
@@ -23,9 +23,12 @@
                 style="width: 100px"
               >
                 <el-option label="片名" value="movieName"></el-option>
+                <el-option label="影片编号" value="movieId"></el-option>
+                <el-option label="场次编号" value="arrangementId"></el-option>
+                <el-option label="影厅" value="arrangementPlace"></el-option>
                 <el-option
-                  label="影片编号"
-                  value="movieId"
+                  label="日期"
+                  value="arrangementDate"
                 ></el-option> </el-select
             ></el-input>
           </el-form-item>
@@ -37,7 +40,7 @@
         </el-form>
       </div>
     </div>
-    <div class="MovieManagement-table">
+    <div class="showArrange-table">
       <el-table
         style="width: 95%; text-align: center; margin: 0 auto"
         v-loading="listLoading"
@@ -59,6 +62,11 @@
         ></el-table-column>
         <el-table-column
           show-overflow-tooltip
+          prop="arrangementId"
+          label="场次编号"
+        ></el-table-column>
+        <el-table-column
+          show-overflow-tooltip
           prop="movieId"
           label="影片编号"
         ></el-table-column>
@@ -67,73 +75,31 @@
           prop="movieName"
           label="片名"
         ></el-table-column>
-        <el-table-column show-overflow-tooltip prop="moviePicture" label="海报">
-          <template #default="{ row }">
-            <el-image
-              style="width: 53px; height: 75px"
-              :src="row.moviePicture"
-              :preview-src-list="imageList"
-            ></el-image>
-          </template>
-        </el-table-column>
         <el-table-column
           show-overflow-tooltip
-          prop="movieTrailer"
-          label="预告片"
-        >
-          <template #default="{ row }">
-            <el-link type="info" :href="row.movieTrailer" target="_blank"
-              >播放预告</el-link
-            >
-          </template>
-        </el-table-column>
-
-        <el-table-column
-          show-overflow-tooltip
-          prop="movieType"
-          :formatter="formatType"
-          label="类型"
+          prop="arrangementPlace"
+          label="影厅"
         ></el-table-column>
         <el-table-column
           show-overflow-tooltip
-          prop="movieDirector"
-          label="导演"
+          prop="arrangementDate"
+          :formatter="formatArrangeDate"
+          label="场次日期"
         ></el-table-column>
         <el-table-column
           show-overflow-tooltip
-          prop="movieActor"
-          label="演员"
+          prop="arrangementTime"
+          :formatter="formatArrangeTime"
+          label="场次时间"
         ></el-table-column>
         <el-table-column
           show-overflow-tooltip
-          prop="movieTime"
-          label="时长"
-        ></el-table-column>
-        <el-table-column
-          show-overflow-tooltip
-          prop="movieRealeseTime"
-          :formatter="formatTime"
-          label="上映日期"
-        ></el-table-column>
-        <el-table-column
-          show-overflow-tooltip
-          prop="wantsNum"
-          label="想看人数"
-        ></el-table-column>
-        <el-table-column
-          show-overflow-tooltip
-          prop="movieScore"
-          label="评分"
-        ></el-table-column>
-        <el-table-column
-          show-overflow-tooltip
-          prop="movieDes"
-          label="电影简介"
+          prop="arrangementPrice"
+          label="票价"
         ></el-table-column>
         <el-table-column show-overflow-tooltip label="操作" width="200">
           <template #default="{ row }">
             <el-button type="text" @click="handleEdit(row)">编辑</el-button>
-            <el-button type="text" @click="addSession(row)">排场</el-button>
             <el-button type="text" @click="handleDelete(row)">删除</el-button>
           </template>
         </el-table-column>
@@ -149,25 +115,19 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     ></el-pagination>
-    <edit ref="edit" :max-list-num="maxNum" @fetch-data="fetchData"></edit>
-    <arrange ref="arrange"></arrange>
+    <arrange ref="arrange" @fetch-data="fetchData"></arrange>
   </div>
 </template>
-
 <script>
-import {
-  getMovieList,
-  doDelete,
-  doDeletes,
-  doEdit,
-} from "@/api/MovieManagement";
-import Edit from "./compoents/MovieManagementEdit";
-import Arrange from "./addArrangement";
+import { doDelete, doEdit } from "@/api/MovieManagement";
+import { getList } from "@/api/Arrangements";
+import Arrange from "../addArrangement";
 import { log } from "util";
+import path from "path";
 
 export default {
-  name: "MovieList",
-  components: { Edit, Arrange },
+  name: "showArrange",
+  components: { Arrange },
   data() {
     return {
       list: null,
@@ -177,7 +137,6 @@ export default {
       total: 0,
       selectRows: "",
       elementLoadingText: "正在加载...",
-      imageList: [],
       queryForm: {
         pageNo: 1,
         pageSize: 10,
@@ -193,40 +152,49 @@ export default {
       this.selectRows = val;
     },
 
-    async handleEdit(row) {
-      if (row.movieId) {
-        this.$refs["edit"].showEdit(row);
-      } else {
-        this.$refs["edit"].showEdit();
-      }
-    },
-
-    async addSession(row) {
-      this.$refs["arrange"].showArrange(row);
-    },
-
-    formatType(row, column) {
-      return row.movieType.join("/");
-    },
-    formatTime(row, column) {
-      const date = new Date(row.movieReleaseTime);
+    formatArrangeDate(row, column) {
+      const date = new Date(row.arrangementTime);
       return (
         date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
       );
     },
+    formatArrangeTime(row, column) {
+      const date = new Date(row.arrangementTime);
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      return hours + ":" + minutes;
+    },
+
+    async handleEdit(row) {
+      if (row.arrangementId) {
+        this.$refs["arrange"].addArrange(row);
+      } else {
+        this.$router.push({
+          path: "/movieManagement/index",
+        });
+      }
+    },
 
     handleDelete(row) {
-      if (row.movieId >= 0) {
+      if (row.arrangementId) {
         this.$baseConfirm("你确定要删除当前项吗", null, async () => {
-          const { msg } = await doDelete({ movieId: row.movieId });
+          const { msg } = await doDelete({ arrangementId: row.arrangementId });
           this.$baseMessage(msg, "success");
           this.fetchData();
         });
       } else {
         if (this.selectRows.length > 0) {
-          const movieIds = this.selectRows.map((item) => item.movieId);
+          const arrangementIds = this.selectRows.map(
+            (item) => item.arrangementId
+          );
           this.$baseConfirm("你确定要删除选中项吗", null, async () => {
-            const { msg } = await doDeletes({ movieIds });
+            const { msg } = await doDelete({ arrangementIds });
             this.$baseMessage(msg, "success");
             this.fetchData();
           });
@@ -254,32 +222,19 @@ export default {
 
     async fetchData() {
       this.listLoading = true;
-      const { data, total } = await getMovieList(this.queryForm);
-      // const result = await getMovieList(this.queryForm).then((res) => {
-      //   return res;
-      // });
+      const { data, total } = await getList(this.queryForm);
       this.list = data;
       this.total = total;
-      //  this.total = 14;
-      const imageList = [];
-      data.forEach((item, index) => {
-        imageList.push(item.moviePicture);
-      });
-      await this.list.forEach((item, index) => {
-        this.list[index].movieType = item.movieType.split("/");
-      });
-      this.imageList = imageList;
-
       this.listLoading = false;
     },
   },
 };
 </script>
 <style>
-/*.MovieManagement-container{*/
+/*.showArrange-container{*/
 /*    overflow: auto;*/
 /*}*/
-.MovieManagement-container .el-button {
+.showArrange-container .el-button {
   font-size: 13px;
   height: 32px;
   line-height: 1;
@@ -287,41 +242,50 @@ export default {
   padding: 9px 10px;
 }
 
-.MovieManagement-container .el-input__inner {
+.showArrange-container .el-input__inner {
   height: 32px;
   line-height: 32px;
   font-size: 13px;
   margin: 0;
 }
 
-.MovieManagement-container .el-form-item {
+.el-form-item__content {
+  line-height: 33px !important;
+}
+
+.showArrange-container .el-form-item {
   margin: 0 10px 0 0;
 }
 
-.MovieManagement-table .el-table td {
+.showArrange-table .el-table td {
   font-size: 14px;
   padding: 7.5px 0;
   height: 25px;
 }
 
-.MovieManagement-container .MovieManagement-do {
+.showArrange-container .showArrange-do {
   width: 95%;
   margin: 20px 2.5% 10px 2.5%;
 }
 
-.MovieManagement-container .MovieManagement-do-right {
+.showArrange-container .showArrange-do-right {
   height: 40px;
   display: inline-block;
   float: right;
 }
 
-.MovieManagement-container .MovieManagement-do-left {
+.showArrange-container .showArrange-do-left {
   height: 40px;
   width: 50%;
   padding-left: 10px;
   display: inline-block;
 }
-.MovieManagement-container .cell {
+.showArrange-container .cell {
   text-align: center;
+}
+.el-form-item__content {
+  line-height: 32px;
+  position: relative;
+  font-size: 14px;
 }
 </style>

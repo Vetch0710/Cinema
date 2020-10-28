@@ -4,7 +4,7 @@ export function getInfo(data) {
   console.log(data)
   return request({
     url: "/film/getInfo",
-    method: "get",
+    method: "post",
     data,
   });
 }

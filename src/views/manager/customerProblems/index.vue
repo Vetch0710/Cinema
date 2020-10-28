@@ -312,8 +312,9 @@
 
 <style scoped>
     .problems-contain {
+        width: 1200px !important;
         height: 600px;
-        border: 1px solid #E5E5E5;
+        /*border: 1px solid #E5E5E5;*/
         /*width: 1101px;*/
         /*margin: 0 auto;*/
     }

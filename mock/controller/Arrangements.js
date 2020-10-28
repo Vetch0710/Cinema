@@ -9,24 +9,24 @@ const arrangement = {
     movieTime: "中国大陆/135分钟",
   },
   arrangementList: [{
-      arrangementData: '2020-10-23',
+      arrangementData: '2020-12-23',
       theDayArrangement: [{
           arrangementId: 1,
-          arrangementTime: '2020-10-23 12:12',
+          arrangementTime: '2020-12-23 12:12',
           movieTime: '138分钟',
           arrangementPrice: 23,
           arrangementPlace: 1,
         },
         {
           arrangementId: 2,
-          arrangementTime: '2020-10-23 12:13',
+          arrangementTime: '2020-12-23 12:13',
           movieTime: '138分钟',
           arrangementPrice: 24,
           arrangementPlace: 2,
         },
         {
           arrangementId: 3,
-          arrangementTime: '2020-10-29 12:14',
+          arrangementTime: '2020-12-29 12:14',
           movieTime: '138分钟',
           arrangementPrice: 25,
           arrangementPlace: 3,

@@ -14,3 +14,10 @@ export function getOrder(data) {
     data,
   });
 }
+export function getCusOrder(data) {
+  return request({
+    url: "/Order/getCusOrder",
+    method: "post",
+    data,
+  });
+}

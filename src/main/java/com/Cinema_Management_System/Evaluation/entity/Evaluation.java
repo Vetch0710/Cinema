@@ -13,19 +13,21 @@ import java.util.Date;
  * * @param evaluationTime      评价时间
  */
 public class Evaluation {
-    private int evaluationId, orderId;
+    private int evaluationId, customerId;
     private float evaluationScore;
-    private String evaluationContent;
+    private String evaluationContent, customerName, movieName;
     private Date evaluationTime;
 
     public Evaluation() {
     }
 
-    public Evaluation(int evaluationId, int orderId, float evaluationScore, String evaluationContent, Date evaluationTime) {
+    public Evaluation(int evaluationId, int customerId, float evaluationScore, String evaluationContent, String customerName, String movieName, Date evaluationTime) {
         this.evaluationId = evaluationId;
-        this.orderId = orderId;
+        this.customerId = customerId;
         this.evaluationScore = evaluationScore;
         this.evaluationContent = evaluationContent;
+        this.customerName = customerName;
+        this.movieName = movieName;
         this.evaluationTime = evaluationTime;
     }
 
@@ -37,12 +39,12 @@ public class Evaluation {
         this.evaluationId = evaluationId;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public float getEvaluationScore() {
@@ -61,6 +63,22 @@ public class Evaluation {
         this.evaluationContent = evaluationContent;
     }
 
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
     public Date getEvaluationTime() {
         return evaluationTime;
     }
@@ -73,9 +91,11 @@ public class Evaluation {
     public String toString() {
         return "Evaluation{" +
                 "evaluationId=" + evaluationId +
-                ", orderId=" + orderId +
+                ", customerId=" + customerId +
                 ", evaluationScore=" + evaluationScore +
                 ", evaluationContent='" + evaluationContent + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", movieName='" + movieName + '\'' +
                 ", evaluationTime=" + evaluationTime +
                 '}';
     }

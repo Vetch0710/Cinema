@@ -3,4 +3,61 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Cinema_Management_System.Evaluation.dao.EvaluationDao"><!--namespace:定义一个操作包  -->
+
+    <select id="getCount" resultType="int">
+        select count(*)
+        FROM Cinema_evaluation e
+        LEFT JOIN (
+            SELECT o.order_id,o.movie_id,o.customer_id,m.movie_name,c.customer_name
+            FROM Cinema_order o,Cinema_customer c,Cinema_movie m
+            WHERE
+                o.customer_id = c.customer_id AND o.movie_id = m.movie_id
+        ) AS w ON w.order_id = e.order_id
+        <if test="selType != null and selType !='' and selContent != null and selContent != ''">
+            <where>
+                <if test="selType == 'movieId'">
+                    w.movie_id = #{selContent}
+                </if>
+                <if test="selType == 'movieName'">
+                    w.movie_name like CONCAT(CONCAT('%',#{selContent}),'%')
+                </if>
+                <if test="selType == 'evaluationId'">
+                    e.evaluation_id = #{selContent}
+                </if>
+                <if test="selType == 'customerId'">
+                    w.customer_id = #{selContent}
+                </if>
+            </where>
+        </if>
+    </select>
+
+    <select id="getEvaluations" resultType="com.Cinema_Management_System.Evaluation.entity.Evaluation">
+        SELECT
+            e.evaluation_id,e.evaluation_content,e.evaluation_score,e.evaluation_time,w.customer_name,w.movie_name
+        FROM
+            Cinema_evaluation e
+        LEFT JOIN (
+            SELECT o.order_id,o.movie_id,o.customer_id,m.movie_name,c.customer_name
+            FROM Cinema_order o,Cinema_customer c,Cinema_movie m
+            WHERE
+                o.customer_id = c.customer_id AND o.movie_id = m.movie_id
+        ) AS w ON w.order_id = e.order_id
+        <if test="selType != null and selType !='' and selContent != null and selContent != ''">
+            <where>
+                <if test="selType == 'movieId'">
+                    w.movie_id = #{selContent}
+                </if>
+                <if test="selType == 'movieName'">
+                    w.movie_name like CONCAT(CONCAT('%',#{selContent}),'%')
+                </if>
+                <if test="selType == 'evaluationId'">
+                    e.evaluation_id = #{selContent}
+                </if>
+                <if test="selType == 'customerId'">
+                    w.customer_id = #{selContent}
+                </if>
+            </where>
+        </if>
+        limit #{pageStart},#{pageSize}
+    </select>
 </mapper>

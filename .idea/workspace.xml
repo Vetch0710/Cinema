@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Cinema_Management_System:war exploded" />
+      <artifact name="Cinema:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="BranchesTreeState">
@@ -16,6 +16,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="752170a0-882c-4f2b-9ea5-1fa5944f9081" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/Cinema_Management_System_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Cinema_Management_System_war_exploded.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -105,11 +106,21 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/Cinema_Management_System/Order/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Cinema_Management_System/Order/service/OrderService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/Cinema_Management_System/Order/service/serviceimpl/OrderServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Cinema_Management_System/Order/service/serviceimpl/OrderServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/properties/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/properties/jdbc.properties" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/utils/webSocket/MyHandShakeInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/utils/webSocket/MyHandShakeInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/utils/webSocket/MyWebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/utils/webSocket/MyWebSocketConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/utils/webSocket/MyWebSocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/utils/webSocket/MyWebSocketHandler.java" afterDir="false" />
+>>>>>>> refs/remotes/origin/cinema-back
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="cinema" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -124,8 +135,14 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="userSettingsFile" value="$PROJECT_DIR$/../../../文件夹/idea包/apache-maven-3.6.3/conf/settings.xml" />
+        <option name="localRepository" value="F:\maven\localWareHome" />
+        <option name="userSettingsFile" value="F:/../文件夹/idea包/apache-maven-3.6.3/conf/settings.xml" />
       </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
     </option>
   </component>
   <component name="ProjectId" id="1j7ZljmoW6FnS6r4tUDMvl9JHkx" />
@@ -140,27 +157,30 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="project.structure.side.proportion" value="0.3402299" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\ideaProject\Cinema\src\main\java\com\Cinema_Management_System\utils" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Tomcat 7.0.103" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.103" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/Cinema_Management_System/" />
+    <configuration name="Tomcat 7.0.96" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.96" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/Cinema/" />
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="Cinema_Management_System:war exploded">
+        <artifact name="Cinema:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/Cinema_Management_System" />
+            <option name="CONTEXT_PATH" value="/Cinema" />
           </settings>
         </artifact>
       </deployment>
@@ -223,10 +243,32 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="Cinema_Management_System:war exploded" />
+          <artifact name="Cinema:war exploded" />
         </option>
       </method>
     </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+            </expand>
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -239,29 +281,40 @@
       <option name="presentableId" value="Default" />
       <updated>1603157243446</updated>
       <workItem from="1603157244977" duration="1754000" />
+      <workItem from="1603894171313" duration="283000" />
+      <workItem from="1603894475209" duration="847000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
+  </component>
   <component name="WindowStateProjectService">
-    <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603158466141">
-      <screen x="0" y="0" width="1680" height="1050" />
+    <state x="278" y="134" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603894838035">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="278" y="134" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1603894838035" />
     <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1603158466141" />
+<<<<<<< HEAD
     <state x="653" y="248" key="#com.intellij.ide.util.MemberChooser" timestamp="1603895514152">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -320,7 +373,84 @@
     <state width="1126" height="294" key="GridCell.Tab.2.right/0.0.1680.1050@0.0.1680.1050" timestamp="1603897474527" />
     <state x="328" y="106" key="SettingsEditor" timestamp="1603158419589">
       <screen x="0" y="0" width="1680" height="1050" />
+=======
+    <state x="591" y="332" key="#com.intellij.javaee.module.view.common.J2EE.J2EEDeploymentDescriptorLocationPanel.changeDDPath" timestamp="1603894779797">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="591" y="332" key="#com.intellij.javaee.module.view.common.J2EE.J2EEDeploymentDescriptorLocationPanel.changeDDPath/0.0.1536.824@0.0.1536.824" timestamp="1603894779797" />
+    <state x="608" y="318" key="#com.intellij.javaee.module.view.web.EditWebRootDialog" timestamp="1603894787309">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="608" y="318" key="#com.intellij.javaee.module.view.web.EditWebRootDialog/0.0.1536.824@0.0.1536.824" timestamp="1603894787309" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1603894786319">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1603894786319" />
+    <state width="1014" height="191" key="GridCell.Tab.0.bottom" timestamp="1603895029562">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1014" height="191" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603895029562" />
+    <state width="1126" height="294" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1603159002721" />
+    <state width="1014" height="191" key="GridCell.Tab.0.center" timestamp="1603895029561">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1014" height="191" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1603895029561" />
+    <state width="1126" height="294" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1603159002720" />
+    <state width="1014" height="191" key="GridCell.Tab.0.left" timestamp="1603895029561">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1014" height="191" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1603895029561" />
+    <state width="1126" height="294" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1603159002720" />
+    <state width="1014" height="191" key="GridCell.Tab.0.right" timestamp="1603895029561">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1014" height="191" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603895029561" />
+    <state width="1126" height="294" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1603159002721" />
+    <state width="1014" height="191" key="GridCell.Tab.1.bottom" timestamp="1603895029562">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1014" height="191" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603895029562" />
+    <state width="1126" height="294" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1603159002723" />
+    <state width="1014" height="191" key="GridCell.Tab.1.center" timestamp="1603895029562">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1014" height="191" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1603895029562" />
+    <state width="1126" height="294" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1603159002722" />
+    <state width="1014" height="191" key="GridCell.Tab.1.left" timestamp="1603895029562">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1014" height="191" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1603895029562" />
+    <state width="1126" height="294" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1603159002722" />
+    <state width="1014" height="191" key="GridCell.Tab.1.right" timestamp="1603895029562">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1014" height="191" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1603895029562" />
+    <state width="1126" height="294" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1603159002722" />
+    <state width="1014" height="191" key="GridCell.Tab.2.bottom" timestamp="1603895029562">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1014" height="191" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603895029562" />
+    <state width="1126" height="294" key="GridCell.Tab.2.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1603159002725" />
+    <state width="1014" height="191" key="GridCell.Tab.2.center" timestamp="1603895029562">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1014" height="191" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1603895029562" />
+    <state width="1126" height="294" key="GridCell.Tab.2.center/0.0.1680.1050@0.0.1680.1050" timestamp="1603159002724" />
+    <state width="1014" height="191" key="GridCell.Tab.2.left" timestamp="1603895029562">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1014" height="191" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1603895029562" />
+    <state width="1126" height="294" key="GridCell.Tab.2.left/0.0.1680.1050@0.0.1680.1050" timestamp="1603159002723" />
+    <state width="1014" height="191" key="GridCell.Tab.2.right" timestamp="1603895029562">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1014" height="191" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1603895029562" />
+    <state width="1126" height="294" key="GridCell.Tab.2.right/0.0.1680.1050@0.0.1680.1050" timestamp="1603159002724" />
+    <state x="300" y="0" key="SettingsEditor" timestamp="1603894824286">
+      <screen x="0" y="0" width="1536" height="824" />
+>>>>>>> refs/remotes/origin/cinema-back
+    </state>
+    <state x="300" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1603894824286" />
     <state x="328" y="106" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1603158419589" />
     <state x="100" y="100" width="1480" height="850" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1603893607418">
       <screen x="0" y="0" width="1680" height="1050" />

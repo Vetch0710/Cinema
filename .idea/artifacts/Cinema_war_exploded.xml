@@ -1,17 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="Cinema_Management_System:war exploded">
-    <output-path>$PROJECT_DIR$/target/Cinema_Management_System</output-path>
-    <properties id="maven-jee-properties">
-      <options>
-        <exploded>true</exploded>
-        <module>Cinema_Management_System</module>
-        <packaging>war</packaging>
-      </options>
-    </properties>
+  <artifact type="exploded-war" name="Cinema:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Cinema_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="Cinema_Management_System" />
+          <element id="module-output" name="Cinema" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.springframework:spring-websocket:4.3.3.RELEASE" />
@@ -64,10 +57,7 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-nop:1.7.5" />
         </element>
       </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/Cinema_Management_System/META-INF/MANIFEST.MF" />
-      </element>
-      <element id="javaee-facet-resources" facet="Cinema_Management_System/web/Web" />
+      <element id="javaee-facet-resources" facet="Cinema/web/Web" />
     </root>
   </artifact>
 </component>

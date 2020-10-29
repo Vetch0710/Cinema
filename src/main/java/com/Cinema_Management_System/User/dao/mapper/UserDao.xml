@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Cinema_Management_System.User.dao.UserDao"><!--namespace:定义一个操作包  -->
+<!--    查询用户信息-->
+    <select id="selectCusInfoById" resultType="com.Cinema_Management_System.User.entity.Customer">
+        select * from  cinema_customer where customer_id=#{customerId}
+    </select>
+
+<!--    查询管理员信息-->
+    <select id="selectManInfoById" resultType="com.Cinema_Management_System.User.entity.Manager">
+        select * from   cinema_manager where manager_id=#{managerId}
+    </select>
+
+
+<!--    查询用户信息 -->
+    <select id="selectCustomer" resultType="com.Cinema_Management_System.User.entity.Customer">
+        select * from   cinema_customer
+            <where>
+              <choose>
+                  <when test="customerName != '' and customerName != null">
+                        customer_name=#{customerName}
+                  </when>
+                  <when test="customerPhone != '' and customerPhone != null">
+                        customer_phone=#{customerPhone}
+                  </when>
+                  <otherwise> 1=1</otherwise>
+              </choose>
+            </where>
+    </select>
+
+
+<!--    查询管理员信息-->
+    <select id="selectManager" resultType="com.Cinema_Management_System.User.entity.Manager">
+        select * from  cinema_manager
+        <where>
+            <choose>
+                <when test="managerPhone != '' and managerPhone != null">
+                    manager_phone=#{managerPhone}
+                </when>
+                <when test="managerId != '' and managerId != null">
+                    manager_id=#{managerId}
+                </when>
+                <otherwise> 1=1</otherwise>
+            </choose>
+        </where>
+
+    </select>
+
+
+    <!--    查询是否有-->
+    <select id="isExistCustomer" resultType="int">
+        SELECT COUNT(*) 'count' FROM cinema_customer WHERE customer_name=#{customerName} OR customer_phone=#{customerPhone}
+    </select>
+
+
+
+<!--    添加用户-->
+    <insert id="addUser" parameterType="com.Cinema_Management_System.User.entity.Customer">
+        insert into cinema_customer(customer_id, customer_password, customer_name, customer_phone)
+        values (default, #{customerPassword}, #{customerName}, #{customerPhone})
+    </insert>
+
+<!--    更改密码-->
+    <update id="resetPassword" parameterType="String">
+        update
+
+                <if test="identity == '顾客'">
+                    cinema_customer   set customer_password=#{password} where customer_phone=#{phone}
+                </if>
+                <if test="identity == '管理员'">
+                    cinema_manager  set manager_password=#{password} where manager_phone=#{phone}
+                </if>
+
+    </update>
+</mapper>

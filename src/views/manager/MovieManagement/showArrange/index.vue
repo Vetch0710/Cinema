@@ -25,10 +25,9 @@
                 <el-option label="片名" value="movieName"></el-option>
                 <el-option label="影片编号" value="movieId"></el-option>
                 <el-option label="场次编号" value="arrangementId"></el-option>
-                <el-option label="影厅" value="arrangementPlace"></el-option>
                 <el-option
-                  label="日期"
-                  value="arrangementDate"
+                  label="影厅"
+                  value="arrangementPlace"
                 ></el-option> </el-select
             ></el-input>
           </el-form-item>
@@ -119,8 +118,7 @@
   </div>
 </template>
 <script>
-import { doDelete, doEdit } from "@/api/MovieManagement";
-import { getList } from "@/api/Arrangements";
+import { getList, doDelete, doEdit, doDeletes } from "@/api/Arrangements";
 import Arrange from "../addArrangement";
 import { log } from "util";
 import path from "path";
@@ -184,8 +182,15 @@ export default {
     handleDelete(row) {
       if (row.arrangementId) {
         this.$baseConfirm("你确定要删除当前项吗", null, async () => {
-          const { msg } = await doDelete({ arrangementId: row.arrangementId });
-          this.$baseMessage(msg, "success");
+          const msg = await doDelete({ arrangementId: row.arrangementId });
+          let msgContent = "";
+          if (msg == "success") {
+            msgContent = "删除成功";
+            this.$baseMessage(msgContent, msg);
+          } else if (msg == "error") {
+            msgContent = "删除失败,请重新尝试";
+            this.$message.error(msgContent);
+          }
           this.fetchData();
         });
       } else {
@@ -194,8 +199,15 @@ export default {
             (item) => item.arrangementId
           );
           this.$baseConfirm("你确定要删除选中项吗", null, async () => {
-            const { msg } = await doDelete({ arrangementIds });
-            this.$baseMessage(msg, "success");
+            const msg = await doDeletes({ arrangementIds });
+            let msgContent = "";
+            if (msg == "success") {
+              msgContent = "删除成功";
+              this.$baseMessage(msgContent, msg);
+            } else if (msg == "error") {
+              msgContent = "删除失败,请重新尝试";
+              this.$message.error(msgContent);
+            }
             this.fetchData();
           });
         } else {

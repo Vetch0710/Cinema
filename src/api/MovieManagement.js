@@ -25,7 +25,7 @@ export function getMovieList(data) {
 }
 export function addMovie(form) {
   return request({
-    url: "/movie//addMovie",
+    url: "/movie/addMovie",
     method: "post",
     data: {
       movie: form,

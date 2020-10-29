@@ -63,7 +63,7 @@ instance.interceptors.request.use(
       config.data = qs.stringify(config.data);
     if (debounce.some((item) => config.url.includes(item)))
       loadingInstance = Vue.prototype.$baseLoading();
-    console.log(config);
+    // console.log(config);
     return config;
   },
   (error) => {
@@ -74,14 +74,18 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     if (loadingInstance) loadingInstance.close();
+    console.log(response)
+    const { data } = response;
+    console.log(data)
+    // const { data, config } = response;
+    // console.log(response)
+    // const { code, msg } = data;
 
-    const { data, config } = response;
-    const { code, msg } = data;
     // console.log("---------------"+code+"-------"+msg)
     // 操作正常Code数组
-    const codeVerificationArray = isArray(successCode)
-      ? [...successCode]
-      : [...[successCode]];
+    // const codeVerificationArray = isArray(successCode)
+    //   ? [...successCode]
+    //   : [...[successCode]];
     // 是否操作正常
     // console.log("codeVerificationArray========"+codeVerificationArray)
     // if (codeVerificationArray.includes(code)) {

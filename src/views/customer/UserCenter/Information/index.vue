@@ -6,7 +6,10 @@
                 <li v-if="index !== 0">
                     <span class="Info-type">{{ item.type }}</span>
                     <span v-if="item.type === '密码'" class="Info-value">******</span>
-                    <span v-else-if="item.type !== '头像'" class="Info-value">
+                    <span v-else-if="item.type === '性别' && (item.value !=='男' && item.value !=='女') " class="Info-value">
+            还未填写数据
+          </span>
+                    <span v-else-if="item.type !== '头像' && item.value !== ''" class="Info-value">
             {{ item.value }}
           </span>
 
@@ -163,6 +166,8 @@
     .Info-value {
         width: 650px;
         display: inline-block;
+        font-size: 14px;
+        /*color: #f5f7fa;*/
     }
 
     .Info-edit {

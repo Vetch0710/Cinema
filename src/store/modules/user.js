@@ -45,8 +45,8 @@ const actions = {
     commit("setPermissions", permissions);
   },
   async login({ commit }, userInfo) {
-    const { data } = await login(userInfo); //给后端接口发送用户信息
-    const accessToken = data[tokenName]; //获取token
+    const { accessToken } = await login(userInfo); //给后端接口发送用户信息
+    // const accessToken = data[tokenName]; //获取token
     console.log(accessToken + "===============");
     if (accessToken) {
       commit("setAccessToken", accessToken);
@@ -64,19 +64,22 @@ const actions = {
       Vue.prototype.$baseNotify(`欢迎登录`, `${thisTime}！`);
     } else {
       Vue.prototype.$baseMessage(
-          `后台返回信息异常，未正确返回${tokenName}...`,
+          `请检查您账号信息是否正确...`,
           "error"
       );
+     throw "登陆失败"
     }
   },
   async getUserInfo({ commit, state }) {
-    const { data } = await getUserInfo(state.accessToken);
-    if (!data) {
-      Vue.prototype.$baseMessage("验证失败，请重新登录...", "error");
-      return false;
-    }
-    let { permissions, username, avatar } = data;
-    console.log(typeof permissions)
+    const { permissions, username, avatar } = await getUserInfo(state.accessToken);
+    // if (!data) {
+    //   Vue.prototype.$baseMessage("验证失败，请重新登录...", "error");
+    //   return false;
+    // }
+    // let { permissions, username, avatar } = data;
+    console.log( permissions)
+    console.log( username)
+    console.log( avatar)
     if (permissions && username && Array.isArray(permissions)) {
       commit("setPermissions", permissions);
       commit("setUsername", username);

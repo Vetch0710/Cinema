@@ -9,7 +9,11 @@
       <el-form-item label="当前为：">
         <el-input v-model="form.value" disabled></el-input>
       </el-form-item>
-      <el-form-item v-if="title !== '手机号'" label="修改为：" prop="newValue">
+      <el-form-item v-if="title === '性别'" label="修改为：" prop="newValue">
+        <el-radio v-model="form.newValue" label="男">男</el-radio>
+        <el-radio v-model="form.newValue" label="女">女</el-radio>
+      </el-form-item>
+      <el-form-item v-else-if="title !== '手机号'" label="修改为：" prop="newValue">
         <el-input v-model="form.newValue" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item v-else label="修改为：" prop="phone">
@@ -29,7 +33,7 @@
 </template>
 
 <script>
-  import { doEdit } from "@/api/roleManagement";
+  import { doEdit } from "@/api/userManagement";
   import { isPhone } from "@/utils/validate";
 
   export default {
@@ -75,11 +79,20 @@
     methods: {
       showEdit(row) {
         console.log(row);
+
         this.form.title = this.title = this.list[row].type;
-        this.form.id = this.list.filter((item) => {
-          return item.type === "id";
-        })[0].value;
         this.form.value = this.list[row].value;
+        if ( this.form.title==='性别' && this.form.value !=='男' &&  this.form.value !=='女'){
+          this.form.value ='未选择'
+        }
+        this.form.id = (this.list.filter((item) => {
+          return item.type === "编号";
+        })[0]).value;
+        // this.form.id = this.list.filter((item) => {
+        //   return item.type === "编号";
+        // })
+        // console.log(this.form.id)
+
         this.dialogFormVisible = true;
       },
       close() {
@@ -90,8 +103,12 @@
       save() {
         this.$refs["form"].validate(async (valid) => {
           if (valid) {
-            const { msg } = await doEdit(this.form);
-            this.$baseMessage(msg, "success");
+            const msg = await doEdit(this.form);
+            if (msg==='success'){
+              this.$baseMessage("修改成功", "success");
+            }else {
+              this.$baseMessage(msg, "error");
+            }
             this.$emit("fetch-data");
             this.close();
           } else {

@@ -15,9 +15,6 @@ export function getUserInfo(accessToken) {
   return request({
     url: "/userInfo",
     method: "get",
-    // data: {
-    //   [tokenName]: accessToken,
-    // },
   });
 }
 export function getPhoneCode(data) {
@@ -36,13 +33,7 @@ export function logout() {
     method: "post",
   });
 }
-export function getPersonalInfo(data) {
-  return request({
-    url: "/getPersonalInfo",
-    method: "post",
-    data
-  });
-}
+
 
 export function register(data) {
   return request({

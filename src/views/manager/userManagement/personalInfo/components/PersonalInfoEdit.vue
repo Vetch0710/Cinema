@@ -9,7 +9,11 @@
       <el-form-item label="当前为：">
         <el-input v-model="form.value" disabled></el-input>
       </el-form-item>
-      <el-form-item v-if="title !== '手机号'" label="修改为：" prop="newValue">
+      <el-form-item v-if="title === '性别'" label="修改为：" prop="newValue">
+        <el-radio v-model="form.newValue" label="男">男</el-radio>
+        <el-radio v-model="form.newValue" label="女">女</el-radio>
+      </el-form-item>
+      <el-form-item v-else-if="title !== '手机号'" label="修改为：" prop="newValue">
         <el-input v-model="form.newValue" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item v-else label="修改为：" prop="phone">
@@ -84,8 +88,14 @@
       save() {
         this.$refs["form"].validate(async (valid) => {
           if (valid) {
-            const { msg } = await doEdit(this.form);
-            this.$baseMessage(msg, "success");
+            const msg = await doEdit(this.form);
+
+            if (msg === 'success') {
+              this.$baseMessage("修改成功", "success");
+            } else {
+              this.$baseMessage(msg, "error");
+            }
+
             this.$emit("fetch-data");
             this.close();
           } else {

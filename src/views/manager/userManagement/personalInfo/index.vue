@@ -14,12 +14,13 @@
       <el-table-column
         show-overflow-tooltip
         prop="value"
-      ></el-table-column>
+      >
+      </el-table-column>
       <el-table-column show-overflow-tooltip label="操作" style="text-align: left" >
         <template #default="{ row }">
 <!--          <div></div>-->
           <el-button
-            v-if="row.type !== '工号' && row.type !== '职位'"
+            v-if="row.type !== '编号' && row.type !== '职位'"
             type="text"
             style="font-size: 14px"
             @click="handleEdit(row)"
@@ -35,7 +36,7 @@
   </div>
 </template>
 <script>
-  import { getInfo } from "@/api/userManagement";
+  import { getPersonalInfo } from "@/api/userManagement";
   import Edit from "./components/PersonalInfoEdit";
 
   export default {
@@ -61,7 +62,7 @@
       },
       async fetchData() {
         this.listLoading = true;
-        const { data } = await getInfo();
+        const { data } = await getPersonalInfo();
         console.log(data[0].value);
         this.list = data;
         this.id = data[0].value;

@@ -36,6 +36,7 @@
                             :show-file-list="false"
                             :on-success="handleAvatarSuccess"
                             :before-upload="beforeAvatarUpload"
+                            :headers="{'accessToken':accessToken}"
                     >
                         <el-button class="Info-edit">
                             上传图片
@@ -51,7 +52,7 @@
     </div>
 </template>
 <script>
-    import {getPersonalInfo} from "@/api/user";
+    import {getPersonalInfo} from "@/api/userManagement";
     import Edit from "./components/InformationEdit";
     import {baseURL, tokenName} from "@/config/settings";
     import {mapGetters} from "vuex";
@@ -72,11 +73,14 @@
                 elementLoadingText: "正在加载...",
                 url: "",
                 baseU: 'http://39.97.217.243:8089/images/',
-                action: baseURL + "/upload",
+                // id:this.accessToken,
+                action: baseURL + "/UserInfo/upload",
             };
         },
         created() {
+            // this.id=this.accessToken.substring(0,this.accessToken.indexOf("-"));
             this.fetchData();
+            // console.log(this.v)
         },
         methods: {
             handleEdit(row) {
@@ -85,11 +89,21 @@
             handleAvatarSuccess(res, file) {
                 console.log(res)
                 console.log(file)
-                // this.url = URL.createObjectURL(file.raw);
+                // this.url = URL.createObjectURL(file.raw);log
+                console.log(this.list)
                 this.url = this.baseU + res;
                 console.log(this.url)
+                if (res==='fail'){
+                    this.$baseMessage("上传失败，请检查您的网络", "error");
+                }else {
+                    this.$baseMessage("上传成功", "success");
+                }
+                console.log(this.list)
+
             },
             beforeAvatarUpload(file) {
+                // this.action=this.action+this.id;
+                // console.log(this.action)
                 const isJPG = file.type === "image/jpeg" || file.type === "image/png";
                 const isLt2M = file.size / 1024 / 1024 < 2;
 
@@ -104,7 +118,7 @@
             },
             async fetchData() {
                 this.listLoading = true;
-                const {data} = await getPersonalInfo({'this.accessToken': this.accessToken});
+                const {data} = await getPersonalInfo();
                 console.log("data====" + data)
                 console.log(data[0].type);
                 this.list = data;

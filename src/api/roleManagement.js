@@ -2,15 +2,15 @@ import request from "@/utils/request";
 
 export function getList(data) {
   return request({
-    url: "/roleManagement/getList",
-    method: "post",
+    url: "/UserInfo/getList",
+    method: "get",
     data,
   });
 }
 
 export function doEdit(data) {
   return request({
-    url: "/roleManagement/doEdit",
+    url: "/UserInfo/doEdit",
     method: "post",
     data,
   });
@@ -18,7 +18,7 @@ export function doEdit(data) {
 
 export function doDelete(data) {
   return request({
-    url: "/roleManagement/doDelete",
+    url: "/UserInfo/doDelete",
     method: "post",
     data,
   });
@@ -26,7 +26,7 @@ export function doDelete(data) {
 
 export function getMaxNum() {
   return request({
-    url: "/roleManagement/getMaxNum",
-    method: "post",
+    url: "/UserInfo/getMaxNum",
+    method: "get",
   });
 }

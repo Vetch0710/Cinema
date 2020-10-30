@@ -1,5 +1,7 @@
 package com.Cinema_Management_System.User.entity;
 
+import java.io.Serializable;
+
 /**
  * @Description 顾客信息实体类
  * @Auther GaoYi
@@ -11,7 +13,8 @@ package com.Cinema_Management_System.User.entity;
  * * @param customerPhone    手机号
  * * @param customerSex      性别
  */
-public class Customer {
+public class Customer implements Serializable {
+    private static final long serialVersionUID = 4222222L;
     private Integer customerId;
     private String customerPassword, customerPicture, customerName, customerPhone;
     private char customerSex;

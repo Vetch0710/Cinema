@@ -1,5 +1,7 @@
 package com.Cinema_Management_System.User.entity;
 
+import java.io.Serializable;
+
 /**
  * @Description 管理员信息表
  * @Auther GaoYi
@@ -11,7 +13,8 @@ package com.Cinema_Management_System.User.entity;
  * * @param managerSex           性别
  * * @param managerIsBoss       是否为老板(0为老板，1为员工)
  */
-public class Manager {
+public class Manager implements Serializable {
+    private   static final long serialVersionUID = 4233232L;
     private Integer managerId;
     private String managerPassword, managerName, managerPhone;
     private char managerSex;

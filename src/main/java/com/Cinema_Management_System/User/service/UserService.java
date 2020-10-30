@@ -33,4 +33,21 @@ public interface UserService {
 
     //获取个人信息
     List<JSONObject> getPersonalInfo(Integer customerId, Integer managerId);
+
+
+    //修改个人信息
+    boolean updateInfoById( Integer id, String value, String type, String identity);
+
+    //获取用户和管理员信息
+    Map<String,Object> getAllUser(String identity,int pageNo,int pageSize);
+
+    //修改用户和管理员信息
+    boolean UpdateUserInfo(String type,String title,Object info);
+
+    //获取管理员最大编号
+    int getMaxCount();
+
+
+    //删除用户
+    boolean deleteUser(String type,List<Integer> Ids);
 }

@@ -24,7 +24,7 @@ public class UserController {
     private UserService userService;
 
     //登陆
-    @RequestMapping(value = "login", method = {RequestMethod.GET})
+    @RequestMapping(value = "/login", method = {RequestMethod.GET})
     @ResponseBody
     public Map<String, String> login(HttpServletRequest req) throws Exception {
         System.out.println("**************login***************");
@@ -55,7 +55,7 @@ public class UserController {
     }
 
     //获取验证码
-    @RequestMapping(value = "getPhoneCode", method = {RequestMethod.GET})
+    @RequestMapping(value = "/getPhoneCode", method = {RequestMethod.GET})
     @ResponseBody
     public Map<String, String> getPhoneCode(String phone) throws Exception {
         System.out.println("**************getPhoneCode***************");
@@ -71,7 +71,7 @@ public class UserController {
     }
 
     //获取个人信息----姓名，头像，权限
-    @RequestMapping(value = "userInfo", method = {RequestMethod.GET})
+    @RequestMapping(value = "/userInfo", method = {RequestMethod.GET})
     @ResponseBody
     public Map<String, Object> userInfo(@RequestHeader("accessToken") String accessToken) throws Exception {
         System.out.println("**************userInfo***************");
@@ -93,7 +93,7 @@ public class UserController {
 
 
     //退出登陆
-    @RequestMapping(value = "logout")
+    @RequestMapping(value = "/logout")
     @ResponseBody
     public String logout() throws Exception {
         System.out.println("**************logout***************");
@@ -105,7 +105,7 @@ public class UserController {
     }
 
     //注册
-    @RequestMapping(value = "register", method = {RequestMethod.POST}, produces = "text/plain;charset=UTF-8")
+    @RequestMapping(value = "/register", method = {RequestMethod.POST}, produces = "text/plain;charset=UTF-8")
     @ResponseBody
     public String register(@RequestBody Customer customer) throws Exception {
         System.out.println("**************register***************");
@@ -123,8 +123,8 @@ public class UserController {
     }
 
 
-    //注册
-    @RequestMapping(value = "resetPassword", method = {RequestMethod.PUT}, produces = "text/plain;charset=UTF-8")
+    //重置密码
+    @RequestMapping(value = "/resetPassword", method = {RequestMethod.PUT}, produces = "text/plain;charset=UTF-8")
     @ResponseBody
     public String resetPassword(@RequestBody Map<String, String> params) throws Exception {
         System.out.println("**************resetPassword***************");
@@ -136,25 +136,4 @@ public class UserController {
     }
 
 
-    //获取个人信息
-        @RequestMapping(value = "getPersonalInfo", produces = "text/plain;charset=UTF-8")
-    @ResponseBody
-    public String getPersonalInfo(@RequestHeader("accessToken") String accessToken) throws Exception {
-        System.out.println("**************getPersonalInfo***************");
-
-            String identity = accessToken.substring(accessToken.indexOf("-") + 1);
-            int userId = Integer.parseInt(accessToken.substring(0, accessToken.indexOf("-")));
-            List<JSONObject> datas = new ArrayList<>();
-            if ("customer".equals(identity)) {
-                datas=  userService.getPersonalInfo(userId, null);
-            } else {
-                datas=  userService.getPersonalInfo(null, userId);
-            }
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("data", datas);
-            System.out.println(jsonObject.toJSONString());
-
-        return jsonObject.toJSONString();
-    }
 }

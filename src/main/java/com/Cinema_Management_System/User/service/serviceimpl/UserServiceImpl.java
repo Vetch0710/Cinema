@@ -198,7 +198,7 @@ public class UserServiceImpl implements UserService {
             Customer customer = userDao.selectCusInfoById(customerId);
             System.out.println(customer);
             jsonObject1.put("value", customer.getCustomerId());
-            jsonObject1.put("value", customer.getCustomerPicture());
+            jsonObject2.put("value", customer.getCustomerPicture());
             jsonObject3.put("value", customer.getCustomerName());
             jsonObject4.put("value", customer.getCustomerSex());
             jsonObject5.put("value", customer.getCustomerPassword());
@@ -213,5 +213,58 @@ public class UserServiceImpl implements UserService {
             datas.add(jsonObject6);
         }
         return datas;
+    }
+
+    @Override
+    public boolean updateInfoById(Integer id, String value, String type, String identity) {
+        return userDao.updateInfoById(id, value, type, identity) != 0;
+    }
+
+    @Override
+    public Map<String, Object> getAllUser(String identity, int pageNo, int pageSize) {
+        Map<String, Object> result = new HashMap<>();
+        if ("customer".equals(identity)) {
+            List<Customer> customers = userDao.selectAllCustomer(pageNo, pageSize);
+            int count = userDao.selectAllCustomerCount();
+            result.put("result", customers);
+            result.put("count", count);
+        } else {
+            List<Manager> managers = userDao.selectAllManager(pageNo, pageSize);
+            int count = userDao.selectAllManagerCount();
+
+            result.put("result", managers);
+            result.put("count", count);
+
+        }
+        return result;
+    }
+
+    @Override
+    public boolean UpdateUserInfo(String type, String title, Object info) {
+        if ("customer".equals(type)) {
+            Customer customer = (Customer) info;
+            return userDao.updateCusInfo(customer) != 0;
+        } else {
+            Manager manager = (Manager) info;
+            if (userDao.selectManInfoById(manager.getManagerId()) != null) {
+                return userDao.updateManInfo(manager) != 0;
+            } else {
+                return userDao.addManager(manager) != 0;
+            }
+        }
+    }
+
+    @Override
+    public int getMaxCount() {
+        return userDao.selectMax();
+    }
+
+    @Override
+    public boolean deleteUser(String type, List<Integer> Ids) {
+        if ("customer".equals(type)) {
+          return   userDao.deleteCustomer(Ids)!=0;
+        }else {
+            return userDao.deleteManager(Ids)!=0;
+        }
     }
 }

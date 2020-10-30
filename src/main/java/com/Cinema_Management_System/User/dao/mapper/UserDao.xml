@@ -3,37 +3,41 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Cinema_Management_System.User.dao.UserDao"><!--namespace:定义一个操作包  -->
-<!--    查询用户信息-->
+    <!--    查询用户信息-->
     <select id="selectCusInfoById" resultType="com.Cinema_Management_System.User.entity.Customer">
-        select * from  cinema_customer where customer_id=#{customerId}
+        select *
+        from cinema_customer
+        where customer_id = #{customerId}
     </select>
 
-<!--    查询管理员信息-->
+    <!--    查询管理员信息-->
     <select id="selectManInfoById" resultType="com.Cinema_Management_System.User.entity.Manager">
-        select * from   cinema_manager where manager_id=#{managerId}
+        select *
+        from cinema_manager
+        where manager_id = #{managerId}
     </select>
 
 
-<!--    查询用户信息 -->
+    <!--    查询用户信息 -->
     <select id="selectCustomer" resultType="com.Cinema_Management_System.User.entity.Customer">
-        select * from   cinema_customer
-            <where>
-              <choose>
-                  <when test="customerName != '' and customerName != null">
-                        customer_name=#{customerName}
-                  </when>
-                  <when test="customerPhone != '' and customerPhone != null">
-                        customer_phone=#{customerPhone}
-                  </when>
-                  <otherwise> 1=1</otherwise>
-              </choose>
-            </where>
+        select * from cinema_customer
+        <where>
+            <choose>
+                <when test="customerName != '' and customerName != null">
+                    customer_name=#{customerName}
+                </when>
+                <when test="customerPhone != '' and customerPhone != null">
+                    customer_phone=#{customerPhone}
+                </when>
+                <otherwise>1=1</otherwise>
+            </choose>
+        </where>
     </select>
 
 
-<!--    查询管理员信息-->
+    <!--    查询管理员信息-->
     <select id="selectManager" resultType="com.Cinema_Management_System.User.entity.Manager">
-        select * from  cinema_manager
+        select * from cinema_manager
         <where>
             <choose>
                 <when test="managerPhone != '' and managerPhone != null">
@@ -42,7 +46,7 @@
                 <when test="managerId != '' and managerId != null">
                     manager_id=#{managerId}
                 </when>
-                <otherwise> 1=1</otherwise>
+                <otherwise>1=1</otherwise>
             </choose>
         </where>
 
@@ -51,27 +55,134 @@
 
     <!--    查询是否有-->
     <select id="isExistCustomer" resultType="int">
-        SELECT COUNT(*) 'count' FROM cinema_customer WHERE customer_name=#{customerName} OR customer_phone=#{customerPhone}
+        SELECT COUNT(*) 'count'
+        FROM cinema_customer
+        WHERE customer_name = #{customerName}
+           OR customer_phone = #{customerPhone}
     </select>
 
 
-
-<!--    添加用户-->
+    <!--    添加用户-->
     <insert id="addUser" parameterType="com.Cinema_Management_System.User.entity.Customer">
         insert into cinema_customer(customer_id, customer_password, customer_name, customer_phone)
         values (default, #{customerPassword}, #{customerName}, #{customerPhone})
     </insert>
 
-<!--    更改密码-->
+    <!--    添加管理员-->
+    <insert id="addManager" parameterType="com.Cinema_Management_System.User.entity.Manager">
+        insert into cinema_manager(manager_id, manager_password, manager_name, manager_sex,manager_is_boss)
+        values (#{managerId},#{managerPassword}, #{managerName}, #{managerSex}, #{managerIsBoss})
+    </insert>
+
+    <!--    更改密码-->
     <update id="resetPassword" parameterType="String">
         update
 
-                <if test="identity == '顾客'">
-                    cinema_customer   set customer_password=#{password} where customer_phone=#{phone}
-                </if>
-                <if test="identity == '管理员'">
-                    cinema_manager  set manager_password=#{password} where manager_phone=#{phone}
-                </if>
+        <if test="identity == '顾客'">
+            cinema_customer set customer_password=#{password} where customer_phone=#{phone}
+        </if>
+        <if test="identity == '管理员'">
+            cinema_manager set manager_password=#{password} where manager_phone=#{phone}
+        </if>
 
     </update>
+
+
+    <!--    更改密码-->
+    <update id="updateInfoById">
+        update
+        <if test="identity == 'customer'">
+            cinema_customer
+            <set>
+                <if test="type == '姓名'">
+                    customer_name=#{value}
+                </if>
+                <if test="type == '头像'">
+                    customer_picture=#{value}
+                </if>
+                <if test="type == '性别'">
+                    customer_sex=#{value}
+                </if>
+                <if test="type == '密码'">
+                    customer_password=#{value}
+                </if>
+                <if test="type == '手机号'">
+                    customer_phone=#{value}
+                </if>
+            </set>
+            where customer_id=#{id}
+        </if>
+        <if test="identity == 'manager' || identity == 'boss'">
+            cinema_manager
+            <set>
+                <if test="type == '姓名'">
+                    manager_name=#{value}
+                </if>
+                <if test="type == '性别'">
+                    manager_sex=#{value}
+                </if>
+                <if test="type == '密码'">
+                    manager_password=#{value}
+                </if>
+                <if test="type == '手机号'">
+                    manager_phone=#{value}
+                </if>
+            </set>
+            where manager_id=#{id}
+        </if>
+
+
+    </update>
+
+
+<!--  查询用户/管理员信息  -->
+    <select id="selectAllManager" resultType="com.Cinema_Management_System.User.entity.Manager">
+        select * from cinema_manager limit #{pageNo},#{pageSize}
+    </select>
+    <select id="selectAllCustomer" resultType="com.Cinema_Management_System.User.entity.Customer">
+        select * from cinema_customer limit #{pageNo},#{pageSize}
+    </select>
+
+    <!--  查询用户/管理员 数量 -->
+    <select id="selectAllManagerCount" resultType="int">
+        select count(*) from cinema_manager
+    </select>
+    <select id="selectAllCustomerCount" resultType="int">
+        select count(*) from cinema_customer
+    </select>
+
+
+<!--  获取最大的管理员编号  -->
+    <select id="selectMax" resultType="int">
+        SELECT MAX(manager_id)+1 'maxCount' FROM cinema_manager
+    </select>
+
+
+<!--    //修改管理员/用户信息-->
+    <update id="updateCusInfo" parameterType="com.Cinema_Management_System.User.entity.Customer">
+        update cinema_customer set customer_name=#{customerName},customer_password=#{customerPassword},customer_phone=#{customerPhone}
+        where customer_id=#{customerId}
+    </update>
+    <update id="updateManInfo" parameterType="com.Cinema_Management_System.User.entity.Manager">
+        update cinema_manager set manager_name=#{managerName},manager_sex=#{managerSex},manager_is_boss=#{managerIsBoss}
+        where manager_id=#{managerId}
+    </update>
+
+
+    <!--//删除用户-->
+    <delete id="deleteCustomer" parameterType="list">
+       delete from cinema_customer where customer_id in
+        <foreach collection="list" item="it" open="(" close=")" separator=",">
+            #{it}
+        </foreach>
+    </delete>
+    <delete id="deleteManager" parameterType="list">
+        delete from cinema_manager where manager_id in
+        <foreach collection="list" item="it" open="(" close=")" separator=",">
+            #{it}
+        </foreach>
+    </delete>
+
+
+
 </mapper>

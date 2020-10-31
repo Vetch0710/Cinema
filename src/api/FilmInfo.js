@@ -21,6 +21,13 @@ export function getRelativeMovie(data) {
   });
 }
 
+export function getRecommendMovie() {
+  return request({
+    url: "/movie/getRecommendMovie",
+    method: "get",
+  });
+}
+
 export function getFlag(data) {
   console.log(data)
   return request({

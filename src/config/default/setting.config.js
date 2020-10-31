@@ -10,8 +10,8 @@ const setting = {
   assetsDir: "static",
   // 默认的接口地址 如果是开发环境和生产环境走vab-mock-server，当然你也可以选择自己配置成需要的接口地址
   baseURL:
-    // "http://39.97.217.243:8089/CinemaData",
-    "http://10.96.115.85:8089/Cinema",
+    "http://8.131.77.164:8089/CinemaData",
+    // "http://10.5.70.107:8089/Cinema_Management_System",
     // "http://localhost:8080/Cinema_Management_System",
     
    // "vab-mock-server",

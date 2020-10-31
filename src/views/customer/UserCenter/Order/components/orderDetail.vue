@@ -15,12 +15,12 @@
             <div class="Detail-info">
                 <div class="Detail-info-info">{{orderDetail.orderId}}</div>
                 <div class="Detail-info-info">{{orderDetail.movieName}}</div>
-                <div class="Detail-info-info" style="    color: #f03d37">{{orderDetail.orderTime}}</div>
+                <div class="Detail-info-info" style="    color: #f03d37">{{orderDetail.orderTime |changeTime}}</div>
                 <div class="info-arrangementSeat">
 
                     <span class="info-arrangement">{{orderDetail.arrangementPlace}}号厅</span>
                      <div class="info-seat">
-                         <span v-for="( item, index) in orderDetail.orderSeat" :key="index" style="display: inline-block;padding: 0 5px">{{item}}座</span>
+                         <span v-for="( item, index) in orderDetail.orderSeat.split(',')" :key="index" style="display: inline-block;padding: 0 5px">{{item}}</span>
                      </div>
 
         </div>
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+    import {thirteenBitTimestamp} from "@/utils/index";
+
     export default {
         name: "InformationEdit",
         props: {},
@@ -38,11 +40,23 @@
             return {
                 title: "",
                 dialogFormVisible: false,
-                orderDetail: ''
+                orderDetail: {
+                    orderSeat:"",
+                }
 
             };
         },
         created() {
+        },
+        filters: {
+            changeTime: function (value) {
+                console.log(typeof value)
+                if (typeof value !== "number") {
+                    return value;
+                }
+
+                return thirteenBitTimestamp(value)
+            }
         },
         methods: {
             showEdit(row) {

@@ -15,25 +15,16 @@
                         </div>
                         <div style="float:right;">
                             <div class="salesStatistics-chart-select-time">
-                                <span class="salesStatistics-chart-select-descTime">开始时间</span>
+                                <span class="salesStatistics-chart-select-descTime">自定义</span>
                                 <el-date-picker
-                                        v-model="startTime"
-                                        type="date"
-                                        placeholder="选择日期"
-                                        format="yyyy 年 MM 月 dd 日"
-                                        value-format="timestamp">
+                                        v-model="yearMonth"
+                                        type="month"
+                                        placeholder="选择月"
+                                        format="yyyy年M月"
+                                        value-format="yyyy-M">
                                 </el-date-picker>
                             </div>
-                            <div class="salesStatistics-chart-select-time">
-                                <span class="salesStatistics-chart-select-descTime">结束时间</span>
-                                <el-date-picker
-                                        v-model="endTime"
-                                        type="date"
-                                        placeholder="选择日期"
-                                        format="yyyy 年 MM 月 dd 日"
-                                        value-format="timestamp">
-                                </el-date-picker>
-                            </div>
+
                             <el-button @click="submitSelect">提交</el-button>
                         </div>
 
@@ -60,6 +51,7 @@
         name: "SalesStatistics",
         data() {
             return {
+                yearMonth:'',
                 type: '当月',
                 startTime: '',
                 endTime: '',
@@ -91,8 +83,8 @@
                     yAxis: [
                         {
                             type: "value",
-                            min: 100,
-                            max: 1000,
+                            min: 50,
+                            max: 500,
                         },
                     ],
                     series: [
@@ -129,73 +121,37 @@
 
             async submitSelect() {
                 // this.fwl.series[0].data=null;
-                console.log(this.startTime)
-                console.log(this.endTime)
-                if (this.startTime && this.endTime) {
-                    const {data} = await getStatistics({
-                        startTime: this.startTime,
-                        endTime: this.endTime
+                console.log(this.yearMonth)
+                if (this.yearMonth) {
+                    const result = await getStatistics({
+                        yearMonth: this.yearMonth,
                     })
-                    console.log(data)
-                    this.fwl.series[0].data = data
+                    console.log(result)
+                    this.fwl.series[0].data = result
+                    this.type='';
                 }else{
                     Vue.prototype.$baseMessage("请检查数据是否齐全", "error");
                 }
             },
             async selectMonths(type) {
-                // this.fwl.series[0].data=null;
-                let startTime = new Date();
-                startTime.setHours(0);
-                startTime.setSeconds(0);
-                startTime.setMinutes(0);
-
-                let endTime = new Date();
-                endTime.setHours(0);
-                endTime.setSeconds(0);
-                endTime.setMinutes(0);
+                let date = new Date();
+                let year = date.getFullYear();
+                let month = date.getMonth();
                 this.type = type;
                 let params;
                 if (type === '当月') {
-                    //获取每月有多少天
-                    let date = new Date();
-                    let year = date.getFullYear();
-                    let month = date.getMonth() + 1;
-                    let d = new Date(year, month, 0);
-
-                    startTime.setDate(1);
-                    endTime.setDate(d.getDate());
-
-                    // console.log(startTime.getTime())
-                    // console.log(endTime.getTime())
                     params = {
-                        startTime: startTime.getTime(),
-                        endTime: endTime.getTime()
+                        yearMonth: year+"-"+(month+1),
                     }
                 } else {
-                    //获取上个月有多少天
-                    let date = new Date();
-                    let year = date.getFullYear();
-                    let month = date.getMonth();
-                    console.log(month)
-                    let d = new Date(year, month, 0);
-
-                    startTime.setDate(1);
-                    startTime.setMonth(month - 1, 1);
-
-                    endTime.setMonth(month - 1, 1);
-                    endTime.setDate(d.getDate());
-
-                    // console.log(startTime.valueOf())
-                    // console.log(endTime.valueOf())
                     params = {
-                        startTime: startTime.getTime(),
-                        endTime: endTime.getTime()
+                        yearMonth: year+"-"+(month),
                     }
                 }
-                const {data} = await getStatistics(params)
-                console.log(data)
+                const result = await getStatistics(params)
+                console.log(result)
 
-                this.fwl.series[0].data = data
+                this.fwl.series[0].data = result
 
             },
         },

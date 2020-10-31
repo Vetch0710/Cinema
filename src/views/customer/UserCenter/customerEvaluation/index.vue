@@ -15,13 +15,13 @@
                     <!--                  :fit="'contain'"-->
                     <!--          >-->
                     <!--          </el-image>-->
-                    <span class="info">电影名称：{{scope.row.orderInfo.movieName}}</span>
-                    <span class="info">订单时间：{{scope.row.orderInfo.orderTime}}</span>
+                    <span class="info">电影名称：{{scope.row.movieName}}</span>
+                    <span class="info">时间：{{scope.row.orderTime |changeTime}}</span>
                 </template>
             </el-table-column>
             <el-table-column prop="evaluationScore" label="评分" width="100px" align="center">
                 <template slot-scope="scope">
-                    <span class="info">{{scope.row.evaluationScore===null? '待评价' : scope.row.evaluationScore}}</span>
+                    <span class="info">{{scope.row.evaluationContent===null? '待评价' : scope.row.evaluationScore}}</span>
                 </template>
             </el-table-column>
             <el-table-column prop="evaluationContent" label="评论" align="center">
@@ -31,7 +31,7 @@
             </el-table-column>
             <el-table-column prop="evaluationTime" label="评论时间" align="center">
                 <template slot-scope="scope">
-                    <span class="info">{{scope.row.evaluationTime===null? '待评价' : scope.row.evaluationTime}}</span>
+                    <span class="info">{{scope.row.evaluationContent===null? '待评价' : scope.row.evaluationTime |changeTime}}</span>
                 </template>
             </el-table-column>
             <el-table-column label="评价状态" align="center" column-key="evaluationStatus"
@@ -41,7 +41,7 @@
             >
                 <template slot-scope="scope">
                     <div class="info"
-                         v-if="scope.row.evaluationScore !== null&&scope.row.evaluationScore !== null && scope.row.evaluationScore!==null">
+                         v-if="scope.row.evaluationContent !== null">
                         已评价
                     </div>
                     <el-button v-else
@@ -52,23 +52,24 @@
                 </template>
             </el-table-column>
         </el-table>
-      <!--  <el-pagination
-                v-if="total>queryForm.pageSize"
-                class="evaluation-page"
-                background
-                :current-page="queryForm.pageNo"
-                :page-size="queryForm.pageSize"
-                :layout="layout"
-                :total="total"
-                @current-change="handleCurrentChange"
-        ></el-pagination>-->
+        <!--  <el-pagination
+                  v-if="total>queryForm.pageSize"
+                  class="evaluation-page"
+                  background
+                  :current-page="queryForm.pageNo"
+                  :page-size="queryForm.pageSize"
+                  :layout="layout"
+                  :total="total"
+                  @current-change="handleCurrentChange"
+          ></el-pagination>-->
         <edit ref="edit" @fetch-data="fetchData"></edit>
     </div>
 </template>
 
 <script>
-    import {getCusEva} from "@/api/EvaluationList";
+    import {getEvaluation} from "@/api/EvaluationList";
     import Edit from "./components/evaluationEdit.vue";
+    import {thirteenBitTimestamp} from "@/utils/index";
 
     export default {
         name: "CustomerEvaluation",
@@ -97,23 +98,33 @@
             // },
             $route(to, from) {
                 console.log("sdssdsdsd")
-                if (this.$route.query.data){
+                if (this.$route.query.data) {
                     this.$refs["edit"].showEdit(this.$route.query.data)
-                    this.$router.push({ query:{} })
+                    this.$router.push({query: {}})
 
                 }
-                console.log("*******"+this.$route.query.data)
+                console.log("*******" + this.$route.query.data)
 
+            }
+        },
+        filters: {
+            changeTime: function (value) {
+                console.log(typeof value)
+                if (typeof value !== "number") {
+                    return value;
+                }
+
+                return thirteenBitTimestamp(value)
             }
         },
         created() {
         },
         mounted() {
             this.fetchData();
-            console.log("*******"+this.$route.query.data)
-            if (this.$route.query.data){
+            console.log("*******" + this.$route.query.data)
+            if (this.$route.query.data) {
                 this.$refs["edit"].showEdit(this.$route.query.data)
-                this.$router.push({ query:{} })
+                this.$router.push({query: {}})
 
             }
             // this.$route.query.data=null
@@ -135,10 +146,15 @@
             // },
             filterHandler(value, row, column) {
                 console.log("111111111111111111")
+                // if (value === '已评价') {
+                //     return row.evaluationScore !== null && row.evaluationContent !== null && row.evaluationTime !== null
+                // } else if (value === '待评价') {
+                //     return row.evaluationScore === null && row.evaluationContent === null && row.evaluationTime === null
+                // }
                 if (value === '已评价') {
-                    return row.evaluationScore !== null && row.evaluationContent !== null && row.evaluationTime !== null
+                    return row.evaluationContent !== null
                 } else if (value === '待评价') {
-                    return row.evaluationScore === null && row.evaluationContent === null && row.evaluationTime === null
+                    return row.evaluationContent === null
                 }
 
 
@@ -146,14 +162,14 @@
             async fetchData() {
                 this.total = 0;
                 this.listLoading = true;
-                const {data, totalCount} = await getCusEva();
-                setTimeout(() => {
-                    this.evaluationList = data.customerEvaluations;
-                    this.total = totalCount;
-                    this.queryForm.pageNo = 1;
-                    // this.pagingInfo();
-                    this.listLoading = false;
-                }, 1000);
+                const data = await getEvaluation();
+
+                this.evaluationList = data;
+                this.total = data.length;
+                this.queryForm.pageNo = 1;
+                // this.pagingInfo();
+                this.listLoading = false;
+
             }
         },
     };
@@ -173,8 +189,9 @@
         padding: 10px 10px;
         height: 60px;
     }
- .customerEvaluation-container .el-table::before {
-      display: none;
+
+    .customerEvaluation-container .el-table::before {
+        display: none;
     }
 
     .customerEvaluation-container .info {

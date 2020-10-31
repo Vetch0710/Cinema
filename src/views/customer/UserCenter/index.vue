@@ -3,9 +3,8 @@
         <div class="UserCenter-info-box">
             <div class="UserCenter-info">
                 <div class="UserCenter-info-img">
-                    <div>
-                        <el-avatar :src="avatar" style="width: 110px;height: 110px;"></el-avatar>
-                    </div>
+                    <el-image :src="'http://8.131.77.164:8089/images/'+avatar" class="UserCenter-avatar"
+                              :fit="'cover'"></el-image>
                 </div>
                 <div class="UserCenter-info-nickName">
                     <p style="font-size: 26px;margin-bottom: 5px;color: #222222;">{{username}}</p>
@@ -70,7 +69,7 @@
                                  style="width: 140px;height: 70px;text-align: center;float: left;margin: 0 15px 0 15px ;background-color: rgba(0, 0, 0, 0);padding: 0;"
 
                                  slot="reference">
-                            <router-link to="/customerInfo">
+                            <router-link to="/agent/index">
                                 <i class="UserCenter-icon iconfont icon-lianxikefu"></i>
                                 <span class="UserCenter-icon-title">联系客服</span>
                             </router-link>
@@ -120,8 +119,8 @@
 
 <script>
     import filmShow from "@/views/index/filmShow";
-    import { mapGetters } from "vuex";
-    import {getRecommendList} from "@/api/FilmList";
+    import {mapGetters} from "vuex";
+    import {getRecommendMovie} from "@/api/FilmInfo";
 
     export default {
         name: "UserCenter",
@@ -155,8 +154,8 @@
             },
             async fetchData() {
                 this.movieInfo = null;
-                const result = await getRecommendList();
-                this.recommendMovie = result.data.RecommendList;
+                const result = await getRecommendMovie();
+                this.recommendMovie = result;
             },
         },
     };
@@ -181,20 +180,34 @@
     .UserCenter-info {
         width: 100%;
         height: 209px;
-        background: rgb(230, 82, 82);
-        background-image: linear-gradient(to bottom right, rgba(230, 110, 141, 0.5), rgba(230, 90, 141, 0.5));
+        background: rgba(238,87,87,.9);
+        /*background-image: linear-gradient(to bottom right, rgba(230, 110, 141, 0.5), rgba(230, 90, 141, 0.5));*/
         border-radius: 4px 4px 0 0;
     }
 
     .UserCenter-info-img {
-        width: 110px;
-        height: 110px;
+        /*width: 110px;*/
+        /*height: 110px;*/
         border: 10px solid rgba(248, 248, 248, 0.5);
         border-radius: 100%;
         position: relative;
         float: left;
         top: 38px;
         left: 30px;
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+        height: 110px;
+        padding: 0;
+    }
+
+    .UserCenter-avatar {
+        width: 110px;
+        height: 110px;
+        cursor: pointer;
+        border-radius: 50%;
     }
 
     .UserCenter-info-nickName {

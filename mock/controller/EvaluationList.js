@@ -240,13 +240,9 @@ const evaluations = [{
   },
 ]
 const customerEvaluations = [{
-    orderInfo: {
+
       orderId: "1111",
-      orderImg: 'https://p0.meituan.net/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg@90w_90h_1e_1c',
-      movieName: '阿凡达啊啊啊啊啊啊啊啊啊啊啊啊',
       orderTime: "2020-6-6 17:00",
-    },
-    evaluationId: "1",
     evaluationId: 1,
     movieName: "夺冠",
     evaluationScore: null,

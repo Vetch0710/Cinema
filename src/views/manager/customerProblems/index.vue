@@ -72,7 +72,7 @@
                 vertical-align: middle;
                 display: inline-block;
               "
-                                      :src="'http://39.97.217.243:8089/images/'+avatar"
+                                      :src="'http://8.131.77.164:8089/images/'+avatar"
 
                                       :fit="'contain'"
                               ></el-image>
@@ -130,7 +130,7 @@
                 vertical-align: middle;
                 display: inline-block;
               "
-                                      :src="'http://39.97.217.243:8089/images/'+avatar"
+                                      :src="'http://8.131.77.164:8089/images/'+avatar"
                                       :fit="'contain'"
                               ></el-image>
                           </span>
@@ -214,6 +214,13 @@
             }),
         },
         methods: {
+            // 发送消息后滚动到底部
+            scrollToBottom() {
+                this.$nextTick(() => {
+                    const div = document.getElementById('problems-chat')
+                    div.scrollTop = div.scrollHeight
+                })
+            },
             async fetchData() {
                 console.log(this.history)
                 await initWebSocket(this.accessToken, this.problemLists,this.results)
@@ -297,7 +304,7 @@
                     sendSock(data, this.results);
                     this.condition = ''
                 }
-                // this.scrollToBottom()
+                this.scrollToBottom()
 
             },
         },
@@ -324,7 +331,7 @@
         float: left;
         height: 100%;
         /*margin:0 20px;*/
-        border-right: 1px solid #E5E5E5;
+        border: 1px solid #E5E5E5;
         background: #fafafa;
 
     }

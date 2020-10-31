@@ -6,14 +6,18 @@
     @close="close"
   >
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-      <el-form-item label="工号" prop="id">
-        <el-input v-model="form.id" autocomplete="off" disabled></el-input>
+      <el-form-item label="工号" prop="managerId">
+        <el-input v-model="form.managerId" autocomplete="off" disabled></el-input>
       </el-form-item>
-      <el-form-item label="姓名" prop="name">
-        <el-input v-model="form.name" autocomplete="off"></el-input>
+      <el-form-item label="姓名" prop="managerName">
+        <el-input v-model="form.managerName" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="权限" prop="permission">
-        <el-radio-group v-model="form.permission">
+      <el-form-item label="性别" prop="managerSex">
+        <el-radio v-model="form.managerSex" label="男">男</el-radio>
+        <el-radio v-model="form.managerSex" label="女">女</el-radio>
+      </el-form-item>
+      <el-form-item label="权限" prop="managerIsBoss" >
+        <el-radio-group v-model="form.managerIsBoss">
           <el-radio label="管理员"></el-radio>
           <el-radio label="老板"></el-radio>
         </el-radio-group>
@@ -27,7 +31,7 @@
 </template>
 
 <script>
-  import { doEdit } from "@/api/roleManagement";
+  import { doEditMan } from "@/api/userManagement";
 
   export default {
     name: "RoleManagementEdit",
@@ -43,10 +47,11 @@
           id: "",
         },
         rules: {
-          permission: [
+          managerIsBoss: [
             { required: true, trigger: "blur", message: "请选择权限" },
           ],
-          name: [{ required: true, trigger: "blur", message: "请输入姓名" }],
+          managerName: [{ required: true, trigger: "blur", message: "请输入姓名" }],
+          managerSex: [{ required: true, trigger: "blur", message: "请选择性别" }],
         },
         title: "",
         dialogFormVisible: false,
@@ -57,10 +62,17 @@
       showEdit(row) {
         if (!row) {
           this.title = "添加";
-          this.form.id = this.maxListNum;
+          this.form.managerId = this.maxListNum;
         } else {
           this.title = "编辑";
           this.form = Object.assign({}, row);
+
+          if (this.form.managerIsBoss === 0){
+            this.form.managerIsBoss='管理员'
+          }else {
+            this.form.managerIsBoss='老板'
+          }
+          console.log(this.form)
           // if (this.form.permission === "manager") {
           //   this.form.permission = "管理员";
           // }
@@ -78,15 +90,22 @@
       save() {
         this.$refs["form"].validate(async (valid) => {
           if (valid) {
-            // if (this.form.permission === "管理员") {
-            //   this.form.permission = "manager";
-            // }
-            // if (this.form.permission === "老板") {
-            //   this.form.permission = "boss";
-            // }
+            if (this.form.managerIsBoss === "管理员") {
+              this.form.managerIsBoss = 0;
+            }
+            if (this.form.managerIsBoss === "老板") {
+              this.form.managerIsBoss = 1;
+            }
+
+            this.form.managerPassword='111111'
+
             console.log(this.form);
-            const { msg } = await doEdit(this.form);
-            this.$baseMessage(msg, "success");
+            const  msg  = await doEditMan(this.form);
+            if (msg==='success'){
+              this.$baseMessage("操作成功", "success");
+            }else {
+              this.$baseMessage(msg, "error");
+            }
             this.$emit("fetch-data");
             this.close();
           } else {

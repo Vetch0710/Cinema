@@ -5,18 +5,25 @@ export async function login(data) {
   console.log("sdsdsd")
   return request({
     url: "/login",
-    method: "post",
-    data,
+    method: "get",
+    params: data
+
   });
 }
 
 export function getUserInfo(accessToken) {
   return request({
     url: "/userInfo",
-    method: "post",
-    data: {
-      [tokenName]: accessToken,
-    },
+    method: "get",
+  });
+}
+export function getPhoneCode(data) {
+  return request({
+    url: "/getPhoneCode",
+    method: "get",
+    params: {
+      phone:data
+    }
   });
 }
 
@@ -26,13 +33,7 @@ export function logout() {
     method: "post",
   });
 }
-export function getPersonalInfo(data) {
-  return request({
-    url: "/getPersonalInfo",
-    method: "post",
-    data
-  });
-}
+
 
 export function register(data) {
   return request({
@@ -44,7 +45,7 @@ export function register(data) {
 export function resetPassword(data) {
   return request({
     url: "/resetPassword",
-    method: "post",
+    method: "put",
     data,
   });
 }

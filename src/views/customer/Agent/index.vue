@@ -105,7 +105,7 @@
                 vertical-align: middle;
                 display: inline-block;
               "
-                                      :src="'http://39.97.217.243:8089/images/20201021101424%E5%9B%BE%E7%89%87.jpeg'"
+                                      :src="'http://8.131.77.164:8089/images/%E5%9B%BE%E7%89%87.jpeg'"
                                       :fit="'contain'"
                               ></el-image>
                           </span>

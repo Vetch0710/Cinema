@@ -9,7 +9,7 @@
                     批量删除
                 </el-button>
             </div>
-            <div class="ManagerInfo-do-right">
+          <!--  <div class="ManagerInfo-do-right">
                 <el-form :inline="true" :model="queryForm" @submit.native.prevent>
                     <el-form-item>
                         <el-input
@@ -24,7 +24,7 @@
                         </el-button>
                     </el-form-item>
                 </el-form>
-            </div>
+            </div>-->
         </div>
         <div class="ManagerInfo-table">
         <el-table
@@ -39,18 +39,19 @@
             <el-table-column show-overflow-tooltip type="selection"></el-table-column>
             <el-table-column
                     show-overflow-tooltip
-                    prop="id"
+                    prop="managerId"
                     label="id"
             ></el-table-column>
             <el-table-column
                     show-overflow-tooltip
-                    prop="name"
+                    prop="managerName"
                     label="姓名"
             ></el-table-column>
             <el-table-column
                     show-overflow-tooltip
-                    prop="permission"
+                    prop="managerIsBoss"
                     label="权限"
+                    :formatter="formatter"
             ></el-table-column>
             <el-table-column show-overflow-tooltip label="操作" width="200">
                 <template #default="{ row }">
@@ -75,7 +76,7 @@
 </template>
 
 <script>
-    import {getList, doDelete, getMaxNum} from "@/api/roleManagement";
+    import {getList, doDelete, getMaxNum} from "@/api/userManagement";
     import Edit from "./components/RoleManagementEdit";
 
     export default {
@@ -94,6 +95,7 @@
                     pageNo: 1,
                     pageSize: 10,
                     permission: "",
+                    identity:'manager'
                 },
             };
         },
@@ -101,15 +103,22 @@
             this.fetchData();
         },
         methods: {
+            formatter(row){
+                if (row.managerIsBoss ===0){
+                    return '管理员'
+                }else {
+                    return '老板'
+                }
+            },
             setSelectRows(val) {
                 this.selectRows = val;
             },
             async changeNum() {
-                const {num} = await getMaxNum();
+                const num = await getMaxNum();
                 this.maxNum = num;
             },
             async handleEdit(row) {
-                if (row.id) {
+                if (row.managerId) {
                     this.$refs["edit"].showEdit(row);
                 } else {
                     await this.changeNum();
@@ -117,18 +126,32 @@
                 }
             },
             handleDelete(row) {
-                if (row.id) {
+                if (row.managerId) {
                     this.$baseConfirm("你确定要删除当前项吗", null, async () => {
-                        const {msg} = await doDelete({ids: row.id});
-                        this.$baseMessage(msg, "success");
+                        const msg = await doDelete({
+                            type:'manager',
+                            Ids: row.managerId
+                        });
+                        if ("success"=== msg){
+                            this.$baseMessage("删除成功", "success");
+                        }else {
+                            this.$baseMessage(msg, "error");
+                        }
                         this.fetchData();
                     });
                 } else {
                     if (this.selectRows.length > 0) {
-                        const ids = this.selectRows.map((item) => item.id);
+                        const managerIds = this.selectRows.map((item) => item.managerId);
                         this.$baseConfirm("你确定要删除选中项吗", null, async () => {
-                            const {msg} = await doDelete({ids});
-                            this.$baseMessage(msg, "success");
+                            const msg = await doDelete({
+                                type:'manager',
+                                Ids:managerIds
+                            });
+                            if ("success"=== msg){
+                                this.$baseMessage("删除成功", "success");
+                            }else {
+                                this.$baseMessage(msg, "error");
+                            }
                             this.fetchData();
                         });
                     } else {
@@ -151,11 +174,11 @@
             },
             async fetchData() {
                 this.listLoading = true;
-                const {data, totalCount} = await getList(this.queryForm);
-                this.list = data;
+                const {result, count} = await getList(this.queryForm);
+                this.list = result;
                 // console.log(typeof this.list);
                 // console.log(parseInt(this.list[this.list.length - 1].id) + 1);
-                this.total = totalCount;
+                this.total = count;
                 setTimeout(() => {
                     this.listLoading = false;
                 }, 300);

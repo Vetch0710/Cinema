@@ -6,7 +6,7 @@
                     批量删除
                 </el-button>
             </div>
-            <div class="customerInfo-do-right">
+           <!-- <div class="customerInfo-do-right">
                 <el-form :inline="true" :model="queryForm" @submit.native.prevent>
                     <el-form-item>
                         <el-input
@@ -21,7 +21,7 @@
                         </el-button>
                     </el-form-item>
                 </el-form>
-            </div>
+            </div>-->
         </div>
         <div class="customerInfo-table">
             <el-table
@@ -36,20 +36,20 @@
                 <el-table-column show-overflow-tooltip type="selection"></el-table-column>
                 <el-table-column
                         show-overflow-tooltip
-                        prop="id"
+                        prop="customerId"
                         label="id"
                 ></el-table-column>
                 <el-table-column
                         show-overflow-tooltip
-                        prop="username"
+                        prop="customerName"
                         label="用户名"
                 ></el-table-column>
-                <el-table-column show-overflow-tooltip prop="password" label="密码">
+                <el-table-column show-overflow-tooltip prop="customerPassword" label="密码">
                     ******
                 </el-table-column>
                 <el-table-column
                         show-overflow-tooltip
-                        prop="phone"
+                        prop="customerPhone"
                         label="手机号"
                 ></el-table-column>
                 <el-table-column show-overflow-tooltip label="操作" width="200">
@@ -93,6 +93,7 @@
                     pageNo: 1,
                     pageSize: 10,
                     username: "",
+                    identity:'customer'
                 },
             };
         },
@@ -104,25 +105,40 @@
                 this.selectRows = val;
             },
             handleEdit(row) {
-                if (row.id) {
+                if (row.customerId) {
                     this.$refs["edit"].showEdit(row);
                 } else {
                     this.$refs["edit"].showEdit();
                 }
             },
             handleDelete(row) {
-                if (row.id) {
+                if (row.customerId) {
                     this.$baseConfirm("你确定要删除当前项吗", null, async () => {
-                        const {msg} = await doDelete({ids: row.id});
-                        this.$baseMessage(msg, "success");
+                        const msg = await doDelete({
+                            type:'customer',
+                            Ids: row.customerId
+                        });
+                        if ("success"=== msg){
+                            this.$baseMessage("删除成功", "success");
+                        }else {
+                            this.$baseMessage(msg, "error");
+                        }
                         this.fetchData();
                     });
                 } else {
                     if (this.selectRows.length > 0) {
-                        const ids = this.selectRows.map((item) => item.id);
+                        const customerIds = this.selectRows.map((item) => item.customerId);
+                        console.log("*-*-*-*-*-*-"+customerIds)
                         this.$baseConfirm("你确定要删除选中项吗", null, async () => {
-                            const {msg} = await doDelete({ids});
-                            this.$baseMessage(msg, "success");
+                            const msg = await doDelete({
+                                type:'customer',
+                                 Ids:customerIds
+                            });
+                            if ("success"=== msg){
+                                this.$baseMessage("删除成功", "success");
+                            }else {
+                                this.$baseMessage(msg, "error");
+                            }
                             this.fetchData();
                         });
                     } else {
@@ -146,9 +162,9 @@
             async fetchData() {
                 this.listLoading = true;
                 console.log(this.queryForm);
-                const {data, totalCount} = await getList(this.queryForm);
-                this.list = data;
-                this.total = totalCount;
+                const {result, count} = await getList(this.queryForm);
+                this.list = result;
+                this.total = count;
                 setTimeout(() => {
                     this.listLoading = false;
                 }, 300);

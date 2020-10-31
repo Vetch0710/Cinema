@@ -30,7 +30,7 @@ module.exports = [
   },
   {
     url: "/login",
-    type: "post",
+    type: "get",
     response(config) {
       const { type } = config.body;
       let accessToken;
@@ -77,7 +77,7 @@ module.exports = [
   },
   {
     url: "/resetPassword",
-    type: "post",
+    type: "get",
     response(config) {
       const { phoneCode } = config.body;
       if (phoneCode === "111111") {
@@ -94,7 +94,7 @@ module.exports = [
   },
   {
     url: "/userInfo",
-    type: "post",
+    type: "get",
     response(config) {
       const { accessToken } = config.body;
       // let permissions = ["manager"];
@@ -129,7 +129,7 @@ module.exports = [
   },
   {
     url: "/logout",
-    type: "post",
+    type: "get",
     response() {
       return {
         code: 200,
@@ -139,7 +139,7 @@ module.exports = [
   },
   {
     url: "/getPersonalInfo",
-    type: "post",
+    type: "get",
     response() {
       return {
         code: 200,

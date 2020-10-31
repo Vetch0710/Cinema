@@ -129,6 +129,8 @@
 <script>
     import {isPassword} from "@/utils/validate";
     import {isNumber, isPhone} from "@/utils/validate";
+    import {getPhoneCode} from "@/api/user";
+    import Vue from "vue";
 
     export default {
         name: "Login",
@@ -161,6 +163,13 @@
                     callback();
                 }
             };
+            const validatePhoneCode = (rule, value, callback) => {
+                if (value !== this.realPhoneCode) {
+                    callback(new Error("验证码不正确"));
+                } else {
+                    callback();
+                }
+            };
             const validatePhone = (rule, value, callback) => {
                 if (!isPhone(value)) {
                     callback(new Error("请输入正确的手机号"));
@@ -176,7 +185,9 @@
                 isGetphone: false,
                 getPhoneIntval: null,
                 phoneCode: "获取验证码",
-                form: {},
+                realPhoneCode:"真实的验证码",
+                form: {
+                },
                 rules: {
                     username: [
                         {required: true, trigger: "blur", message: "请输入用户名"},
@@ -185,6 +196,7 @@
                     managerId: [
                         {required: true, trigger: "blur", message: "请输入账号"},
                         {required: true, trigger: "blur", validator: validateNum},
+                        {min: 1, max: 8, message: '账号为8位数字', trigger: 'blur'},
                     ],
                     password: [
                         {required: true, trigger: "blur", message: "请输入密码"},
@@ -197,6 +209,8 @@
                     phoneCode: [
                         {required: true, trigger: "blur", message: "请输入手机验证码"},
                         {required: true, trigger: "blur", validator: validateNum},
+                        {min: 1, max: 6, message: '验证码为6为数字', trigger: 'blur'},
+                        {validator: validatePhoneCode, trigger: "blur"},
                     ],
                 },
                 loading: false,
@@ -220,11 +234,6 @@
             clearInterval(this.getPhoneIntval);
         },
         mounted() {
-            // this.form.username = "admin";
-            // this.form.password = "123456";
-            // setTimeout(() => {
-            //   this.handleLogin();
-            // }, 3000);
         },
         methods: {
             change() {
@@ -243,20 +252,28 @@
                     this.$refs.password.focus();
                 });
             },
-            getPhoneCode() {
-                this.isGetphone = true;
-                let n = 60;
-                this.getPhoneIntval = setInterval(() => {
-                    if (n > 0) {
-                        n--;
-                        this.phoneCode = "重新获取(" + n + "s)";
-                    } else {
-                        this.getPhoneIntval = null;
-                        clearInterval(this.getPhoneIntval);
-                        this.phoneCode = "获取验证码";
-                        this.isGetphone = false;
-                    }
-                }, 1000);
+           async getPhoneCode() {
+               console.log(isPhone(this.form.phone))
+               if (isPhone(this.form.phone)) {
+                   this.isGetphone = true;
+                   let n = 60;
+                   console.log(this.form.phone)
+                   const { result } = await getPhoneCode(this.form.phone)
+                   this.realPhoneCode=result;
+                   this.getPhoneIntval = setInterval(() => {
+                       if (n > 0) {
+                           n--;
+                           this.phoneCode = "重新获取(" + n + "s)";
+                       } else {
+                           this.getPhoneIntval = null;
+                           clearInterval(this.getPhoneIntval);
+                           this.phoneCode = "获取验证码";
+                           this.isGetphone = false;
+                       }
+                   }, 1000);
+               }else {
+                   Vue.prototype.$baseMessage( `请先查手机号是否正确`, "error");
+               }
             },
             handleLogin() {
                 this.$refs.form.validate((valid) => {

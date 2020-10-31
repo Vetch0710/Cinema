@@ -1,7 +1,7 @@
 <template>
   <el-dropdown @command="handleCommand">
     <span class="avatar-dropdown">
-      <img class="user-avatar" src="http://39.97.217.243:8089/images/20201021101424%E5%9B%BE%E7%89%87.jpeg" alt="" />
+      <img class="user-avatar" src="http://8.131.77.164:8089/images/%E5%9B%BE%E7%89%87.jpeg" alt="" />
       <div class="user-name">
         {{ username }}
         <i class="el-icon-arrow-down el-icon--right"></i>

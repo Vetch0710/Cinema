@@ -93,8 +93,9 @@
 </template>
 <script>
   import { isPassword, isPhone } from "@/utils/validate";
-  import { resetPassword } from "@/api/user";
+  import { resetPassword ,getPhoneCode } from "@/api/user";
   import { isNumber } from "../../utils/validate";
+  import Vue from "vue";
   export default {
     username: "resetPassword",
     directives: {
@@ -126,6 +127,13 @@
           callback();
         }
       };
+      const validatePhoneCode = (rule, value, callback) => {
+        if (value !== this.realPhoneCode) {
+          callback(new Error("验证码不正确"));
+        } else {
+          callback();
+        }
+      };
       const validateCheckPassword = (rule, value, callback) => {
         if (value === "") {
           callback(new Error("请再次输入密码"));
@@ -139,6 +147,7 @@
         isGetphone: false,
         getPhoneIntval: null,
         phoneCode: "获取验证码",
+        realPhoneCode:"真实的验证码",
         showresetPassword: false,
         nodeEnv: process.env.NODE_ENV,
         title: this.$baseTitle,
@@ -164,6 +173,8 @@
           phoneCode: [
             { required: true, trigger: "blur", message: "请输入手机验证码" },
             { required: true, trigger: "blur", validator: validateNum },
+            {min: 1, max: 6, message: '验证码为6为数字', trigger: 'blur'},
+            {validator: validatePhoneCode, trigger: "blur"},
           ],
         },
         loading: false,
@@ -176,20 +187,28 @@
       clearInterval(this.getPhoneIntval);
     },
     methods: {
-      getPhoneCode() {
-        this.isGetphone = true;
-        let n = 60;
-        this.getPhoneIntval = setInterval(() => {
-          if (n > 0) {
-            n--;
-            this.phoneCode = "重新获取(" + n + "s)";
-          } else {
-            this.getPhoneIntval = null;
-            clearInterval(this.getPhoneIntval);
-            this.phoneCode = "获取验证码";
-            this.isGetphone = false;
-          }
-        }, 1000);
+    async  getPhoneCode() {
+        console.log(isPhone(this.form.phone))
+        if (isPhone(this.form.phone)) {
+          this.isGetphone = true;
+          let n = 60;
+          console.log(this.form.phone)
+          const { result } = await getPhoneCode(this.form.phone)
+          this.realPhoneCode=result;
+          this.getPhoneIntval = setInterval(() => {
+            if (n > 0) {
+              n--;
+              this.phoneCode = "重新获取(" + n + "s)";
+            } else {
+              this.getPhoneIntval = null;
+              clearInterval(this.getPhoneIntval);
+              this.phoneCode = "获取验证码";
+              this.isGetphone = false;
+            }
+          }, 1000);
+        }else {
+          Vue.prototype.$baseMessage( `请先查手机号是否正确`, "error");
+        }
       },
       handleReset() {
         this.$refs["resetPasswordForm"].validate(async (valid) => {
@@ -198,12 +217,16 @@
               identity: this.form.identity,
               phone: this.form.phone,
               password: this.form.password,
-              phoneCode: this.form.phoneCode,
             };
             console.log(param);
-            const { msg } = await resetPassword(param);
-            this.$baseMessage(msg, "success");
-            this.$router.push("/login").catch(() => {});
+            const msg = await resetPassword(param);
+            if (msg==='success'){
+              this.$baseMessage("注册成功", "success");
+              this.$router.push("/login").catch(() => {});
+            }else {
+              this.$baseMessage(msg, "error");
+            }
+
           }
         });
       },

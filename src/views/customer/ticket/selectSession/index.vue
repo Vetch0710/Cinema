@@ -37,16 +37,16 @@
       <span>观影时间 :</span>
       <span
         class="date-time"
-        :class="{ active: item.arrangementData == selectedDate }"
+        :class="{ active: item.arrangementDate == selectedDate }"
         v-for="(item, index) in arrangementList"
-        @click="showArrangement(item.arrangementData)"
+        @click="showArrangement(item.arrangementDate)"
         :key="index"
-        >{{ getTagTime(item.arrangementData) }}</span
+        >{{ getTagTime(item.arrangementDate) }}</span
       >
     </div>
     <div
       class="plist-container"
-      :class="{ active: item1.arrangementData == selectedDate }"
+      :class="{ active: item1.arrangementDate == selectedDate }"
       v-for="(item1, index1) in arrangementList"
       :key="'a' + index1"
     >
@@ -73,7 +73,7 @@
               <br />
               <span class="end-time"
                 >{{
-                  getEndTime(item2.arrangementTime, item2.movieTime)
+                  getEndTime(item2.arrangementTime, movieInfo.movieTime)
                 }}散场</span
               >
             </td>
@@ -118,7 +118,7 @@ export default {
       selectedDate: String,
       ticketStep: 1,
       queryForm: {
-        movieId: this.movieId,
+        movieId: this.$route.query.movieId,
       },
     };
   },
@@ -153,10 +153,11 @@ export default {
 
     async fetchData() {
       const result = await selectSession(this.queryForm);
-      this.arrangementList = result.data.arrangementList;
-      this.movieInfo = result.data.movie;
-      this.actors = this.movieInfo.movieActor.split(",");
-      this.selectedDate = this.arrangementList[0].arrangementData;
+      this.arrangementList = result.arrangementList;
+      this.movieInfo = result.movie;
+      this.actors = this.movieInfo.movieActor.split("/");
+      this.selectedDate = this.arrangementList[0].arrangementDate;
+      console.log(this.arrangementList[0]);
       this.loaded = true;
     },
 

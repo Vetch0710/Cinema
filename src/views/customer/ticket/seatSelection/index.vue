@@ -149,6 +149,7 @@
 </template>
 <script>
 import { arrangementInfo } from "@/api/Arrangements";
+import { generateOrder } from "@/api/order";
 import { mapGetters } from "vuex";
 
 export default {
@@ -158,10 +159,17 @@ export default {
       loaded: false,
       row: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       column: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      soldSeats: ["1排2座", "3排3座", "4排4", "5座5", "6排1座"],
-      selectedSeats: ["2排2座", "3排5座", "5排6座"],
+      soldSeats: [],
+      selectedSeats: [],
       movieInfo: {},
       arrangementInfo: {},
+      queryForm: {
+        arrangementId: this.$route.query.arrangementId,
+      },
+      generateForm: {
+        sqlOrder: {},
+        selectedSeat: [],
+      },
     };
   },
   created() {
@@ -198,10 +206,12 @@ export default {
       }
     },
     async fetchArrangementInfo() {
-      const { data } = await arrangementInfo("1");
-      this.arrangementInfo = data;
+      console.log(this.queryForm);
+      console.log(this.$router.arrangementId);
+      const data = await arrangementInfo(this.queryForm);
+      this.arrangementInfo = data.arrangementInfo;
       this.movieInfo = data.movieInfo;
-
+      this.soldSeats = data.soldSeats;
       this.loaded = true;
     },
     getArrangementTime(data) {
@@ -217,17 +227,35 @@ export default {
         date.getMinutes()
       );
     },
-    placeOrder() {
+    async placeOrder() {
       const nowDate = new Date();
       const arrDate = new Date(this.arrangementInfo.arrangementTime);
       nowDate.setMinutes(nowDate.getMinutes() + 15);
       if (nowDate - arrDate < 0) {
-        this.$router.push({
-          path: "/ticket/orderGenerated",
-          query: {
-            orderId: 2,
-          },
-        });
+        this.generateForm.sqlOrder.arrangementId = this.$route.query.arrangementId;
+        this.generateForm.sqlOrder.movieId = this.movieInfo.movieId;
+        this.generateForm.sqlOrder.customerId = this.accessToken.split("-")[0];
+        this.generateForm.sqlOrder.orderPrice =
+          this.selectedSeats.length * this.arrangementInfo.arrangementPrice;
+        this.generateForm.selectedSeat = this.selectedSeats;
+        console.log(this.generateForm);
+        const { message, orderId } = await generateOrder(this.generateForm);
+        if (message == "success") {
+          this.$router.push({
+            path: "/ticket/orderGenerated",
+            query: {
+              orderId: orderId,
+            },
+          });
+        } else {
+          this.$message({
+            message: "订票失败,请重新选择座位!",
+            type: "warning",
+          });
+          // setTimeout(() => {
+          //   this.$router.go(0);
+          // }, 1000);
+        }
       } else {
         this.loaded = false;
         this.$message({

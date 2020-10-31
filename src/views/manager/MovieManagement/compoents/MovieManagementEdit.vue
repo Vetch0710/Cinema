@@ -19,7 +19,7 @@
       >
         <el-upload
           class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="http://localhost:8080/Cinema_Management_System/movie/upload"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
@@ -44,7 +44,7 @@
         <el-upload
           class="upload-demo"
           ref="upload"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="http://localhost:8080/Cinema_Management_System/movie/upload"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :multiple="false"
@@ -138,6 +138,7 @@ export default {
       imageUrl: "",
       fileList: [],
       form: {
+        moviePicture:"",
         movieTrailer: null,
       },
       rules: {
@@ -242,10 +243,12 @@ export default {
   created() {},
   methods: {
     handleAvatarSuccess(res, file) {
-      this.form.moviePicture = URL.createObjectURL(file.raw);
+      this.form.moviePicture = res;
+      console.log("=============");
+      console.log(this.form.moviePicture);
     },
     handleTrailerSuccess(res, file) {
-      this.form.movieTrailer = URL.createObjectURL(file.raw);
+      this.form.movieTrailer = res;
       console.log(this.form.movieTrailer);
     },
     beforeAvatarUpload(file) {

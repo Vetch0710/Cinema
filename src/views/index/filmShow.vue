@@ -21,8 +21,11 @@
           {{ movieName }}
         </h4>
         <p class="movie-arrangementPrice">
-          <span class="movie-iniprice font-reaular">
-            ￥{{ arrangementPrice }}
+          <span class="movie-iniprice font-reaular" v-if="lowestPrice">
+            ￥<span class="num">{{ lowestPrice }}</span>起
+          </span>
+          <span class="movie-iniprice font-reaular" v-else>
+            <span class="num">{{ wantsNum }}</span>人想看
           </span>
           <span class="movie-tag font-bold">
             <label></label>
@@ -44,7 +47,8 @@ export default {
     movieId: { type: Number, required: true, default: 1 },
     movieScore: { type: Number, required: true },
     moviePicture: { type: String, required: true },
-    arrangementPrice: { type: Number, required: true },
+    lowestPrice: { type: Number },
+    wantsNum: { type: Number },
     movieName: { type: String, required: true },
   },
   methods: {
@@ -130,13 +134,17 @@ a {
 .movie-iniprice {
   display: inline-block;
   position: relative;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: bolder;
   margin-top: 18px;
   color: #fff;
   line-height: 24px;
   color: #ff5228;
   vertical-align: middle;
+}
+
+.movie-iniprice .num{
+  font-size: 24px;
 }
 
 .movie-tag {

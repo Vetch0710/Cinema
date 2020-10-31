@@ -32,7 +32,7 @@
             id="byhot"
             value="byhot"
             style="height: 14px; width: 14px"
-            v-model="queryForm.data.selecttype"
+            v-model="queryForm.selectType"
             @click="fetchData"
           />
           <!--          <label for="radio" class="radio-beauty"></label>-->
@@ -47,7 +47,7 @@
             id="bytime"
             value="bytime"
             style="height: 14px; width: 14px"
-            v-model="queryForm.data.selecttype"
+            v-model="queryForm.selectType"
             @click="fetchData"
           />
           <!--          <label for="radio" class="radio-beauty"></label>-->
@@ -62,7 +62,7 @@
             id="byscore"
             value="byscore"
             style="height: 14px; width: 14px"
-            v-model="queryForm.data.selecttype"
+            v-model="queryForm.selectType"
             @click="fetchData"
           />
           <!--          <label for="byscore" class="radio-beauty"></label>-->
@@ -77,7 +77,7 @@
             id="bywantnum"
             value="bywantnum"
             style="height: 14px; width: 14px"
-            v-model="queryForm.data.selecttype"
+            v-model="queryForm.selectType"
             @click="fetchData"
           />
           <!--          <label for="radio" class="radio-beauty"></label>-->
@@ -99,7 +99,8 @@
             :movieId="item.movieId"
             :movieName="item.movieName"
             :movieScore="item.movieScore"
-            :arrangementPrice="item.arrangementPrice"
+            :wantsNum="item.wantsNum"
+            :lowestPrice="item.lowestPrice"
             :moviePicture="item.moviePicture"
             :movieLoaded="loaded"
           ></film-show>
@@ -120,7 +121,7 @@
 </template>
 <script>
 import filmShow from "./filmShow";
-import { getList, doDelete } from "@/api/FilmList";
+import { indexList } from "@/api/FilmList";
 
 export default {
   name: "Index",
@@ -145,11 +146,8 @@ export default {
       queryForm: {
         pageNo: 1,
         pageSize: 20,
-        username: "",
-        data: {
-          timetype: "zzry",
-          selecttype: "byhot",
-        },
+        timeType: "zzry",
+        selectType: "byhot",
       },
     };
   },
@@ -161,13 +159,13 @@ export default {
     checkhot() {
       this.tabhotflag = true;
       this.tabupflag = false;
-      this.queryForm.data.timetype = "zzry";
+      this.queryForm.timeType = "zzry";
       this.fetchData();
     },
     checkup() {
       this.tabhotflag = false;
       this.tabupflag = true;
-      this.queryForm.data.timetype = "jjsy";
+      this.queryForm.timeType = "jjsy";
       this.fetchData();
     },
     handleSizeChange(val) {
@@ -185,13 +183,11 @@ export default {
     async fetchData() {
       this.list = null;
       this.listLoading = true;
-      const { data, totalCount } = await getList(this.queryForm);
+      const { data, totalCount } = await indexList(this.queryForm);
       this.loaded = true;
-      setTimeout(() => {
-        this.list = data;
-        this.total = totalCount;
-        this.listLoading = false;
-      }, 3000);
+      this.list = data;
+      this.total = totalCount;
+      this.listLoading = false;
     },
   },
   components: {
@@ -319,11 +315,12 @@ ul {
   min-height: 700px;
   margin: 0 auto;
   margin-top: 30px;
+  margin-left: 50px;
 }
 
 .filmshow ul {
   font-size: 0;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .filmshow ul li {

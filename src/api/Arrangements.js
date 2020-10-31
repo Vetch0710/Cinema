@@ -3,17 +3,15 @@ import request from "@/utils/request";
 export function selectSession(data) {
   console.log(data)
   return request({
-    url: "/arrangement/selectSession",
-    method: "post",
-    data,
+    url: "/arrangement/selectSession/"+data.movieId,
+    method: "get",
   });
 }
 export function arrangementInfo(data) {
   console.log(data)
   return request({
-    url: "/arrangement/arrangementInfo",
-    method: "post",
-    data,
+    url: "/arrangement/arrangementInfo/"+data.arrangementId,
+    method: "get",
   });
 }
 export function getList(data) {

@@ -13,6 +13,18 @@ export function getList(data) {
     },
   });
 }
+export function getMovieEvaluation(data) {
+  console.log(data)
+  return request({
+    url: "/evaluation/getMovieEvaluation",
+    method: "get",
+    params: {
+      pageNo: data.pageNo,
+      pageSize: data.pageSize,
+      movieId: data.movieId
+    },
+  });
+}
 export function getCusEva() {
   return request({
     url: "/evaluationList/getCusEva",

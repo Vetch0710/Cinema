@@ -1,7 +1,6 @@
 const arrangement = {
   movie: {
     movieId: 1,
-    movieTime: 128,
     movieName: "夺冠",
     movieScore: 4.6,
     movieActor: "巩俐,黄渤,吴刚,彭彦昌",
@@ -88,13 +87,14 @@ const arrangement = {
 };
 
 const arrangementInfo = {
-  arrangementId: 9,
-  arrangementTime: '2020-10-25 19:23',
-  arrangementPrice: 25,
-  arrangementPlace: 9,
+  arrangementInfo: {
+    arrangementId: 9,
+    arrangementTime: '2020-10-25 19:23',
+    arrangementPrice: 25,
+    arrangementPlace: 9,
+  },
   movieInfo: {
     movieId: 1,
-    movieTime: 128,
     movieName: "夺冠",
     moviePicture: "https://p0.meituan.net/movie/e7185e149d79e72c4ef0d70f27fc76da1642784.jpg@464w_644h_1e_1c",
     movieType: "剧情",

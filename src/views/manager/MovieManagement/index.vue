@@ -133,7 +133,12 @@
         <el-table-column show-overflow-tooltip label="操作" width="200">
           <template #default="{ row }">
             <el-button type="text" @click="handleEdit(row)">编辑</el-button>
-            <el-button type="text" @click="addSession(row)">排场</el-button>
+            <el-button
+              type="text"
+              @click="addSession(row)"
+              v-if="row.movieReleaseTime < new Date()"
+              >排场</el-button
+            >
             <el-button type="text" @click="handleDelete(row)">删除</el-button>
           </template>
         </el-table-column>
@@ -234,7 +239,7 @@ export default {
         if (this.selectRows.length > 0) {
           const movieIds = this.selectRows.map((item) => item.movieId);
           this.$baseConfirm("你确定要删除选中项吗", null, async () => {
-            const  msg  = await doDeletes({ movieIds });
+            const msg = await doDeletes({ movieIds });
             console.log(msg);
             let msgContent = "";
             if (msg == "success") {

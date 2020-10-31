@@ -2,14 +2,14 @@
   <div style="width: 100%">
     <div class="evalustion-userinfo">
       <div class="evaluation-userimg">
-        <el-avatar :size="50" :src="customer.customerPicture">
+        <el-avatar :size="50" :src="customerPicture">
           <img
             src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"
           />
         </el-avatar>
       </div>
-      <div class="evaluation-username" :title="evaluationTime">
-        {{ customer.customerName }}<br />
+      <div class="evaluation-username" :title="timeTitle">
+        {{ customerName }}<br />
         <div>
           <span style="float: left; font-size: 16px; color: #999999">{{
             date
@@ -28,23 +28,29 @@
 </template>
 
 <script>
+import { parseTime, formatTime } from "@/utils/index";
 export default {
   name: "Evaluation",
   data() {
     return {};
   },
   props: {
-    customer: { type: Object, required: true },
+    customerName: { type: String, required: true },
+    customerPicture: { type: String, required: true },
     evaluationScore: { type: Number, required: true },
     evaluationContent: { type: String, required: true },
-    evaluationTime: { type: String, required: true },
+    evaluationTime: { type: Number, required: true },
     // evaLoaded: { type: Boolean, required: true },
   },
   methods: {},
   computed: {
     date() {
-      const str = this.evaluationTime.split(/\s+/)[0].split("-");
-      return str[1] + "-" + str[2];
+      // const str = this.evaluationTime.split(/\s+/)[0].split("-");
+      // return str[1] + "-" + str[2];
+      return formatTime(this.evaluationTime);
+    },
+    timeTitle() {
+      return parseTime(this.evaluationTime);
     },
   },
   components: {},

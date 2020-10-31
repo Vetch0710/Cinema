@@ -64,7 +64,7 @@
   </div>
 </template>
 <script>
-import { getOrder } from "@/api/order";
+import { getOrderInfo } from "@/api/order";
 import { formatTime } from "@/utils/index";
 import path from "path";
 import { log } from "util";
@@ -97,7 +97,7 @@ export default {
   computed: {},
   methods: {
     async fetchData() {
-      const { data } = await getOrder({
+      const data = await getOrderInfo({
         orderId: this.orderId,
       });
       this.orderInfo = data[0];
@@ -168,16 +168,15 @@ export default {
         },
       });
     },
-    confirmPay(){
+    confirmPay() {
       this.$router.push({
         path: "/ticket/orderFinished",
         query: {
           orderId: this.orderInfo.orderId,
         },
       });
-    }
+    },
   },
-  
 };
 </script>
 

@@ -3,15 +3,14 @@ import request from "@/utils/request";
 export function getOrderList(data) {
   return request({
     url: "/Order/getOrderList",
-    method: "post",
+    method: "get",
     data,
   });
 }
-export function getOrder(data) {
+export function getOrderInfo(data) {
   return request({
-    url: "/Order/getOrder",
-    method: "post",
-    data,
+    url: "/order/getOrderInfo/"+data.orderId,
+    method: "get",
   });
 }
 export function getCusOrder(data) {
@@ -19,5 +18,15 @@ export function getCusOrder(data) {
     url: "/Order/getCusOrder",
     method: "post",
     data,
+  });
+}
+export function generateOrder(data) {
+  return request({
+    url: "/order/generateOrder",
+    method: "post",
+    data: {
+      sqlOrder: data.sqlOrder,
+      selectedSeat: data.selectedSeat,
+    }
   });
 }

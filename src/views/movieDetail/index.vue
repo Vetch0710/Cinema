@@ -5,7 +5,7 @@
       <div class="movie-info-movieshow">
         <div class="movie-info-moviepicture">
           <div class="movie-yugao-play">
-            <a :href="movieInfo.movie.movieTrailer">
+            <a :href="movieInfo.movieTrailer" target="_blank">
               <img
                 src="data:image/png;base64,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"
               />
@@ -19,7 +19,7 @@
               border: solid 1px #c9bac0;
               box-shadow: 3px 3px 10px white;
             "
-            :src="movieInfo.movie.moviePicture"
+            :src="movieInfo.moviePicture"
           >
             <div slot="placeholder" class="image-slot">
               加载中<span class="dot">...</span>
@@ -31,58 +31,44 @@
         </div>
         <div class="movie-info-movieshow-right">
           <p style="font-size: 26px; font-weight: 800; color: #ffffff">
-            {{ movieInfo.movie.movieName }}
+            {{ movieInfo.movieName }}
           </p>
           <br /><br /><br />
           <ul class="movie-info-smallinfo">
-            <li>{{ movieInfo.movie.movieType }}</li>
-            <li>{{ movieInfo.movie.movieTime }}</li>
-            <li>{{ movieInfo.movie.movieRealese_Time }}</li>
+            <li>类型:{{ movieInfo.movieType }}</li>
+            <li>时长:{{ movieInfo.movieTime }}</li>
+            <li>上映日期:{{ movieReleaseTime }}</li>
           </ul>
           <div class="movieshow-actionbuttom">
             <a class="wish" @click="addwant">
               <div>
-                <i
-                  class="icon wish-icon"
-                  :class="{ wanted: movieInfo.wantflag }"
-                ></i>
-                <span
-                  class="wish-msg"
-                  data-act="wish-click"
-                  v-if="!movieInfo.wantflag"
+                <i class="icon wish-icon" :class="{ wanted: wantflag }"></i>
+                <span class="wish-msg" data-act="wish-click" v-if="!wantflag"
                   >想看</span
                 >
                 <span
                   class="wish-msg"
                   data-act="wish-click"
-                  v-else-if="movieInfo.wantflag"
+                  v-else-if="wantflag"
                   >已想看</span
                 >
               </div>
             </a>
-            <a class="movieScore-btn">
+            <a class="movieScore-btn" href="#evaluation">
               <div>
-                <i
-                  class="icon movieScore-btn-icon"
-                  :class="{ scored: scoreflag }"
-                ></i>
-                <span class="movieScore-btn-msg" v-if="!scoreflag">评分</span>
-                <span
-                  class="movieScore-btn-msg movieScore-num"
-                  v-else-if="scoreflag"
-                  >{{ movieInfo.myScore }}</span
-                >
+                <span class="movieScore-btn-msg">查看评价</span>
               </div>
             </a>
             <a
               class="btn buy"
               target="_blank"
-              @click="jumpBuyTicket(movieInfo.movie.movieId)"
+              @click="jumpBuyTicket(movieInfo.movieId)"
+              v-if="movieInfo.movieReleaseTime <= new Date()"
               >特惠购票</a
             >
           </div>
         </div>
-        <div class="movie-movieScore-all" v-if="movieInfo.movie.movieScore > 0">
+        <div class="movie-movieScore-all" v-if="movieInfo.movieScore > 0">
           <p style="font-size: 26px; font-weight: 500; color: white">
             影片评分
           </p>
@@ -99,12 +85,12 @@
             >
               <el-rate
                 style="height: 41px; margin-top: 4px"
-                v-model="movieInfo.movie.movieScore"
+                v-model="movieInfo.movieScore"
                 disabled
               ></el-rate>
             </div>
             <span class="movieScore-all-part-scorenum">{{
-              movieInfo.movie.movieScore
+              movieInfo.movieScore
             }}</span>
           </div>
         </div>
@@ -121,7 +107,7 @@
       <div class="relativeMovies">
         <dl>
           <dd
-            v-for="(item, index) in movieInfo.relativeMovies"
+            v-for="(item, index) in relativeMovies"
             :key="index"
             style="
               width: 106px;
@@ -163,7 +149,7 @@
     <div class="movieDetail-middle">
       <h2>剧情简介</h2>
       <br />
-      <span>{{ movieInfo.movie.movieDes }}</span
+      <span>{{ movieInfo.movieDes }}</span
       ><br /><br /><br />
       <h2>演职人员</h2>
       <br />
@@ -172,6 +158,7 @@
       <span style="margin-left: 20px"
         ><a
           :href="'https://baike.baidu.com/item/' + item"
+          target="_blank"
           v-for="(item, index) in directors"
           :key="'d' + index"
           >{{ item }}</a
@@ -182,17 +169,19 @@
       <span style="margin-left: 20px"
         ><a
           :href="'https://baike.baidu.com/item/' + item"
+          target="_blank"
           v-for="(item, index) in actors"
           :key="'a' + index"
           >{{ item }}</a
         ></span
       ><br /><br /><br />
       <h2>影片评价</h2>
-      <div class="evaluation-list" v-loading="listLoading">
+      <div class="evaluation-list" v-loading="listLoading" id="evaluation">
         <ul>
           <li v-for="(item, index) in evaluationList" :key="index">
             <evaluation
-              :customer="item.customer"
+              :customerName="item.customerName"
+              :customerPicture="item.customerPicture"
               :evaluationScore="item.evaluationScore"
               :evaluationContent="item.evaluationContent"
               :evaluationTime="item.evaluationTime"
@@ -214,35 +203,58 @@
   </div>
 </template>
 <script>
-import { getInfo } from "@/api/FilmInfo";
+import { getInfo, getRelativeMovie, getFlag, changeWant } from "@/api/FilmInfo";
 import { methods } from "@/components/customerLeftNav/customerleftNav.vue";
 import Evaluation from "@/views/movieDetail/Evaluation";
-import { getList } from "@/api/EvaluationList";
+import { getMovieEvaluation } from "@/api/EvaluationList";
+import { mapGetters } from "vuex";
 export default {
   name: "MovieDetail",
   data() {
     return {
       movieInfo: {},
-      wantflag: true,
+      wantflag: false,
       scoreflag: false,
       actors: [],
       directors: [],
       evaluationList: null,
+      relativeMovies: [],
       listLoading: true,
       layout: "total,  prev, pager, next, jumper",
       total: 0,
       queryForm: {
         pageNo: 1,
         pageSize: 5,
-        pageMovieId: this.$route.query.movieId,
+        movieId: this.$route.query.movieId,
       },
-      flag:false,
+      flag: false,
     };
   },
   computed: {
+    ...mapGetters({
+      username: "user/username",
+      accessToken: "user/accessToken",
+      permissions: "user/permissions",
+    }),
     movieName: function () {
       // this.fetchData();
       return this.$route.query.movieName;
+    },
+    movieReleaseTime: function () {
+      const date = new Date(this.movieInfo.movieReleaseTime);
+      let year = date.getFullYear();
+      let month = date.getMonth() + 1;
+      let day = date.getDate();
+      if (year < 10) {
+        year = "0" + year;
+      }
+      if (month < 10) {
+        month = "0" + month;
+      }
+      if (day < 10) {
+        day = "0" + day;
+      }
+      return year + "-" + month + "-" + day;
     },
   },
   mounted() {},
@@ -253,26 +265,47 @@ export default {
   },
   methods: {
     async fetchData() {
-      this.queryForm.pageMovieId = this.$route.query.movieId;
-      this.movieInfo = null;
+      this.queryForm.movieId = this.$route.query.movieId;
       const result = await getInfo(this.queryForm);
-      this.movieInfo = result.data
-      // console.log(this.movieInfo);
-      // console.log(this.flag)
-      if (this.movieInfo.myScore != null) {
+      this.movieInfo = null;
+      this.movieInfo = result;
+      if (this.movieInfo.movieScore != null) {
         this.scoreflag = true;
       }
-      this.actors = this.movieInfo.movie.movieActor.split(",");
-      this.directors = this.movieInfo.movie.movieDirector.split(",");
-      this.flag=true;
-
-      // setTimeout(()=>{
-      //   // this.flag=true;
-      //
-      // },2000)
+      this.actors = this.movieInfo.movieActor.split("/");
+      this.directors = this.movieInfo.movieDirector.split("/");
+      await this.fetchFlag();
+      await this.fetchRelativeMovie();
+      this.flag = true;
     },
-    addwant() {
-      this.wantflag = !this.wantflag;
+
+    async fetchRelativeMovie() {
+      this.queryForm.movieType = this.movieInfo.movieType;
+      this.queryForm.movieActor = this.movieInfo.movieActor;
+      this.queryForm.movieDirector = this.movieInfo.movieDirector;
+      console.log(this.queryForm);
+      const result = await getRelativeMovie(this.queryForm);
+      this.relativeMovies = result;
+    },
+
+    async fetchFlag() {
+      const result = await getFlag(this.queryForm);
+      this.wantflag = result;
+    },
+
+    async addwant() {
+      if (this.accessToken != null && this.accessToken != "") {
+        if (this.wantflag) {
+          this.queryForm.wantsFlag = 1;
+        } else {
+          this.queryForm.wantsFlag = 0;
+        }
+        await changeWant(this.queryForm);
+        this.wantflag = !this.wantflag;
+      } else {
+        const fullPath = this.$route.fullPath;
+        this.$router.push(`/login?redirect=${fullPath}`);
+      }
     },
     handleSizeChange(val) {
       this.queryForm.pageSize = val;
@@ -288,20 +321,24 @@ export default {
     },
     async fetchEvaluation() {
       this.listLoading = true;
-      this.queryForm.pageMovieId = this.movieId;
-      const { data, totalCount } = await getList(this.queryForm);
-      setTimeout(() => {
-        this.evaluationList = data;
-        this.total = totalCount;
-        this.listLoading = false;
-      }, 3000);
+      console.log(this.queryForm);
+      const { data, totalCount } = await getMovieEvaluation(this.queryForm);
+      this.evaluationList = data;
+      this.total = totalCount;
+      this.listLoading = false;
     },
     showMovie(movieId) {
+      this.flag = false;
       this.$router.push({
         path: "/movies/movieDetail",
         query: {
           movieId: movieId,
         },
+      });
+      this.$nextTick(function () {
+        this.fetchData();
+        this.fetchEvaluation();
+        this.flag = true;
       });
     },
     jumpBuyTicket(movieId) {
@@ -349,7 +386,7 @@ export default {
 }
 .movie-yugao-play:hover {
   opacity: 1;
-  background: rgba(0, 0, 0,0.4);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .movie-info-moviepicture {
@@ -438,26 +475,9 @@ export default {
   border-radius: 2px;
 }
 
-.movieScore-btn-icon {
-  font-family: Microsoft YaHei, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: subpixel-antialiased;
-  cursor: pointer;
-  text-align: center;
-  font-size: 14px;
-  line-height: 16px;
-  color: #fff;
-  display: inline-block;
-  vertical-align: middle;
-  margin-top: -2px;
-  margin-right: 6px;
-  width: 16px;
-  height: 16px;
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MDc1OTZBM0QzQzIzMTFFNkI5NzY4NjMyQkI3QTVCMDAiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MDc1OTZBM0MzQzIzMTFFNkI5NzY4NjMyQkI3QTVCMDAiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4QzQ3QTgzOTM3NjgxMUU2QUY0Q0YzNTlBNkE3Q0U3MiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4QzQ3QTgzQTM3NjgxMUU2QUY0Q0YzNTlBNkE3Q0U3MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pi0cMmgAAADqSURBVHjaYvz//z8DHtAExAJAnIdLASMeA3iB+BOULQfEj7EpYsJjey8SuwunKpALsOCQ/5ggBJtadAEJIG75jxsUATEbsh5QGLgDHeIDxGZArAfEHAz4wTMg3g/EZ4F4N8iAY0CGJQN54CDIGXpAfPE/6eA5EHvB/CIKxG9J0PwRiBXQAzGRBANikQMR5h9mIH4DTXn4wAsglsSWkP4C8TUiAu4ovpTIQoQBv3AZwAPEWkQYoIjLRnaoISCwG4hXAPEZIOaCppNUINYEYnVcBnyEZqDPQDwTGlgwcAKI9wJxFRDfRzYAIMAAYsNIs6fSEWgAAAAASUVORK5CYII=);
-}
-
-.movieScore-btn-icon.scored {
+/* .movieScore-btn-icon.scored {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MDc1OTZBMzkzQzIzMTFFNkI5NzY4NjMyQkI3QTVCMDAiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MDc1OTZBMzgzQzIzMTFFNkI5NzY4NjMyQkI3QTVCMDAiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4QzQ3QTgzRDM3NjgxMUU2QUY0Q0YzNTlBNkE3Q0U3MiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4QzQ3QTgzRTM3NjgxMUU2QUY0Q0YzNTlBNkE3Q0U3MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pr7Zy/cAAADuSURBVHjaYvx/jAEfaAJiASDOw6WAEY8BvED8CcqWA+LH2BQx4bG9F4ndhUsRLgNCgDgViR8BFSNogAQQtwDxaixqQWJFQMyGHgbuQNoHiM2AWA+IORjwg2dAvB+IzwLxbpABoGC0ZCAPHAR5IQOIL5Gh+QUocGHRKArEN4BYiEjNoOjVB+IHsEB8DcQlJNieA9KMnpCYgfgNNOURcroktmj8C8TXiLD9KL50wEKEAb9wGcADxFpEGKCIy0Z2qCEgsBuIVwDxGSDmgqYTUNLWBGJ1XAZ8hGagz0A8ExpYMHACiPcCcRUQ30c2ACDAABdZMN0CosYSAAAAAElFTkSuQmCC);
-}
+} */
 
 .movieScore-btn-msg {
   font-family: Microsoft YaHei, Helvetica, Arial, sans-serif;

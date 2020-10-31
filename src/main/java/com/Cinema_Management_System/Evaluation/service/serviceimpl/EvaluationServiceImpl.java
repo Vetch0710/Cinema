@@ -37,6 +37,19 @@ public class EvaluationServiceImpl implements EvaluationService {
     public int getMovieEvaluationCount(int movieId) {
         return evaluationDao.getMovieEvaluationCount(movieId);
     }
+
+    @Override
+    public List<Evaluation> getAllCusEvaluations(Integer id) {
+        return evaluationDao.selectAllEvaluation(id);
+    }
+
+    @Override
+    public boolean updateEvaluation(Evaluation evaluation) {
+        if (evaluationDao.updateEvaluation(evaluation)!=0){
+          return   evaluationDao.updateOrderStatus(evaluation.getOrderId())!=0;
+        }
+        return false;
+    }
 //    public New getById(long bookId) {
 //        return bookDao.queryById(bookId);
 //    }

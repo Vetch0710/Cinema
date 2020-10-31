@@ -11,21 +11,42 @@ import java.util.Date;
  * * @param infoContent     通知内容
  * * @param infoStatus      通知状态
  * * @param infoTime        通知时间
+ * * @param infoType        消息发送的类型
+ * * @param messageCount        未读消息的数量
  */
 public class Inform {
-    private int infoId, customerId;
-    private String infoContent, infoStatus;
+    private int infoId;
+    private String infoContent;
     private Date infoTime;
+    private String infoStatus;
+    private String infoType;
+    private int customerId;
+    private String customerName;
+    private int messageCount;
 
-    public Inform() {
+
+    public Date getInfoTime() {
+        return infoTime;
     }
 
-    public Inform(int infoId, int customerId, String infoContent, String infoStatus, Date infoTime) {
-        this.infoId = infoId;
-        this.customerId = customerId;
-        this.infoContent = infoContent;
-        this.infoStatus = infoStatus;
+    public void setInfoTime(Date infoTime) {
         this.infoTime = infoTime;
+    }
+
+    public int getMessageCount() {
+        return messageCount;
+    }
+
+    public void setMessageCount(int messageCount) {
+        this.messageCount = messageCount;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public int getInfoId() {
@@ -36,14 +57,6 @@ public class Inform {
         this.infoId = infoId;
     }
 
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
     public String getInfoContent() {
         return infoContent;
     }
@@ -51,6 +64,7 @@ public class Inform {
     public void setInfoContent(String infoContent) {
         this.infoContent = infoContent;
     }
+
 
     public String getInfoStatus() {
         return infoStatus;
@@ -60,22 +74,31 @@ public class Inform {
         this.infoStatus = infoStatus;
     }
 
-    public Date getInfoTime() {
-        return infoTime;
+    public String getInfoType() {
+        return infoType;
     }
 
-    public void setInfoTime(Date infoTime) {
-        this.infoTime = infoTime;
+    public void setInfoType(String infoType) {
+        this.infoType = infoType;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     @Override
     public String toString() {
-        return "Inform{" +
+        return "Message{" +
                 "infoId=" + infoId +
-                ", customerId=" + customerId +
                 ", infoContent='" + infoContent + '\'' +
-                ", infoStatus='" + infoStatus + '\'' +
                 ", infoTime=" + infoTime +
+                ", infoStatus='" + infoStatus + '\'' +
+                ", infoType='" + infoType + '\'' +
+                ", customerId=" + customerId +
                 '}';
     }
 }

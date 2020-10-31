@@ -13,39 +13,49 @@ import java.util.Date;
  * * @param evaluationTime      评价时间
  */
 public class Evaluation {
-    private int evaluationId, customerId;
+    private Integer evaluationId, customerId,orderId;
     private float evaluationScore;
     private String evaluationContent, customerName, movieName, customerPicture;
-    private Date evaluationTime;
+    private Date evaluationTime, orderTime;
 
     public Evaluation() {
     }
 
-    public Evaluation(int evaluationId, int customerId, float evaluationScore, String evaluationContent, String customerName, String movieName, String customerPicture, Date evaluationTime) {
+    public Evaluation(Integer evaluationId, Integer customerId, Integer orderId, float evaluationScore, String evaluationContent, String customerName, String movieName, String customerPicture, Date evaluationTime, Date orderTime) {
         this.evaluationId = evaluationId;
         this.customerId = customerId;
+        this.orderId = orderId;
         this.evaluationScore = evaluationScore;
         this.evaluationContent = evaluationContent;
         this.customerName = customerName;
         this.movieName = movieName;
         this.customerPicture = customerPicture;
         this.evaluationTime = evaluationTime;
+        this.orderTime = orderTime;
     }
 
-    public int getEvaluationId() {
+    public Integer getEvaluationId() {
         return evaluationId;
     }
 
-    public void setEvaluationId(int evaluationId) {
+    public void setEvaluationId(Integer evaluationId) {
         this.evaluationId = evaluationId;
     }
 
-    public int getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
+    }
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public float getEvaluationScore() {
@@ -87,6 +97,7 @@ public class Evaluation {
     public void setCustomerPicture(String customerPicture) {
         this.customerPicture = customerPicture;
     }
+
     public Date getEvaluationTime() {
         return evaluationTime;
     }
@@ -95,17 +106,27 @@ public class Evaluation {
         this.evaluationTime = evaluationTime;
     }
 
+    public Date getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
+    }
+
     @Override
     public String toString() {
         return "Evaluation{" +
                 "evaluationId=" + evaluationId +
                 ", customerId=" + customerId +
+                ", orderId=" + orderId +
                 ", evaluationScore=" + evaluationScore +
                 ", evaluationContent='" + evaluationContent + '\'' +
                 ", customerName='" + customerName + '\'' +
                 ", movieName='" + movieName + '\'' +
                 ", customerPicture='" + customerPicture + '\'' +
                 ", evaluationTime=" + evaluationTime +
+                ", orderTime=" + orderTime +
                 '}';
     }
 }

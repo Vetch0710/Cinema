@@ -3,4 +3,44 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Cinema_Management_System.Inform.dao.InformDao"><!--namespace:定义一个操作包  -->
+
+    <select id="selectAllInfo" resultType="com.Cinema_Management_System.Inform.entity.Inform">
+        select * from cinema_inform where customer_id=#{id};
+    </select>
+
+
+    <update id="updateStatus" parameterType="int">
+        UPDATE cinema_inform SET info_status='已读' where  customer_id=#{customerId}
+    </update>
+
+    <update id="updateStatusById" parameterType="int">
+        UPDATE cinema_inform SET info_status='已读' where  info_id=#{infoId}
+    </update>
+
+
+    <select id="selectInfoByType" resultType="com.Cinema_Management_System.Inform.entity.Inform">
+        SELECT mid.* from
+            (select cinema_inform.* , c.customer_name , messageCount
+             from cinema_inform
+                      INNER	JOIN cinema_customer c on c.customer_id=cinema_inform.customer_id
+                      INNER	JOIN (
+                 SELECT count(if (info_status='未读',1,null)) 'messageCount', MAX(info_time) 'time' , 				customer_id
+                 FROM cinema_inform    GROUP BY customer_id
+             ) t
+                                    ON t.time=cinema_inform.info_time AND t.customer_id=cinema_inform.customer_id
+             ORDER BY info_id DESC limit 99999999
+            ) mid
+        GROUP BY mid.customer_id
+
+    </select>
+
+    <insert id="addInfo" parameterType="com.Cinema_Management_System.Inform.entity.Inform" useGeneratedKeys="true" keyProperty="infoId"
+            keyColumn="info_id">
+        insert into cinema_inform values(default,#{infoContent},#{infoTime},#{infoStatus},#{infoType},#{customerId})
+    </insert>
+
+    <select id="selectCustomerName" parameterType="int" resultType="String">
+        select customer_name from cinema_customer where customer_id=#{customerId}
+    </select>
+
 </mapper>

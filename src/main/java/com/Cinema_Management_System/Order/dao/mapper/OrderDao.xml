@@ -4,10 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Cinema_Management_System.Order.dao.OrderDao"><!--namespace:定义一个操作包  -->
     <select id="getOrderInfo" resultType="com.Cinema_Management_System.Order.entity.PayOrder">
-        select o.order_id,o.order_seat,o.order_price,o.order_time,o.order_status,
-        o.arrangement_id,a.arrangement_place,a.arrangement_time,m.movie_name
-        from Cinema_order o,Cinema_arrangement a,Cinema_movie m
-        where o.arrangement_id = a.arrangement_id and m.movie_id = o.movie_id and o.order_id = #{orderId}
+        select o.order_id,
+               o.order_seat,
+               o.order_price,
+               o.order_time,
+               o.order_status,
+               o.arrangement_id,
+               a.arrangement_place,
+               a.arrangement_time,
+               m.movie_name
+        from Cinema_order o,
+             Cinema_arrangement a,
+             Cinema_movie m
+        where o.arrangement_id = a.arrangement_id
+          and m.movie_id = o.movie_id
+          and o.order_id = #{orderId}
     </select>
 
     <select id="soldSeats" resultType="int">
@@ -20,8 +31,10 @@
     </select>
 
     <insert id="generateOrder" parameterType="com.Cinema_Management_System.Order.entity.SqlOrder">
-        insert into Cinema_order(order_id,order_seat,order_status,order_time,movie_id,customer_id,arrangement_id,order_price)
-        value (#{orderId},#{orderSeat},#{orderStatus},#{orderTime},#{movieId},#{customerId},#{arrangementId},#{orderPrice})
+        insert into Cinema_order(order_id, order_seat, order_status, order_time, movie_id, customer_id, arrangement_id,
+                                 order_price)
+            value (#{orderId}, #{orderSeat}, #{orderStatus}, #{orderTime}, #{movieId}, #{customerId}, #{arrangementId},
+                   #{orderPrice})
     </insert>
 
     <update id="modifyStatus">
@@ -29,4 +42,53 @@
         set order_status = #{status}
         where order_id = #{orderId}
     </update>
+
+
+    <select id="countAllOrder" resultType="int">
+        select count(*) from cinema_order o
+        <where>
+            1=1
+            <if test="cname!=null and cname!='' ">
+                and customer_id=(
+                SELECT customer_id FROM cinema_customer WHERE customer_name=#{cname}
+                )
+            </if>
+            <if test="mname!=null and mname!='' ">
+                and  movie_id=(
+                SELECT movie_id FROM cinema_movie WHERE movie_name=#{mname}
+                )
+            </if>
+
+        </where>
+
+    </select>
+
+    <select id="selectAllOrder" resultType="com.Cinema_Management_System.Order.entity.CMOrder">
+        SELECT o.*,c.customer_name,m.movie_name,a.arrangement_place,a.arrangement_time FROM cinema_order o
+        JOIN cinema_movie m ON m.movie_id=o.movie_id
+        JOIN cinema_customer c ON c.customer_id=o.customer_id
+        JOIN cinema_arrangement a ON a.arrangement_id=o.arrangement_id
+        <where>
+            1=1
+            <if test="id!=null and id!='' ">
+                and o.customer_id=#{id}
+            </if>
+            <if test="type!=null and type!='' ">
+                and o.order_status=#{type}
+            </if>
+            <if test="selectType=='customerName' ">
+                and c.customer_name=#{selectValues}
+            </if>
+            <if test="selectType=='movieName' ">
+                and m.movie_name=#{selectValues}
+            </if>
+        </where>
+
+        <if test="pageNo!=null and pageSize!=null ">
+            limit #{pageNo} , #{pageSize}
+        </if>
+
+
+    </select>
+
 </mapper>

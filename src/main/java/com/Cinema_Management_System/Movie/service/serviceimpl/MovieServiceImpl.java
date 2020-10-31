@@ -60,6 +60,11 @@ public class MovieServiceImpl implements MovieService {
         int affectRows = wantFlag == 0 ? movieDao.addWant(movieId, customerId) : movieDao.delWant(movieId, customerId);
     }
 
+    @Override
+    public List<Movie> getRecommendMovie() {
+        return movieDao.getRecommendMovie();
+    }
+
     public DetailMovie selectMovieByName(String movieName) {
         return movieDao.selectMovieByName(movieName);
     }

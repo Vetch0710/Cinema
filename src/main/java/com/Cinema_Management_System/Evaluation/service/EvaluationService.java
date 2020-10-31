@@ -3,6 +3,7 @@ package com.Cinema_Management_System.Evaluation.service;
 import com.Cinema_Management_System.Evaluation.entity.Evaluation;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.util.List;
 
 @Service
@@ -14,5 +15,8 @@ public interface EvaluationService {
     List<Evaluation> getMovieEvaluation(int movieId, Integer pageStart, Integer pageSize);
 
     int getMovieEvaluationCount(int movieId);
-    //Book getById(long bookId);
+
+    List<Evaluation> getAllCusEvaluations(Integer id);
+
+    boolean updateEvaluation(Evaluation evaluation);
 }

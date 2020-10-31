@@ -1,13 +1,16 @@
 package com.Cinema_Management_System.Movie.dao;
 
 import com.Cinema_Management_System.Movie.entity.DetailMovie;
+
 import com.Cinema_Management_System.Movie.entity.HitMovie;
 import com.Cinema_Management_System.Movie.entity.Movie;
 import com.Cinema_Management_System.Movie.entity.UpcomingMovie;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface MovieDao {
     //查询全部影片信息
     List<DetailMovie> selectMovieAll(@Param("selType") String selType, @Param("selContent") String selContent, @Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
@@ -48,6 +51,7 @@ public interface MovieDao {
 
     List<Movie> getRelativeMovie(@Param("typeList") List<String> typeList, @Param("actorList") List<String> actorList, @Param("directorList") List<String> directorList);
 
+    List<Movie> getRecommendMovie();
 
     int isWant(@Param("movieId") int movieId, @Param("customerId") int customerId);
 

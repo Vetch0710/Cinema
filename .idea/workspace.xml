@@ -16,204 +16,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="752170a0-882c-4f2b-9ea5-1fa5944f9081" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/User/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/User/controller/UserManagerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/User/controller/XXXController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/User/dao/UserDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/User/dao/mapper/UserDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/User/entity/Manager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/User/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/User/service/serviceimpl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/utils/webSocket/MyHandShakeInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/utils/webSocket/MyWebSocketConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/utils/webSocket/MyWebSocketHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/properties/sms.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/controller/ArrangeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/controller/ArrangeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/dao/ArrangementDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/dao/ArrangementDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/dao/mapper/ArrangementDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/dao/mapper/ArrangementDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/entity/Arrangement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/entity/Arrangement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/entity/Seat.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/service/ArrangementService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/service/ArrangementService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/service/serviceimpl/ArrangementServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/service/serviceimpl/ArrangementServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/controller/CustomerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/dao/CustomerDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/dao/mapper/CustomerDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/entity/Customer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/service/CustomerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/service/serviceimpl/CustomerServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/controller/EvaluationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/controller/EvaluationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/dao/EvaluationDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/dao/EvaluationDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/dao/mapper/EvaluationDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/dao/mapper/EvaluationDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/entity/Evaluation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/entity/Evaluation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/service/EvaluationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/service/EvaluationService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/service/serviceimpl/EvaluationServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/service/serviceimpl/EvaluationServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/controller/InformController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/controller/InformController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/dao/InformDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/dao/InformDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/entity/Inform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/entity/Inform.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/service/InformService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/service/InformService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/serviceimpl/InformServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/serviceimpl/InformServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/controller/ManagerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/controller/ManagerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/dao/ManagerDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/dao/ManagerDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/entity/Manager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/entity/Manager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/service/ManagerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/service/ManagerService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/service/serviceimpl/ManagerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/service/serviceimpl/ManagerServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/controller/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/controller/MovieController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/dao/MovieDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/dao/MovieDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/dao/mapper/MovieDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/dao/mapper/MovieDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/entity/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/entity/Movie.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/service/MovieService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/service/MovieService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/service/serviceimpl/MovieServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/service/serviceimpl/MovieServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/controller/OrderController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/dao/OrderDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/dao/OrderDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/dao/mapper/OrderDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/dao/mapper/OrderDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/entity/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/entity/Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/service/OrderService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/service/serviceimpl/OrderServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/service/serviceimpl/OrderServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/properties/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/properties/jdbc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/spring/spring-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/classes/spring/spring-web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/lib/c3p0-0.9.2.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/lib/jstl-1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/lib/mchange-commons-java-0.2.3.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Cinema_Management_System_war_exploded/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/controller/ArrangeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/dao/ArrangementDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/dao/mapper/ArrangementDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/entity/Arrangement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/entity/UsedTime.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/service/ArrangementService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Arrangement/service/serviceimpl/ArrangementServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/controller/CustomerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/controller/XXXController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/dao/CustomerDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/dao/mapper/CustomerDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/entity/Customer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/service/CustomerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Customer/service/serviceimpl/CustomerServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/controller/EvaluationController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/dao/EvaluationDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/dao/mapper/EvaluationDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/entity/Evaluation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/service/EvaluationService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Evaluation/service/serviceimpl/EvaluationServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/controller/InformController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/dao/InformDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/dao/mapper/InformDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/entity/Inform.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/service/InformService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Inform/serviceimpl/InformServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/controller/ManagerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/dao/ManagerDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/dao/mapper/ManagerDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/entity/Manager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/service/ManagerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Manager/service/serviceimpl/ManagerServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/controller/MovieController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/dao/MovieDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/dao/mapper/MovieDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/entity/Movie.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/service/MovieService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Movie/service/serviceimpl/MovieServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/controller/OrderController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/dao/OrderDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/dao/mapper/OrderDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/entity/Order.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/service/OrderService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/Order/service/serviceimpl/OrderServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/utils/Exception/DeleteException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/com/Cinema_Management_System/utils/Filter/CorsFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/logback.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/mybatis/mybatis-config.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/properties/jdbc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/properties/log4j.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/spring/spring-dao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/spring/spring-service.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/classes/spring/spring-web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/c3p0-0.9.5.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/cdi-api-1.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/commons-fileupload-1.3.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/commons-io-2.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/commons-lang3-3.8.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/commons-logging-1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/fastjson-1.2.32.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/gson-2.3.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/jackson-annotations-2.5.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/jackson-core-2.5.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/jackson-databind-2.5.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/javax.annotation-api-1.3.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/javax.inject-1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/jsr250-api-1.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/jstl-1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/log4j-1.2.17.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/maven-artifact-3.6.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/maven-model-3.6.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/maven-plugin-api-3.6.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/mchange-commons-java-0.2.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/mybatis-3.5.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/mybatis-generator-core-1.4.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/mybatis-generator-maven-plugin-1.4.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/mybatis-spring-1.3.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/mysql-connector-java-8.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/org.eclipse.sisu.inject-0.3.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/org.eclipse.sisu.plexus-0.3.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/plexus-classworlds-2.6.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/plexus-component-annotations-1.5.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/plexus-utils-3.2.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/protobuf-java-2.6.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/slf4j-api-1.7.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/slf4j-nop-1.7.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/slf4j-simple-1.7.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-aop-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-beans-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-context-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-context-support-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-core-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-expression-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-jdbc-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-messaging-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-oxm-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-test-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-tx-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-web-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-webmvc-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/lib/spring-websocket-4.3.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Cinema_war_exploded/index.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Arrangement/controller/ArrangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Arrangement/controller/ArrangeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Arrangement/dao/ArrangementDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Arrangement/dao/ArrangementDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Arrangement/dao/mapper/ArrangementDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Arrangement/dao/mapper/ArrangementDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Arrangement/service/ArrangementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Arrangement/service/ArrangementService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Arrangement/service/serviceimpl/ArrangementServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Arrangement/service/serviceimpl/ArrangementServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Customer/controller/CustomerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Customer/controller/XXXController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Customer/dao/CustomerDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Customer/dao/mapper/CustomerDao.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Customer/entity/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/User/entity/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Customer/service/CustomerService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Customer/service/serviceimpl/CustomerServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Evaluation/controller/EvaluationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Evaluation/controller/EvaluationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Evaluation/dao/EvaluationDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Evaluation/dao/EvaluationDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Evaluation/dao/mapper/EvaluationDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Evaluation/dao/mapper/EvaluationDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Evaluation/entity/Evaluation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Evaluation/entity/Evaluation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Evaluation/service/EvaluationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Evaluation/service/EvaluationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Evaluation/service/serviceimpl/EvaluationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Evaluation/service/serviceimpl/EvaluationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Movie/controller/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Movie/controller/MovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Movie/dao/MovieDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Movie/dao/MovieDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Movie/dao/mapper/MovieDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Movie/dao/mapper/MovieDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Movie/entity/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Movie/entity/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Movie/service/MovieService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Movie/service/MovieService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Movie/service/serviceimpl/MovieServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Movie/service/serviceimpl/MovieServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Order/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Order/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Order/dao/OrderDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Order/dao/mapper/OrderDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Order/dao/mapper/OrderDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Order/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Order/entity/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Order/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Order/service/serviceimpl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/Order/service/serviceimpl/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/utils/Filter/CorsFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Cinema_Management_System/utils/Filter/CorsFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/properties/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/properties/jdbc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,6 +84,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ChangesTree.GroupingKeys" value="module&#10;directory" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -291,7 +95,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3402299" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -467,7 +271,8 @@
       <workItem from="1604064356267" duration="1816000" />
       <workItem from="1604066453344" duration="6016000" />
       <workItem from="1604108022896" duration="1552000" />
-      <workItem from="1604112317651" duration="2485000" />
+      <workItem from="1604112317651" duration="3944000" />
+      <workItem from="1604117385426" duration="296000" />
     </task>
     <servers />
   </component>
@@ -529,71 +334,71 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="653" y="248" key="#com.intellij.ide.util.MemberChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1604048381066" />
-    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1604025516579">
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog" timestamp="1604115506363">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1604025516579" />
-    <state width="1126" height="308" key="GridCell.Tab.0.bottom" timestamp="1604114736207">
+    <state x="100" y="100" width="1480" height="850" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1604115506363" />
+    <state width="1126" height="308" key="GridCell.Tab.0.bottom" timestamp="1604115404937">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1126" height="308" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604114736207" />
-    <state width="1126" height="308" key="GridCell.Tab.0.center" timestamp="1604114736205">
+    <state width="1126" height="308" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604115404937" />
+    <state width="1126" height="308" key="GridCell.Tab.0.center" timestamp="1604115404936">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1126" height="308" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604114736205" />
-    <state width="1126" height="308" key="GridCell.Tab.0.left" timestamp="1604114736203">
+    <state width="1126" height="308" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604115404936" />
+    <state width="1126" height="308" key="GridCell.Tab.0.left" timestamp="1604115404935">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1126" height="308" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604114736203" />
-    <state width="1126" height="308" key="GridCell.Tab.0.right" timestamp="1604114736206">
+    <state width="1126" height="308" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604115404935" />
+    <state width="1126" height="308" key="GridCell.Tab.0.right" timestamp="1604115404937">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1126" height="308" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604114736206" />
-    <state width="1126" height="308" key="GridCell.Tab.1.bottom" timestamp="1604114736081">
+    <state width="1126" height="308" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604115404937" />
+    <state width="1126" height="308" key="GridCell.Tab.1.bottom" timestamp="1604115404939">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1126" height="308" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604114736081" />
-    <state width="1126" height="308" key="GridCell.Tab.1.center" timestamp="1604114736079">
+    <state width="1126" height="308" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604115404939" />
+    <state width="1126" height="308" key="GridCell.Tab.1.center" timestamp="1604115404938">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1126" height="308" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604114736079" />
-    <state width="1126" height="308" key="GridCell.Tab.1.left" timestamp="1604114736079">
+    <state width="1126" height="308" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604115404938" />
+    <state width="1126" height="308" key="GridCell.Tab.1.left" timestamp="1604115404938">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1126" height="308" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604114736079" />
-    <state width="1126" height="308" key="GridCell.Tab.1.right" timestamp="1604114736080">
+    <state width="1126" height="308" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604115404938" />
+    <state width="1126" height="308" key="GridCell.Tab.1.right" timestamp="1604115404938">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1126" height="308" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604114736080" />
-    <state width="1126" height="308" key="GridCell.Tab.2.bottom" timestamp="1604114736083">
+    <state width="1126" height="308" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604115404938" />
+    <state width="1126" height="308" key="GridCell.Tab.2.bottom" timestamp="1604115404940">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1126" height="308" key="GridCell.Tab.2.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604114736083" />
-    <state width="1126" height="308" key="GridCell.Tab.2.center" timestamp="1604114736082">
+    <state width="1126" height="308" key="GridCell.Tab.2.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1604115404940" />
+    <state width="1126" height="308" key="GridCell.Tab.2.center" timestamp="1604115404940">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1126" height="308" key="GridCell.Tab.2.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604114736082" />
-    <state width="1126" height="308" key="GridCell.Tab.2.left" timestamp="1604114736081">
+    <state width="1126" height="308" key="GridCell.Tab.2.center/0.0.1680.1050@0.0.1680.1050" timestamp="1604115404940" />
+    <state width="1126" height="308" key="GridCell.Tab.2.left" timestamp="1604115404939">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1126" height="308" key="GridCell.Tab.2.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604114736081" />
-    <state width="1126" height="308" key="GridCell.Tab.2.right" timestamp="1604114736082">
+    <state width="1126" height="308" key="GridCell.Tab.2.left/0.0.1680.1050@0.0.1680.1050" timestamp="1604115404939" />
+    <state width="1126" height="308" key="GridCell.Tab.2.right" timestamp="1604115404940">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1126" height="308" key="GridCell.Tab.2.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604114736082" />
+    <state width="1126" height="308" key="GridCell.Tab.2.right/0.0.1680.1050@0.0.1680.1050" timestamp="1604115404940" />
     <state x="378" y="187" key="Maven.ArtifactSearchDialog" timestamp="1604068106605">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="378" y="187" key="Maven.ArtifactSearchDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1604068106605" />
-    <state x="260" y="62" key="SettingsEditor" timestamp="1604113166980">
+    <state x="260" y="62" key="SettingsEditor" timestamp="1604117428045">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="300" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1603894824286" />
-    <state x="260" y="62" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1604113166980" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604109973057">
+    <state x="260" y="62" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1604117428045" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1604115922580">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604109973057" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1604115922580" />
     <state x="100" y="100" width="1480" height="850" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1603893607418">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

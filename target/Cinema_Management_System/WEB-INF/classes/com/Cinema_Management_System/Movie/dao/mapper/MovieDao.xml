@@ -17,7 +17,8 @@
         </if>
     </select>
 
-    <select id="selectMovieAll" resultType="com.Cinema_Management_System.Movie.entity.DetailMovie">
+    <select id="selectMovieAll" resultType="com.Cinema_Management_System.Movie.entity.Movie">
+>>>>>>> d2ff0e96be57ede04fc9691232a3df7be3141f0f
         select *
         from Cinema_movie
         <if test="selType != null and selType !='' and selContent != null and selContent != ''">
@@ -33,7 +34,8 @@
         limit #{pageStart},#{pageSize}
     </select>
 
-    <select id="selectMovieByName" resultType="com.Cinema_Management_System.Movie.entity.DetailMovie">
+    <select id="selectMovieByName" resultType="com.Cinema_Management_System.Movie.entity.Movie">
+>>>>>>> d2ff0e96be57ede04fc9691232a3df7be3141f0f
         select *
         from Cinema_movie
         where movie_name = #{movieName}

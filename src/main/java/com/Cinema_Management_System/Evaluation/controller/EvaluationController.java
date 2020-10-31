@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RequestMapping("/evaluation")
 @RestController
 public class EvaluationController {
@@ -44,8 +45,8 @@ public class EvaluationController {
         Integer pageStart = (pageNo - 1) * pageSize;
         returnData = new HashMap<>();
         evaluationList = evaluationService.getMovieEvaluation(movieId, pageStart, pageSize);
-        returnData.put("data",evaluationList);
-        returnData.put("totalCount",evaluationService.getMovieEvaluationCount(movieId));
+        returnData.put("data", evaluationList);
+        returnData.put("totalCount", evaluationService.getMovieEvaluationCount(movieId));
         return returnData;
     }
 }

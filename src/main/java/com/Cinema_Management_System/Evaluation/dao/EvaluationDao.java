@@ -13,5 +13,6 @@ public interface EvaluationDao {
     List<Evaluation> getMovieEvaluation(@Param("movieId") int movieId, @Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
 
     int getMovieEvaluationCount(@Param("movieId") int movieId);
+
     //Book queryById(@Param("book_id") long book_id);
 }

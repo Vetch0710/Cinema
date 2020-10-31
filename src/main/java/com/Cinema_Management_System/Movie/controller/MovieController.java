@@ -1,5 +1,6 @@
 package com.Cinema_Management_System.Movie.controller;
 
+
 import com.Cinema_Management_System.Movie.entity.DetailMovie;
 import com.Cinema_Management_System.Movie.entity.HitMovie;
 import com.Cinema_Management_System.Movie.entity.Movie;
@@ -9,6 +10,7 @@ import com.Cinema_Management_System.utils.Exception.DeleteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +35,7 @@ public class MovieController {
     private Map<String, Object> returnData;
     String image = ".jpg,.jpeg,.png,.gif,.bmp,.pdf,.JPG,.JPEG,.PBG,.GIF,.BMP,.PDF";
     String video = ".mp4,.mov,.avi,.wmv,.3gp,.mkv,.flv,.MP4,.MOV,.AVI,.WMV,.3GP,.MKV,.FLV";
+
 
     @RequestMapping(value = "/movieList", method = RequestMethod.GET)
     public Map<String, Object> getMovieList(String selectType, String permission, Integer pageNo, Integer pageSize) {

@@ -35,6 +35,7 @@
     <!--  4.配置SpringMVC中的multipartResovler(文件上传)解析器  -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="#{1024*1024*31}"/>
+
         <property name="defaultEncoding" value="utf-8"/>
     </bean>
 

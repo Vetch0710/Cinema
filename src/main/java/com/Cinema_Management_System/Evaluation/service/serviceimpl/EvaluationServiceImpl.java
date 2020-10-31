@@ -37,7 +37,6 @@ public class EvaluationServiceImpl implements EvaluationService {
     public int getMovieEvaluationCount(int movieId) {
         return evaluationDao.getMovieEvaluationCount(movieId);
     }
-
 //    public New getById(long bookId) {
 //        return bookDao.queryById(bookId);
 //    }

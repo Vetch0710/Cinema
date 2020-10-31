@@ -87,7 +87,6 @@ public class Evaluation {
     public void setCustomerPicture(String customerPicture) {
         this.customerPicture = customerPicture;
     }
-
     public Date getEvaluationTime() {
         return evaluationTime;
     }

@@ -2,11 +2,11 @@ package com.Cinema_Management_System.Arrangement.service;
 
 
 import com.Cinema_Management_System.Arrangement.entity.Arrangement;
-import com.Cinema_Management_System.Movie.entity.ArrangementMovie;
 import com.Cinema_Management_System.utils.Exception.DeleteException;
 
 import java.util.List;
 import java.util.Map;
+
 
 public interface ArrangementService {
     Arrangement getArrange(int arrangementId);

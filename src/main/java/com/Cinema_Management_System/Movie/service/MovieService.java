@@ -47,4 +47,5 @@ public interface MovieService {
     boolean getFlag(int movieId, int customerId);
 
     void changeWant(int wantFlag, int movieId, int customerId);
+
 }

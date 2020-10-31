@@ -105,6 +105,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     public void insertMovie(DetailMovie movie) {
+
         movieDao.insertMovie(movie);
     }
 

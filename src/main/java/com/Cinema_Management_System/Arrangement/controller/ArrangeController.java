@@ -30,6 +30,7 @@ public class ArrangeController {
     public List<String> getDisableTime(@PathVariable int arrangementPlace, @PathVariable String arrangementDate, @PathVariable int movieId) {
 
         return ArrangementService.getDisableTime(arrangementPlace, arrangementDate, movieId);
+
     }
 
     @RequestMapping(value = "/arrangeList", method = RequestMethod.GET)

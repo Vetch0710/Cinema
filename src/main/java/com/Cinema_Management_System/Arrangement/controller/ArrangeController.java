@@ -27,9 +27,9 @@ public class ArrangeController {
     }
 
     @RequestMapping(value = "/{arrangementPlace}/{arrangementDate}/{movieId}", method = RequestMethod.GET)
-    public List<String> getDisableTime(@PathVariable int arrangementPlace, @PathVariable String arrangementDate,@PathVariable int movieId) {
+    public List<String> getDisableTime(@PathVariable int arrangementPlace, @PathVariable String arrangementDate, @PathVariable int movieId) {
 
-        return ArrangementService.getDisableTime(arrangementPlace, arrangementDate,movieId);
+        return ArrangementService.getDisableTime(arrangementPlace, arrangementDate, movieId);
     }
 
     @RequestMapping(value = "/arrangeList", method = RequestMethod.GET)
@@ -48,6 +48,15 @@ public class ArrangeController {
         return returnData;
     }
 
+    @RequestMapping(value = "/selectSession/{movieId}", method = RequestMethod.GET)
+    public Map<String, Object> selectSession(@PathVariable int movieId) {
+        return ArrangementService.getArrangeMovie(movieId);
+    }
+
+    @RequestMapping(value = "/arrangementInfo/{arrangementId}", method = RequestMethod.GET)
+    public Map<String,Object> arrangementInfo(@PathVariable int arrangementId){
+        return ArrangementService.getSeatInfo(arrangementId);
+    }
 
     @RequestMapping(value = "/addArrangement", method = RequestMethod.POST)
     public String addArrangement(@RequestBody Map<String, Arrangement> arrangement) {

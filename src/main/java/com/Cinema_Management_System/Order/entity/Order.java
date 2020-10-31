@@ -1,5 +1,7 @@
 package com.Cinema_Management_System.Order.entity;
 
+import java.util.Date;
+
 /**
  * @Description 订单信息实体类
  * @Auther GaoYi
@@ -12,18 +14,81 @@ package com.Cinema_Management_System.Order.entity;
  * * @param orderStatus     订单状态(待支付/已支付/待评价/已完成)
  */
 public class Order {
-    private int orderId, movieId, customerId, arrangementId, seatId;
-    private String orderStatus;
+    private long orderId;
+    private int arrangementId;
+    private float orderPrice;
+    private String orderStatus, orderSeat;
+    private Date orderTime;
 
     public Order() {
     }
 
-    public Order(int orderId, int movieId, int customerId, int arrangementId, int seatId, String orderStatus) {
+    public Order(long orderId, int arrangementId, float orderPrice, String orderStatus, String orderSeat, Date orderTime) {
         this.orderId = orderId;
-        this.movieId = movieId;
-        this.customerId = customerId;
         this.arrangementId = arrangementId;
-        this.seatId = seatId;
+        this.orderPrice = orderPrice;
         this.orderStatus = orderStatus;
+        this.orderSeat = orderSeat;
+        this.orderTime = orderTime;
+    }
+
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getArrangementId() {
+        return arrangementId;
+    }
+
+    public void setArrangementId(int arrangementId) {
+        this.arrangementId = arrangementId;
+    }
+
+    public float getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(float orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getOrderSeat() {
+        return orderSeat;
+    }
+
+    public void setOrderSeat(String orderSeat) {
+        this.orderSeat = orderSeat;
+    }
+
+    public Date getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", arrangementId=" + arrangementId +
+                ", orderPrice=" + orderPrice +
+                ", orderStatus='" + orderStatus + '\'' +
+                ", orderSeat='" + orderSeat + '\'' +
+                ", orderTime=" + orderTime +
+                '}';
     }
 }

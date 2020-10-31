@@ -15,19 +15,20 @@ import java.util.Date;
 public class Evaluation {
     private int evaluationId, customerId;
     private float evaluationScore;
-    private String evaluationContent, customerName, movieName;
+    private String evaluationContent, customerName, movieName, customerPicture;
     private Date evaluationTime;
 
     public Evaluation() {
     }
 
-    public Evaluation(int evaluationId, int customerId, float evaluationScore, String evaluationContent, String customerName, String movieName, Date evaluationTime) {
+    public Evaluation(int evaluationId, int customerId, float evaluationScore, String evaluationContent, String customerName, String movieName, String customerPicture, Date evaluationTime) {
         this.evaluationId = evaluationId;
         this.customerId = customerId;
         this.evaluationScore = evaluationScore;
         this.evaluationContent = evaluationContent;
         this.customerName = customerName;
         this.movieName = movieName;
+        this.customerPicture = customerPicture;
         this.evaluationTime = evaluationTime;
     }
 
@@ -79,6 +80,14 @@ public class Evaluation {
         this.movieName = movieName;
     }
 
+    public String getCustomerPicture() {
+        return customerPicture;
+    }
+
+    public void setCustomerPicture(String customerPicture) {
+        this.customerPicture = customerPicture;
+    }
+
     public Date getEvaluationTime() {
         return evaluationTime;
     }
@@ -96,6 +105,7 @@ public class Evaluation {
                 ", evaluationContent='" + evaluationContent + '\'' +
                 ", customerName='" + customerName + '\'' +
                 ", movieName='" + movieName + '\'' +
+                ", customerPicture='" + customerPicture + '\'' +
                 ", evaluationTime=" + evaluationTime +
                 '}';
     }

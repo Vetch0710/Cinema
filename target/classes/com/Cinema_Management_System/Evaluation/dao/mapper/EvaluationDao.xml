@@ -8,10 +8,10 @@
         select count(*)
         FROM Cinema_evaluation e
         LEFT JOIN (
-            SELECT o.order_id,o.movie_id,o.customer_id,m.movie_name,c.customer_name
-            FROM Cinema_order o,Cinema_customer c,Cinema_movie m
-            WHERE
-                o.customer_id = c.customer_id AND o.movie_id = m.movie_id
+        SELECT o.order_id,o.movie_id,o.customer_id,m.movie_name,c.customer_name
+        FROM Cinema_order o,Cinema_customer c,Cinema_movie m
+        WHERE
+        o.customer_id = c.customer_id AND o.movie_id = m.movie_id
         ) AS w ON w.order_id = e.order_id
         <if test="selType != null and selType !='' and selContent != null and selContent != ''">
             <where>
@@ -33,14 +33,14 @@
 
     <select id="getEvaluations" resultType="com.Cinema_Management_System.Evaluation.entity.Evaluation">
         SELECT
-            e.evaluation_id,e.evaluation_content,e.evaluation_score,e.evaluation_time,w.customer_name,w.movie_name
+        e.evaluation_id,e.evaluation_content,e.evaluation_score,e.evaluation_time,w.customer_name,w.movie_name
         FROM
-            Cinema_evaluation e
+        Cinema_evaluation e
         LEFT JOIN (
-            SELECT o.order_id,o.movie_id,o.customer_id,m.movie_name,c.customer_name
-            FROM Cinema_order o,Cinema_customer c,Cinema_movie m
-            WHERE
-                o.customer_id = c.customer_id AND o.movie_id = m.movie_id
+        SELECT o.order_id,o.movie_id,o.customer_id,m.movie_name,c.customer_name
+        FROM Cinema_order o,Cinema_customer c,Cinema_movie m
+        WHERE
+        o.customer_id = c.customer_id AND o.movie_id = m.movie_id
         ) AS w ON w.order_id = e.order_id
         <if test="selType != null and selType !='' and selContent != null and selContent != ''">
             <where>
@@ -59,5 +59,29 @@
             </where>
         </if>
         limit #{pageStart},#{pageSize}
+    </select>
+
+    <select id="getMovieEvaluation" resultType="com.Cinema_Management_System.Evaluation.entity.Evaluation">
+        select e.evaluation_id,e.evaluation_score,e.evaluation_content,e.evaluation_time,w.customer_name,w.customer_picture
+        from Cinema_evaluation e
+        LEFT JOIN (
+        SELECT o.order_id,o.movie_id,o.customer_id,m.movie_name,c.customer_name,c.customer_picture
+        FROM Cinema_order o,Cinema_customer c,Cinema_movie m
+        WHERE
+        o.customer_id = c.customer_id AND o.movie_id = m.movie_id
+        ) AS w ON w.order_id = e.order_id
+        where w.movie_id = #{movieId}
+        limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getMovieEvaluationCount" resultType="int">
+        select count(*)
+        from Cinema_evaluation e
+        LEFT JOIN (
+        SELECT o.order_id,o.movie_id,o.customer_id,m.movie_name,c.customer_name,c.customer_picture
+        FROM Cinema_order o,Cinema_customer c,Cinema_movie m
+        WHERE
+        o.customer_id = c.customer_id AND o.movie_id = m.movie_id
+        ) AS w ON w.order_id = e.order_id
+        where w.movie_id = #{movieId}
     </select>
 </mapper>

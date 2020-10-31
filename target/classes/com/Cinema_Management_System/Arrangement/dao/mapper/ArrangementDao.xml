@@ -8,10 +8,10 @@
         from Cinema_arrangement
         where arrangement_id = #{arrangementId}
     </select>
+
     <select id="getArranges" resultType="com.Cinema_Management_System.Arrangement.entity.Arrangement">
         select a.*,m.movie_name
         from Cinema_arrangement a left join Cinema_movie m on a.movie_id = m.movie_id
-<<<<<<< HEAD
 
         <where>
             <if test="1 == 1">
@@ -31,33 +31,12 @@
             </if>
         </where>
 
-=======
-        <if test="selType != null and selType !='' and selContent != null and selContent != ''">
-            <where>
-                <if test="selType == 'movieId'">
-                    a.movie_id = #{selContent}
-                </if>
-                <if test="selType == 'movieName'">
-                    m.movie_name like CONCAT(CONCAT('%',#{selContent}),'%')
-                </if>
-                <if test="selType == 'arrangementId'">
-                    a.arrangement_id = #{selContent}
-                </if>
-                <if test="selType == 'arrangementPlace'">
-                    a.arrangement_place = #{selContent}
-                </if>
-                <if test="selType == 'arrangementTime'">
-                    a.arrangement_time = = #{selContent}
-                </if>
-            </where>
-        </if>
->>>>>>> refs/remotes/origin/cinema-back
         limit #{pageStart},#{pageSize}
     </select>
+
     <select id="getCount" resultType="int">
         select count(*)
         from Cinema_arrangement
-<<<<<<< HEAD
         <where>
             <if test="1 == 1">
                 arrangement_time &gt; now()
@@ -76,25 +55,6 @@
                 arrangement_place = #{selContent}
             </if>
         </where>
-=======
-        <if test="selType != null and selType !='' and selContent != null and selContent != ''">
-            <where>
-                <if test="selType == 'movieId'">
-                    movie_id = #{selContent}
-                </if>
-                <if test="selType == 'movieName'">
-                    movie_id in (select movie_id from Cinema_movie where movie_name like
-                    CONCAT(CONCAT('%',#{selContent}),'%'))
-                </if>
-                <if test="selType == 'arrangementId'">
-                    arrangement_id = #{selContent}
-                </if>
-                <if test="selType == 'arrangementPlace'">
-                    arrangement_place = #{selContent}
-                </if>
-            </where>
-        </if>
->>>>>>> refs/remotes/origin/cinema-back
     </select>
 
     <select id="getMovieTime" resultType="string">
@@ -110,6 +70,31 @@
         WHERE
         arrangement_time &gt; #{dayStart} AND arrangement_time &lt; #{dayEnd} AND a.movie_id = m.movie_id AND a.arrangement_place = #{arrangementPlace}
         order by a.arrangement_time
+    </select>
+
+    <select id="getArrangeMovie" resultType="com.Cinema_Management_System.Movie.entity.ArrangementMovie">
+        select movie_id,movie_name,movie_picture,movie_score,movie_actor,movie_time,movie_type
+        from Cinema_movie
+        where movie_id = #{movieId}
+    </select>
+
+    <select id="getNowArranges" resultType="com.Cinema_Management_System.Arrangement.entity.Arrangement">
+        select a.*,m.movie_time
+        from Cinema_arrangement a left join Cinema_movie m on a.movie_id = m.movie_id
+        where a.arrangement_time &gt; now() and a.movie_id = #{movieId}
+        order by a.arrangement_time
+    </select>
+
+    <select id="getMovieInfo" resultType="com.Cinema_Management_System.Movie.entity.ArrangementMovie">
+        select movie_id,movie_time,movie_name,movie_picture,movie_type
+        from Cinema_movie
+        where movie_id = (select movie_id from Cinema_arrangement where arrangement_id = #{arrangementId})
+    </select>
+
+    <select id="getSelectedSeats" resultType="string">
+        select seat_num
+        from Cinema_seat
+        where arrangement_id = #{arrangementId}
     </select>
 
     <insert id="addArrangement" parameterType="com.Cinema_Management_System.Arrangement.entity.Arrangement">

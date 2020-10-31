@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service(value = "ArrangementService")
 public class ArrangementServiceImpl implements ArrangementService {
@@ -141,7 +139,69 @@ public class ArrangementServiceImpl implements ArrangementService {
         return disableTimes;
     }
 
-    private void addDisableTime(List<String> disableTimes, int startTime, int endTime, String startHours, String startMinutes, String endHours, String endMinutes) {
+    @Override
+    public Map<String, Object> getArrangeMovie(int movieId) {
+        List<Arrangement> nowArranges = arrangementDao.getNowArranges(movieId);
+        List<Map<String, Object>> arrangementList = new ArrayList<>();
+        for (Arrangement a : nowArranges) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String time = sdf.format(a.getArrangementTime());
+            System.out.println("time================" + time);
+            if (arrangementList.size() > 0) {
+                System.out.println("size大于0================");
+                Iterator<Map<String, Object>> iterator = arrangementList.iterator();
+                for (int i = 0; i < arrangementList.size(); i++) {
+                    if (arrangementList.get(i).get("arrangementDate").equals(time)) {
+                        System.out.println("第一个添加操作");
+                        ((List) arrangementList.get(i).get("theDayArrangement")).add(a);
+                        break;
+                    } else {
+                        List<Arrangement> arrangements = new ArrayList<>();
+                        System.out.println("第二个添加操作");
+                        arrangements.add(a);
+                        Map<String, Object> map1 = new HashMap<>();
+                        map1.put("arrangementDate", time);
+                        map1.put("theDayArrangement", arrangements);
+                        arrangementList.add(map1);
+                        break;
+                    }
+                }
+            } else {
+                System.out.println("size小于0================");
+                Map<String, Object> map1 = new HashMap<>();
+                List<Arrangement> arrangements = new ArrayList<>();
+                System.out.println("第三个添加操作");
+                arrangements.add(a);
+                System.out.println(arrangements.get(0));
+                map1.put("arrangementDate", time);
+                map1.put("theDayArrangement", arrangements);
+                arrangementList.add(map1);
+            }
+        }
+        Map<String, Object> returnData = new HashMap<>();
+        returnData.put("movie", arrangementDao.getArrangeMovie(movieId));
+        returnData.put("arrangementList", arrangementList);
+        return returnData;
+    }
+
+    @Override
+    public Map<String, Object> getSeatInfo(int arrangementId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("movieInfo", arrangementDao.getMovieInfo(arrangementId));
+        map.put("arrangementInfo", arrangementDao.getArrange(arrangementId));
+        String selected = arrangementDao.getSelectedSeats(arrangementId);
+        String[] seats;
+        if (selected != null && selected != "") {
+            seats = selected.split(",");
+        } else {
+            seats = new String[]{};
+        }
+        map.put("soldSeats", seats);
+        return map;
+    }
+
+    private void addDisableTime(List<String> disableTimes, int startTime, int endTime, String startHours, String
+            startMinutes, String endHours, String endMinutes) {
         System.out.println("添加时间" + startTime + "\t" + endTime);
         if (startTime / 60 < 10) {
             startHours = "0" + startTime / 60;

@@ -3,6 +3,7 @@ package com.Cinema_Management_System.Arrangement.dao;
 
 import com.Cinema_Management_System.Arrangement.entity.Arrangement;
 import com.Cinema_Management_System.Arrangement.entity.UsedTime;
+import com.Cinema_Management_System.Movie.entity.ArrangementMovie;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,4 +26,12 @@ public interface ArrangementDao {
     int updateArrangement(Arrangement arrangement);
 
     List<UsedTime> getDisableTime(@Param("dayStart") String dayStart, @Param("dayEnd") String dayEnd, @Param("arrangementPlace") int arrangementPlace);
+
+    ArrangementMovie getArrangeMovie(@Param("movieId") int movieId);
+
+    List<Arrangement> getNowArranges(int movieId);
+
+    ArrangementMovie getMovieInfo(@Param("arrangementId")int arrangementId);
+
+    String getSelectedSeats(@Param("arrangementId")int arrangementId);
 }

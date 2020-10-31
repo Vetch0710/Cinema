@@ -10,5 +10,9 @@ public interface EvaluationService {
     List<Evaluation> getEvaluations(String selectType, String permission, Integer pageStart, Integer pageSize);
 
     int getCount(String selectType, String permission);
+
+    List<Evaluation> getMovieEvaluation(int movieId, Integer pageStart, Integer pageSize);
+
+    int getMovieEvaluationCount(int movieId);
     //Book getById(long bookId);
 }

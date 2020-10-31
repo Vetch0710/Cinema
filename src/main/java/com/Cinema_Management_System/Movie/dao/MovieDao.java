@@ -1,24 +1,27 @@
 package com.Cinema_Management_System.Movie.dao;
 
+import com.Cinema_Management_System.Movie.entity.DetailMovie;
+import com.Cinema_Management_System.Movie.entity.HitMovie;
 import com.Cinema_Management_System.Movie.entity.Movie;
+import com.Cinema_Management_System.Movie.entity.UpcomingMovie;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Date;
 import java.util.List;
 
 public interface MovieDao {
     //查询全部影片信息
-    List<Movie> selectMovieAll(@Param("selType") String selType, @Param("selContent") String selContent, @Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
+    List<DetailMovie> selectMovieAll(@Param("selType") String selType, @Param("selContent") String selContent, @Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
 
     //通过电影名称查询指定影片信息
-    Movie selectMovieByName(@Param("movieName") String movieName);
+    DetailMovie selectMovieByName(@Param("movieName") String movieName);
 
     //按是否已上映与搜索条件(按时间，按类型)来查询影片
-    List<Movie> selectMovieByType(@Param("timeType") String timeType,
-                                  @Param("selectType") String selectType,
+    List<HitMovie> selectHitMovie(@Param("selectType") String selectType,
                                   @Param("pageStart") Integer pageStart,
-                                  @Param("pageSize") Integer pageSize,
-                                  @Param("nowDate") Date nowDate);
+                                  @Param("pageSize") Integer pageSize);
+
+    DetailMovie getDetailMovie(@Param("movieId") int movieId);
+
 
     //按影片id删除指定电影
     int deleteMovie(@Param("movieId") Integer movieId);
@@ -27,10 +30,28 @@ public interface MovieDao {
     int deleteMovies(List<Integer> movieIds);
 
     //更新影片信息
-    void updateMovie(Movie movie);
+    void updateMovie(DetailMovie movie);
 
     //新增影片信息
-    void insertMovie(Movie movie);
+    void insertMovie(DetailMovie movie);
 
+    //获取总数
     int getCount(@Param("selType") String selType, @Param("selContent") String selContent);
+
+    List<UpcomingMovie> selectUpcomingMovie(@Param("selectType") String selectType,
+                                            @Param("pageStart") Integer pageStart,
+                                            @Param("pageSize") Integer pageSize);
+
+    int HitMovieCount();
+
+    int UpcomingMovieCount();
+
+    List<Movie> getRelativeMovie(@Param("typeList") List<String> typeList, @Param("actorList") List<String> actorList, @Param("directorList") List<String> directorList);
+
+
+    int isWant(@Param("movieId") int movieId, @Param("customerId") int customerId);
+
+    int addWant(@Param("movieId") int movieId, @Param("customerId") int customerId);
+
+    int delWant(@Param("movieId") int movieId, @Param("customerId") int customerId);
 }

@@ -20,8 +20,9 @@ public class EvaluationController {
     @Autowired
     private EvaluationService evaluationService;
     private List<Evaluation> evaluationList;
-    private Map<String,Object> returnData;
-    @RequestMapping(value = "/evaluationList",method = RequestMethod.GET)
+    private Map<String, Object> returnData;
+
+    @RequestMapping(value = "/evaluationList", method = RequestMethod.GET)
     public Map<String, Object> getEvaluations(String selectType, String permission, Integer pageNo, Integer pageSize) {
         try {
             permission = new String(permission.getBytes("ISO-8859-1"), "UTF-8");
@@ -35,6 +36,16 @@ public class EvaluationController {
         returnData = new HashMap<>();
         returnData.put("data", evaluationList);
         returnData.put("total", count);
+        return returnData;
+    }
+
+    @RequestMapping(value = "/getMovieEvaluation", method = RequestMethod.GET)
+    public Map<String, Object> getMovieEvaluation(int movieId, Integer pageNo, Integer pageSize) {
+        Integer pageStart = (pageNo - 1) * pageSize;
+        returnData = new HashMap<>();
+        evaluationList = evaluationService.getMovieEvaluation(movieId, pageStart, pageSize);
+        returnData.put("data",evaluationList);
+        returnData.put("totalCount",evaluationService.getMovieEvaluationCount(movieId));
         return returnData;
     }
 }

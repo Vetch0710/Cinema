@@ -28,6 +28,16 @@ public class EvaluationServiceImpl implements EvaluationService {
         return evaluationDao.getCount(selectType, permission);
     }
 
+    @Override
+    public List<Evaluation> getMovieEvaluation(int movieId, Integer pageStart, Integer pageSize) {
+        return evaluationDao.getMovieEvaluation(movieId, pageStart, pageSize);
+    }
+
+    @Override
+    public int getMovieEvaluationCount(int movieId) {
+        return evaluationDao.getMovieEvaluationCount(movieId);
+    }
+
 //    public New getById(long bookId) {
 //        return bookDao.queryById(bookId);
 //    }

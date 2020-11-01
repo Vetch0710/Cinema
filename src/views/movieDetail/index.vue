@@ -176,7 +176,7 @@
         ></span
       ><br /><br /><br />
       <h2>影片评价</h2>
-      <div class="evaluation-list" v-loading="listLoading" id="evaluation">
+      <div class="evaluation-list" v-loading="listLoading" id="evaluation" >
         <ul>
           <li v-for="(item, index) in evaluationList" :key="index">
             <evaluation
@@ -273,7 +273,7 @@ export default {
     async fetchData() {
       if (
         this.$route.query.movieId != null &&
-        yhis.$route.query.movieId != ""
+        this.$route.query.movieId != ""
       ) {
         this.queryForm.movieId = this.$route.query.movieId;
       } else {

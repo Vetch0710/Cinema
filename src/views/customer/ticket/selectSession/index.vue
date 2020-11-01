@@ -44,62 +44,64 @@
         >{{ getTagTime(item.arrangementDate) }}</span
       >
     </div>
-    <div
-      class="plist-container"
-      :class="{ active: item1.arrangementDate == selectedDate }"
-      v-for="(item1, index1) in arrangementList"
-      :key="'a' + index1"
-    >
-      <table class="plist">
-        <thead>
-          <tr>
-            <th>放映时间</th>
-            <th>放映厅</th>
-            <th>售价（元）</th>
-            <th>选座购票</th>
-          </tr>
-        </thead>
+    <div>
+      <div
+        class="plist-container"
+        :class="{ active: item1.arrangementDate == selectedDate }"
+        v-for="(item1, index1) in arrangementList"
+        :key="'a' + index1"
+      >
+        <table class="plist">
+          <thead>
+            <tr>
+              <th>放映时间</th>
+              <th>放映厅</th>
+              <th>售价（元）</th>
+              <th>选座购票</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr
-            class=""
-            v-for="(item2, index2) in item1.theDayArrangement"
-            :key="'b' + index2"
-          >
-            <td>
-              <span class="begin-time">{{
-                getBeginTime(item2.arrangementTime)
-              }}</span>
-              <br />
-              <span class="end-time"
-                >{{
-                  getEndTime(item2.arrangementTime, movieInfo.movieTime)
-                }}散场</span
-              >
-            </td>
-            <td>
-              <span class="hall">{{ item2.arrangementPlace }}号厅</span>
-            </td>
-            <td>
-              <span class="sell-price"
-                ><span class="stonefont">{{
-                  item2.arrangementPrice
-                }}</span></span
-              >
-            </td>
-            <td>
-              <a
-                class="buy-btn normal"
-                one-link-mark="yes"
-                @click="
-                  jumpSelectSeat(item2.arrangementId, item2.arrangementTime)
-                "
-                >选座购票</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody>
+            <tr
+              class=""
+              v-for="(item2, index2) in item1.theDayArrangement"
+              :key="'b' + index2"
+            >
+              <td>
+                <span class="begin-time">{{
+                  getBeginTime(item2.arrangementTime)
+                }}</span>
+                <br />
+                <span class="end-time"
+                  >{{
+                    getEndTime(item2.arrangementTime, movieInfo.movieTime)
+                  }}散场</span
+                >
+              </td>
+              <td>
+                <span class="hall">{{ item2.arrangementPlace }}号厅</span>
+              </td>
+              <td>
+                <span class="sell-price"
+                  ><span class="stonefont">{{
+                    item2.arrangementPrice
+                  }}</span></span
+                >
+              </td>
+              <td>
+                <a
+                  class="buy-btn normal"
+                  one-link-mark="yes"
+                  @click="
+                    jumpSelectSeat(item2.arrangementId, item2.arrangementTime)
+                  "
+                  >选座购票</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -153,11 +155,13 @@ export default {
 
     async fetchData() {
       const result = await selectSession(this.queryForm);
-      this.arrangementList = result.arrangementList;
+      if (result.arrangementList.length > 0) {
+        this.arrangementList = result.arrangementList;
+        this.selectedDate = this.arrangementList[0].arrangementDate;
+        console.log(this.arrangementList[0]);
+      }
       this.movieInfo = result.movie;
       this.actors = this.movieInfo.movieActor.split("/");
-      this.selectedDate = this.arrangementList[0].arrangementDate;
-      console.log(this.arrangementList[0]);
       this.loaded = true;
     },
 

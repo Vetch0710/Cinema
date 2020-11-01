@@ -1,5 +1,8 @@
 package com.Cinema_Management_System.Order.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.util.Date;
 
 /**
@@ -13,6 +16,8 @@ import java.util.Date;
  * * @param seatId          座位号
  * * @param orderStatus     订单状态(待支付/已支付/待评价/已完成)
  */
+@Data
+@Accessors(chain = true)
 public class Order {
     private long orderId;
     private int arrangementId;
@@ -32,63 +37,4 @@ public class Order {
         this.orderTime = orderTime;
     }
 
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
-    }
-
-    public int getArrangementId() {
-        return arrangementId;
-    }
-
-    public void setArrangementId(int arrangementId) {
-        this.arrangementId = arrangementId;
-    }
-
-    public float getOrderPrice() {
-        return orderPrice;
-    }
-
-    public void setOrderPrice(float orderPrice) {
-        this.orderPrice = orderPrice;
-    }
-
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public String getOrderSeat() {
-        return orderSeat;
-    }
-
-    public void setOrderSeat(String orderSeat) {
-        this.orderSeat = orderSeat;
-    }
-
-    public Date getOrderTime() {
-        return orderTime;
-    }
-
-    public void setOrderTime(Date orderTime) {
-        this.orderTime = orderTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderId=" + orderId +
-                ", arrangementId=" + arrangementId +
-                ", orderPrice=" + orderPrice +
-                ", orderStatus='" + orderStatus + '\'' +
-                ", orderSeat='" + orderSeat + '\'' +
-                ", orderTime=" + orderTime +
-                '}';
-    }
 }

@@ -1,5 +1,8 @@
 package com.Cinema_Management_System.Evaluation.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.util.Date;
 
 /**
@@ -12,6 +15,8 @@ import java.util.Date;
  * * @param evaluationContent   评价内容
  * * @param evaluationTime      评价时间
  */
+@Data
+@Accessors(chain = true)
 public class Evaluation {
     private int evaluationId, customerId;
     private float evaluationScore;
@@ -32,80 +37,4 @@ public class Evaluation {
         this.evaluationTime = evaluationTime;
     }
 
-    public int getEvaluationId() {
-        return evaluationId;
-    }
-
-    public void setEvaluationId(int evaluationId) {
-        this.evaluationId = evaluationId;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public float getEvaluationScore() {
-        return evaluationScore;
-    }
-
-    public void setEvaluationScore(float evaluationScore) {
-        this.evaluationScore = evaluationScore;
-    }
-
-    public String getEvaluationContent() {
-        return evaluationContent;
-    }
-
-    public void setEvaluationContent(String evaluationContent) {
-        this.evaluationContent = evaluationContent;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getMovieName() {
-        return movieName;
-    }
-
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
-    public String getCustomerPicture() {
-        return customerPicture;
-    }
-
-    public void setCustomerPicture(String customerPicture) {
-        this.customerPicture = customerPicture;
-    }
-    public Date getEvaluationTime() {
-        return evaluationTime;
-    }
-
-    public void setEvaluationTime(Date evaluationTime) {
-        this.evaluationTime = evaluationTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Evaluation{" +
-                "evaluationId=" + evaluationId +
-                ", customerId=" + customerId +
-                ", evaluationScore=" + evaluationScore +
-                ", evaluationContent='" + evaluationContent + '\'' +
-                ", customerName='" + customerName + '\'' +
-                ", movieName='" + movieName + '\'' +
-                ", customerPicture='" + customerPicture + '\'' +
-                ", evaluationTime=" + evaluationTime +
-                '}';
-    }
 }

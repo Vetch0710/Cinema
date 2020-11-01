@@ -10,7 +10,6 @@ import com.Cinema_Management_System.utils.Exception.DeleteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,13 +90,23 @@ public class MovieController {
     @RequestMapping(value = "/getFlag/{movieId}", method = RequestMethod.GET)
     public boolean getFlag(@PathVariable int movieId, HttpServletRequest request) {
         System.out.println(request.getHeader("accessToken"));
-       try {
-           String[] str = (request.getHeader("accessToken").split("-"));
-           int customerId = Integer.parseInt(str[0]);
-           return movieService.getFlag(movieId, customerId);
-       }catch (NullPointerException e){
-           return false;
-       }
+        try {
+            String[] str = (request.getHeader("accessToken").split("-"));
+            int customerId = Integer.parseInt(str[0]);
+            return movieService.getFlag(movieId, customerId);
+        } catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    @RequestMapping(value = "/getMovieId/{movieName}", method = RequestMethod.GET)
+    public int getMovieId(@PathVariable String movieName) throws UnsupportedEncodingException {
+        movieName = new String(movieName.getBytes("ISO-8859-1"), "UTF-8");
+        try {
+            return movieService.getMovieId(movieName);
+        }catch (Exception e){
+            return 0;
+        }
     }
 
     @RequestMapping(value = "/{movieId}", method = RequestMethod.DELETE)
@@ -127,12 +135,12 @@ public class MovieController {
         movieService.updateMovie(movie);
     }
 
-    @RequestMapping(value = "/changeWant/{wantFlag}/{movieId}",method = RequestMethod.PUT)
-    public void changeWant(@PathVariable int wantFlag,@PathVariable int movieId,HttpServletRequest request){
+    @RequestMapping(value = "/changeWant/{wantFlag}/{movieId}", method = RequestMethod.PUT)
+    public void changeWant(@PathVariable int wantFlag, @PathVariable int movieId, HttpServletRequest request) {
         System.out.println(request.getHeader("accessToken"));
         String[] str = (request.getHeader("accessToken").split("-"));
         int customerId = Integer.parseInt(str[0]);
-        movieService.changeWant(wantFlag,movieId,customerId);
+        movieService.changeWant(wantFlag, movieId, customerId);
     }
 
     @RequestMapping(value = "/addMovie", method = RequestMethod.POST)

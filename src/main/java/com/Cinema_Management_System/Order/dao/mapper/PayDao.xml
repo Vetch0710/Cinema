@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Cinema_Management_System.Order.dao.PayDao"><!--namespace:定义一个操作包  -->
+    <select id="getOrderInfo" resultType="com.Cinema_Management_System.Order.entity.PayOrder">
+        select o.order_id,o.order_seat,o.order_price,o.arrangement_id,m.movie_name
+        from Cinema_order o,Cinema_movie m
+        where m.movie_id = o.movie_id and o.order_id = #{orderId}
+    </select>
+</mapper>

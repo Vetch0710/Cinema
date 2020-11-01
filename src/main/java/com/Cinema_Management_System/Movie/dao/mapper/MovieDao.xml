@@ -144,6 +144,13 @@
         </if>
     </select>
 
+    <select id="getMovieId" resultType="int">
+        select movie_id
+        from Cinema_movie
+        where movie_name like concat(concat('%',#{movieName}),'%')
+        limit 0,1
+    </select>
+
     <delete id="deleteMovie" parameterType="integer">
         delete from Cinema_movie
         where movie_id = #{movieId}

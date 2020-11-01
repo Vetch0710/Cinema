@@ -15,9 +15,17 @@
         from Cinema_seat
         where arrangement_id = #{arrangementId} and
         <foreach collection="selectedSeats" index="index" item="item" open="(" separator="or" close=")">
-            seat_num like CONCAT(CONCAT('%',#{item}),'%'))
+            seat_num like CONCAT(CONCAT('%',#{item}),'%')
         </foreach>
     </select>
+
+    <select id="getOrderStatus" resultType="string">
+        select order_status from Cinema_order where order_id = #{orderId}
+    </select>
+
+    <delete id="delOrder" parameterType="long">
+        delete from Cinema_order where order_id = #{orderId}
+    </delete>
 
     <insert id="generateOrder" parameterType="com.Cinema_Management_System.Order.entity.SqlOrder">
         insert into Cinema_order(order_id,order_seat,order_status,order_time,movie_id,customer_id,arrangement_id,order_price)

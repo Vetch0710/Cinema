@@ -1,6 +1,9 @@
 package com.Cinema_Management_System.Order.entity;
 
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.util.Date;
 
 /**
@@ -8,6 +11,8 @@ import java.util.Date;
  * @Auther GaoYi
  * @Date 2020/10/30 1:55 下午
  */
+@Data
+@Accessors(chain = true)
 public class SqlOrder extends Order {
     private int customerId, movieId;
 
@@ -20,30 +25,6 @@ public class SqlOrder extends Order {
         this.movieId = movieId;
     }
 
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public int getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
-    }
-
-    @Override
-    public String toString() {
-        return "SqlOrder{" +
-                ", customerId=" + customerId +
-                ", movieId=" + movieId +
-                '}';
-    }
 
     @Override
     public boolean equals(Object obj) {

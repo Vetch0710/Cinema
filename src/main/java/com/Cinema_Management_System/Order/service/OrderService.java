@@ -15,4 +15,6 @@ public interface OrderService {
     PayOrder getOrderInfo(long orderId);
 
     void modifyStatus(long orderId, String status) throws Exception;
+
+    String getOrderStatus(long orderId);
 }

@@ -13,22 +13,25 @@
         WHERE
         o.customer_id = c.customer_id AND o.movie_id = m.movie_id
         ) AS w ON w.order_id = e.order_id
-        <if test="selType != null and selType !='' and selContent != null and selContent != ''">
-            <where>
+        <where>
+            <if test="1==1">
+                e.evaluation_time is not null
+            </if>
+            <if test="selContent != null and selContent != ''">
                 <if test="selType == 'movieId'">
-                    w.movie_id = #{selContent}
+                    and w.movie_id = #{selContent}
                 </if>
                 <if test="selType == 'movieName'">
-                    w.movie_name like CONCAT(CONCAT('%',#{selContent}),'%')
+                    and w.movie_name like CONCAT(CONCAT('%',#{selContent}),'%')
                 </if>
                 <if test="selType == 'evaluationId'">
-                    e.evaluation_id = #{selContent}
+                    and e.evaluation_id = #{selContent}
                 </if>
                 <if test="selType == 'customerId'">
-                    w.customer_id = #{selContent}
+                    and w.customer_id = #{selContent}
                 </if>
-            </where>
-        </if>
+            </if>
+        </where>
     </select>
 
     <select id="getEvaluations" resultType="com.Cinema_Management_System.Evaluation.entity.Evaluation">
@@ -42,22 +45,25 @@
         WHERE
         o.customer_id = c.customer_id AND o.movie_id = m.movie_id
         ) AS w ON w.order_id = e.order_id
-        <if test="selType != null and selType !='' and selContent != null and selContent != ''">
-            <where>
+        <where>
+            <if test="1==1">
+                e.evaluation_time is not null
+            </if>
+            <if test="selContent != null and selContent != ''">
                 <if test="selType == 'movieId'">
-                    w.movie_id = #{selContent}
+                    and w.movie_id = #{selContent}
                 </if>
                 <if test="selType == 'movieName'">
-                    w.movie_name like CONCAT(CONCAT('%',#{selContent}),'%')
+                    and w.movie_name like CONCAT(CONCAT('%',#{selContent}),'%')
                 </if>
                 <if test="selType == 'evaluationId'">
-                    e.evaluation_id = #{selContent}
+                    and e.evaluation_id = #{selContent}
                 </if>
                 <if test="selType == 'customerId'">
-                    w.customer_id = #{selContent}
+                    and w.customer_id = #{selContent}
                 </if>
-            </where>
-        </if>
+            </if>
+        </where>
         limit #{pageStart},#{pageSize}
     </select>
 

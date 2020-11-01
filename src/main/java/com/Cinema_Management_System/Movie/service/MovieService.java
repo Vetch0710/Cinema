@@ -48,4 +48,5 @@ public interface MovieService {
 
     void changeWant(int wantFlag, int movieId, int customerId);
 
+    int getMovieId(String movieName);
 }

@@ -5,9 +5,11 @@ import com.Cinema_Management_System.Movie.entity.HitMovie;
 import com.Cinema_Management_System.Movie.entity.Movie;
 import com.Cinema_Management_System.Movie.entity.UpcomingMovie;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface MovieDao {
     //查询全部影片信息
     List<DetailMovie> selectMovieAll(@Param("selType") String selType, @Param("selContent") String selContent, @Param("pageStart") Integer pageStart, @Param("pageSize") Integer pageSize);
@@ -54,4 +56,6 @@ public interface MovieDao {
     int addWant(@Param("movieId") int movieId, @Param("customerId") int customerId);
 
     int delWant(@Param("movieId") int movieId, @Param("customerId") int customerId);
+
+    int getMovieId(@Param("movieName") String movieName);
 }

@@ -5,9 +5,11 @@ import com.Cinema_Management_System.Arrangement.entity.Arrangement;
 import com.Cinema_Management_System.Arrangement.entity.UsedTime;
 import com.Cinema_Management_System.Movie.entity.ArrangementMovie;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ArrangementDao {
     Arrangement getArrange(int arrangementId);
 

@@ -1,5 +1,7 @@
 package com.Cinema_Management_System.Arrangement.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -16,16 +18,19 @@ import java.util.Date;
  * * @param arrangementTime  场次时间
  */
 
+@Data
+@Accessors(chain = true)
 @Component(value = "Arrangement")
 public class Arrangement {
-    private int arrangementId, arrangementPlace, arrangementPrice, movieId;
+    private int arrangementId, arrangementPlace, movieId;
+    private float arrangementPrice;
     private Date arrangementTime;
     private String movieName;
 
     public Arrangement() {
     }
 
-    public Arrangement(int arrangementId, int arrangementPlace, int arrangementPrice, int movieId, Date arrangementTime, String movieName) {
+    public Arrangement(int arrangementId, int arrangementPlace, float arrangementPrice, int movieId, Date arrangementTime, String movieName) {
         this.arrangementId = arrangementId;
         this.arrangementPlace = arrangementPlace;
         this.arrangementPrice = arrangementPrice;
@@ -34,63 +39,5 @@ public class Arrangement {
         this.movieName = movieName;
     }
 
-    public int getArrangementId() {
-        return arrangementId;
-    }
 
-    public void setArrangementId(int arrangementId) {
-        this.arrangementId = arrangementId;
-    }
-
-    public int getArrangementPlace() {
-        return arrangementPlace;
-    }
-
-    public void setArrangementPlace(int arrangementPlace) {
-        this.arrangementPlace = arrangementPlace;
-    }
-
-    public int getArrangementPrice() {
-        return arrangementPrice;
-    }
-
-    public void setArrangementPrice(int arrangementPrice) {
-        this.arrangementPrice = arrangementPrice;
-    }
-
-    public int getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
-    }
-
-    public Date getArrangementTime() {
-        return arrangementTime;
-    }
-
-    public void setArrangementTime(Date arrangementTime) {
-        this.arrangementTime = arrangementTime;
-    }
-
-    public String getMovieName() {
-        return movieName;
-    }
-
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
-    @Override
-    public String toString() {
-        return "Arrangement{" +
-                "arrangementId=" + arrangementId +
-                ", arrangementPlace=" + arrangementPlace +
-                ", arrangementPrice=" + arrangementPrice +
-                ", movieId=" + movieId +
-                ", arrangementTime=" + arrangementTime +
-                ", movieName='" + movieName + '\'' +
-                '}';
-    }
 }

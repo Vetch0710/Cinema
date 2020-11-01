@@ -1,5 +1,8 @@
 package com.Cinema_Management_System.Order.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.util.Date;
 
 /**
@@ -7,6 +10,8 @@ import java.util.Date;
  * @Auther GaoYi
  * @Date 2020/10/30 1:46 下午
  */
+@Data
+@Accessors(chain = true)
 public class PayOrder extends Order {
     private int arrangementPlace;
     private String movieName;
@@ -22,36 +27,5 @@ public class PayOrder extends Order {
         this.arrangementTime = arrangementTime;
     }
 
-    public int getArrangementPlace() {
-        return arrangementPlace;
-    }
 
-    public void setArrangementPlace(int arrangementPlace) {
-        this.arrangementPlace = arrangementPlace;
-    }
-
-    public String getMovieName() {
-        return movieName;
-    }
-
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
-    public Date getArrangementTime() {
-        return arrangementTime;
-    }
-
-    public void setArrangementTime(Date arrangementTime) {
-        this.arrangementTime = arrangementTime;
-    }
-
-    @Override
-    public String toString() {
-        return "PayOrder{" +
-                "arrangementPlace=" + arrangementPlace +
-                ", movieName='" + movieName + '\'' +
-                ", arrangementTime=" + arrangementTime +
-                '}';
-    }
 }

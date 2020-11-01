@@ -10,7 +10,7 @@
                 <span class="evaluationDetail-title">订单信息：</span>
                 <div class="evaluationDetail-title-info">
                     <span class="info-det">电影名称：{{orderDetail.movieName}}</span>
-                    <span class="info-det">订单时间：{{orderDetail.orderTime}}</span>
+                    <span class="info-det">订单时间：{{orderDetail.orderTime |changeTime}}</span>
                 </div>
             </div>
             <div class="evaluationDetail evaScore">
@@ -41,7 +41,8 @@
 </template>
 
 <script>
-    import { saveEvaluation } from "@/api/EvaluationList";
+    import {saveEvaluation} from "@/api/EvaluationList";
+    import {thirteenBitTimestamp} from "@/utils/index";
 
     export default {
         name: "evaluationEdit.vue",
@@ -53,16 +54,26 @@
                 orderDetail: '',
                 score: null,
                 content: null,
-                evaData:'',
+                evaData: '',
             };
+        },
+        filters: {
+            changeTime: function (value) {
+                console.log(typeof value)
+                if (typeof value !== "number") {
+                    return value;
+                }
+
+                return thirteenBitTimestamp(value)
+            }
         },
         created() {
         },
         methods: {
             showEdit(row) {
                 console.log(row);
-                this.orderDetail = row.orderInfo;
-                this.evaData=row;
+                this.orderDetail = row;
+                this.evaData = row;
                 this.dialogFormVisible = true;
             },
             close() {
@@ -72,16 +83,22 @@
                 console.log(this.score)
                 console.log(this.content)
                 if (this.score && this.content) {
-                    const {msg} = await saveEvaluation({
-                        orderId:this.orderDetail.orderId,
-                        score: this.score,
-                        content: this.content,
-                        evaluationTime:new Date()
+                    const msg = await saveEvaluation({
+                        orderId: this.orderDetail.orderId,
+                        evaluationScore: this.score,
+                        evaluationContent: this.content,
+                        evaluationTime: new Date()
                     });
-                    this.$baseMessage(msg, "success");
+                    if (msg === "success") {
+                        this.$baseMessage("评价成功", "success");
+                        this.score = null;
+                        this.content = null;
+                    } else {
+                        this.$baseMessage(msg, "error");
+                    }
                     this.$emit("fetch-data");
                     this.close();
-                }else {
+                } else {
                     this.$baseMessage("请检查信息是否填写完全", "error");
                 }
 

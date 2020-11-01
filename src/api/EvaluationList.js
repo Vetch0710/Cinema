@@ -25,15 +25,15 @@ export function getMovieEvaluation(data) {
     },
   });
 }
-export function getCusEva() {
+export function getEvaluation() {
   return request({
-    url: "/evaluationList/getCusEva",
-    method: "post",
+    url: "/evaluation/getEvaluation",
+    method: "get",
   });
 }
 export function saveEvaluation(data) {
   return request({
-    url: "/evaluationList/saveEvaluation",
+    url: "/evaluation/saveEvaluation",
     method: "post",
     data
   });

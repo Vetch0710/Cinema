@@ -6,7 +6,8 @@
                 <li v-if="index !== 0">
                     <span class="Info-type">{{ item.type }}</span>
                     <span v-if="item.type === '密码'" class="Info-value">******</span>
-                    <span v-else-if="item.type === '性别' && (item.value !=='男' && item.value !=='女') " class="Info-value">
+                    <span v-else-if="item.type === '性别' && (item.value !=='男' && item.value !=='女') "
+                          class="Info-value">
             还未填写数据
           </span>
                     <span v-else-if="item.type !== '头像' && item.value !== ''" class="Info-value">
@@ -21,7 +22,7 @@
                 vertical-align: middle;
                 display: inline-block;
               "
-                    :src="url"
+                    :src="'http://8.131.77.164:8089/images/'+url"
                     :fit="'contain'"
             ></el-image>
           </span>
@@ -72,7 +73,7 @@
                 layout: "total, sizes, prev, pager, next, jumper",
                 elementLoadingText: "正在加载...",
                 url: "",
-                baseU: 'http://39.97.217.243:8089/images/',
+                // baseU: 'http://39.97.217.243:8089/images/',
                 // id:this.accessToken,
                 action: baseURL + "/UserInfo/upload",
             };
@@ -91,11 +92,11 @@
                 console.log(file)
                 // this.url = URL.createObjectURL(file.raw);log
                 console.log(this.list)
-                this.url = this.baseU + res;
+                this.url = res;
                 console.log(this.url)
-                if (res==='fail'){
+                if (res === 'fail') {
                     this.$baseMessage("上传失败，请检查您的网络", "error");
-                }else {
+                } else {
                     this.$baseMessage("上传成功", "success");
                 }
                 console.log(this.list)
@@ -123,9 +124,7 @@
                 console.log(data[0].type);
                 this.list = data;
                 this.url = data[1].value;
-                setTimeout(() => {
-                    this.listLoading = false;
-                }, 300);
+                this.listLoading = false;
             },
         },
     };

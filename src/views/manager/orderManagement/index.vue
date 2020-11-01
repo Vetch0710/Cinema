@@ -5,7 +5,7 @@
         <el-form :inline="true" :model="queryForm" @submit.native.prevent>
           <el-form-item>
             <el-input
-                    v-model.trim="queryForm.permission"
+                    v-model.trim="queryForm.selectValues"
                     placeholder="请输入查询内容"
                     clearable
             ><el-select
@@ -14,7 +14,6 @@
                     placeholder="查询条件"
                     style="width: 100px"
             >
-              <el-option label="订单编号" value="orderId" ></el-option>
               <el-option label="电影名称" value="movieName"></el-option>
               <el-option
                       label="用户名称"
@@ -63,7 +62,7 @@
         >
           <template slot-scope="scope">
             <div class="OrderManagement-seatInfo">
-              <span v-for="( item, index) in scope.row.orderSeat" :key="index" style="display: inline-block;padding: 0 5px">{{item}}</span>
+              <span v-for="( item, index) in scope.row.orderSeat.split(',')" :key="index" style="display: inline-block;padding: 0 5px">{{item}}</span>
             </div>
           </template>
 
@@ -73,11 +72,17 @@
                 show-overflow-tooltip
                 prop="orderTime"
                 label="订单时间"
+                :formatter="changeTime"
         ></el-table-column>
         <el-table-column
                 show-overflow-tooltip
                 prop="orderPrice"
                 label="金额"
+        ></el-table-column>
+        <el-table-column
+                show-overflow-tooltip
+                prop="orderStatus"
+                label="状态"
         ></el-table-column>
         <el-table-column
                 show-overflow-tooltip
@@ -100,8 +105,9 @@
 </template>
 
 <script>
-  import {getCusOrder} from "@/api/order";
+  import {getOrderList} from "@/api/order";
   import path from "path";
+  import {thirteenBitTimestamp} from "@/utils/index";
 
   export default {
     name: "OrderManagement",
@@ -125,6 +131,10 @@
       this.fetchData();
     },
     methods: {
+      changeTime: function (value) {
+        // console.log( value)
+        return thirteenBitTimestamp(value.orderTime)
+      },
       // setSelectRows(val) {
       //   this.selectRows = val;
       // },
@@ -151,9 +161,11 @@
 
       async fetchData() {
         this.listLoading = true;
-        const { data, totalCount } = await getCusOrder(this.queryForm);
-        console.log(data)
-        this.list = data;
+        const { result, totalCount } = await getOrderList(this.queryForm);
+        // console.log(data)
+        this.list = result;
+        // console.log(this.list.orderSeat)
+        // this.list.orderSeat=this.list.orderSeat.split(",")
         // console.log(typeof this.list);
         // console.log(parseInt(this.list[this.list.length - 1].id) + 1);
         this.total = totalCount;

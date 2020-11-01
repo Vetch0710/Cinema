@@ -1,9 +1,10 @@
 <template>
     <div class="agent-contain">
         <div style=" overflow: hidden;">
-            <div style="margin: 20px 0 0 30px;font-weight: bold;font-size: 16px">客服服务</div>
+<!--            <div style="margin: 20px 0 0 30px;font-weight: bold;font-size: 16px">客服服务</div>-->
             <el-row>
                 <el-col :span="18" :offset="3">
+                    <div style="margin: 20px 0 0 30px;font-weight: bold;font-size: 18px">客服服务</div>
                     <div
                             id="dataShow"
                             onmouseover="this.style.overflow='overlay'"
@@ -31,7 +32,7 @@
                 display: inline-block;
                 margin-right: 10px;
               "
-                                  :src="'http://39.97.217.243:8089/images/'+avatar"
+                                  :src="'http://8.131.77.164:8089/images/'+avatar"
                                   :fit="'contain'"
                           ></el-image>
 
@@ -88,7 +89,7 @@
                 display: inline-block;
                 margin-right: 10px;
               "
-                                            :src="'http://39.97.217.243:8089/images/'+avatar"
+                                            :src="'http://8.131.77.164:8089/images/'+avatar"
                                             :fit="'contain'"
                                     ></el-image>
 

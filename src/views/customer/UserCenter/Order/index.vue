@@ -31,8 +31,8 @@
                         <div class="customerOrder-orderInfo-info" @click="orderDetail(item)">
                             <div class="info-box">
                                 <p class="info-title">{{item.movieName}}</p>
-                                <p class="info">下单时间：{{item.orderTime}}</p>
-                                <p class="info">数量：{{ Object.keys(item.orderSeat).length}}</p>
+                                <p class="info">下单时间：{{item.orderTime |changeTime }}</p>
+                                <p class="info">数量：{{ Object.keys(item.orderSeat.split(',')).length}}</p>
                             </div>
 
 
@@ -73,6 +73,7 @@
 
 <script>
     import {getOrderList} from "@/api/order";
+    import {thirteenBitTimestamp} from "@/utils/index";
     import Edit from "./components/orderDetail.vue";
 
     export default {
@@ -101,6 +102,16 @@
             this.fetchData();
 
         },
+        filters: {
+            changeTime: function (value) {
+                console.log(typeof value)
+                if (typeof value !== "number") {
+                    return value;
+                }
+
+                return thirteenBitTimestamp(value)
+            }
+        },
         computed: {
             activeIndex() {
                 const route = this.$route;
@@ -126,12 +137,10 @@
                     query: {
                         data:
                             {
-                                orderInfo: {
-                                    orderId: item.orderId,
-                                    orderImg: item.orderImg,
-                                    movieName:  item.movieName,
-                                    orderTime:  item.orderTime,
-                                },
+                                orderId: item.orderId,
+                                orderImg: item.orderImg,
+                                movieName: item.movieName,
+                                orderTime: item.orderTime,
                                 evaluationScore: null,
                                 evaluationContent: null,
                                 evaluationTime: null,
@@ -177,13 +186,11 @@
                     this.flag = false;
                     this.total = 0;
                     this.listLoading = true;
-                    const {data} = await getOrderList({type: this.type});
-                    setTimeout(() => {
-                        this.orderAllInfo = data.orderInfo;
-                        this.filterData();
-                        this.flag = true;
-                        this.listLoading = false;
-                    }, 1000);
+                    const {result} = await getOrderList({type: this.type});
+                    this.orderAllInfo = result;
+                    this.filterData();
+                    this.flag = true;
+                    this.listLoading = false;
 
                 }
             },

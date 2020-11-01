@@ -221,7 +221,7 @@
             console.log(param);
             const msg = await resetPassword(param);
             if (msg==='success'){
-              this.$baseMessage("注册成功", "success");
+              this.$baseMessage("修改成功", "success");
               this.$router.push("/login").catch(() => {});
             }else {
               this.$baseMessage(msg, "error");

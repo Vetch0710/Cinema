@@ -2,9 +2,9 @@ import request from "@/utils/request";
 
 export function getOrderList(data) {
   return request({
-    url: "/Order/getOrderList",
+    url: "/order/getOrderList",
     method: "get",
-    data,
+    params:data,
   });
 }
 export function getOrderInfo(data) {
@@ -13,13 +13,7 @@ export function getOrderInfo(data) {
     method: "get",
   });
 }
-export function getCusOrder(data) {
-  return request({
-    url: "/Order/getCusOrder",
-    method: "post",
-    data,
-  });
-}
+
 export function generateOrder(data) {
   return request({
     url: "/order/generateOrder",

@@ -4,7 +4,7 @@ export async function getStatistics(data) {
     console.log("获取销售额++++data:+++"+data)
     return request({
         url: "/getStatistics",
-        method: "post",
-        data,
+        method: "get",
+        params:data,
     });
 }

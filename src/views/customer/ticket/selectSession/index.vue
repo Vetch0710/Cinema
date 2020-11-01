@@ -153,11 +153,13 @@ export default {
 
     async fetchData() {
       const result = await selectSession(this.queryForm);
-      this.arrangementList = result.arrangementList;
+      if (result.arrangementList.length > 0) {
+        this.arrangementList = result.arrangementList;
+        this.selectedDate = this.arrangementList[0].arrangementDate;
+        console.log(this.arrangementList[0]);
+      }
       this.movieInfo = result.movie;
       this.actors = this.movieInfo.movieActor.split("/");
-      this.selectedDate = this.arrangementList[0].arrangementDate;
-      console.log(this.arrangementList[0]);
       this.loaded = true;
     },
 

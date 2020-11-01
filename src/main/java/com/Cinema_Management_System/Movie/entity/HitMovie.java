@@ -1,10 +1,15 @@
 package com.Cinema_Management_System.Movie.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 /**
  * @Description class
  * @Auther GaoYi
  * @Date 2020/10/29 1:46 下午
  */
+@Data
+@Accessors(chain = true)
 public class HitMovie extends Movie {
     private float lowestPrice;
 
@@ -16,18 +21,4 @@ public class HitMovie extends Movie {
         this.lowestPrice = lowestPrice;
     }
 
-    public float getLowestPrice() {
-        return lowestPrice;
-    }
-
-    public void setLowestPrice(float lowestPrice) {
-        this.lowestPrice = lowestPrice;
-    }
-
-    @Override
-    public String toString() {
-        return "SimpleMovie{" +
-                "lowestPrice=" + lowestPrice +
-                '}';
-    }
 }

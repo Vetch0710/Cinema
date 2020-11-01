@@ -1,10 +1,15 @@
 package com.Cinema_Management_System.Movie.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 /**
  * @Description class
  * @Auther GaoYi
  * @Date 2020/10/29 9:05 下午
  */
+@Data
+@Accessors(chain = true)
 public class ArrangementMovie extends Movie {
     private String movieTime, movieActor, movieType;
 
@@ -18,36 +23,4 @@ public class ArrangementMovie extends Movie {
         this.movieType = movieType;
     }
 
-    public String getMovieTime() {
-        return movieTime;
-    }
-
-    public void setMovieTime(String movieTime) {
-        this.movieTime = movieTime;
-    }
-
-    public String getMovieActor() {
-        return movieActor;
-    }
-
-    public void setMovieActor(String movieActor) {
-        this.movieActor = movieActor;
-    }
-
-    public String getMovieType() {
-        return movieType;
-    }
-
-    public void setMovieType(String movieType) {
-        this.movieType = movieType;
-    }
-
-    @Override
-    public String toString() {
-        return "ArrangementMovie{" +
-                "movieTime='" + movieTime + '\'' +
-                ", movieActor='" + movieActor + '\'' +
-                ", movieType='" + movieType + '\'' +
-                '}';
-    }
 }

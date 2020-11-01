@@ -1,5 +1,8 @@
 package com.Cinema_Management_System.Evaluation.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.util.Date;
 
 /**
@@ -12,6 +15,8 @@ import java.util.Date;
  * * @param evaluationContent   评价内容
  * * @param evaluationTime      评价时间
  */
+@Data
+@Accessors(chain = true)
 public class Evaluation {
     private Integer evaluationId, customerId,orderId;
     private float evaluationScore;

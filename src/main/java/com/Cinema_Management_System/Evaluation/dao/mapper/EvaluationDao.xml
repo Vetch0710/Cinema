@@ -45,7 +45,6 @@
         WHERE
         o.customer_id = c.customer_id AND o.movie_id = m.movie_id
         ) AS w ON w.order_id = e.order_id
-
         <where>
             <if test="1==1">
                 e.evaluation_time is not null
@@ -65,7 +64,6 @@
                 </if>
             </if>
         </where>
-
         limit #{pageStart},#{pageSize}
     </select>
 

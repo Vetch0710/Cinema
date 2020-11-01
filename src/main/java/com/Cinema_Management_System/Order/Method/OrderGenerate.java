@@ -23,11 +23,15 @@ public class OrderGenerate implements Callable<String> {
         this.sqlOrder = sqlOrder;
     }
 
-    public String generateOrder() throws Exception {
+    public String generateOrder() {
         synchronized (sqlOrder) {
             if (orderDao.soldSeats(selectedSeats, sqlOrder.getArrangementId()) == 0) {
-                orderDao.generateOrder(sqlOrder);
-                return "success";
+                int row = orderDao.generateOrder(sqlOrder);
+                if (row > 0) {
+                    return "success";
+                } else {
+                    return "error";
+                }
             } else {
                 return "error";
             }
@@ -36,7 +40,7 @@ public class OrderGenerate implements Callable<String> {
 
 
     @Override
-    public String call() throws Exception {
+    public String call() {
         String message = generateOrder();
         return message;
     }

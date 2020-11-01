@@ -1,5 +1,8 @@
 package com.Cinema_Management_System.Arrangement.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.util.Date;
 
 /**
@@ -7,6 +10,8 @@ import java.util.Date;
  * @Auther GaoYi
  * @Date 2020/10/28 3:57 下午
  */
+@Data
+@Accessors(chain = true)
 public class UsedTime {
     private Date arrangementTime;
     private String movieTime;
@@ -19,27 +24,4 @@ public class UsedTime {
         this.movieTime = movieTime;
     }
 
-    public Date getArrangementTime() {
-        return arrangementTime;
-    }
-
-    public void setArrangementTime(Date arrangementTime) {
-        this.arrangementTime = arrangementTime;
-    }
-
-    public String getMovieTime() {
-        return movieTime;
-    }
-
-    public void setMovieTime(String movieTime) {
-        this.movieTime = movieTime;
-    }
-
-    @Override
-    public String toString() {
-        return "UsedTime{" +
-                "arrangementTime=" + arrangementTime +
-                ", movieTime='" + movieTime + '\'' +
-                '}';
-    }
 }

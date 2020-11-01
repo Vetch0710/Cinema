@@ -91,7 +91,7 @@ public class ArrangeController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     public String editMovies(@RequestBody Arrangement arrangement) {
-
+        System.out.println(arrangement);
         try {
             ArrangementService.updateArrangement(arrangement);
         } catch (DeleteException e) {

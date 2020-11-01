@@ -58,4 +58,6 @@ public interface MovieDao {
     int addWant(@Param("movieId") int movieId, @Param("customerId") int customerId);
 
     int delWant(@Param("movieId") int movieId, @Param("customerId") int customerId);
+
+    int getMovieId(@Param("movieName") String movieName);
 }

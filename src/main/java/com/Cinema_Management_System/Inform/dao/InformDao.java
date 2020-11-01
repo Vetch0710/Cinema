@@ -1,5 +1,6 @@
 package com.Cinema_Management_System.Inform.dao;
 
+
 import com.Cinema_Management_System.Inform.entity.Inform;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

@@ -1,10 +1,15 @@
 package com.Cinema_Management_System.Movie.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 /**
  * @Description class
  * @Auther GaoYi
  * @Date 2020/10/29 1:39 下午
  */
+@Data
+@Accessors(chain = true)
 public class Movie {
     private int movieId;
     private String movieName, moviePicture;
@@ -20,45 +25,5 @@ public class Movie {
         this.movieScore = movieScore;
     }
 
-    public int getMovieId() {
-        return movieId;
-    }
 
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
-    }
-
-    public String getMovieName() {
-        return movieName;
-    }
-
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
-    public String getMoviePicture() {
-        return moviePicture;
-    }
-
-    public void setMoviePicture(String moviePicture) {
-        this.moviePicture = moviePicture;
-    }
-
-    public float getMovieScore() {
-        return movieScore;
-    }
-
-    public void setMovieScore(float movieScore) {
-        this.movieScore = movieScore;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "movieId=" + movieId +
-                ", movieName='" + movieName + '\'' +
-                ", moviePicture='" + moviePicture + '\'' +
-                ", movieScore=" + movieScore +
-                '}';
-    }
 }

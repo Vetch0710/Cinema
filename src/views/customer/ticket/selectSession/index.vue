@@ -181,7 +181,7 @@ export default {
         }, 2000);
       } else {
         this.$router.push({
-          path: "/movies/seatSelection",
+          path: "/ticket/seatSelection",
           query: {
             arrangementId: arrangementId,
           },

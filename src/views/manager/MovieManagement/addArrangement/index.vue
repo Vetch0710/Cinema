@@ -57,6 +57,7 @@
           placeholder="请输入金额"
           v-model.number="form.arrangementPrice"
           :inputNumber="form.arrangementPrice"
+          @setarrangementprcie="setarrangementprcie"
         ></MyNumberInput
         >&nbsp;&nbsp;&nbsp;<span style="color: red">0&lt;price&lt;200</span>
       </el-form-item>
@@ -117,6 +118,10 @@ export default {
     MyNumberInput,
   },
   methods: {
+    setarrangementprcie: function (data) {
+      this.form.arrangementPrice = data;
+    },
+
     showArrange(row) {
       this.title = "排场";
       const assresult = Object.assign({}, row);

@@ -71,6 +71,7 @@
           show-overflow-tooltip
           prop="evaluationTime"
           label="评价时间"
+          :formatter="formatTime"
         ></el-table-column>
         <el-table-column
           show-overflow-tooltip
@@ -122,8 +123,21 @@ export default {
     //   this.selectRows = val;
     // },
 
-    formatMovieTime(row, column) {
-      return row.movieTime + "分钟";
+    formatTime(row, column) {
+      const date = new Date(row.evaluationTime);
+      return (
+        date.getFullYear() +
+        "-" +
+        (date.getMonth() + 1) +
+        "-" +
+        date.getDate() +
+        " " +
+        date.getHours() +
+        ":" +
+        date.getMinutes() +
+        ":" +
+        date.getSeconds()
+      );
     },
 
     handleSizeChange(val) {

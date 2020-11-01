@@ -39,18 +39,26 @@ export default {
       inputModel: this.inputNumber,
     };
   },
-  mounted() {},
-  methods: {
-    setParentModeVal() {
-      this.$emit("notify", this.inputModel);
+  computed: {
+    inputNum: function () {
+      return this.inputNumber;
     },
   },
+  mounted() {},
+
   watch: {
+    inputNumber: {
+      deep: true,
+      handler(newVal, oldVal) {
+        this.inputModel = newVal;
+      },
+    },
     inputModel: function (newVal, oldVal) {
       // 解决数字键盘可以输入输入多个小数点问题
       if (newVal === "" && oldVal.toString().indexOf(".") > 0) {
         this.inputModel = oldVal;
-        this.setParentModeVal();
+        this.$emit('setarrangementprcie', this.inputModel);
+        // this.setParentModeVal();
         return;
       }
       // 保留两位小数
@@ -59,22 +67,26 @@ export default {
         var pointIndex = newVal.indexOf(".");
         if (pointIndex > 0 && newVal.length - pointIndex > this.point + 1) {
           this.inputModel = oldVal;
-          this.setParentModeVal();
+          this.$emit('setarrangementprcie', this.inputModel);
+          // this.setParentModeVal();
           return;
         }
       }
       // 最大值
       if (this.max > 0 && newVal > this.max) {
         this.inputModel = oldVal;
-        this.setParentModeVal();
+        this.$emit('setarrangementprcie', this.inputModel);
+        // this.setParentModeVal();
         return;
       }
       if (newVal < 0) {
         this.inputModel = 0;
-        this.setParentModeVal();
+        this.$emit('setarrangementprcie', this.inputModel);
+        // this.setParentModeVal();
         return;
       }
-      this.setParentModeVal();
+      this.$emit('setarrangementprcie', this.inputModel);
+      // this.setParentModeVal();
     },
   },
 };

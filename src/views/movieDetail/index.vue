@@ -203,7 +203,13 @@
   </div>
 </template>
 <script>
-import { getInfo, getRelativeMovie, getFlag, changeWant } from "@/api/FilmInfo";
+import {
+  getInfo,
+  getRelativeMovie,
+  getFlag,
+  changeWant,
+  getMovieId,
+} from "@/api/FilmInfo";
 import { methods } from "@/components/customerLeftNav/customerleftNav.vue";
 import Evaluation from "@/views/movieDetail/Evaluation";
 import { getMovieEvaluation } from "@/api/EvaluationList";
@@ -260,12 +266,26 @@ export default {
   mounted() {},
   created() {
     this.fetchData();
-    this.fetchEvaluation();
+    // this.fetchEvaluation();
     // this.flag=true;
   },
   methods: {
     async fetchData() {
-      this.queryForm.movieId = this.$route.query.movieId;
+      if (
+        this.$route.query.movieId != null &&
+        yhis.$route.query.movieId != ""
+      ) {
+        this.queryForm.movieId = this.$route.query.movieId;
+      } else {
+        const id = await getMovieId(this.$route.query.movieName);
+        if (id == null || id == 0) {
+          this.$router.push({
+            path: "/404",
+          });
+        } else {
+          this.queryForm.movieId = id;
+        }
+      }
       const result = await getInfo(this.queryForm);
       this.movieInfo = null;
       this.movieInfo = result;
@@ -275,6 +295,7 @@ export default {
       this.actors = this.movieInfo.movieActor.split("/");
       this.directors = this.movieInfo.movieDirector.split("/");
       await this.fetchFlag();
+      await this.fetchEvaluation();
       await this.fetchRelativeMovie();
       this.flag = true;
     },

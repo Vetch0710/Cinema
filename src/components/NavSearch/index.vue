@@ -4,19 +4,19 @@
         <search></search>
         <div class="app-main">
             <transition mode="out-in" name="fade-transform">
-                <keep-alive>
+                <!-- <keep-alive> -->
                     <router-view name="steps"/>
-                </keep-alive>
+                <!-- </keep-alive> -->
             </transition>
             <transition mode="out-in" name="fade-transform">
-                <keep-alive>
+                <!-- <keep-alive> -->
                     <router-view name="left"/>
-                </keep-alive>
+                <!-- </keep-alive> -->
             </transition>
             <transition mode="out-in" name="fade-transform">
-                <keep-alive>
+                <!-- <keep-alive> -->
                     <router-view/>
-                </keep-alive>
+                <!-- </keep-alive> -->
             </transition>
         </div>
         <bottom></bottom>

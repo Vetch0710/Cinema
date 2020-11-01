@@ -55,7 +55,7 @@
                 display: inline-block;
                 margin-right: 10px;
               "
-                                                :src="'http://8.131.77.164:8089/images/%E5%9B%BE%E7%89%87.jpeg'"
+                                                :src="'http://8.131.77.164:8089/images/manager.jpeg'"
                                                 :fit="'contain'"
                                         ></el-image>
 
@@ -113,7 +113,7 @@
                 display: inline-block;
                 margin-right: 10px;
               "
-                                                :src="'http://8.131.77.164:8089/images/%E5%9B%BE%E7%89%87.jpeg'"
+                                                :src="'http://8.131.77.164:8089/images/manager.jpeg'"
                                                 :fit="'contain'"
                                         ></el-image>
 
@@ -201,6 +201,7 @@
                 nowList: [],
                 flag: false,
                 condition: '',
+                avatar:'',
             }
         },
         created() {
@@ -228,8 +229,10 @@
             async activeSession(item, index) {
                 this.flag = item;
                 let data = await gethistoryList({customerId: item.customerId});
-                console.log(data.success)
-                this.historyList = data.success;
+                console.log(data.history)
+                console.log(data.avatar)
+                this.historyList = data.history;
+                this.avatar = data.avatar;
                 this.problemList[index].messageCount = 0;
                 this.nowList = [];
                 console.log(this.flag)

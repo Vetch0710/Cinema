@@ -8,6 +8,10 @@
         select * from cinema_inform where customer_id=#{id};
     </select>
 
+    <select id="selectCustomerAvatar" resultType="String">
+        select customer_picture from cinema_customer where customer_id=#{id};
+    </select>
+
 
     <update id="updateStatus" parameterType="int">
         UPDATE cinema_inform SET info_status='已读' where  customer_id=#{customerId}

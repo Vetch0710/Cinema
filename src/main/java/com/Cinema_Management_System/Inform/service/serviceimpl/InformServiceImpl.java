@@ -47,4 +47,9 @@ public class InformServiceImpl implements InformService {
     public String selectCustomerName(int customerId) {
         return informDao.selectCustomerName(customerId);
     }
+
+    @Override
+    public String selectCustomerAvatar(int customerId) {
+        return informDao.selectCustomerAvatar(customerId);
+    }
 }

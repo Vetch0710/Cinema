@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Cinema_Management_System Maven Webapp</name>
+    <name>CinemaData</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -209,7 +209,7 @@
     </dependencies>
 
     <build>
-        <finalName>Cinema_Management_System</finalName>
+        <finalName>CinemaData</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>

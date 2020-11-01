@@ -34,10 +34,11 @@ public class InformController {
 
         List<Inform> messages = infoService.selectAllInfo(customerId);
         int i = infoService.updateStatus(customerId);
-
+        String s = infoService.selectCustomerAvatar(customerId);
         System.out.println("历史记录message++++++"+messages);
         Map<String,Object> result=new HashMap<>();
-        result.put("success",messages);
+        result.put("history",messages);
+        result.put("avatar",s);
         return result;
     }
 

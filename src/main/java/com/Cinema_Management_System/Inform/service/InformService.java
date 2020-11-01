@@ -13,4 +13,5 @@ public interface InformService {
     int updateStatus(int customerId);
     int updateStatusById(int infoId);
     String selectCustomerName(int customerId);
+    String selectCustomerAvatar(int customerId);
 }

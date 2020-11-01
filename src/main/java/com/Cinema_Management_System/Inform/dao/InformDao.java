@@ -8,12 +8,19 @@ import java.util.List;
 
 @Repository
 public interface InformDao {
-    List<Inform> selectAllInfo(@Param(value = "id")int customerId);
+    List<Inform> selectAllInfo(@Param(value = "id") int customerId);
+
     List<Inform> selectInfoByType();
+
     List<Inform> selectInfoByCId(int id);
+
     int updateStatus(int customerId);
+
     String selectCustomerName(int customerId);
+
     int updateStatusById(int infoId);
+
+    String selectCustomerAvatar(int customerId);
 
     int addInfo(Inform message);
 }

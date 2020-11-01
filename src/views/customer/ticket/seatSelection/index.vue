@@ -167,7 +167,9 @@ export default {
         arrangementId: this.$route.query.arrangementId,
       },
       generateForm: {
-        sqlOrder: {},
+        sqlOrder: {
+          orderPrice:Float32Array,
+        },
         selectedSeat: [],
       },
     };

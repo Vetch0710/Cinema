@@ -35,3 +35,10 @@ export function changeWant(data) {
     method: "put",
   });
 }
+export function getMovieId(data) {
+  console.log(data)
+  return request({
+    url: "/movie/getMovieId/" + data,
+    method: "get",
+  });
+}

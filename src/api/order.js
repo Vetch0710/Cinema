@@ -9,7 +9,7 @@ export function getOrderList(data) {
 }
 export function getOrderInfo(data) {
   return request({
-    url: "/order/getOrderInfo/"+data.orderId,
+    url: "/order/" + data.orderId,
     method: "get",
   });
 }
@@ -26,7 +26,26 @@ export function generateOrder(data) {
     method: "post",
     data: {
       sqlOrder: data.sqlOrder,
+      // arrangementId: data.sqlOrder.arrangementId,
+      // customerId: data.sqlOrder.customerId,
+      // movieId: data.sqlOrder.movieId,
+      // orderPrice: data.sqlOrder.orderPrice,
       selectedSeat: data.selectedSeat,
     }
+  });
+}
+
+export function jumpToPay(data) {
+  return request({
+    url: "/alipay",
+    method: "post",
+    data,
+  });
+}
+
+export function getOrderStatus(data) {
+  return request({
+    url: "/order/getOrderStatus/"+data,
+    method: "get",
   });
 }

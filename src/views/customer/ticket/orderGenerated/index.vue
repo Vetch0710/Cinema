@@ -64,10 +64,11 @@
   </div>
 </template>
 <script>
-import { getOrderInfo } from "@/api/order";
+import { getOrderInfo, jumpToPay } from "@/api/order";
 import { formatTime } from "@/utils/index";
 import path from "path";
 import { log } from "util";
+import { setTimeout } from "timers";
 export default {
   name: "OrderGenerated",
   data() {
@@ -85,14 +86,13 @@ export default {
   created() {
     this.fetchData();
   },
-  mounted() {},
+
   beforeDestroy() {
     // clearInterval(this.timer);
   },
   watch: {
     // 利用watch方法检测路由变化：
     $route: "fetchData",
-    // $route: "createTimer",
   },
   computed: {},
   methods: {
@@ -100,9 +100,14 @@ export default {
       const data = await getOrderInfo({
         orderId: this.orderId,
       });
-      this.orderInfo = data[0];
+      if (data == null || data == "") {
+        this.$router.replace({
+          path: "/404",
+        });
+      }
+      this.orderInfo = data;
       let orderDate = new Date(this.orderInfo.orderTime);
-      orderDate.setMinutes(orderDate.getMinutes() + 3);
+      orderDate.setMinutes(orderDate.getMinutes() + 15);
       let nowDate = new Date();
       let difftime = (orderDate - nowDate) / 1000; //计算时间差,并把毫秒转换成秒
       console.log(difftime);
@@ -137,6 +142,9 @@ export default {
     },
 
     createTimer() {
+      if (this.timer != null && this.timer != "") {
+        clearInterval(this.timer);
+      }
       log(this.timer);
       if (this.timer == 0 || this.timer == "") {
         this.timer = setInterval(this.renewSeconds, 1000);
@@ -168,13 +176,35 @@ export default {
         },
       });
     },
-    confirmPay() {
-      this.$router.push({
-        path: "/ticket/orderFinished",
-        query: {
-          orderId: this.orderInfo.orderId,
-        },
+
+    async confirmPay() {
+      let message = jumpToPay(this.orderInfo.orderId).then((res) => {
+        // if (res.status === 200 && this.form.type == 2) {
+        // if (res.status === 200) {
+        //返回参数
+        console.log(res);
+        let routerData = this.$router.resolve({
+          path: "/ticket/finance/applyText",
+          query: { htmls: res },
+        });
+        this.htmls = res;
+        //打开新页面
+        window.location.href = routerData.href;
+        // window.open(routerData.href);
+        const div = document.createElement("div");
+        div.innerHTML = htmls;
+        document.body.appendChild(div);
+        document.forms[0].submit();
+        // }
       });
+      console.log(message);
+      // console.log(result);
+      // this.$router.replace({
+      //   path: "/ticket/orderFinished",
+      //   query: {
+      //     orderId: this.orderInfo.orderId,
+      //   },
+      // });
     },
   },
 };

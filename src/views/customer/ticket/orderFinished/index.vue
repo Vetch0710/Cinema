@@ -1,6 +1,6 @@
 import path from 'path';
 <template>
-  <div class="orderFinished">
+  <div class="orderFinished" v-if="isFinished">
     <el-image
       style="width: 200px; height: 200px"
       :src="require('@/views/customer/ticket/orderFinished/paySuccessful.png')"
@@ -13,12 +13,37 @@ import path from 'path';
 </template>
 
 <script>
+import { getOrderStatus } from "@/api/order";
 export default {
   name: "OrderFinished",
   data() {
-    return {};
+    return {
+      isFinished: false,
+    };
+  },
+  created() {
+    this.getStatus();
   },
   methods: {
+    async getStatus() {
+      if (
+        this.$route.params.orderId != null &&
+        this.$route.params.orderId != ""
+      ) {
+        let status = await getOrderStatus(this.$route.params.orderId);
+        if (status == "待支付" || status == "" || status == null) {
+          this.$router.replace({
+            path: "/404",
+          });
+        } else if (status == "已完成" || status == "待评价") {
+          this.isFinished = true;
+        }
+      } else {
+        this.$router.replace({
+          path: "/404",
+        });
+      }
+    },
     showOrder() {
       this.$router.push({
         path: "/customerOrder/totalOrder",

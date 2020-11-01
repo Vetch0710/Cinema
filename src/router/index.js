@@ -62,17 +62,7 @@ export const constantRoutes = [
           title: "选择场次",
         },
       },
-      {
-        path: "seatSelection",
-        name: "SeatSelection",
-        components: {
-          default: () => import("@/views/customer/ticket/seatSelection/index"),
-          steps: () => import("@/views/customer/ticket/index"),
-        },
-        meta: {
-          title: "座位选择",
-        },
-      },
+
     ],
   },
 
@@ -99,7 +89,18 @@ export const asyncRoutes = [
     meta: {
       permissions: ["customer"],
     },
-    children: [
+    children: [{
+        path: "seatSelection",
+        name: "SeatSelection",
+        components: {
+          default: () => import("@/views/customer/ticket/seatSelection/index"),
+          steps: () => import("@/views/customer/ticket/index"),
+        },
+        meta: {
+          title: "座位选择",
+          permissions: ["customer"],
+        },
+      },
       //选择场次界面
       {
         path: "orderGenerated",
@@ -115,7 +116,7 @@ export const asyncRoutes = [
       },
 
       {
-        path: "orderFinished",
+        path: "orderFinished/:orderId",
         name: "orderFinished",
         components: {
           default: () => import("@/views/customer/ticket/orderFinished/index"),
@@ -123,6 +124,18 @@ export const asyncRoutes = [
         },
         meta: {
           title: "购票成功",
+          permissions: ["customer"],
+        },
+      },
+      {
+        path: "finance/applyText",
+        name: "pay",
+        components: {
+          default: () => import("@/views/customer/ticket/orderGenerated/pay"),
+          steps: () => import("@/views/customer/ticket/index")
+        },
+        meta: {
+          title: "付款",
           permissions: ["customer"],
         },
       },

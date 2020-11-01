@@ -69,11 +69,11 @@ export default {
 
   created() {},
   mounted() {},
-  watch: {
-    $route(to, from) {
-      this.$router.go(0);
-    },
-  },
+  // watch: {
+  //   $route(to, from) {
+  //     this.$router.go(0);
+  //   },
+  // },
   methods: {
     selectMovie() {
       this.$router.replace({

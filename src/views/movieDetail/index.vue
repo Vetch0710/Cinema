@@ -176,8 +176,8 @@
         ></span
       ><br /><br /><br />
       <h2>影片评价</h2>
-      <div class="evaluation-list" v-loading="listLoading" id="evaluation" >
-        <ul>
+      <div class="evaluation-list" v-loading="listLoading" id="evaluation">
+        <ul v-if="evaluationList">
           <li v-for="(item, index) in evaluationList" :key="index">
             <evaluation
               :customerName="item.customerName"
@@ -243,7 +243,7 @@ export default {
       permissions: "user/permissions",
     }),
     movieName: function () {
-      // this.fetchData();
+      this.fetchData();
       return this.$route.query.movieName;
     },
     movieReleaseTime: function () {

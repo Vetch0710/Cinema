@@ -19,7 +19,7 @@
       >
         <el-upload
           class="avatar-uploader"
-          action="http://localhost:8080/Cinema_Management_System/movie/upload"
+          :action="action"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
@@ -44,7 +44,7 @@
         <el-upload
           class="upload-demo"
           ref="upload"
-          action="http://localhost:8080/Cinema_Management_System/movie/upload"
+          :action="action"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :multiple="false"
@@ -126,7 +126,7 @@
 
 <script>
 import { doEdit, addMovie } from "@/api/MovieManagement";
-
+import {baseURL, tokenName} from "@/config/settings";
 export default {
   name: "MovieManagementEdit",
   data() {
@@ -137,6 +137,7 @@ export default {
         ".mp4,.mov,.avi,.wmv,.3gp,.mkv,.flv,.MP4,.MOV,.AVI,.WMV,.3GP,.MKV,.FLV",
       imageUrl: "",
       fileList: [],
+      action: baseURL + "/movie/upload",
       form: {
         moviePicture:"",
         movieTrailer: null,

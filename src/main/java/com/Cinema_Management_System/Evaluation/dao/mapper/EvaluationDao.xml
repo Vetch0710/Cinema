@@ -83,7 +83,7 @@
             WHERE o.customer_id = c.customer_id
               AND o.movie_id = m.movie_id
         ) AS w ON w.order_id = e.order_id
-        where w.movie_id = #{movieId}
+        where w.movie_id = #{movieId} and e.evaluation_content is not null
         limit #{pageStart},#{pageSize}
     </select>
     <select id="getMovieEvaluationCount" resultType="int">
@@ -97,7 +97,7 @@
             WHERE o.customer_id = c.customer_id
               AND o.movie_id = m.movie_id
         ) AS w ON w.order_id = e.order_id
-        where w.movie_id = #{movieId}
+        where w.movie_id = #{movieId} and e.evaluation_content is not null
     </select>
 
 

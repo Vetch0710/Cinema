@@ -71,6 +71,7 @@ public class OrderServiceImpl implements OrderService {
             throw new Exception("支付异常，请重新支付!");
         } else {
             OrderTask orderTask = new OrderTask(0, null, orderId);
+            orderDao.addEvaluation(orderId);
             orderTaskQueenThreads.endTask(orderTask);
         }
     }

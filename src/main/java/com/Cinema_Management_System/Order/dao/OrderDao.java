@@ -27,4 +27,6 @@ public interface OrderDao {
     int countAllOrder(@Param("cname") String cname, @Param("mname") String mname);
 
     List<CMOrder> selectAllOrder(@Param("id") Integer id, @Param("type") String type, @Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize, @Param("selectType") String selectType, @Param("selectValues") String selectValues);
+
+    int  addEvaluation(long id);
 }

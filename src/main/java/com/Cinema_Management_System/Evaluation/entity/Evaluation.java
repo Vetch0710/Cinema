@@ -18,7 +18,8 @@ import java.util.Date;
 @Data
 @Accessors(chain = true)
 public class Evaluation {
-    private Integer evaluationId, customerId,orderId;
+    private Integer evaluationId, customerId;
+    private long orderId;
     private float evaluationScore;
     private String evaluationContent, customerName, movieName, customerPicture;
     private Date evaluationTime, orderTime;
@@ -26,7 +27,7 @@ public class Evaluation {
     public Evaluation() {
     }
 
-    public Evaluation(Integer evaluationId, Integer customerId, Integer orderId, float evaluationScore, String evaluationContent, String customerName, String movieName, String customerPicture, Date evaluationTime, Date orderTime) {
+    public Evaluation(Integer evaluationId, Integer customerId, long orderId, float evaluationScore, String evaluationContent, String customerName, String movieName, String customerPicture, Date evaluationTime, Date orderTime) {
         this.evaluationId = evaluationId;
         this.customerId = customerId;
         this.orderId = orderId;
@@ -55,11 +56,11 @@ public class Evaluation {
         this.customerId = customerId;
     }
 
-    public Integer getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 

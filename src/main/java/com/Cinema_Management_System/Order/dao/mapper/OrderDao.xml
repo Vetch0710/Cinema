@@ -99,4 +99,9 @@
 
     </select>
 
+
+    <insert id="addEvaluation" >
+        insert into cinema_evaluation(order_id) values (#{id})
+    </insert>
+
 </mapper>

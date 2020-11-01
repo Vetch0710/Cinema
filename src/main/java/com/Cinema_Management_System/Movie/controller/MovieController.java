@@ -87,6 +87,11 @@ public class MovieController {
         return movieService.getRelativeMovie(movieType, movieActor, movieDirector);
     }
 
+    @RequestMapping(value = "/getRecommendMovie", method = RequestMethod.GET)
+    public List<Movie> getRecommendMovie() {
+        return movieService.getRecommendMovie();
+    }
+
     @RequestMapping(value = "/getFlag/{movieId}", method = RequestMethod.GET)
     public boolean getFlag(@PathVariable int movieId, HttpServletRequest request) {
         System.out.println(request.getHeader("accessToken"));

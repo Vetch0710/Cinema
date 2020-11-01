@@ -17,4 +17,7 @@ public interface OrderService {
     void modifyStatus(long orderId, String status) throws Exception;
 
     String getOrderStatus(long orderId);
+    //获取用户订单/全部订单
+    Map<String, Object> getAllOrder(Integer id, String identity, String type,Integer pageNo,Integer pageSize,String selectType,String selectValues) ;
+
 }

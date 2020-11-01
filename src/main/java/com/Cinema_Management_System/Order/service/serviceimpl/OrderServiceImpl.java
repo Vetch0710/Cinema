@@ -3,6 +3,7 @@ package com.Cinema_Management_System.Order.service.serviceimpl;
 import com.Cinema_Management_System.Order.Method.DelOrder;
 import com.Cinema_Management_System.Order.Method.OrderGenerate;
 import com.Cinema_Management_System.Order.dao.OrderDao;
+import com.Cinema_Management_System.Order.entity.CMOrder;
 import com.Cinema_Management_System.Order.entity.PayOrder;
 import com.Cinema_Management_System.Order.entity.SqlOrder;
 import com.Cinema_Management_System.Order.service.OrderService;
@@ -77,6 +78,32 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String getOrderStatus(long orderId) {
         return orderDao.getOrderStatus(orderId);
+    }
+
+    public Map<String, Object> getAllOrder(Integer id, String identity, String type, Integer pageNo, Integer pageSize, String selectType, String selectValues) {
+        Map<String, Object> result = new HashMap<>();
+        List<CMOrder> allOrder = new ArrayList<>();
+        if ("customer".equals(identity)) {
+            allOrder = orderDao.selectAllOrder(id, type, null, null, null, null);
+
+        } else {
+            if ("movieName".equals(selectType) && !"".equals(selectValues) && selectValues != null) {
+                allOrder = orderDao.selectAllOrder(null, null, pageNo, pageSize, selectType, selectValues);
+                int i = orderDao.countAllOrder(null, selectValues);
+                result.put("totalCount", i);
+            } else if ("customerName".equals(selectType) && !"".equals(selectValues) && selectValues != null) {
+                allOrder = orderDao.selectAllOrder(null, null, pageNo, pageSize, selectType, selectValues);
+                int i = orderDao.countAllOrder(selectValues, null);
+                result.put("totalCount", i);
+            } else {
+                allOrder = orderDao.selectAllOrder(null, null, pageNo, pageSize, null, null);
+                int i = orderDao.countAllOrder(null, null);
+                result.put("totalCount", i);
+            }
+
+        }
+        result.put("result", allOrder);
+        return result;
     }
 
 //    public New getById(long bookId) {

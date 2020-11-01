@@ -24,11 +24,12 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private MovieDao movieDao;
 
-
+    @Override
     public List<DetailMovie> selectMovieAll(String selType, String selContent, Integer pageStart, Integer pageSize) {
         return movieDao.selectMovieAll(selType, selContent, pageStart, pageSize);
     }
 
+    @Override
     public int getCount(String selType, String selContent) {
         return movieDao.getCount(selType, selContent);
     }
@@ -65,26 +66,37 @@ public class MovieServiceImpl implements MovieService {
         return movieDao.getMovieId(movieName);
     }
 
+    @Override
+    public List<Movie> getRecommendMovie() {
+        return movieDao.getRecommendMovie();
+    }
+
+    @Override
     public DetailMovie selectMovieByName(String movieName) {
         return movieDao.selectMovieByName(movieName);
     }
 
+    @Override
     public List<HitMovie> selectHitMovie(String selectType, Integer pageStart, Integer pageSize) {
         return movieDao.selectHitMovie(selectType, pageStart, pageSize);
     }
 
+    @Override
     public List<UpcomingMovie> selectUpcomingMovie(String selectType, Integer pageStart, Integer pageSize) {
         return movieDao.selectUpcomingMovie(selectType, pageStart, pageSize);
     }
 
+    @Override
     public int HitMovieCount() {
         return movieDao.HitMovieCount();
     }
 
+    @Override
     public int UpcomingMovieCount() {
         return movieDao.UpcomingMovieCount();
     }
 
+    @Override
     public void deleteMovie(Integer movieId) throws DeleteException {
         int affectRows = movieDao.deleteMovie(movieId);
         if (affectRows == 0) {
@@ -92,6 +104,7 @@ public class MovieServiceImpl implements MovieService {
         }
     }
 
+    @Override
     @Transactional(rollbackFor = DeleteException.class)
     public void deleteMovies(String movieIds) throws DeleteException {
         String[] idArray = movieIds.split("&");
@@ -105,12 +118,13 @@ public class MovieServiceImpl implements MovieService {
         }
     }
 
+    @Override
     public void updateMovie(DetailMovie movie) {
         movieDao.updateMovie(movie);
     }
 
+    @Override
     public void insertMovie(DetailMovie movie) {
-
         movieDao.insertMovie(movie);
     }
 

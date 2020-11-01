@@ -1,6 +1,7 @@
 package com.Cinema_Management_System.Movie.dao;
 
 import com.Cinema_Management_System.Movie.entity.DetailMovie;
+
 import com.Cinema_Management_System.Movie.entity.HitMovie;
 import com.Cinema_Management_System.Movie.entity.Movie;
 import com.Cinema_Management_System.Movie.entity.UpcomingMovie;
@@ -50,6 +51,7 @@ public interface MovieDao {
 
     List<Movie> getRelativeMovie(@Param("typeList") List<String> typeList, @Param("actorList") List<String> actorList, @Param("directorList") List<String> directorList);
 
+    List<Movie> getRecommendMovie();
 
     int isWant(@Param("movieId") int movieId, @Param("customerId") int customerId);
 

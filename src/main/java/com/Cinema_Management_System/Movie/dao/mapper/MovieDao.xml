@@ -183,4 +183,15 @@
         insert into Cinema_movie(movie_name,movie_actor,movie_des,movie_director,movie_picture,movie_trailer,movie_release_time,movie_score,movie_time,movie_type,wants_num)
         value (#{movieName},#{movieActor},#{movieDes},#{movieDirector},#{moviePicture},#{movieTrailer},#{movieReleaseTime},#{movieScore},#{movieTime},#{movieType},#{wantsNum})
     </insert>
+
+
+    <select id="getRecommendMovie" resultType="com.Cinema_Management_System.Movie.entity.Movie">
+
+        select movie_id,movie_name,movie_picture,movie_score
+        from Cinema_movie
+        order by movie_score desc
+        limit 0,10
+    </select>
+
+
 </mapper>

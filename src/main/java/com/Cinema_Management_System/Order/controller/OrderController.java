@@ -77,4 +77,41 @@ public class OrderController {
 //        System.out.println(map);
 //
 //    }
+
+    @RequestMapping(value = "/getOrderList", method = {RequestMethod.GET})
+    @ResponseBody
+    public Map<String, Object> getOrderList(@RequestParam(value = "type", required = false) String type,
+                                            @RequestHeader("accessToken") String accessToken,
+                                            @RequestParam(value = "pageNo", required = false) String pageNo,
+                                            @RequestParam(value = "pageSize", required = false) String pageSize,
+                                            @RequestParam(value = "selectType", required = false) String selectType,
+                                            @RequestParam(value = "selectValues", required = false) String selectValues
+    ) throws Exception {
+        System.out.println("**************getOrderList***************");
+        String identity = accessToken.substring(accessToken.indexOf("-") + 1);
+        int userId = Integer.parseInt(accessToken.substring(0, accessToken.indexOf("-")));
+        System.out.println(selectValues);
+        System.out.println(selectType);
+        if (type != null)
+            type = new String(type.getBytes("ISO-8859-1"), "UTF-8");
+        else if (selectValues != null)
+            selectValues = new String(selectValues.getBytes("ISO-8859-1"), "UTF-8");
+
+        if ("全部订单".equals(type)) {
+            type = null;
+        }
+        int n = 0;
+        int s = 0;
+        if (pageNo != null && pageSize != null) {
+            n = Integer.parseInt(pageNo);
+            s = Integer.parseInt(pageSize);
+        }
+        System.out.println(userId + "---" + identity + "----" + type + "---" + s * (n - 1) + "----" + s);
+        Map<String, Object> allOrder = orderService.getAllOrder(userId, identity, type, s * (n - 1), s, selectType, selectValues);
+
+        System.out.println(allOrder);
+
+        return allOrder;
+    }
+
 }

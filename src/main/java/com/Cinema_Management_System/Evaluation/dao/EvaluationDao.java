@@ -16,5 +16,7 @@ public interface EvaluationDao {
 
     int getMovieEvaluationCount(@Param("movieId") int movieId);
 
-    //Book queryById(@Param("book_id") long book_id);
+    List<Evaluation> selectAllEvaluation(@Param("customerId")Integer id);
+    int updateEvaluation(Evaluation evaluation);
+    int updateOrderStatus(int id);
 }

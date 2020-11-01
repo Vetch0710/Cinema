@@ -4,9 +4,7 @@ import com.Cinema_Management_System.Evaluation.entity.Evaluation;
 import com.Cinema_Management_System.Evaluation.service.EvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,4 +47,24 @@ public class EvaluationController {
         returnData.put("totalCount", evaluationService.getMovieEvaluationCount(movieId));
         return returnData;
     }
+
+    @RequestMapping(value = "/getEvaluation", method = RequestMethod.GET)
+    public List<Evaluation> getEvaluation(@RequestHeader("accessToken") String accessToken) {
+        String identity = accessToken.substring(accessToken.indexOf("-") + 1);
+        int userId = Integer.parseInt(accessToken.substring(0, accessToken.indexOf("-")));
+        List<Evaluation> allCusEvaluations = evaluationService.getAllCusEvaluations(userId);
+        return allCusEvaluations;
+    }
+    @RequestMapping(value = "/saveEvaluation", method = RequestMethod.POST ,produces = "text/plain;charset=UTF-8")
+    public String saveEvaluation(@RequestBody Evaluation evaluation ) {
+        System.out.println(evaluation);
+        if (evaluationService.updateEvaluation(evaluation)){
+            return "success";
+        }
+
+        return "评价失败，请检查您的信息是否正确";
+    }
+
+
+
 }

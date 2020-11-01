@@ -68,13 +68,20 @@
     </select>
 
     <select id="getMovieEvaluation" resultType="com.Cinema_Management_System.Evaluation.entity.Evaluation">
-        select e.evaluation_id,e.evaluation_score,e.evaluation_content,e.evaluation_time,w.customer_name,w.customer_picture
+        select e.evaluation_id,
+               e.evaluation_score,
+               e.evaluation_content,
+               e.evaluation_time,
+               w.customer_name,
+               w.customer_picture
         from Cinema_evaluation e
-        LEFT JOIN (
-        SELECT o.order_id,o.movie_id,o.customer_id,m.movie_name,c.customer_name,c.customer_picture
-        FROM Cinema_order o,Cinema_customer c,Cinema_movie m
-        WHERE
-        o.customer_id = c.customer_id AND o.movie_id = m.movie_id
+                 LEFT JOIN (
+            SELECT o.order_id, o.movie_id, o.customer_id, m.movie_name, c.customer_name, c.customer_picture
+            FROM Cinema_order o,
+                 Cinema_customer c,
+                 Cinema_movie m
+            WHERE o.customer_id = c.customer_id
+              AND o.movie_id = m.movie_id
         ) AS w ON w.order_id = e.order_id
         where w.movie_id = #{movieId}
         limit #{pageStart},#{pageSize}
@@ -82,12 +89,37 @@
     <select id="getMovieEvaluationCount" resultType="int">
         select count(*)
         from Cinema_evaluation e
-        LEFT JOIN (
-        SELECT o.order_id,o.movie_id,o.customer_id,m.movie_name,c.customer_name,c.customer_picture
-        FROM Cinema_order o,Cinema_customer c,Cinema_movie m
-        WHERE
-        o.customer_id = c.customer_id AND o.movie_id = m.movie_id
+                 LEFT JOIN (
+            SELECT o.order_id, o.movie_id, o.customer_id, m.movie_name, c.customer_name, c.customer_picture
+            FROM Cinema_order o,
+                 Cinema_customer c,
+                 Cinema_movie m
+            WHERE o.customer_id = c.customer_id
+              AND o.movie_id = m.movie_id
         ) AS w ON w.order_id = e.order_id
         where w.movie_id = #{movieId}
     </select>
+
+
+    <select id="selectAllEvaluation" resultType="com.Cinema_Management_System.Evaluation.entity.Evaluation">
+        SELECT e.*, o.order_time, m.movie_name
+        FROM cinema_evaluation e
+                 JOIN cinema_order o ON o.order_id = e.order_id
+                 JOIN cinema_movie m ON o.movie_id = m.movie_id
+        WHERE o.customer_id = #{customerId}
+    </select>
+
+    <update id="updateEvaluation" parameterType="com.Cinema_Management_System.Evaluation.entity.Evaluation">
+        update cinema_evaluation
+        set evaluation_score=#{evaluationScore},
+            evaluation_content=#{evaluationContent},
+            evaluation_time=#{evaluationTime}
+        where order_id = #{orderId}
+    </update>
+
+    <update id="updateOrderStatus" >
+        update cinema_order
+        set order_status='已完成'
+        where order_id = #{id}
+    </update>
 </mapper>

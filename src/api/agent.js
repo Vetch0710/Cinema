@@ -19,7 +19,7 @@ function initWebSocket(token,callback,callback2){ //初始化weosocket
     global_problemList = callback;
     global_result = callback2;
     // var wsuri = "ws://8.131.77.164:8089/CinemaData/ws";
-    var wsuri = "ws:/8.131.77.164:8089/CinemaData/ws";
+    var wsuri = "ws:/47.93.137.95:8080/Cinema//ws";
     websock = new WebSocket(wsuri,[token]);
     websock.onmessage = function(e){
         websocketonmessage(e);

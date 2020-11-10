@@ -137,7 +137,15 @@ export default {
   methods: {
     getBeginTime(data) {
       const arrdate = new Date(data);
-      return arrdate.getHours() + ":" + arrdate.getMinutes();
+      let hours = arrdate.getHours();
+      let minutes = arrdate.getMinutes();
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      return hours + ":" + minutes;
     },
 
     getEndTime(data, movieTime) {
@@ -145,7 +153,16 @@ export default {
       startTime.setMinutes(
         startTime.getMinutes() + parseInt(movieTime.replace("分钟", ""))
       );
-      return startTime.getHours() + ":" + startTime.getMinutes();
+
+      let hours = startTime.getHours();
+      let minutes = startTime.getMinutes();
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      return hours + ":" + minutes;
     },
 
     getTagTime(data) {

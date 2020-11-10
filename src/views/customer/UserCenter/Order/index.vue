@@ -22,7 +22,7 @@
                         <div class="customerOrder-orderInfo-img" @click="orderDetail(item)">
                             <el-image
                                     style="width: 80px; height: 80px;vertical-align: middle"
-                                    :src="item.orderImg"
+                                    :src="item.moviePicture"
                                     :fit="'contain'"
                             >
                                 <div slot="placeholder" class="image-slot"></div>

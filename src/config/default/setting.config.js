@@ -13,9 +13,10 @@ const setting = {
 
     // "http://8.131.77.164:8089/CinemaData",
     // "http://10.5.54.127:8089/Cinema_Management_System",
-    "http://localhost:8080/Cinema_Management_System",
-    
-   // "vab-mock-server",
+    // "http://localhost:8080/Cinema_Management_System",
+    "http://47.93.137.95:8080/Cinema",
+
+  // "vab-mock-server",
   //标题 （包括初次加载雪花屏的标题 页面的标题 浏览器的标题）
   title: "毅购",
   //开发环境端口号

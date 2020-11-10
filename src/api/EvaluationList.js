@@ -31,10 +31,18 @@ export function getEvaluation() {
     method: "get",
   });
 }
+
 export function saveEvaluation(data) {
   return request({
     url: "/evaluation/saveEvaluation",
     method: "post",
     data
+  });
+}
+
+export function doDelete(data) {
+  return request({
+    url: "/evaluation/" + data.evaluationId,
+    method: "delete",
   });
 }

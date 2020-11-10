@@ -22,7 +22,7 @@
                 vertical-align: middle;
                 display: inline-block;
               "
-                    :src="'http://8.131.77.164:8089/images/'+url"
+                    :src="'http://47.93.137.95:8080/Cinema/img/'+url"
                     :fit="'contain'"
             ></el-image>
           </span>

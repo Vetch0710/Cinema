@@ -35,7 +35,7 @@
                                 class="problems-chat"
                         >
                             <div
-                                    v-for="(item,index) in historyList"
+                                    v-for="(item) in historyList"
                                     :key="item.infoId"
                                     style=" padding:0 20px;"
                             >
@@ -55,7 +55,7 @@
                 display: inline-block;
                 margin-right: 10px;
               "
-                                                :src="'http://8.131.77.164:8089/images/manager.jpeg'"
+                                                :src="'http://47.93.137.95:8080/Cinema/img/manager.jpeg'"
                                                 :fit="'contain'"
                                         ></el-image>
 
@@ -72,7 +72,7 @@
                 vertical-align: middle;
                 display: inline-block;
               "
-                                      :src="'http://8.131.77.164:8089/images/'+avatar"
+                                      :src="'http://47.93.137.95:8080/Cinema/img/'+avatar"
 
                                       :fit="'contain'"
                               ></el-image>
@@ -93,7 +93,7 @@
                                 </el-col>
                             </el-row>
                             <div
-                                    v-for="(item,index) in nowList"
+                                    v-for="(item) in nowList"
                                     :key="item.infoId"
                                     style=" padding:0 20px;"
                             >
@@ -113,7 +113,7 @@
                 display: inline-block;
                 margin-right: 10px;
               "
-                                                :src="'http://8.131.77.164:8089/images/manager.jpeg'"
+                                                :src="'http://47.93.137.95:8080/Cinema/img/manager.jpeg'"
                                                 :fit="'contain'"
                                         ></el-image>
 
@@ -130,7 +130,7 @@
                 vertical-align: middle;
                 display: inline-block;
               "
-                                      :src="'http://8.131.77.164:8089/images/'+avatar"
+                                      :src="'http://47.93.137.95:8080/Cinema/img/'+avatar"
                                       :fit="'contain'"
                               ></el-image>
                           </span>

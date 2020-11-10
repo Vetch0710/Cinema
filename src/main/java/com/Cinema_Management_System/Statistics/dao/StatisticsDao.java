@@ -7,4 +7,5 @@ import java.util.List;
 @Repository
 public interface StatisticsDao {
     List<Float> selectStaByMonth(String day);
+    List<Float> selectStaByYear(String year);
 }

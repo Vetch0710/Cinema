@@ -55,16 +55,21 @@ public class EvaluationController {
         List<Evaluation> allCusEvaluations = evaluationService.getAllCusEvaluations(userId);
         return allCusEvaluations;
     }
-    @RequestMapping(value = "/saveEvaluation", method = RequestMethod.POST ,produces = "text/plain;charset=UTF-8")
-    public String saveEvaluation(@RequestBody Evaluation evaluation ) {
+
+    @RequestMapping(value = "/saveEvaluation", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+    public String saveEvaluation(@RequestBody Evaluation evaluation) {
         System.out.println(evaluation);
-        if (evaluationService.updateEvaluation(evaluation)){
+        if (evaluationService.updateEvaluation(evaluation)) {
             return "success";
         }
 
         return "评价失败，请检查您的信息是否正确";
     }
 
-
+    @RequestMapping(value = "/{evaluationId}",method = RequestMethod.DELETE)
+    public String delEavluation(@PathVariable int evaluationId){
+        String message = evaluationService.delEavluation(evaluationId);
+        return message;
+    }
 
 }

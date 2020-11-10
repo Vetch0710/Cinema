@@ -1,5 +1,7 @@
 package com.Cinema_Management_System.Order.entity;
 
+import lombok.Data;
+
 import java.util.Date;
 
 /**
@@ -7,18 +9,20 @@ import java.util.Date;
  * @Description
  * @create 2020-10-31-13:44
  */
+@Data
 public class CMOrder extends Order {
     private Integer movieId;
     private String movieName;
     private Integer arrangementPlace;
     private Date arrangementTime;
     private Integer customerId;
-    private String customerName;
+    private String customerName,moviePicture;
 
     public CMOrder() {
     }
 
-    public CMOrder(long orderId, int arrangementId, float orderPrice, String orderStatus, String orderSeat, Date orderTime, Integer movieId, String movieName, Integer arrangementPlace, Date arrangementTime, Integer customerId, String customerName) {
+
+    public CMOrder(long orderId, int arrangementId, float orderPrice, String orderStatus, String orderSeat, Date orderTime, Integer movieId, String movieName, Integer arrangementPlace, Date arrangementTime, Integer customerId, String customerName, String moviePicture) {
         super(orderId, arrangementId, orderPrice, orderStatus, orderSeat, orderTime);
         this.movieId = movieId;
         this.movieName = movieName;
@@ -26,6 +30,7 @@ public class CMOrder extends Order {
         this.arrangementTime = arrangementTime;
         this.customerId = customerId;
         this.customerName = customerName;
+        this.moviePicture = moviePicture;
     }
 
     public Integer getMovieId() {

@@ -20,4 +20,5 @@ public interface OrderService {
     //获取用户订单/全部订单
     Map<String, Object> getAllOrder(Integer id, String identity, String type,Integer pageNo,Integer pageSize,String selectType,String selectValues) ;
 
+    String delOrder(long orderId);
 }

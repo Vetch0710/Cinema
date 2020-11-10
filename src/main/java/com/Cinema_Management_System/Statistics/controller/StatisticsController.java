@@ -1,6 +1,5 @@
 package com.Cinema_Management_System.Statistics.controller;
 
-import com.Cinema_Management_System.Statistics.entity.Statistics;
 import com.Cinema_Management_System.Statistics.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -21,11 +18,19 @@ public class StatisticsController {
     @Autowired
     private StatisticsService statisticsService;
 
-    @RequestMapping(value = "getStatistics",method = {RequestMethod.GET})
+    @RequestMapping(value = "/getStatistics",method = {RequestMethod.GET})
     @ResponseBody
     public  List<Float> getStatistics(String yearMonth) throws ParseException {
         System.out.println(yearMonth);
         List<Float> statistics = statisticsService.selectStaByMonth(yearMonth);
+        System.out.println(statistics);
+        return statistics;
+    }
+    @RequestMapping(value = "/getStatisticsYear",method = {RequestMethod.GET})
+    @ResponseBody
+    public  List<Float> getStatisticsYear(String yearMonth) throws ParseException {
+        System.out.println(yearMonth);
+        List<Float> statistics = statisticsService.selectStaByYear(yearMonth);
         System.out.println(statistics);
         return statistics;
     }

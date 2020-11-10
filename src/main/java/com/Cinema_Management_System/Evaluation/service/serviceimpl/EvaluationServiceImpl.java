@@ -50,6 +50,15 @@ public class EvaluationServiceImpl implements EvaluationService {
         }
         return false;
     }
+
+    @Override
+    public String delEavluation(int evaluationId) {
+        int row = evaluationDao.delEavluation(evaluationId);
+        if (row>0){
+            return "success";
+        }
+        return "error";
+    }
 //    public New getById(long bookId) {
 //        return bookDao.queryById(bookId);
 //    }

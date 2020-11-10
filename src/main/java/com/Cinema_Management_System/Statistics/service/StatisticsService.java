@@ -8,4 +8,5 @@ import java.util.List;
 @Service
 public interface StatisticsService {
     List<Float> selectStaByMonth(String day);
+    List<Float> selectStaByYear(String year);
 }

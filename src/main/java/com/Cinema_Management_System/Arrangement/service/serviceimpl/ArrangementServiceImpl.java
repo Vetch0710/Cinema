@@ -155,7 +155,7 @@ public class ArrangementServiceImpl implements ArrangementService {
                         System.out.println("第一个添加操作");
                         ((List) arrangementList.get(i).get("theDayArrangement")).add(a);
                         break;
-                    } else {
+                    } else if ((i + 1) == arrangementList.size()) {
                         List<Arrangement> arrangements = new ArrayList<>();
                         System.out.println("第二个添加操作");
                         arrangements.add(a);

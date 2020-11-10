@@ -18,7 +18,7 @@
         LEFT JOIN
 
         (SELECT DATE_FORMAT(o.order_time,'%Y-%c-%d') as gptime , SUM(o.order_price) m
-        from  cinema_order o
+        from  Cinema_order o
         where  DATE_FORMAT(o.order_time,'%Y-%c')=#{day}   GROUP BY gptime)
         as righttable
         ON
@@ -26,4 +26,16 @@
 
     </select>
 
+    <select id="selectStaByYear" resultType="float">
+        SELECT  IF(o.money IS NOT NULL,o.money,0)
+        from  (SELECT 1 AS d UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL
+               SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12) r
+                  Left OUTER JOIN  (
+            SELECT MONTH(DATE_FORMAT(o.order_time,'%Y-%c-%d')) month ,SUM(o.order_price) money
+            from   Cinema_order o
+            where  (YEAR(DATE_FORMAT(o.order_time,'%Y-%m-%d')))=#{year}
+            GROUP BY   MONTH(DATE_FORMAT(o.order_time,'%Y-%c-%d')))  o
+                                   ON r.d=o.month
+
+    </select>
 </mapper>

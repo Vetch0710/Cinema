@@ -200,7 +200,7 @@ public class MovieController {
             file.transferTo(targetFile);
             System.out.println("上传成功");
             //将文件在服务器的存储路径返回
-            return "http://localhost:8089/Cinema_Management_System/" + director + "/" + fileName;
+            return "http://47.93.137.95:8080/Cinema/" + director + "/" + fileName;
         } catch (IOException e) {
             System.out.println("上传失败");
             e.printStackTrace();

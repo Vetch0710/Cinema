@@ -32,6 +32,12 @@ public class OrderController {
         return orderService.getOrderStatus(orderId);
     }
 
+    @RequestMapping(value = "/{orderId}", method = RequestMethod.DELETE)
+    public String delOrder(@PathVariable long orderId) {
+        String message = orderService.delOrder(orderId);
+        return message;
+    }
+
     @RequestMapping(value = "/{orderId}/{status}", method = RequestMethod.PUT)
     public String modifyStatus(@PathVariable long orderId, @PathVariable String status) throws UnsupportedEncodingException {
         status = status = new String(status.getBytes("ISO-8859-1"), "UTF-8");

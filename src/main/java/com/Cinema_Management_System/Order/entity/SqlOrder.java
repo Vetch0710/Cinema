@@ -32,7 +32,7 @@ public class SqlOrder extends Order {
             SqlOrder order1 = (SqlOrder) obj;
             String[] seats = order1.getOrderSeat().split(",");
             for (String seat : seats) {
-                if (seat.indexOf(this.getOrderSeat()) != -1) {
+                if (this.getOrderSeat().indexOf(seat) != -1) {
                     return true;
                 }
             }

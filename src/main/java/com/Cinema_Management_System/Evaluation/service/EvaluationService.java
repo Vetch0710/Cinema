@@ -19,4 +19,6 @@ public interface EvaluationService {
     List<Evaluation> getAllCusEvaluations(Integer id);
 
     boolean updateEvaluation(Evaluation evaluation);
+
+    String delEavluation(int evaluationId);
 }

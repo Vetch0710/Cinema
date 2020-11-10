@@ -103,14 +103,14 @@
 
     <select id="selectAllEvaluation" resultType="com.Cinema_Management_System.Evaluation.entity.Evaluation">
         SELECT e.*, o.order_time, m.movie_name
-        FROM cinema_evaluation e
-                 JOIN cinema_order o ON o.order_id = e.order_id
-                 JOIN cinema_movie m ON o.movie_id = m.movie_id
+        FROM Cinema_evaluation e
+                 JOIN Cinema_order o ON o.order_id = e.order_id
+                 JOIN Cinema_movie m ON o.movie_id = m.movie_id
         WHERE o.customer_id = #{customerId}
     </select>
 
     <update id="updateEvaluation" parameterType="com.Cinema_Management_System.Evaluation.entity.Evaluation">
-        update cinema_evaluation
+        update Cinema_evaluation
         set evaluation_score=#{evaluationScore},
             evaluation_content=#{evaluationContent},
             evaluation_time=#{evaluationTime}
@@ -118,8 +118,13 @@
     </update>
 
     <update id="updateOrderStatus" >
-        update cinema_order
+        update Cinema_order
         set order_status='已完成'
         where order_id = #{id}
     </update>
+
+    <delete id="delEavluation">
+        delete from Cinema_evaluation
+        where evaluation_id = #{evaluationId}
+    </delete>
 </mapper>

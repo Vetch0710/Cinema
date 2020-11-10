@@ -107,6 +107,18 @@ public class OrderServiceImpl implements OrderService {
         return result;
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public String delOrder(long orderId) {
+        int i = orderDao.delOrder(orderId);
+        if (i > 0) {
+            OrderTask orderTask = new OrderTask(0, null, orderId);
+            orderTaskQueenThreads.endTask(orderTask);
+            return "success";
+        }
+        return "error";
+    }
+
 //    public New getById(long bookId) {
 //        return bookDao.queryById(bookId);
 //    }

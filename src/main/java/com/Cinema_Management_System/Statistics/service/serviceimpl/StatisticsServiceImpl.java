@@ -23,6 +23,11 @@ public class StatisticsServiceImpl implements StatisticsService {
         return statisticsDao.selectStaByMonth(day);
     }
 
+    @Override
+    public List<Float> selectStaByYear(String year) {
+        return statisticsDao.selectStaByYear(year);
+    }
+
 //    public New getById(long bookId) {
 //        return bookDao.queryById(bookId);
 //    }

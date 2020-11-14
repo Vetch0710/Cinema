@@ -29,4 +29,12 @@ public class StatisticsController {
         System.out.println(statistics);
         return statistics;
     }
+    @RequestMapping(value = "getStatisticsYear",method = {RequestMethod.GET})
+    @ResponseBody
+    public  List<Float> getStatisticsYear(String yearMonth) throws ParseException {
+        System.out.println(yearMonth);
+        List<Float> statistics = statisticsService.selectStaByYear(yearMonth);
+        System.out.println(statistics);
+        return statistics;
+    }
 }

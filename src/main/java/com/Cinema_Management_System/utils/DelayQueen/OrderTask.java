@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @Auther GaoYi
  * @Date 2020/10/31 4:13 下午
  */
-public class OrderTask<T extends Callable<String>> implements Delayed {
+public class OrderTask<T extends Callable<String>> implements Delayed{
     private final long time;
 
     /**

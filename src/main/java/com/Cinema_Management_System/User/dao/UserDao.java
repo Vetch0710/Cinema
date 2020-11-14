@@ -54,4 +54,6 @@ public interface UserDao {
    //删除用户
    int deleteCustomer(@Param(value = "list")List<Integer> customerId);
    int deleteManager(@Param(value = "list")List<Integer> managerId);
+
+   int selectOrderStatusCount(@Param(value = "list")List<Integer> customerId);
 }

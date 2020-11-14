@@ -18,7 +18,7 @@
         LEFT JOIN
 
         (SELECT DATE_FORMAT(o.order_time,'%Y-%c-%d') as gptime , SUM(o.order_price) m
-        from  cinema_order o
+        from  Cinema_order o
         where  DATE_FORMAT(o.order_time,'%Y-%c')=#{day}   GROUP BY gptime)
         as righttable
         ON
@@ -32,7 +32,7 @@
                SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12) r
                   Left OUTER JOIN  (
             SELECT MONTH(DATE_FORMAT(o.order_time,'%Y-%c-%d')) month ,SUM(o.order_price) money
-            from   cinema_order o
+            from   Cinema_order o
             where  (YEAR(DATE_FORMAT(o.order_time,'%Y-%m-%d')))=#{year}
             GROUP BY   MONTH(DATE_FORMAT(o.order_time,'%Y-%c-%d')))  o
                                    ON r.d=o.month

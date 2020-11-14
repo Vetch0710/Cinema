@@ -41,8 +41,12 @@ public class ArrangementServiceImpl implements ArrangementService {
         arrangementDao.addArrangement(arrangement);
     }
 
+    @Transactional(rollbackFor = DeleteException.class)
     @Override
     public void deleteArrangement(int arrangementId) throws DeleteException {
+        if (arrangementDao.selectArrangementCountSingle(arrangementId)!=0){
+            throw new DeleteException();
+        }
         int affectRows = arrangementDao.deleteArrangement(arrangementId);
         if (affectRows == 0) {
             throw new DeleteException();
@@ -57,14 +61,21 @@ public class ArrangementServiceImpl implements ArrangementService {
         for (String str : idArray) {
             idList.add(Integer.parseInt(str));
         }
+        if (arrangementDao.selectArrangementCountList(idList)!=0){
+            throw new DeleteException();
+        }
         int affectRows = arrangementDao.deleteArrangements(idList);
         if (affectRows != idList.size()) {
             throw new DeleteException();
         }
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public void updateArrangement(Arrangement arrangement) throws DeleteException {
+    public void updateArrangement(Arrangement arrangement) throws Exception {
+        if (arrangementDao.selectArrangementCountSingle(arrangement.getArrangementId())!=0){
+            throw new Exception();
+        }
         int affectRows = arrangementDao.updateArrangement(arrangement);
         if (affectRows == 0) {
             throw new DeleteException();
@@ -155,7 +166,7 @@ public class ArrangementServiceImpl implements ArrangementService {
                         System.out.println("第一个添加操作");
                         ((List) arrangementList.get(i).get("theDayArrangement")).add(a);
                         break;
-                    } else {
+                    } else if ((i + 1) == arrangementList.size()) {
                         List<Arrangement> arrangements = new ArrayList<>();
                         System.out.println("第二个添加操作");
                         arrangements.add(a);

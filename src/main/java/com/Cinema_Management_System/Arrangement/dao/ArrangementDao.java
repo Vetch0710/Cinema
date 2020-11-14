@@ -36,4 +36,8 @@ public interface ArrangementDao {
     ArrangementMovie getMovieInfo(@Param("arrangementId")int arrangementId);
 
     String getSelectedSeats(@Param("arrangementId")int arrangementId);
+
+    int selectArrangementCountSingle( Integer movieId);
+
+    int selectArrangementCountList(List<Integer> movieIds);
 }

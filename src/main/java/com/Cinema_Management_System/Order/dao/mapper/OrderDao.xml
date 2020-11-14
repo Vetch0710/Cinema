@@ -53,17 +53,17 @@
 
 
     <select id="countAllOrder" resultType="int">
-        select count(*) from cinema_order o
+        select count(*) from Cinema_order o
         <where>
             1=1
             <if test="cname!=null and cname!='' ">
                 and customer_id=(
-                SELECT customer_id FROM cinema_customer WHERE customer_name=#{cname}
+                SELECT customer_id FROM Cinema_customer WHERE customer_name=#{cname}
                 )
             </if>
             <if test="mname!=null and mname!='' ">
                 and  movie_id=(
-                SELECT movie_id FROM cinema_movie WHERE movie_name=#{mname}
+                SELECT movie_id FROM Cinema_movie WHERE movie_name=#{mname}
                 )
             </if>
 
@@ -72,10 +72,10 @@
     </select>
 
     <select id="selectAllOrder" resultType="com.Cinema_Management_System.Order.entity.CMOrder">
-        SELECT o.*,c.customer_name,m.movie_name,a.arrangement_place,a.arrangement_time FROM cinema_order o
-        JOIN cinema_movie m ON m.movie_id=o.movie_id
-        JOIN cinema_customer c ON c.customer_id=o.customer_id
-        JOIN cinema_arrangement a ON a.arrangement_id=o.arrangement_id
+        SELECT o.*,c.customer_name,m.movie_name,a.arrangement_place,a.arrangement_time,m.movie_picture FROM Cinema_order o
+        JOIN Cinema_movie m ON m.movie_id=o.movie_id
+        JOIN Cinema_customer c ON c.customer_id=o.customer_id
+        JOIN Cinema_arrangement a ON a.arrangement_id=o.arrangement_id
         <where>
             1=1
             <if test="id!=null and id!='' ">
@@ -101,7 +101,7 @@
 
 
     <insert id="addEvaluation" >
-        insert into cinema_evaluation(order_id) values (#{id})
+        insert into Cinema_evaluation(order_id) values (#{id})
     </insert>
 
 </mapper>

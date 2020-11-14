@@ -259,12 +259,17 @@ public class UserServiceImpl implements UserService {
         return userDao.selectMax();
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean deleteUser(String type, List<Integer> Ids) {
+    public boolean deleteUser(String type, List<Integer> Ids) throws Exception {
+
         if ("customer".equals(type)) {
-          return   userDao.deleteCustomer(Ids)!=0;
-        }else {
-            return userDao.deleteManager(Ids)!=0;
+            if (userDao.selectOrderStatusCount(Ids) != 0) {
+                throw new Exception("用户有未完成订单无法删除");
+            }
+            return userDao.deleteCustomer(Ids) != 0;
+        } else {
+            return userDao.deleteManager(Ids) != 0;
         }
     }
 }

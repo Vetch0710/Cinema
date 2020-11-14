@@ -21,7 +21,7 @@ public interface ArrangementService {
 
     void deleteArrangements(String movieIds) throws DeleteException;
 
-    void updateArrangement(Arrangement arrangement) throws DeleteException;
+    void updateArrangement(Arrangement arrangement) throws DeleteException, Exception;
 
     List<String> getDisableTime(int arrangementPlace, String arrangementDate,int movieId);
 

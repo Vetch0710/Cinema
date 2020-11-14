@@ -49,5 +49,5 @@ public interface UserService {
 
 
     //删除用户
-    boolean deleteUser(String type,List<Integer> Ids);
+    boolean deleteUser(String type,List<Integer> Ids) throws Exception;
 }

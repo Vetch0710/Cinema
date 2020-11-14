@@ -6,21 +6,21 @@
     <!--    查询用户信息-->
     <select id="selectCusInfoById" resultType="com.Cinema_Management_System.User.entity.Customer">
         select *
-        from cinema_customer
+        from Cinema_customer
         where customer_id = #{customerId}
     </select>
 
     <!--    查询管理员信息-->
     <select id="selectManInfoById" resultType="com.Cinema_Management_System.User.entity.Manager">
         select *
-        from cinema_manager
+        from Cinema_manager
         where manager_id = #{managerId}
     </select>
 
 
     <!--    查询用户信息 -->
     <select id="selectCustomer" resultType="com.Cinema_Management_System.User.entity.Customer">
-        select * from cinema_customer
+        select * from Cinema_customer
         <where>
             <choose>
                 <when test="customerName != '' and customerName != null">
@@ -37,7 +37,7 @@
 
     <!--    查询管理员信息-->
     <select id="selectManager" resultType="com.Cinema_Management_System.User.entity.Manager">
-        select * from cinema_manager
+        select * from Cinema_manager
         <where>
             <choose>
                 <when test="managerPhone != '' and managerPhone != null">
@@ -56,7 +56,7 @@
     <!--    查询是否有-->
     <select id="isExistCustomer" resultType="int">
         SELECT COUNT(*) 'count'
-        FROM cinema_customer
+        FROM Cinema_customer
         WHERE customer_name = #{customerName}
            OR customer_phone = #{customerPhone}
     </select>
@@ -64,13 +64,13 @@
 
     <!--    添加用户-->
     <insert id="addUser" parameterType="com.Cinema_Management_System.User.entity.Customer">
-        insert into cinema_customer(customer_id, customer_password, customer_name, customer_phone)
+        insert into Cinema_customer(customer_id, customer_password, customer_name, customer_phone)
         values (default, #{customerPassword}, #{customerName}, #{customerPhone})
     </insert>
 
     <!--    添加管理员-->
     <insert id="addManager" parameterType="com.Cinema_Management_System.User.entity.Manager">
-        insert into cinema_manager(manager_id, manager_password, manager_name, manager_sex,manager_is_boss)
+        insert into Cinema_manager(manager_id, manager_password, manager_name, manager_sex,manager_is_boss)
         values (#{managerId},#{managerPassword}, #{managerName}, #{managerSex}, #{managerIsBoss})
     </insert>
 
@@ -79,10 +79,10 @@
         update
 
         <if test="identity == '顾客'">
-            cinema_customer set customer_password=#{password} where customer_phone=#{phone}
+            Cinema_customer set customer_password=#{password} where customer_phone=#{phone}
         </if>
         <if test="identity == '管理员'">
-            cinema_manager set manager_password=#{password} where manager_phone=#{phone}
+            Cinema_manager set manager_password=#{password} where manager_phone=#{phone}
         </if>
 
     </update>
@@ -92,7 +92,7 @@
     <update id="updateInfoById">
         update
         <if test="identity == 'customer'">
-            cinema_customer
+            Cinema_customer
             <set>
                 <if test="type == '姓名'">
                     customer_name=#{value}
@@ -113,7 +113,7 @@
             where customer_id=#{id}
         </if>
         <if test="identity == 'manager' || identity == 'boss'">
-            cinema_manager
+            Cinema_manager
             <set>
                 <if test="type == '姓名'">
                     manager_name=#{value}
@@ -137,52 +137,59 @@
 
 <!--  查询用户/管理员信息  -->
     <select id="selectAllManager" resultType="com.Cinema_Management_System.User.entity.Manager">
-        select * from cinema_manager limit #{pageNo},#{pageSize}
+        select * from Cinema_manager limit #{pageNo},#{pageSize}
     </select>
     <select id="selectAllCustomer" resultType="com.Cinema_Management_System.User.entity.Customer">
-        select * from cinema_customer limit #{pageNo},#{pageSize}
+        select * from Cinema_customer limit #{pageNo},#{pageSize}
     </select>
 
     <!--  查询用户/管理员 数量 -->
     <select id="selectAllManagerCount" resultType="int">
-        select count(*) from cinema_manager
+        select count(*) from Cinema_manager
     </select>
     <select id="selectAllCustomerCount" resultType="int">
-        select count(*) from cinema_customer
+        select count(*) from Cinema_customer
     </select>
 
 
 <!--  获取最大的管理员编号  -->
     <select id="selectMax" resultType="int">
-        SELECT MAX(manager_id)+1 'maxCount' FROM cinema_manager
+        SELECT MAX(manager_id)+1 'maxCount' FROM Cinema_manager
     </select>
 
 
 <!--    //修改管理员/用户信息-->
     <update id="updateCusInfo" parameterType="com.Cinema_Management_System.User.entity.Customer">
-        update cinema_customer set customer_name=#{customerName},customer_password=#{customerPassword},customer_phone=#{customerPhone}
+        update Cinema_customer set customer_name=#{customerName},customer_password=#{customerPassword},customer_phone=#{customerPhone}
         where customer_id=#{customerId}
     </update>
     <update id="updateManInfo" parameterType="com.Cinema_Management_System.User.entity.Manager">
-        update cinema_manager set manager_name=#{managerName},manager_sex=#{managerSex},manager_is_boss=#{managerIsBoss}
+        update Cinema_manager set manager_name=#{managerName},manager_sex=#{managerSex},manager_is_boss=#{managerIsBoss}
         where manager_id=#{managerId}
     </update>
 
 
     <!--//删除用户-->
     <delete id="deleteCustomer" parameterType="list">
-       delete from cinema_customer where customer_id in
+       delete from Cinema_customer where customer_id in
         <foreach collection="list" item="it" open="(" close=")" separator=",">
             #{it}
         </foreach>
     </delete>
     <delete id="deleteManager" parameterType="list">
-        delete from cinema_manager where manager_id in
+        delete from Cinema_manager where manager_id in
         <foreach collection="list" item="it" open="(" close=")" separator=",">
             #{it}
         </foreach>
     </delete>
 
-
-
+<!--查询用户订单是否有未完成订单-->
+<select id="selectOrderStatusCount" resultType="int">
+    SELECT COUNT(*) FROM  cinema_order o
+    WHERE o.customer_id in
+    <foreach collection="list" item="it" open="(" close=")" separator=",">
+        #{it}
+    </foreach>
+     AND  o.order_status !='已完成'
+</select>
 </mapper>

@@ -17,17 +17,19 @@
             <if test="1 == 1">
                 a.arrangement_time &gt; now()
             </if>
-            <if test="selType == 'movieId'">
-                a.movie_id = #{selContent}
-            </if>
-            <if test="selType == 'movieName'">
-                m.movie_name like CONCAT(CONCAT('%',#{selContent}),'%')
-            </if>
-            <if test="selType == 'arrangementId'">
-                a.arrangement_id = #{selContent}
-            </if>
-            <if test="selType == 'arrangementPlace'">
-                a.arrangement_place = #{selContent}
+            <if test="selContent !=null and selContent != ''">
+                <if test="selType == 'movieId'">
+                    and a.movie_id = #{selContent}
+                </if>
+                <if test="selType == 'movieName'">
+                    and m.movie_name like CONCAT(CONCAT('%',#{selContent}),'%')
+                </if>
+                <if test="selType == 'arrangementId'">
+                    and a.arrangement_id = #{selContent}
+                </if>
+                <if test="selType == 'arrangementPlace'">
+                    and a.arrangement_place = #{selContent}
+                </if>
             </if>
         </where>
 
@@ -36,23 +38,24 @@
 
     <select id="getCount" resultType="int">
         select count(*)
-        from Cinema_arrangement
+        from Cinema_arrangement a left join Cinema_movie m on a.movie_id = m.movie_id
         <where>
             <if test="1 == 1">
                 arrangement_time &gt; now()
             </if>
-            <if test="selType == 'movieId'">
-                movie_id = #{selContent}
-            </if>
-            <if test="selType == 'movieName'">
-                movie_id in (select movie_id from Cinema_movie where movie_name like
-                CONCAT(CONCAT('%',#{selContent}),'%'))
-            </if>
-            <if test="selType == 'arrangementId'">
-                arrangement_id = #{selContent}
-            </if>
-            <if test="selType == 'arrangementPlace'">
-                arrangement_place = #{selContent}
+            <if test="selContent !=null and selContent != ''">
+                <if test="selType == 'movieId'">
+                    and a.movie_id = #{selContent}
+                </if>
+                <if test="selType == 'movieName'">
+                    and m.movie_name like CONCAT(CONCAT('%',#{selContent}),'%')
+                </if>
+                <if test="selType == 'arrangementId'">
+                    and a.arrangement_id = #{selContent}
+                </if>
+                <if test="selType == 'arrangementPlace'">
+                    and a.arrangement_place = #{selContent}
+                </if>
             </if>
         </where>
     </select>
@@ -118,4 +121,16 @@
         arrangement_price = #{arrangementPrice},arrangement_place = #{arrangementPlace}
         where arrangement_id = #{arrangementId}
     </update>
+
+
+    <select id="selectArrangementCountList" resultType="int">
+        SELECT COUNT(*) FROM  cinema_order o
+        WHERE o.arrangement_id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
+    </select>
+    <select id="selectArrangementCountSingle" resultType="int">
+        SELECT COUNT(*) FROM  cinema_order o
+        WHERE o.arrangement_id=#{id}
+    </select>
+
 </mapper>

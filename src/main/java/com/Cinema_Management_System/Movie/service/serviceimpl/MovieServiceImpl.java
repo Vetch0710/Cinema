@@ -96,8 +96,13 @@ public class MovieServiceImpl implements MovieService {
         return movieDao.UpcomingMovieCount();
     }
 
+
+    @Transactional(rollbackFor = DeleteException.class)
     @Override
     public void deleteMovie(Integer movieId) throws DeleteException {
+        if (movieDao.selectMovieCountSingle(movieId)!=0){
+            throw new DeleteException();
+        }
         int affectRows = movieDao.deleteMovie(movieId);
         if (affectRows == 0) {
             throw new DeleteException();
@@ -111,6 +116,9 @@ public class MovieServiceImpl implements MovieService {
         List<Integer> idList = new ArrayList<>();
         for (String str : idArray) {
             idList.add(Integer.parseInt(str));
+        }
+        if (movieDao.selectMovieCountList(idList)!=0){
+            throw new DeleteException();
         }
         int affectRows = movieDao.deleteMovies(idList);
         if (affectRows != idList.size()) {

@@ -60,4 +60,8 @@ public interface MovieDao {
     int delWant(@Param("movieId") int movieId, @Param("customerId") int customerId);
 
     int getMovieId(@Param("movieName") String movieName);
+
+    int selectMovieCountSingle( Integer movieId);
+
+    int selectMovieCountList(List<Integer> movieIds);
 }

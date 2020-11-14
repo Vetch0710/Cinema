@@ -19,4 +19,6 @@ public interface EvaluationDao {
     List<Evaluation> selectAllEvaluation(@Param("customerId")Integer id);
     int updateEvaluation(Evaluation evaluation);
     int updateOrderStatus(long id);
+
+    int delEavluation(int evaluationId);
 }

@@ -1,6 +1,7 @@
 package com.Cinema_Management_System.Movie.controller;
 
 
+import com.Cinema_Management_System.Arrangement.service.ArrangementService;
 import com.Cinema_Management_System.Movie.entity.DetailMovie;
 import com.Cinema_Management_System.Movie.entity.HitMovie;
 import com.Cinema_Management_System.Movie.entity.Movie;
@@ -34,7 +35,7 @@ public class MovieController {
     String image = ".jpg,.jpeg,.png,.gif,.bmp,.pdf,.JPG,.JPEG,.PBG,.GIF,.BMP,.PDF";
     String video = ".mp4,.mov,.avi,.wmv,.3gp,.mkv,.flv,.MP4,.MOV,.AVI,.WMV,.3GP,.MKV,.FLV";
 
-
+    //获取全部电影信息及查询电影信息
     @RequestMapping(value = "/movieList", method = RequestMethod.GET)
     public Map<String, Object> getMovieList(String selectType, String permission, Integer pageNo, Integer pageSize) {
         try {
@@ -113,7 +114,7 @@ public class MovieController {
             return 0;
         }
     }
-
+    //删除某一个电影
     @RequestMapping(value = "/{movieId}", method = RequestMethod.DELETE)
     public String deleteMovie(@PathVariable int movieId) {
         try {
@@ -123,7 +124,7 @@ public class MovieController {
         }
         return "success";
     }
-
+    //批量删除电影
     @RequestMapping(value = "/batchDelete/{movieIds}", method = RequestMethod.DELETE)
     public String deleteMovies(@PathVariable String movieIds) {
         try {
@@ -133,11 +134,16 @@ public class MovieController {
         }
         return "success";
     }
-
+    //编辑电影
     @RequestMapping(value = "/edit", method = RequestMethod.PUT)
-    public void editMovies(@RequestBody DetailMovie movie) {
+    public String editMovies(@RequestBody DetailMovie movie) {
+        try {
+            movieService.updateMovie(movie);
+        } catch (Exception e) {
+            return "error";
+        }
+        return "success";
 
-        movieService.updateMovie(movie);
     }
 
     @RequestMapping(value = "/changeWant/{wantFlag}/{movieId}", method = RequestMethod.PUT)
@@ -147,10 +153,16 @@ public class MovieController {
         int customerId = Integer.parseInt(str[0]);
         movieService.changeWant(wantFlag, movieId, customerId);
     }
-
+    //添加电影
     @RequestMapping(value = "/addMovie", method = RequestMethod.POST)
-    public void addMovie(@RequestBody Map<String, DetailMovie> movie) {
-        movieService.insertMovie(movie.get("movie"));
+    public String addMovie(@RequestBody Map<String, DetailMovie> movie) {
+        try {
+            movieService.insertMovie(movie.get("movie"));
+        } catch (Exception e) {
+            return "error";
+        }
+        return "success";
+
     }
 
 
@@ -200,7 +212,7 @@ public class MovieController {
             file.transferTo(targetFile);
             System.out.println("上传成功");
             //将文件在服务器的存储路径返回
-            return "http://localhost:8089/Cinema_Management_System/" + director + "/" + fileName;
+            return "http://47.93.137.95:8080/Cinema/" + director + "/" + fileName;
         } catch (IOException e) {
             System.out.println("上传失败");
             e.printStackTrace();

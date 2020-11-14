@@ -32,7 +32,7 @@ public class ArrangeController {
         return ArrangementService.getDisableTime(arrangementPlace, arrangementDate, movieId);
 
     }
-
+    //获取全部排场信息及查询排场信息
     @RequestMapping(value = "/arrangeList", method = RequestMethod.GET)
     public Map<String, Object> getArrangeList(String selectType, String permission, Integer pageNo, Integer pageSize) {
         try {
@@ -58,7 +58,7 @@ public class ArrangeController {
     public Map<String,Object> arrangementInfo(@PathVariable int arrangementId){
         return ArrangementService.getSeatInfo(arrangementId);
     }
-
+//添加排场信息
     @RequestMapping(value = "/addArrangement", method = RequestMethod.POST)
     public String addArrangement(@RequestBody Map<String, Arrangement> arrangement) {
         try {
@@ -68,7 +68,7 @@ public class ArrangeController {
         }
         return "success";
     }
-
+//删除某个排场信息
     @RequestMapping(value = "/{arrangementId}", method = RequestMethod.DELETE)
     public String deleteArrangement(@PathVariable int arrangementId) {
         try {
@@ -78,7 +78,7 @@ public class ArrangeController {
         }
         return "success";
     }
-
+//批量删除排场信息
     @RequestMapping(value = "/batchDelete/{arrangementIds}", method = RequestMethod.DELETE)
     public String deleteMovies(@PathVariable String arrangementIds) {
         try {
@@ -88,13 +88,14 @@ public class ArrangeController {
         }
         return "success";
     }
-
+//修改排场信息
     @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     public String editMovies(@RequestBody Arrangement arrangement) {
         System.out.println(arrangement);
         try {
             ArrangementService.updateArrangement(arrangement);
-        } catch (DeleteException e) {
+        }catch (Exception e) {
+            e.printStackTrace();
             return "error";
         }
         return "success";

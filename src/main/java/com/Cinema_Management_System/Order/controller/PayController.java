@@ -47,9 +47,9 @@ public class PayController {
     //签名方式
     private final String SIGN_TYPE = "RSA2";
     //支付宝异步通知路径,付款完毕后会异步调用本项目的方法,必须为公网地址
-    private final String NOTIFY_URL = "http://localhost:8089/Cinema_Management_System/notifyUrl";
+    private final String NOTIFY_URL = "http://47.93.137.95:8080/Cinema/notifyUrl";
     //支付宝同步通知路径,也就是当付款完毕后跳转本项目的页面,可以不是公网地址
-    private final String RETURN_URL = "http://localhost:8089/Cinema_Management_System/returnUrl";
+    private final String RETURN_URL = "http://47.93.137.95:8080/Cinema/returnUrl";
 
     @RequestMapping("alipay")
     public void alipay(@RequestBody String orderId, HttpServletResponse httpResponse) throws IOException {
@@ -127,17 +127,17 @@ public class PayController {
             try {
                 System.out.println("支付成功");
                 orderService.modifyStatus(Long.parseLong(out_trade_no), "待评价");
-                return "redirect:" + "http://localhost:80/#/ticket/orderFinished/" + out_trade_no;//跳转付款失败页面
+                return "redirect:" + "http://47.93.137.95:8080/yigou/#/ticket/orderFinished/" + out_trade_no;//跳转付款失败页面
 
             } catch (Exception e) {
                 System.out.println("支付失败");
                 e.printStackTrace();
-                return "redirect:" + "http://localhost:80/#/ticket/orderFinished/" + out_trade_no;//跳转付款失败页面
+                return "redirect:" + "http://47.93.137.95:8080/yigou/#/ticket/orderFinished/" + out_trade_no;//跳转付款失败页面
 
             }
         } else {
             System.out.println("支付失败1");
-            return "redirect:" + "http://localhost:80/#/ticket/orderFinished/" + out_trade_no;//跳转付款失败页面
+            return "redirect:" + "http://47.93.137.95:8080/yigou/#/ticket/orderFinished/" + out_trade_no;//跳转付款失败页面
         }
     }
 }

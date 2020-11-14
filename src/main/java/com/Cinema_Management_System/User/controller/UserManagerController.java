@@ -192,9 +192,9 @@ public class UserManagerController {
     }
 
     //删除用户
-    @RequestMapping(value = "/doDelete", method = {RequestMethod.POST})
+    @RequestMapping(value = "/doDelete", method = {RequestMethod.POST},produces = "text/plain;charset=UTF-8")
     @ResponseBody
-    public String doDelete(@RequestBody Map<String, Object> params) {
+    public String doDelete(@RequestBody Map<String, Object> params)  {
         System.out.println("**************doDelete***************");
         System.out.println(params.get("Ids"));
         System.out.println(params.get("type"));
@@ -206,12 +206,16 @@ public class UserManagerController {
         } else {
             pam = (List<Integer>) params.get("Ids");
         }
-        if (userService.deleteUser((String) params.get("type"), pam)) {
-            return "success";
+        try {
+            if (userService.deleteUser((String) params.get("type"), pam)) {
+                return "success";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
-        return "删除失败，请重新操作";
+        return "删除失败，请查看用户是否有未完成订单";
     }
 
 

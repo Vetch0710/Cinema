@@ -41,7 +41,7 @@
 
     <select id="selectHitMovie" resultType="com.Cinema_Management_System.Movie.entity.HitMovie">
         SELECT
-        m.movie_id,m.movie_name,m.movie_picture,MIN(a.arrangement_price) lowest_price
+        m.movie_id,m.movie_name,m.movie_picture,m.movie_score,MIN(a.arrangement_price) lowest_price
         FROM
         Cinema_movie m
         RIGHT JOIN
@@ -193,4 +193,16 @@
     </select>
 
 
+
+    <select id="selectMovieCountList" resultType="int">
+        SELECT COUNT(*) FROM  cinema_arrangement m
+        WHERE m.movie_id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
+              AND arrangement_time>NOW()
+    </select>
+
+    <select id="selectMovieCountSingle" resultType="int">
+        SELECT COUNT(*) FROM  cinema_arrangement m
+        WHERE m.movie_id= #{id} AND arrangement_time>NOW()
+    </select>
 </mapper>

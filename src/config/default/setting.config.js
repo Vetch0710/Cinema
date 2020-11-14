@@ -12,7 +12,8 @@ const setting = {
   baseURL:
 
     "http://8.131.77.164:8089/CinemaData",
-    // "http://10.5.54.127:8089/Cinema_Management_System",
+    // "http://47.93.137.95:8080/Cinema",
+    // "http://10.5.111.48:8089/Cinema_Management_System",
     // "http://localhost:8080/Cinema_Management_System",
     
    // "vab-mock-server",

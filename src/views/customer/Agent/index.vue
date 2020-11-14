@@ -49,7 +49,7 @@
                 vertical-align: middle;
                 display: inline-block;
               "
-                                      :src="'http://39.97.217.243:8089/images/manager.jpeg'"
+                                      :src="'http://8.131.77.164:8089/images/manager.jpeg'"
                                       :fit="'contain'"
                               ></el-image>
                           </span>

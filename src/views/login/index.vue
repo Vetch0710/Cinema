@@ -310,10 +310,10 @@
                             .dispatch("user/login", param)
                             .then(() => {
                                 console.log( this.redirect)
-                                const routerPath =
-                                    this.redirect === "/404" || this.redirect === "/401"
-                                        ? "/"
-                                        : this.redirect;
+                                const routerPath ="/";
+                                    // this.redirect === "/404" || this.redirect === "/401"
+                                    //     ? "/"
+                                    //     : this.redirect;
                                 this.$router.push(routerPath).catch(() => {
                                 });
                                 this.loading = false;

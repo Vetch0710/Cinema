@@ -127,7 +127,7 @@
         components: {filmShow},
         data() {
             return {
-                url: "http://39.97.217.243:8089/images/20201021101424%E5%9B%BE%E7%89%87.jpeg",
+                url: "",
                 movieInfo: '',
                 recommendMovie: [],
             };

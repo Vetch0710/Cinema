@@ -223,13 +223,13 @@ export default {
     handleDelete(row) {
       if (row.movieId >= 0) {
         this.$baseConfirm("你确定要删除当前项吗", null, async () => {
-          const { msg } = await doDelete({ movieId: row.movieId });
+          const  msg = await doDelete({ movieId: row.movieId });
           let msgContent = "";
           if (msg == "success") {
             msgContent = "删除成功";
             this.$baseMessage(msgContent, msg);
           } else if (msg == "error") {
-            msgContent = "删除失败,请重新尝试";
+            msgContent = "删除失败,请检查是否以排场或已有订单";
             this.$message.error(msgContent);
           }
 
@@ -246,7 +246,7 @@ export default {
               msgContent = "删除成功";
               this.$baseMessage(msgContent, msg);
             } else if (msg == "error") {
-              msgContent = "删除失败,请重新尝试";
+              msgContent = "删除失败,请检查是否以排场或已有订单";
               this.$message.error(msgContent);
             }
             this.fetchData();

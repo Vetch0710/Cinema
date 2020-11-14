@@ -4,7 +4,7 @@ export function getOrderList(data) {
   return request({
     url: "/order/getOrderList",
     method: "get",
-    params:data,
+    params: data,
   });
 }
 export function getOrderInfo(data) {
@@ -39,7 +39,14 @@ export function jumpToPay(data) {
 
 export function getOrderStatus(data) {
   return request({
-    url: "/order/getOrderStatus/"+data,
+    url: "/order/getOrderStatus/" + data,
     method: "get",
+  });
+}
+
+export function delOrder(data) {
+  return request({
+    url: "/order/" + data,
+    method: "delete",
   });
 }

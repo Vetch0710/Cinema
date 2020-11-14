@@ -1,6 +1,10 @@
 /* 这个新建的vue.config会将现有配置与原有配置整合 */
 
-const path = require('path');//引入path模块
+const path = require('path'); //引入path模块
+const webpack = require('webpack')
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = ['js', 'css']
+const isProduction = process.env.NODE_ENV === 'production'
 
 //导入配置
 const {
@@ -20,6 +24,8 @@ const mockServer = () => {
 };
 
 module.exports = {
+  lintOnSave: false,
+  runtimeCompiler: true,
   publicPath,
   assetsDir,
   outputDir,
@@ -46,8 +52,21 @@ module.exports = {
         // 'network': resolve('src/network'),
         'views': resolve('src/views'),
       }
-    }
+    },
+    plugins: [
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      // 下面是下载的插件的配置
+      new CompressionWebpackPlugin({
+        algorithm: 'gzip',
+        test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+        threshold: 10240,
+        minRatio: 0.8
+      }),
+      new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 5,
+        minChunkSize: 100
+      })
+    ]
   },
 
 }
-

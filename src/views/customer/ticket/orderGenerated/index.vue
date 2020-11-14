@@ -49,6 +49,7 @@
         <span class="price">{{ orderInfo.orderPrice }}</span>
       </div>
       <div>
+        <div class="cancle-btn" @click="canclePay">取消订单</div>
         <div class="pay-btn" @click="confirmPay">确认支付</div>
       </div>
     </div>
@@ -64,7 +65,7 @@
   </div>
 </template>
 <script>
-import { getOrderInfo, jumpToPay } from "@/api/order";
+import { getOrderInfo, jumpToPay, delOrder } from "@/api/order";
 import { formatTime } from "@/utils/index";
 import path from "path";
 import { log } from "util";
@@ -170,11 +171,40 @@ export default {
     reSelectSeat() {
       this.overTimeFlag = false;
       this.$router.push({
-        path: "/movies/selectSession",
-        query: {
-          movieId: this.orderInfo.movieId,
-        },
+        path: "/movies/movieDetail?movieName=" + this.orderInfo.movieName,
       });
+    },
+
+    async canclePay() {
+      this.$confirm("此操作将取消该订单, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          delOrder(this.orderInfo.orderId).then((res) => {
+            console.log(res);
+            if (res === "success") {
+              this.$router.push({
+                path: "/ticket/seatSelection",
+                query: {
+                  arrangementId: this.orderInfo.arrangementId,
+                },
+              });
+            } else {
+              this.$message({
+                message: "取消订单失败,请重新尝试!",
+                type: "error",
+              });
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
     },
 
     async confirmPay() {
@@ -330,6 +360,21 @@ tbody {
   border-radius: 100px;
   -webkit-box-shadow: 0 2px 10px -2px #f03d37;
   box-shadow: 0 2px 10px -2px #f03d37;
+}
+
+.cancle-btn {
+  cursor: pointer;
+  display: inline-block;
+  width: 190px;
+  height: 42px;
+  line-height: 42px;
+  text-align: center;
+  margin-right: 20px;
+  color: #fff;
+  background-color: #b5b5b5;
+  border-radius: 100px;
+  -webkit-box-shadow: 0 2px 10px -2px #b5b5b5;
+  box-shadow: 0 2px 10px -2px #b5b5b5;
 }
 
 .modal-container {

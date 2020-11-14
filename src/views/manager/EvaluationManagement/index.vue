@@ -78,6 +78,11 @@
           prop="evaluationContent"
           label="评价内容"
         ></el-table-column>
+        <el-table-column show-overflow-tooltip label="操作" width="200">
+          <template #default="{ row }">
+            <el-button type="text" @click="handleDelete(row)">删除</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
     <el-pagination
@@ -93,7 +98,7 @@
   </div>
 </template>
 <script>
-import { getList } from "@/api/EvaluationList";
+import { getList, doDelete } from "@/api/EvaluationList";
 import { log } from "util";
 import path from "path";
 
@@ -165,6 +170,21 @@ export default {
       setTimeout(() => {
         this.listLoading = false;
       }, 300);
+    },
+
+    handleDelete(row) {
+      this.$baseConfirm("你确定要删除当前项吗", null, async () => {
+        const msg = await doDelete({ evaluationId: row.evaluationId });
+        let msgContent = "";
+        if (msg == "success") {
+          msgContent = "删除成功";
+          this.$baseMessage(msgContent, msg);
+        } else if (msg == "error") {
+          msgContent = "删除失败,请重新尝试";
+          this.$message.error(msgContent);
+        }
+        this.fetchData();
+      });
     },
   },
 };

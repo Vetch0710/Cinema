@@ -289,12 +289,18 @@ export default {
     save() {
       this.$refs["form"].validate(async (valid) => {
         if (valid) {
+          let msg='';
           this.form.movieType = this.form.movieType.join("/");
           this.form.movieTime = this.form.movieTime + "分钟";
           if (this.title == "添加") {
-            await addMovie(this.form);
+            msg=  await addMovie(this.form);
           } else if (this.title == "编辑") {
-            await doEdit(this.form);
+            msg= await doEdit(this.form);
+          }
+          if (msg==='success'){
+            this.$baseMessage("操作成功", msg);
+          }else if (msg === 'error'){
+            this.$baseMessage("操作失败，请检查数据及网络", msg);
           }
           this.$emit("fetch-data");
           this.close();

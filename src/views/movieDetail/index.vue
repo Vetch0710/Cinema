@@ -30,7 +30,7 @@
           </el-image>
         </div>
         <div class="movie-info-movieshow-right">
-          <p style="font-size: 26px; font-weight: 800; color: #ffffff">
+          <p style="font-size: 28px; font-weight: 800; color: #ffffff">
             {{ movieInfo.movieName }}
           </p>
           <br /><br /><br />
@@ -427,7 +427,7 @@ export default {
 .movie-info-smallinfo {
   line-height: 30px;
   list-style: none;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .movieshow-actionbuttom {
@@ -600,7 +600,7 @@ export default {
   font-family: Microsoft YaHei, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: subpixel-antialiased;
   color: #333;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 26px;
 }
 

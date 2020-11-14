@@ -140,8 +140,10 @@
         },
         created() {
             this.fetchData();
+            console.log(this.avatar)
         },
         mounted() {
+            console.log(this.avatar)
         },
         methods: {
             showMovie(movieId) {

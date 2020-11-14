@@ -93,6 +93,7 @@
                 // this.url = URL.createObjectURL(file.raw);log
                 console.log(this.list)
                 this.url = res;
+                this.$store.commit('user/setAvatar',res)
                 console.log(this.url)
                 if (res === 'fail') {
                     this.$baseMessage("上传失败，请检查您的网络", "error");

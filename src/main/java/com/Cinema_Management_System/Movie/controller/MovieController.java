@@ -166,7 +166,7 @@ public class MovieController {
     }
 
 
-    @RequestMapping(value = "upload", method = RequestMethod.POST)
+    @RequestMapping(value = "upload", method = RequestMethod.POST ,produces = "text/plain;charset=UTF-8")
     public String upImg(MultipartFile file, HttpServletRequest request) {
         //获取文件在服务器的储存位置
         String path = "";
@@ -212,7 +212,7 @@ public class MovieController {
             file.transferTo(targetFile);
             System.out.println("上传成功");
             //将文件在服务器的存储路径返回
-            return "http://47.93.137.95:8080/Cinema/" + director + "/" + fileName;
+            return "http://8.131.77.164:8089/CinemaData/" + director + "/" + fileName;
         } catch (IOException e) {
             System.out.println("上传失败");
             e.printStackTrace();

@@ -57,13 +57,13 @@
         <where>
             1=1
             <if test="cname!=null and cname!='' ">
-                and customer_id=(
-                SELECT customer_id FROM Cinema_customer WHERE customer_name=#{cname}
+                and customer_id in(
+                SELECT customer_id FROM Cinema_customer WHERE customer_name like concat(concat('%', #{cname}),'%')
                 )
             </if>
             <if test="mname!=null and mname!='' ">
-                and  movie_id=(
-                SELECT movie_id FROM Cinema_movie WHERE movie_name=#{mname}
+                and  movie_id in(
+                SELECT movie_id FROM Cinema_movie WHERE movie_name like concat(concat('%', #{mname}),'%')
                 )
             </if>
 
@@ -85,10 +85,10 @@
                 and o.order_status=#{type}
             </if>
             <if test="selectType=='customerName' ">
-                and c.customer_name=#{selectValues}
+                and c.customer_name like concat(concat('%', #{selectValues}),'%')
             </if>
             <if test="selectType=='movieName' ">
-                and m.movie_name=#{selectValues}
+                and m.movie_name like concat(concat('%',#{selectValues}),'%')
             </if>
         </where>
 

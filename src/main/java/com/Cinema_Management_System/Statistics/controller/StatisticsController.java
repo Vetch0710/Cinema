@@ -18,6 +18,7 @@ public class StatisticsController {
     @Autowired
     private StatisticsService statisticsService;
 
+    //按月份
     @RequestMapping(value = "/getStatistics",method = {RequestMethod.GET})
     @ResponseBody
     public  List<Float> getStatistics(String yearMonth) throws ParseException {
@@ -26,7 +27,7 @@ public class StatisticsController {
         System.out.println(statistics);
         return statistics;
     }
-
+//按年份
     @RequestMapping(value = "/getStatisticsYear",method = {RequestMethod.GET})
     @ResponseBody
     public  List<Float> getStatisticsYear(String yearMonth) throws ParseException {

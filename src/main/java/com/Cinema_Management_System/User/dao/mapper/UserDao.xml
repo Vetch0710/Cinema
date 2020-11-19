@@ -53,12 +53,19 @@
     </select>
 
 
-    <!--    查询是否有-->
+    <!--    查询是否有用户-->
     <select id="isExistCustomer" resultType="int">
         SELECT COUNT(*) 'count'
         FROM Cinema_customer
         WHERE customer_name = #{customerName}
            OR customer_phone = #{customerPhone}
+    </select>
+
+    <!--    查询是否有管理员-->
+    <select id="isExistManager" resultType="int">
+        SELECT COUNT(*) 'count'
+        FROM Cinema_manager
+        WHERE manager_phone = #{customerPhone}
     </select>
 
 
@@ -190,6 +197,11 @@
     <foreach collection="list" item="it" open="(" close=")" separator=",">
         #{it}
     </foreach>
-     AND  o.order_status !='已完成'
 </select>
+
+
+
+    <select id="">
+
+    </select>
 </mapper>

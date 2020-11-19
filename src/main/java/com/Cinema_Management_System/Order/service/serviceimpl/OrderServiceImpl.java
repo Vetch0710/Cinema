@@ -88,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
             allOrder = orderDao.selectAllOrder(id, type, null, null, null, null);
 
         } else {
-            if ("movieName".equals(selectType) && !"".equals(selectValues) && selectValues != null) {
+                if ("movieName".equals(selectType) && !"".equals(selectValues) && selectValues != null) {
                 allOrder = orderDao.selectAllOrder(null, null, pageNo, pageSize, selectType, selectValues);
                 int i = orderDao.countAllOrder(null, selectValues);
                 result.put("totalCount", i);

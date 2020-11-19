@@ -118,6 +118,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean isExistManagerPhone(String Phone) {
+        try {
+            int existManagerPhone = userDao.isExistManager(Phone);
+            if (existManagerPhone == 0) {
+                return false;
+            }
+        } catch (Exception e) {
+
+        }
+        return true;
+    }
+
+    @Override
     public boolean register(Customer customer) {
         return userDao.addUser(customer) != 0;
     }
@@ -242,7 +255,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean UpdateUserInfo(String type, String title, Object info) {
         if ("customer".equals(type)) {
+
             Customer customer = (Customer) info;
+            Customer oldCustomer = userDao.selectCusInfoById(customer.getCustomerId());
+            if (!oldCustomer.getCustomerName().equals(customer.getCustomerName())) {
+                if (this.isExistCustomerName(customer.getCustomerName(), null)){
+                    return false;
+                }
+            }
+            if (!oldCustomer.getCustomerPhone().equals(customer.getCustomerPhone())){
+                if (this.isExistCustomerName(null, customer.getCustomerPhone())){
+                    return false;
+                }
+            }
             return userDao.updateCusInfo(customer) != 0;
         } else {
             Manager manager = (Manager) info;

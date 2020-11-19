@@ -21,6 +21,7 @@ public interface UserService {
 
     //检查是否重名
     boolean isExistCustomerName(String customerName,String customerPhone);
+    boolean isExistManagerPhone(String customerPhone);
 
     //注册
     boolean register(Customer customer);

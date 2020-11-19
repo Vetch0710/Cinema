@@ -61,8 +61,31 @@ public class UserManagerController {
         String title = params.get("title");
         String newValue = params.get("newValue");
         if ("手机号".equals(params.get("title"))) {
-            if (userService.updateInfoById(id, params.get("phone"), title, identity)) {
-                return "success";
+            if ("customer".equals(identity)) {
+                if (!userService.isExistCustomerName(null, params.get("phone"))) {
+                    if (userService.updateInfoById(id, params.get("phone"), title, identity)) {
+                        return "success";
+                    }
+                }
+            } else {
+                if (!userService.isExistManagerPhone(params.get("phone"))) {
+                    if (userService.updateInfoById(id, params.get("phone"), title, identity)) {
+                        return "success";
+                    }
+                }
+            }
+
+        } else if ("姓名".equals(params.get("title"))) {
+            if ("customer".equals(identity)) {
+                if (!userService.isExistCustomerName(newValue, null)) {
+                    if (userService.updateInfoById(id, newValue, title, identity)) {
+                        return "success";
+                    }
+                }
+            } else {
+                if (userService.updateInfoById(id, newValue, title, identity)) {
+                    return "success";
+                }
             }
         } else {
             if (userService.updateInfoById(id, newValue, title, identity)) {
@@ -161,24 +184,26 @@ public class UserManagerController {
          return "操作失败，请检查网络";
      }*/
     //修改用户信息
-    @RequestMapping(value = "/doEditCus", method = {RequestMethod.POST})
+    @RequestMapping(value = "/doEditCus", method = {RequestMethod.POST},produces = "text/plain;charset=UTF-8")
     @ResponseBody
     public String doEditCus(@RequestBody Customer customer) {
         System.out.println("**************doEditCus***************");
+
+
         if (userService.UpdateUserInfo("customer", null, customer)) {
             return "success";
         }
-        return "操作失败，请检查网络";
+        return "操作失败，请检查您的信息及网络";
     }
 
-    @RequestMapping(value = "/doEditMan", method = {RequestMethod.POST})
+    @RequestMapping(value = "/doEditMan", method = {RequestMethod.POST},produces = "text/plain;charset=UTF-8")
     @ResponseBody
     public String doEditMan(@RequestBody Manager manager) {
         System.out.println("**************doEditMan***************");
         if (userService.UpdateUserInfo("manager", null, manager)) {
             return "success";
         }
-        return "操作失败，请检查网络";
+        return "操作失败，请检查您的信息及网络";
     }
 
     //获取管理员最大编号
@@ -187,14 +212,13 @@ public class UserManagerController {
     public int getMaxNum() {
         System.out.println("**************getMaxNum***************");
         int maxCount = userService.getMaxCount();
-
         return maxCount;
     }
 
     //删除用户
-    @RequestMapping(value = "/doDelete", method = {RequestMethod.POST},produces = "text/plain;charset=UTF-8")
+    @RequestMapping(value = "/doDelete", method = {RequestMethod.POST}, produces = "text/plain;charset=UTF-8")
     @ResponseBody
-    public String doDelete(@RequestBody Map<String, Object> params)  {
+    public String doDelete(@RequestBody Map<String, Object> params) {
         System.out.println("**************doDelete***************");
         System.out.println(params.get("Ids"));
         System.out.println(params.get("type"));

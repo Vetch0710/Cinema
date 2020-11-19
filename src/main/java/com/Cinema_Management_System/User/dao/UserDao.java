@@ -21,6 +21,8 @@ public interface UserDao {
 
    //检查是否重名
    int isExistCustomer(@Param(value = "customerName") String customerName,@Param(value = "customerPhone") String customerPhone);
+   //是否有重 手机号
+   int isExistManager(@Param(value = "customerPhone") String customerPhone);
 
    //注册----添加用户
    int addUser(Customer customer);

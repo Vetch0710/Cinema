@@ -3,7 +3,7 @@
         <div class="UserCenter-info-box">
             <div class="UserCenter-info">
                 <div class="UserCenter-info-img">
-                    <el-image :src="'http://47.93.137.95:8080/Cinema/img/'+avatar" class="UserCenter-avatar"
+                    <el-image :src="'http://8.131.77.164:8089/CinemaData/img/'+avatar" class="UserCenter-avatar"
                               :fit="'cover'"></el-image>
                 </div>
                 <div class="UserCenter-info-nickName">

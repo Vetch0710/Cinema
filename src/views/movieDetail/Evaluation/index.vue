@@ -2,7 +2,7 @@
   <div style="width: 100%">
     <div class="evalustion-userinfo">
       <div class="evaluation-userimg">
-        <el-avatar :size="50" :src="customerPicture">
+        <el-avatar :size="50" :src="'http://8.131.77.164:8089/CinemaData/img/'+customerPicture">
           <img
             src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"
           />

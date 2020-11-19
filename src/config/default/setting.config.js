@@ -5,15 +5,15 @@ const setting = {
   // 开发以及部署时的URL
   publicPath: "./",
   // 生产环境构建文件的目录名
-  outputDir: "dist",
+  outputDir: "Cinema",
   // 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
   assetsDir: "static",
   // 默认的接口地址 如果是开发环境和生产环境走vab-mock-server，当然你也可以选择自己配置成需要的接口地址
   baseURL:
 
-    // "http://8.131.77.164:8089/CinemaData",
+    "http://8.131.77.164:8089/CinemaData",
     // "http://47.93.137.95:8080/Cinema",
-    "http://10.5.65.206:8089/Cinema_Management_System",
+    // "http://10.5.65.206:8089/Cinema_Management_System",
     // "http://localhost:8080/Cinema_Management_System",
 
   // "vab-mock-server",

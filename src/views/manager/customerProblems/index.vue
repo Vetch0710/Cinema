@@ -55,7 +55,7 @@
                 display: inline-block;
                 margin-right: 10px;
               "
-                                                :src="'http://47.93.137.95:8080/Cinema/img/manager.jpeg'"
+                                                :src="'http://8.131.77.164:8089/CinemaData/img/manager.jpeg'"
                                                 :fit="'contain'"
                                         ></el-image>
 
@@ -72,7 +72,7 @@
                 vertical-align: middle;
                 display: inline-block;
               "
-                                      :src="'http://47.93.137.95:8080/Cinema/img/'+avatar"
+                                      :src="'http://8.131.77.164:8089/CinemaData/img/'+avatar"
 
                                       :fit="'contain'"
                               ></el-image>
@@ -113,7 +113,7 @@
                 display: inline-block;
                 margin-right: 10px;
               "
-                                                :src="'http://47.93.137.95:8080/Cinema/img/manager.jpeg'"
+                                                :src="'http://8.131.77.164:8089/CinemaData/img/manager.jpeg'"
                                                 :fit="'contain'"
                                         ></el-image>
 
@@ -130,7 +130,7 @@
                 vertical-align: middle;
                 display: inline-block;
               "
-                                      :src="'http://47.93.137.95:8080/Cinema/img/'+avatar"
+                                      :src="'http://8.131.77.164:8089/CinemaData/img/'+avatar"
                                       :fit="'contain'"
                               ></el-image>
                           </span>

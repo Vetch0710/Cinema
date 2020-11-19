@@ -1,3 +1,5 @@
+import {Message} from "element-ui";
+
 let websock = null;
 let global_history = null;
 let global_result = null;
@@ -16,8 +18,8 @@ function initWebSocket(token,callback,callback2){ //初始化weosocket
     count=0;
     global_history = callback;
     global_result = callback2;
-    // var wsuri = "ws://8.131.77.164:8089/CinemaData/ws";
-    var wsuri = "ws:/47.93.137.95:8080/Cinema//ws";
+    var wsuri = "ws://8.131.77.164:8089/CinemaData/ws";
+    // var wsuri = "ws:/47.93.137.95:8080/Cinema//ws";
     // var wsuri = "ws://8.131.77.164:8089/CinemaData/ws";
     websock = new WebSocket(wsuri,[token]);
     websock.onmessage = function(e){
@@ -32,6 +34,14 @@ function initWebSocket(token,callback,callback2){ //初始化weosocket
 
     //连接发生错误的回调方法
     websock.onerror = function () {
+        Message({
+            offset: 60,
+            showClose: true,
+            message: "连接发生错误,请检查您的网络并刷新页面",
+            type: "error",
+            dangerouslyUseHTMLString: true,
+            duration: 3000,
+        });
         console.log("WebSocket连接发生错误");
     }
 }
@@ -78,6 +88,14 @@ function websocketclose(e){
 }
 
 function websocketOpen(e){
+    Message({
+        offset: 60,
+        showClose: true,
+        message: "连接成功",
+        type: "success",
+        dangerouslyUseHTMLString: true,
+        duration: 3000,
+    });
     console.log("连接成功");
     count++;
 }

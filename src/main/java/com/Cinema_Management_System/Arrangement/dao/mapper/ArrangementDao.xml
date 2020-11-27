@@ -8,7 +8,7 @@
         from Cinema_arrangement
         where arrangement_id = #{arrangementId}
     </select>
-
+<!--查询排场-->
     <select id="getArranges" resultType="com.Cinema_Management_System.Arrangement.entity.Arrangement">
         select a.*,m.movie_name
         from Cinema_arrangement a left join Cinema_movie m on a.movie_id = m.movie_id
@@ -35,7 +35,7 @@
 
         limit #{pageStart},#{pageSize}
     </select>
-
+<!--查询数量-->
     <select id="getCount" resultType="int">
         select count(*)
         from Cinema_arrangement a left join Cinema_movie m on a.movie_id = m.movie_id
@@ -100,21 +100,24 @@
         where arrangement_id = #{arrangementId}
     </select>
 
+<!--添加电影-->
     <insert id="addArrangement" parameterType="com.Cinema_Management_System.Arrangement.entity.Arrangement">
         insert into Cinema_arrangement
         value (#{arrangementId},#{arrangementTime},#{arrangementPlace},#{arrangementPrice},#{movieId})
     </insert>
 
+<!--删除一个-->
     <delete id="deleteArrangement" parameterType="int">
         delete from Cinema_arrangement
         where arrangement_id = #{arrangementId}
     </delete>
-
+<!--批量删除-->
     <delete id="deleteArrangements" parameterType="list">
         delete from Cinema_arrangement where arrangement_id in
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
     </delete>
 
+<!--更新排场-->
     <update id="updateArrangement" parameterType="com.Cinema_Management_System.Arrangement.entity.Arrangement">
         update Cinema_arrangement
         set movie_id = #{movieId},arrangement_time = #{arrangementTime},
@@ -122,7 +125,7 @@
         where arrangement_id = #{arrangementId}
     </update>
 
-
+<!--查看是否有订单-->
     <select id="selectArrangementCountList" resultType="int">
         SELECT COUNT(*) FROM  cinema_order o
         WHERE o.arrangement_id in

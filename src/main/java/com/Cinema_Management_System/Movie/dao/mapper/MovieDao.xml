@@ -16,7 +16,7 @@
             </where>
         </if>
     </select>
-
+<!--查询电影-->
     <select id="selectMovieAll" resultType="com.Cinema_Management_System.Movie.entity.DetailMovie">
         select *
         from Cinema_movie
@@ -149,12 +149,12 @@
         where movie_name like concat(concat('%',#{movieName}),'%')
         limit 0,1
     </select>
-
+<!--删除一个电影-->
     <delete id="deleteMovie" parameterType="integer">
         delete from Cinema_movie
         where movie_id = #{movieId}
     </delete>
-
+<!--批量删除电影-->
     <delete id="deleteMovies" parameterType="list">
         delete from Cinema_movie where movie_id in
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
@@ -164,7 +164,7 @@
         delete from movie_wants
         where customer_id = #{customerId} and movie_id = #{movieId}
     </delete>
-
+<!--//更新电影-->
     <update id="updateMovie">
         update Cinema_movie
         set movie_name = #{movieName},movie_actor = #{movieActor},movie_des = #{movieDes},
@@ -177,7 +177,7 @@
         insert into movie_wants(customer_id,movie_id)
         value(#{customerId}, #{movieId})
     </insert>
-
+<!--//插入电影-->
     <insert id="insertMovie" parameterType="com.Cinema_Management_System.Movie.entity.DetailMovie">
         insert into Cinema_movie(movie_name,movie_actor,movie_des,movie_director,movie_picture,movie_trailer,movie_release_time,movie_score,movie_time,movie_type,wants_num)
         value (#{movieName},#{movieActor},#{movieDes},#{movieDirector},#{moviePicture},#{movieTrailer},#{movieReleaseTime},#{movieScore},#{movieTime},#{movieType},#{wantsNum})
@@ -193,14 +193,14 @@
     </select>
 
 
-
+    <!--查询是否有排场-->
     <select id="selectMovieCountList" resultType="int">
         SELECT COUNT(*) FROM  cinema_arrangement m
         WHERE m.movie_id in
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
               AND arrangement_time>NOW()
     </select>
-
+<!--查询是否有排场-->
     <select id="selectMovieCountSingle" resultType="int">
         SELECT COUNT(*) FROM  cinema_arrangement m
         WHERE m.movie_id= #{id} AND arrangement_time>NOW()

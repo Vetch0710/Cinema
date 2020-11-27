@@ -24,11 +24,12 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private MovieDao movieDao;
 
+    //查询电影
     @Override
     public List<DetailMovie> selectMovieAll(String selType, String selContent, Integer pageStart, Integer pageSize) {
         return movieDao.selectMovieAll(selType, selContent, pageStart, pageSize);
     }
-
+    //查询数量
     @Override
     public int getCount(String selType, String selContent) {
         return movieDao.getCount(selType, selContent);
@@ -96,7 +97,7 @@ public class MovieServiceImpl implements MovieService {
         return movieDao.UpcomingMovieCount();
     }
 
-
+//删除一个
     @Transactional(rollbackFor = DeleteException.class)
     @Override
     public void deleteMovie(Integer movieId) throws DeleteException {
@@ -108,7 +109,7 @@ public class MovieServiceImpl implements MovieService {
             throw new DeleteException();
         }
     }
-
+//批量删除电影
     @Override
     @Transactional(rollbackFor = DeleteException.class)
     public void deleteMovies(String movieIds) throws DeleteException {
@@ -125,12 +126,12 @@ public class MovieServiceImpl implements MovieService {
             throw new DeleteException();
         }
     }
-
+//更新电影
     @Override
     public void updateMovie(DetailMovie movie) {
         movieDao.updateMovie(movie);
     }
-
+//插入电影
     @Override
     public void insertMovie(DetailMovie movie) {
         movieDao.insertMovie(movie);

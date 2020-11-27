@@ -26,21 +26,24 @@ public class ArrangementServiceImpl implements ArrangementService {
         return arrangementDao.getArrange(arrangementId);
     }
 
+    //查询电影
     @Override
     public List<Arrangement> getArranges(String selectType, String permission, Integer pageNo, Integer pageSize) {
         return arrangementDao.getArranges(selectType, permission, pageNo, pageSize);
     }
-
+//查询数量
     @Override
     public int getCount(String selectType, String permission) {
         return arrangementDao.getCount(selectType, permission);
     }
 
+//添加排场
     @Override
     public void addArrangement(Arrangement arrangement) {
         arrangementDao.addArrangement(arrangement);
     }
 
+//删除一个电影
     @Transactional(rollbackFor = DeleteException.class)
     @Override
     public void deleteArrangement(int arrangementId) throws DeleteException {
@@ -52,7 +55,7 @@ public class ArrangementServiceImpl implements ArrangementService {
             throw new DeleteException();
         }
     }
-
+//批量删除
     @Override
     @Transactional(rollbackFor = DeleteException.class)
     public void deleteArrangements(String arrangementIds) throws DeleteException {
@@ -69,7 +72,7 @@ public class ArrangementServiceImpl implements ArrangementService {
             throw new DeleteException();
         }
     }
-
+//更新场次
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void updateArrangement(Arrangement arrangement) throws Exception {

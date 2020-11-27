@@ -11,9 +11,10 @@ const setting = {
   // 默认的接口地址 如果是开发环境和生产环境走vab-mock-server，当然你也可以选择自己配置成需要的接口地址
   baseURL:
 
-    "http://8.131.77.164:8089/CinemaData",
+    // "http://8.131.77.164:8089/CinemaData",
     // "http://47.93.137.95:8080/Cinema",
-    // "http://10.5.65.206:8089/Cinema_Management_System",
+    "http://10.96.5.103:8089/Cinema_Management_System",
+    // "http://192.168.43.112:8089/Cinema_Management_System",
     // "http://localhost:8080/Cinema_Management_System",
 
   // "vab-mock-server",

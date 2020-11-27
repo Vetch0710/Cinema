@@ -169,7 +169,8 @@
             this.year=date.getFullYear();
             this.month=date.getMonth() + 1;
             this.submitSelect( date.getFullYear())
-            this.selectMonths((date.getMonth() + 1))
+            console.log(date.getFullYear()+(date.getMonth() + 1))
+            this.selectMonths((date.getFullYear()+"-"+(date.getMonth() + 1)))
             // console.log(day)
             // console.log(this.fwl.xAxis[0].data)
             // this.fwl.xAxis[0].data = day
